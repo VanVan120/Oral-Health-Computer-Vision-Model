@@ -17,8 +17,12 @@ COPY requirements.txt .
 # --no-cache-dir keeps the image smaller
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application code
-COPY . .
+# Copy the application code
+COPY ["main.py", "chat_service.py", "report_service.py", "final.txt", "./"]
+COPY ["Model A", "Model A/"]
+COPY ["Model B", "Model B/"]
+COPY ["Model Triage", "Model Triage/"]
+COPY ["static", "static/"]
 
 # Create the temp_uploads directory (since it's ignored in git)
 RUN mkdir -p temp_uploads

@@ -4,7 +4,7 @@ python-multipart
 torch
 torchvision
 ultralytics
-opencv-python
+opencv-python-headless
 pillow
 numpy
 scikit-learn

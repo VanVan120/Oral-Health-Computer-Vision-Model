@@ -10,3 +10,6 @@ venv/
 .gitignore
 .vscode
 temp_uploads/
+*.ipynb
+*.bat
+.DS_Store
