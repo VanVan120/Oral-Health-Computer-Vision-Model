@@ -378,6 +378,10 @@ async def subscribe_newsletter(request: SubscribeRequest, background_tasks: Back
     print(f"Debug: Sender configured? {'Yes' if sender_email else 'No'}")
     print(f"Debug: API Key configured? {'Yes' if api_key else 'No'}")
     
+    if not api_key:
+        # Print all available environment variables (keys only) to debug why it's missing
+        print(f"Debug: BREVO_API_KEY is missing. Available keys: {list(os.environ.keys())}")
+    
     # Get Base URL from env or default to the Hugging Face Space URL
     base_url = os.getenv("BASE_URL", "https://ivanjun-oral-ai-cancer-disease-detection.hf.space")
 
