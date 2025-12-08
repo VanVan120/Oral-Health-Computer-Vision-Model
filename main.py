@@ -360,12 +360,20 @@ def send_email_task(email: str, base_url: str, sender_email: str, sender_passwor
         print(f"Email sent successfully to {email}")
     except Exception as e:
         print(f"Background Email Error: {e}")
+        # Print more details for debugging
+        import traceback
+        traceback.print_exc()
 
 @app.post("/api/subscribe")
 async def subscribe_newsletter(request: SubscribeRequest, background_tasks: BackgroundTasks):
     sender_email = os.getenv("EMAIL_SENDER")
     sender_password = os.getenv("EMAIL_PASSWORD")
     recipient_email = os.getenv("EMAIL_RECIPIENT")
+    
+    print(f"Debug: Attempting to subscribe {request.email}")
+    print(f"Debug: Sender configured? {'Yes' if sender_email else 'No'}")
+    print(f"Debug: Password configured? {'Yes' if sender_password else 'No'}")
+    
     # Get Base URL from env or default to the Hugging Face Space URL
     base_url = os.getenv("BASE_URL", "https://ivanjun-oral-ai-cancer-disease-detection.hf.space")
 
