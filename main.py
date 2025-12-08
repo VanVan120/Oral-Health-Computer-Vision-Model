@@ -12,7 +12,7 @@ from typing import Optional, Dict, Any
 from dotenv import load_dotenv
 
 from pydantic import BaseModel
-from fastapi import FastAPI, File, UploadFile, HTTPException, Request
+from fastapi import FastAPI, File, UploadFile, HTTPException, Request, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -305,26 +305,7 @@ async def chat_endpoint(request: ChatRequest):
 class SubscribeRequest(BaseModel):
     email: str
 
-@app.post("/api/subscribe")
-async def subscribe_newsletter(request: SubscribeRequest):
-    sender_email = os.getenv("EMAIL_SENDER")
-    sender_password = os.getenv("EMAIL_PASSWORD")
-    recipient_email = os.getenv("EMAIL_RECIPIENT")
-    # Get Base URL from env or default to the Hugging Face Space URL
-    base_url = os.getenv("BASE_URL", "https://ivanjun-oral-ai-cancer-disease-detection.hf.space")
-
-    # Clean up credentials (remove potential spaces or newlines)
-    if sender_email: sender_email = sender_email.strip()
-    if sender_password: sender_password = sender_password.strip().replace(" ", "") # Remove spaces from app password
-    if recipient_email: recipient_email = recipient_email.strip()
-
-    if not sender_email or not sender_password or not recipient_email:
-        # Fallback for demo purposes if not configured
-        print(f"Simulation: Newsletter subscription for {request.email}")
-        # In a real scenario, you might want to return an error or log this.
-        # For now, we return success to the frontend so the UI updates.
-        return {"message": "Subscribed successfully (Simulation Mode - Configure .env for real emails)"}
-
+def send_email_task(email: str, base_url: str, sender_email: str, sender_password: str, recipient_email: str):
     try:
         # Connect to Gmail SMTP server
         server = smtplib.SMTP('smtp.gmail.com', 587)
@@ -335,8 +316,8 @@ async def subscribe_newsletter(request: SubscribeRequest):
         msg_admin = MIMEMultipart()
         msg_admin['From'] = f"Oral AI Bot <{sender_email}>"
         msg_admin['To'] = recipient_email
-        msg_admin['Reply-To'] = request.email
-        msg_admin['Subject'] = f"New Subscriber: {request.email}"
+        msg_admin['Reply-To'] = email
+        msg_admin['Subject'] = f"New Subscriber: {email}"
 
         body_admin = f"""
         New Newsletter Subscription
@@ -344,7 +325,7 @@ async def subscribe_newsletter(request: SubscribeRequest):
         
         A new user has joined your newsletter!
         
-        Subscriber Email: {request.email}
+        Subscriber Email: {email}
         
         (This email was sent automatically by your Oral AI Platform)
         """
@@ -354,7 +335,7 @@ async def subscribe_newsletter(request: SubscribeRequest):
         # 2. Send Confirmation to Subscriber (The User)
         msg_user = MIMEMultipart()
         msg_user['From'] = f"Oral AI Team <{sender_email}>"
-        msg_user['To'] = request.email
+        msg_user['To'] = email
         msg_user['Subject'] = "Welcome to Oral AI!"
 
         body_user = f"""
@@ -372,15 +353,36 @@ async def subscribe_newsletter(request: SubscribeRequest):
         </html>
         """
         msg_user.attach(MIMEText(body_user, 'html'))
-        server.sendmail(sender_email, request.email, msg_user.as_string())
+        server.sendmail(sender_email, email, msg_user.as_string())
 
         # Close connection
         server.quit()
-
-        return {"message": "Subscribed successfully"}
+        print(f"Email sent successfully to {email}")
     except Exception as e:
-        print(f"Email Error: {e}")
-        raise HTTPException(status_code=500, detail=f"Failed to send email: {str(e)}")
+        print(f"Background Email Error: {e}")
+
+@app.post("/api/subscribe")
+async def subscribe_newsletter(request: SubscribeRequest, background_tasks: BackgroundTasks):
+    sender_email = os.getenv("EMAIL_SENDER")
+    sender_password = os.getenv("EMAIL_PASSWORD")
+    recipient_email = os.getenv("EMAIL_RECIPIENT")
+    # Get Base URL from env or default to the Hugging Face Space URL
+    base_url = os.getenv("BASE_URL", "https://ivanjun-oral-ai-cancer-disease-detection.hf.space")
+
+    # Clean up credentials (remove potential spaces or newlines)
+    if sender_email: sender_email = sender_email.strip()
+    if sender_password: sender_password = sender_password.strip().replace(" ", "") # Remove spaces from app password
+    if recipient_email: recipient_email = recipient_email.strip()
+
+    if not sender_email or not sender_password or not recipient_email:
+        # Fallback for demo purposes if not configured
+        print(f"Simulation: Newsletter subscription for {request.email}")
+        return {"message": "Subscribed successfully (Simulation Mode - Configure .env for real emails)"}
+
+    # Add email task to background
+    background_tasks.add_task(send_email_task, request.email, base_url, sender_email, sender_password, recipient_email)
+
+    return {"message": "Subscribed successfully"}
 
 if __name__ == "__main__":
     import uvicorn
