@@ -1,3 +1,13 @@
+---
+title: Oral AI Cancer Disease Detection
+emoji: 🦷
+colorFrom: blue
+colorTo: green
+sdk: docker
+pinned: false
+app_port: 7860
+---
+
 # 🦷 Oral AI: Advanced Disease Detection System
 
 [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/IvanJun/Oral_AI_Cancer_Disease_Detection)
