@@ -213,8 +213,8 @@ Want to run this locally? Follow these steps to compile and run the server on yo
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/VanVan120/Backend-Development.git
-cd Backend-Development
+git clone https://github.com/VanVan120/Oral-Health-Computer-Vision-Model.git
+cd Oral-Health-Computer-Vision-Model
 git lfs pull  # Crucial: Downloads the actual AI model weights
 ```
 
@@ -281,7 +281,7 @@ docker run -p 7860:7860 -e BREVO_API_KEY="your_key" oral-ai-backend
 A quick look at the codebase organization:
 
 ```text
-📦 Backend-Development
+📦 Oral-Health-Computer-Vision-Model
  ┣ 📂 Model A             # 🧬 Pathology Model (DenseNet/ResNet)
  ┣ 📂 Model B             # 🦷 Hygiene Model (YOLOv8)
  ┣ 📂 Model Triage        # 🛡️ Router Model (MobileNet)
@@ -301,7 +301,7 @@ Developed for **SEGP - Multi-task Deep Learning for Quantifying Key Histopatholo
 Cancer**.
 
 *   **Developer**: Ivan Char Cheng Jun
-*   **Issues**: [Report a Bug](https://github.com/VanVan120/Backend-Development/issues)
+*   **Issues**: [Report a Bug](https://github.com/VanVan120/Oral-Health-Computer-Vision-Model/issues)
 
 > **Disclaimer**: This tool is for educational and assistive purposes only. It does not replace professional medical advice.
 
