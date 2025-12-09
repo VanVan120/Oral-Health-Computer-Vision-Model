@@ -25,6 +25,22 @@ export class APIService {
         return await response.blob();
     }
 
+    static async sendReportEmail(payload) {
+        const response = await fetch('/api/send-report', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+        
+        if (!response.ok) {
+            const err = await response.json();
+            throw new Error(err.detail || "Failed to send email");
+        }
+        return await response.json();
+    }
+
     static async sendChatMessage(message, context) {
         const payload = {
             message: message,

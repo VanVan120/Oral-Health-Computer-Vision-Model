@@ -318,9 +318,15 @@ class App {
         const btnReportA = document.getElementById('btn-report-a');
         if (btnReportA) btnReportA.addEventListener('click', () => this.downloadReport('A'));
 
+        const btnEmailA = document.getElementById('btn-email-a');
+        if (btnEmailA) btnEmailA.addEventListener('click', () => this.handleEmailReport('A'));
+
         // Model B Controls
         const btnReportB = document.getElementById('btn-report-b');
         if (btnReportB) btnReportB.addEventListener('click', () => this.downloadReport('B'));
+
+        const btnEmailB = document.getElementById('btn-email-b');
+        if (btnEmailB) btnEmailB.addEventListener('click', () => this.handleEmailReport('B'));
 
         // Model B Back Button
         const btnBackB = document.getElementById('btn-back-model-b');
@@ -427,6 +433,49 @@ class App {
         } catch (error) {
             console.error("Report Error:", error);
             alert("Failed to generate report. Please try again.");
+        } finally {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        }
+    }
+
+    async handleEmailReport(modelType) {
+        const btnId = modelType === 'A' ? 'btn-email-a' : 'btn-email-b';
+        const btn = document.getElementById(btnId);
+        const originalText = btn.innerHTML;
+
+        const email = prompt("Please enter your email address to receive the report:");
+        if (!email || !email.includes('@')) {
+            if (email) alert("Please enter a valid email address.");
+            return;
+        }
+
+        try {
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Sending...';
+            btn.disabled = true;
+
+            const reportType = modelType === 'A' ? 'expert' : 'public';
+            
+            let imageSrc;
+            if (modelType === 'A') {
+                imageSrc = this.modelAUI.getImageSrc();
+            } else {
+                imageSrc = this.modelBUI.getImageSrc();
+            }
+
+            const payload = {
+                report_type: reportType,
+                analysis_data: this.currentAnalysisData,
+                image_base64: imageSrc,
+                email: email
+            };
+
+            await APIService.sendReportEmail(payload);
+            alert(`Report successfully sent to ${email}!`);
+
+        } catch (error) {
+            console.error("Email Report Error:", error);
+            alert("Failed to send email. Please try again later.");
         } finally {
             btn.innerHTML = originalText;
             btn.disabled = false;
