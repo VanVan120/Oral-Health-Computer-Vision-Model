@@ -5,7 +5,6 @@ import uuid
 import importlib.util
 import base64
 import io
-import smtplib
 import requests
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart

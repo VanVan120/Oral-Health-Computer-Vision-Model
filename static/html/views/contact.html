@@ -218,6 +218,54 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Toast Notification Helper
+            function showToast(message, type = 'info') {
+                const container = document.getElementById('toast-container');
+                if (!container) return;
+
+                const toast = document.createElement('div');
+                toast.className = `toast-notification ${type}`;
+                
+                let iconClass = 'fa-info-circle';
+                let title = 'Notification';
+                
+                if (type === 'success') {
+                    iconClass = 'fa-check-circle';
+                    title = 'Success';
+                } else if (type === 'error') {
+                    iconClass = 'fa-exclamation-circle';
+                    title = 'Error';
+                }
+
+                toast.innerHTML = `
+                    <div class="toast-icon">
+                        <i class="fas ${iconClass}"></i>
+                    </div>
+                    <div class="toast-content">
+                        <div class="toast-title">${title}</div>
+                        <div class="toast-message">${message}</div>
+                    </div>
+                    <button class="toast-close" onclick="this.parentElement.remove()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+
+                container.appendChild(toast);
+
+                // Trigger animation
+                requestAnimationFrame(() => {
+                    toast.classList.add('show');
+                });
+
+                // Auto remove
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                    setTimeout(() => {
+                        if (toast.parentElement) toast.remove();
+                    }, 400);
+                }, 5000);
+            }
+
             const contactForm = document.getElementById('contact-form');
             if (contactForm) {
                 contactForm.addEventListener('submit', async function(e) {
@@ -249,15 +297,15 @@
                         });
 
                         if (response.ok) {
-                            alert('Thank you! Your message has been sent successfully.');
+                            showToast('Thank you! Your message has been sent successfully.', 'success');
                             contactForm.reset();
                         } else {
                             const data = await response.json();
-                            alert('Failed to send message: ' + (data.detail || 'Unknown error'));
+                            showToast('Failed to send message: ' + (data.detail || 'Unknown error'), 'error');
                         }
                     } catch (error) {
                         console.error('Error:', error);
-                        alert('An error occurred while sending your message. Please try again later.');
+                        showToast('An error occurred while sending your message. Please try again later.', 'error');
                     } finally {
                         btn.innerText = originalText;
                         btn.disabled = false;

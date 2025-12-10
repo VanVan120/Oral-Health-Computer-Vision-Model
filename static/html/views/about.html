@@ -114,4 +114,119 @@
             </div>
         </div>
     </section>
+
+    <!-- Technology Stack Section -->
+    <section class="py-5 bg-white">
+        <div class="container py-5">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-8 text-center">
+                    <h6 class="text-primary fw-bold text-uppercase mb-2">Our Technology</h6>
+                    <h2 class="display-5 fw-bold text-dark mb-3">Powered by Innovation</h2>
+                    <p class="lead text-muted mb-4">Explore the cutting-edge tools that power our AI models.</p>
+                    
+                    <!-- Level Toggle -->
+                    <div class="d-inline-flex bg-light rounded-pill p-1 border">
+                        <button class="btn btn-sm rounded-pill px-4 py-2 fw-bold active" id="btn-beginner" onclick="setTechLevel('beginner')">Beginner</button>
+                        <button class="btn btn-sm rounded-pill px-4 py-2 fw-bold text-muted" id="btn-advanced" onclick="setTechLevel('advanced')">Advanced</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <!-- PyTorch -->
+                <div class="col-lg-4">
+                    <div class="card h-100 border-0 shadow-lg rounded-4 overflow-hidden">
+                        <div class="card-header bg-danger text-white p-4 border-0">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-fire fa-2x me-3"></i>
+                                <h4 class="mb-0 fw-bold">PyTorch</h4>
+                            </div>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="tech-content beginner-content">
+                                <p class="text-muted mb-0">PyTorch, developed by Facebook, is another deep learning framework widely used for building neural networks. Its straightforward, Pythonic nature makes it easy for beginners to grasp the basics of model creation and training. Beginners will appreciate PyTorch’s flexibility in creating simple models for image classification without having to worry about too much technical overhead.</p>
+                            </div>
+                            <div class="tech-content advanced-content d-none">
+                                <p class="text-muted mb-0">Advanced users can use PyTorch’s dynamic computation graph, allowing greater flexibility when building complex architectures, custom loss functions, and optimizers. It’s a great choice for researchers, as PyTorch offers seamless experimentation with cutting-edge models like Vision Language Models, Generative Adversarial Networks (GANs) and deep reinforcement learning. Thanks to its efficient memory management and GPU support, it also excels in handling large datasets.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CUDA -->
+                <div class="col-lg-4">
+                    <div class="card h-100 border-0 shadow-lg rounded-4 overflow-hidden">
+                        <div class="card-header bg-success text-white p-4 border-0">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-microchip fa-2x me-3"></i>
+                                <h4 class="mb-0 fw-bold">NVIDIA CUDA</h4>
+                            </div>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="tech-content beginner-content">
+                                <p class="text-muted mb-0">CUDA is a parallel computing platform and programming model developed by NVIDIA, while cuDNN is a GPU-accelerated library for deep neural networks. For beginners, these tools may seem technical, but their primary purpose is to accelerate the training of deep learning models by utilizing GPU power. By setting up CUDA and cuDNN properly within the training environment, a significant boost in speed and optimization of model training can be achieved, especially when working with frameworks like TensorFlow and PyTorch.</p>
+                            </div>
+                            <div class="tech-content advanced-content d-none">
+                                <p class="text-muted mb-0">Experts can harness the full power of CUDA and cuDNN to optimize performance in high-demand applications. This includes writing custom CUDA kernels for specific operations, managing GPU memory efficiently, and fine-tuning neural network training for maximum speed and scalability. These tools are essential for developers working with large datasets and needing top-tier performance from their models.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- YOLO -->
+                <div class="col-lg-4">
+                    <div class="card h-100 border-0 shadow-lg rounded-4 overflow-hidden">
+                        <div class="card-header bg-primary text-white p-4 border-0">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-eye fa-2x me-3"></i>
+                                <h4 class="mb-0 fw-bold">YOLO</h4>
+                            </div>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="tech-content beginner-content">
+                                <p class="text-muted mb-0">YOLO (You Only Look Once) is a fast object detection algorithm that is especially popular for real-time applications. Beginners can use pre-trained YOLO models to quickly detect objects in images or videos with relatively simple code. The ease of use makes YOLO a great entry point for those looking to explore object detection without needing to build complex models from scratch.</p>
+                            </div>
+                            <div class="tech-content advanced-content d-none">
+                                <p class="text-muted mb-0">YOLO provides opportunities for fine-tuning models on custom datasets to detect specific objects, improving detection speed and accuracy. YOLO’s lightweight nature allows it to be deployed in resource-constrained environments, like mobile devices, making it a go-to solution for real-time applications. Professionals can also experiment with newer versions of YOLO, adjusting parameters to fit specific project needs.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function setTechLevel(level) {
+            const btnBeginner = document.getElementById('btn-beginner');
+            const btnAdvanced = document.getElementById('btn-advanced');
+            const beginnerContents = document.querySelectorAll('.beginner-content');
+            const advancedContents = document.querySelectorAll('.advanced-content');
+
+            if (level === 'beginner') {
+                btnBeginner.classList.add('active', 'bg-white', 'shadow-sm', 'text-primary');
+                btnBeginner.classList.remove('text-muted');
+                
+                btnAdvanced.classList.remove('active', 'bg-white', 'shadow-sm', 'text-primary');
+                btnAdvanced.classList.add('text-muted');
+
+                beginnerContents.forEach(el => el.classList.remove('d-none'));
+                advancedContents.forEach(el => el.classList.add('d-none'));
+            } else {
+                btnAdvanced.classList.add('active', 'bg-white', 'shadow-sm', 'text-primary');
+                btnAdvanced.classList.remove('text-muted');
+                
+                btnBeginner.classList.remove('active', 'bg-white', 'shadow-sm', 'text-primary');
+                btnBeginner.classList.add('text-muted');
+
+                advancedContents.forEach(el => el.classList.remove('d-none'));
+                beginnerContents.forEach(el => el.classList.add('d-none'));
+            }
+        }
+        
+        // Init state
+        document.addEventListener('DOMContentLoaded', () => {
+            setTechLevel('beginner');
+        });
+    </script>
 {% endblock %}
