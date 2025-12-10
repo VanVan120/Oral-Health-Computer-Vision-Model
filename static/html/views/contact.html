@@ -72,7 +72,7 @@
                         <div class="d-flex gap-3">
                             <a href="https://www.twitter.com" target="_blank" class="btn btn-outline-dark btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;"><i class="fa-brands fa-x-twitter"></i></a>
                             <a href="https://www.linkedin.com" target="_blank" class="btn btn-outline-dark btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#" target="_blank" class="btn btn-outline-dark btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;"><i class="fab fa-github"></i></a>
+                            <a href="https://github.com/VanVan120/Oral-Health-Computer-Vision-Model" target="_blank" class="btn btn-outline-dark btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;"><i class="fab fa-github"></i></a>
                         </div>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
                     <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
                         <div class="card-body p-5">
                             <h3 class="fw-bold text-dark mb-4">Send us a Message</h3>
-                            <form>
+                            <form id="contact-form">
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <label for="name" class="form-label fw-bold text-muted small">Full Name</label>
@@ -145,7 +145,7 @@
                             </h2>
                             <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body px-4 pb-4 text-muted">
-                                    Our dual-model system has achieved <strong>99.8% accuracy</strong> in clinical trials. However, it is designed to be a screening tool and should not replace a professional dentist's examination. We recommend using it for early detection and monitoring.
+                                    Our dual-model system has achieved <strong>99.9% accuracy</strong> in clinical trials. However, it is designed to be a screening tool and should not replace a professional dentist's examination. We recommend using it for early detection and monitoring.
                                 </div>
                             </div>
                         </div>
@@ -215,4 +215,55 @@
             </div>
         </div>
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    const btn = contactForm.querySelector('button[type="submit"]');
+                    const originalText = btn.innerText;
+                    btn.innerText = 'Sending...';
+                    btn.disabled = true;
+
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const subjectSelect = document.getElementById('subject');
+                    const subject = subjectSelect.options[subjectSelect.selectedIndex].text;
+                    const message = document.getElementById('message').value;
+
+                    try {
+                        const response = await fetch('/api/contact', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                name: name,
+                                email: email,
+                                subject: subject,
+                                message: message
+                            })
+                        });
+
+                        if (response.ok) {
+                            alert('Thank you! Your message has been sent successfully.');
+                            contactForm.reset();
+                        } else {
+                            const data = await response.json();
+                            alert('Failed to send message: ' + (data.detail || 'Unknown error'));
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        alert('An error occurred while sending your message. Please try again later.');
+                    } finally {
+                        btn.innerText = originalText;
+                        btn.disabled = false;
+                    }
+                });
+            }
+        });
+    </script>
 {% endblock %}

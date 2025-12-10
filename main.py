@@ -6,6 +6,7 @@ import importlib.util
 import base64
 import io
 import smtplib
+import requests
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from typing import Optional, Dict, Any
@@ -260,6 +261,96 @@ async def get_suggestion(request: SuggestionRequest):
 
 class SendReportRequest(ReportRequest):
     email: str
+
+class ContactRequest(BaseModel):
+    name: str
+    email: str
+    subject: str
+    message: str
+
+def send_contact_emails_task(contact_data: ContactRequest, sender_email: str, api_key: str, developer_email: str):
+    try:
+        url = "https://api.brevo.com/v3/smtp/email"
+        headers = {
+            "accept": "application/json",
+            "api-key": api_key,
+            "content-type": "application/json"
+        }
+
+        # 1. Send Auto-Reply to User
+        user_payload = {
+            "sender": {"name": "Oral AI Team", "email": sender_email},
+            "to": [{"email": contact_data.email, "name": contact_data.name}],
+            "subject": f"We received your message: {contact_data.subject}",
+            "htmlContent": f"""
+            <html>
+                <body>
+                    <h2>Thank you for contacting us, {contact_data.name}!</h2>
+                    <p>We have received your message regarding "<strong>{contact_data.subject}</strong>".</p>
+                    <p>Our team will review your inquiry and get back to you as soon as possible.</p>
+                    <br>
+                    <p><strong>Your Message:</strong></p>
+                    <blockquote style="border-left: 4px solid #ccc; padding-left: 10px; color: #555;">
+                        {contact_data.message}
+                    </blockquote>
+                    <br>
+                    <p>Best regards,</p>
+                    <p>The Oral AI Team</p>
+                </body>
+            </html>
+            """
+        }
+        
+        response_user = requests.post(url, json=user_payload, headers=headers)
+        if not response_user.ok:
+            print(f"Failed to send auto-reply to user: {response_user.text}")
+        else:
+            print(f"Auto-reply sent to {contact_data.email}")
+
+        # 2. Send Notification to Developer
+        dev_payload = {
+            "sender": {"name": "Oral AI System", "email": sender_email},
+            "to": [{"email": developer_email, "name": "Developer"}],
+            "replyTo": {"email": contact_data.email, "name": contact_data.name},
+            "subject": f"New Contact Inquiry: {contact_data.subject}",
+            "htmlContent": f"""
+            <html>
+                <body>
+                    <h2>New Contact Form Submission</h2>
+                    <p><strong>Name:</strong> {contact_data.name}</p>
+                    <p><strong>Email:</strong> {contact_data.email}</p>
+                    <p><strong>Subject:</strong> {contact_data.subject}</p>
+                    <hr>
+                    <h3>Message:</h3>
+                    <p style="white-space: pre-wrap;">{contact_data.message}</p>
+                </body>
+            </html>
+            """
+        }
+
+        response_dev = requests.post(url, json=dev_payload, headers=headers)
+        if not response_dev.ok:
+            print(f"Failed to send notification to developer: {response_dev.text}")
+        else:
+            print(f"Notification sent to developer ({developer_email})")
+
+    except Exception as e:
+        print(f"Background Contact Email Error: {e}")
+        import traceback
+        traceback.print_exc()
+
+@app.post("/api/contact")
+async def contact_form_submission(request: ContactRequest, background_tasks: BackgroundTasks):
+    sender_email = os.getenv("EMAIL_SENDER")
+    api_key = os.getenv("BREVO_API_KEY")
+    developer_email = "ivanccj0120@gmail.com" # Hardcoded as requested
+
+    if not sender_email or not api_key:
+        print("Email configuration missing. Skipping emails.")
+        return {"message": "Message received (Email simulation mode)."}
+
+    background_tasks.add_task(send_contact_emails_task, request, sender_email, api_key, developer_email)
+    return {"message": "Message sent successfully!"}
 
 def send_report_email_task(email: str, sender_email: str, api_key: str, pdf_bytes: bytes, filename: str, image_bytes: Optional[bytes] = None):
     try:
