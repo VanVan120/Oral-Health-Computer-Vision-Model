@@ -56,4 +56,18 @@ export class APIService {
         });
         return await response.json();
     }
+
+    static async getSuggestion(modelType, analysisData) {
+        const response = await fetch('/api/get-suggestion', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                model_type: modelType,
+                analysis_data: analysisData
+            })
+        });
+        return await response.json();
+    }
 }

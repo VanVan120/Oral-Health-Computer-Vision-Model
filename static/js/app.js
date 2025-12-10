@@ -380,16 +380,8 @@ class App {
             this.currentAnalysisData = data;
 
             if (data.model_used === "Model A (Histopathology)") {
-                // Inject AI suggestion into the analysis object
-                if (data.final_analysis) {
-                    data.final_analysis.ai_suggestion = data.ai_suggestion;
-                }
                 this.modelAUI.show(data.final_analysis, file);
             } else if (data.model_used === "Model B (Clinical Screening)") {
-                // Inject AI suggestion into the analysis object
-                if (data.final_analysis) {
-                    data.final_analysis.ai_suggestion = data.ai_suggestion;
-                }
                 this.modelBUI.show(data.final_analysis, file);
             } else {
                 this.showToast("Unknown result type.", "error");

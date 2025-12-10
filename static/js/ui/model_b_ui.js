@@ -1,22 +1,39 @@
+import { APIService } from '../services/api.js';
+
 export class ModelBUI {
     constructor() {
-        this.currentSuggestion = "No suggestion available.";
+        this.currentSuggestion = null;
+        this.lastPredictions = null;
         this.initModalListeners();
     }
 
     initModalListeners() {
         const adviceBtn = document.getElementById('btn-ai-advice-b');
         
-        const showModal = () => {
+        const showModal = async () => {
             const modalText = document.getElementById('ai-suggestion-text');
-            if (modalText) {
-                modalText.textContent = this.currentSuggestion || "Analysis in progress...";
-            }
-            // Use Bootstrap's modal API
             const modalEl = document.getElementById('aiSuggestionModal');
+            
             if (modalEl) {
                 const modal = new bootstrap.Modal(modalEl);
                 modal.show();
+                
+                if (!this.currentSuggestion && this.lastPredictions) {
+                     if (modalText) modalText.textContent = "Generating AI suggestion...";
+                     
+                     try {
+                         const data = await APIService.getSuggestion("Model B", this.lastPredictions);
+                         
+                         this.currentSuggestion = data.ai_suggestion;
+                         if (modalText) modalText.textContent = this.currentSuggestion;
+                         
+                     } catch (error) {
+                         console.error("Error fetching suggestion:", error);
+                         if (modalText) modalText.textContent = "Error loading suggestion.";
+                     }
+                } else {
+                    if (modalText) modalText.textContent = this.currentSuggestion || "No analysis data available.";
+                }
             }
         };
 
@@ -42,7 +59,8 @@ export class ModelBUI {
     }
 
     fillData(data) {
-        this.currentSuggestion = data.ai_suggestion;
+        this.lastPredictions = data;
+        this.currentSuggestion = null;
         this.lastDetections = data.detections; // Store for report generation
 
         // Show Quality Note if present

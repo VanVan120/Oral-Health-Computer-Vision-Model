@@ -194,15 +194,6 @@ async def analyze_image(file: UploadFile = File(...)):
                 response_data["final_analysis"] = analysis
                 response_data["model_used"] = "Model A (Histopathology)"
                 
-                # Generate AI Suggestion
-                try:
-                    suggestion_prompt = "Based on these histopathology results, provide a brief, professional suggestion for the medical professional reviewing this case (max 2 sentences)."
-                    ai_suggestion = get_chat_response(suggestion_prompt, analysis)
-                    response_data["ai_suggestion"] = ai_suggestion
-                except Exception as e:
-                    print(f"AI Suggestion Error: {e}")
-                    response_data["ai_suggestion"] = "AI suggestion unavailable at this time."
-
             else:
                 print("Error: Model A is not loaded.")
                 response_data["error"] = "Model A is not loaded."
@@ -216,15 +207,6 @@ async def analyze_image(file: UploadFile = File(...)):
                 print("Model B Inference Complete.")
                 response_data["final_analysis"] = analysis
                 response_data["model_used"] = "Model B (Clinical Screening)"
-
-                # Generate AI Suggestion
-                try:
-                    suggestion_prompt = "Based on these clinical screening results, provide a brief, empathetic suggestion for the patient (max 2 sentences). Focus on hygiene or next steps."
-                    ai_suggestion = get_chat_response(suggestion_prompt, analysis)
-                    response_data["ai_suggestion"] = ai_suggestion
-                except Exception as e:
-                    print(f"AI Suggestion Error: {e}")
-                    response_data["ai_suggestion"] = "AI suggestion unavailable at this time."
 
             else:
                 print("Error: Model B is not loaded.")
@@ -255,6 +237,26 @@ class ReportRequest(BaseModel):
     report_type: str  # "expert" or "public"
     analysis_data: Dict[str, Any]
     image_base64: Optional[str] = None
+
+class SuggestionRequest(BaseModel):
+    model_type: str
+    analysis_data: Dict[str, Any]
+
+@app.post("/api/get-suggestion")
+async def get_suggestion(request: SuggestionRequest):
+    try:
+        if request.model_type == "Model A":
+             suggestion_prompt = "Based on these histopathology results, provide a brief, professional suggestion for the medical professional reviewing this case (max 2 sentences)."
+        elif request.model_type == "Model B":
+             suggestion_prompt = "Based on these clinical screening results, provide a brief, empathetic suggestion for the patient (max 2 sentences). Focus on hygiene or next steps."
+        else:
+            raise HTTPException(status_code=400, detail="Invalid model type")
+            
+        ai_suggestion = get_chat_response(suggestion_prompt, request.analysis_data)
+        return {"ai_suggestion": ai_suggestion}
+    except Exception as e:
+        print(f"AI Suggestion Error: {e}")
+        return {"ai_suggestion": "AI suggestion unavailable at this time."}
 
 class SendReportRequest(ReportRequest):
     email: str

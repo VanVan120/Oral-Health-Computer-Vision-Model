@@ -1,23 +1,41 @@
+import { APIService } from '../services/api.js';
+
 export class ModelAUI {
     constructor() {
         this.maOriginalSrc = "";
         this.maHeatmapSrc = "";
-        this.currentSuggestion = "No suggestion available.";
+        this.currentSuggestion = null;
+        this.lastPredictions = null;
         this.initModalListeners();
     }
 
     initModalListeners() {
         const adviceBtn = document.getElementById('btn-ai-advice-a');
         
-        const showModal = () => {
+        const showModal = async () => {
             const modalText = document.getElementById('ai-suggestion-text-a');
-            if (modalText) {
-                modalText.textContent = this.currentSuggestion || "Analysis in progress...";
-            }
             const modalEl = document.getElementById('aiSuggestionModalA');
+            
             if (modalEl) {
                 const modal = new bootstrap.Modal(modalEl);
                 modal.show();
+                
+                if (!this.currentSuggestion && this.lastPredictions) {
+                     if (modalText) modalText.textContent = "Generating AI suggestion...";
+                     
+                     try {
+                         const data = await APIService.getSuggestion("Model A", this.lastPredictions);
+                         
+                         this.currentSuggestion = data.ai_suggestion;
+                         if (modalText) modalText.textContent = this.currentSuggestion;
+                         
+                     } catch (error) {
+                         console.error("Error fetching suggestion:", error);
+                         if (modalText) modalText.textContent = "Error loading suggestion.";
+                     }
+                } else {
+                    if (modalText) modalText.textContent = this.currentSuggestion || "No analysis data available.";
+                }
             }
         };
 
@@ -25,7 +43,8 @@ export class ModelAUI {
     }
 
     show(preds, file) {
-        this.currentSuggestion = preds.ai_suggestion;
+        this.lastPredictions = preds;
+        this.currentSuggestion = null;
 
         document.getElementById('triage-view').classList.add('hidden-section');
         document.getElementById('model-a-view').classList.remove('hidden-section');
