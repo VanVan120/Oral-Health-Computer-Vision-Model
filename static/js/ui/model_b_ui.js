@@ -63,11 +63,19 @@ export class ModelBUI {
         this.currentSuggestion = null;
         this.lastDetections = data.detections; // Store for report generation
 
+        // Helper function for translations
+        const t = (key, fallback) => window.AppLanguage ? window.AppLanguage.t(key) : fallback;
+
         // Show Quality Note if present
         const qualityAlert = document.getElementById('mb-quality-note');
         const qualityText = document.getElementById('mb-quality-text');
         if (data.quality_note && qualityAlert && qualityText) {
-            qualityText.textContent = data.quality_note;
+            // Translate quality note if it matches known patterns
+            let translatedNote = data.quality_note;
+            if (data.quality_note.includes("Low Resolution")) {
+                translatedNote = t('qualityNoteLowRes', 'Low Resolution. Switched to Standard Mode for better stability.');
+            }
+            qualityText.textContent = translatedNote;
             
             // Style based on content
             if (data.quality_note.includes("Low Resolution")) {
@@ -81,11 +89,15 @@ export class ModelBUI {
         }
 
         const screenRes = document.getElementById('mb-screening-result');
-        screenRes.textContent = data.screening_result;
+        // Translate screening result
+        const screeningResultKey = 'screeningResult' + data.screening_result.replace(/\s+/g, '');
+        screenRes.textContent = t(screeningResultKey, data.screening_result);
         screenRes.className = `h3 fw-bold mb-0 ${data.screening_result === 'Normal' ? 'text-success' : 'text-danger'}`;
 
         const hygieneRes = document.getElementById('mb-hygiene-score');
-        hygieneRes.textContent = data.hygiene_score;
+        // Translate hygiene score
+        const hygieneKey = 'hygieneScore' + data.hygiene_score;
+        hygieneRes.textContent = t(hygieneKey, data.hygiene_score);
         let color = 'text-dark';
         if (data.hygiene_score === 'High') color = 'text-success';
         if (data.hygiene_score === 'Medium') color = 'text-warning';
@@ -96,16 +108,20 @@ export class ModelBUI {
         list.innerHTML = '';
         
         if (data.detections.length === 0) {
-            list.innerHTML = `<div class="text-center text-muted py-5"><i class="fas fa-check-circle display-4 mb-3 text-success"></i><p>No specific issues detected.</p></div>`;
+            list.innerHTML = `<div class="text-center text-muted py-5"><i class="fas fa-check-circle display-4 mb-3 text-success"></i><p>${t('noIssuesDetected', 'No specific issues detected.')}</p></div>`;
         } else {
             const counts = {};
             data.detections.forEach(d => counts[d.class] = (counts[d.class] || 0) + 1);
             
             for (const [cls, count] of Object.entries(counts)) {
+                // Translate condition class name
+                const conditionKey = 'condition' + cls.replace(/\s+/g, '');
+                const translatedCls = t(conditionKey, cls);
+                const detectedText = t('detectedCount', '{count} detected').replace('{count}', count);
                 list.innerHTML += `
                     <div class="d-flex justify-content-between align-items-center p-3 bg-light rounded border">
-                        <span class="fw-medium text-secondary">${cls}</span>
-                        <span class="badge bg-primary-subtle text-primary-emphasis rounded-pill">${count} detected</span>
+                        <span class="fw-medium text-secondary">${translatedCls}</span>
+                        <span class="badge bg-primary-subtle text-primary-emphasis rounded-pill">${detectedText}</span>
                     </div>`;
             }
         }

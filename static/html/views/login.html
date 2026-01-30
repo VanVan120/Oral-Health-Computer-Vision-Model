@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+
+{% block content %}
+<script>
+    // Redirect if already logged in
+    if (localStorage.getItem('access_token')) {
+        window.location.replace('/');
+    }
+</script>
+<div class="container-fluid p-0 overflow-hidden">
+    <div class="row g-0 min-vh-100">
+        <!-- Left Column: Branding (Hidden on mobile) -->
+        <div class="col-lg-6 d-none d-lg-block position-relative">
+            <!-- Background Image -->
+            <div class="position-absolute w-100 h-100" 
+                 style="background: url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2068&auto=format&fit=crop') center/cover no-repeat;">
+            </div>
+            <!-- Overlay -->
+            <div class="position-absolute w-100 h-100 bg-primary" style="opacity: 0.95; background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);"></div>
+            
+            <!-- Content -->
+            <div class="position-relative h-100 d-flex flex-column justify-content-center px-5 text-white" style="z-index: 2;">
+                <div class="mb-4">
+                    <div class="bg-white rounded-circle d-inline-flex align-items-center justify-content-center shadow-lg" style="width: 60px; height: 60px;">
+                        <i class="fas fa-tooth text-primary fs-3"></i>
+                    </div>
+                </div>
+                <h1 class="display-4 fw-bold mb-4" data-translate="welcomeBack">Welcome Back.</h1>
+                <p class="lead opacity-75 mb-5" style="max-width: 500px;" data-translate="loginBrandingDesc">
+                    Access your personalized dashboard to manage appointments, view analysis reports, and connect with medical professionals seamlessly.
+                </p>
+                
+                <div class="d-flex gap-4">
+                    <div>
+                        <h3 class="fw-bold mb-0">98%</h3>
+                        <small class="text-white-50" data-translate="accuracyRate">Accuracy Rate</small>
+                    </div>
+                    <div class="border-start border-white border-opacity-25 ps-4">
+                        <h3 class="fw-bold mb-0">24/7</h3>
+                        <small class="text-white-50" data-translate="aiAvailability">AI Availability</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Decoration -->
+            <div class="position-absolute bottom-0 end-0 opacity-10 mb-n5 me-n5" style="pointer-events: none;">
+                <i class="fas fa-microscope" style="font-size: 20rem;"></i>
+            </div>
+        </div>
+
+        <!-- Right Column: Login Form -->
+        <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center bg-light position-relative">
+            <!-- Mobile decorative header (Visible only on mobile) -->
+            <div class="d-lg-none w-100 p-4 bg-primary text-white text-center mb-4">
+                <i class="fas fa-tooth fa-2x mb-2"></i>
+                <h3 class="fw-bold" data-translate="appName">Oral AI</h3>
+            </div>
+
+            <div class="w-100 p-4 p-md-5" style="max-width: 550px;">
+                <div class="text-center mb-5">
+                    <h2 class="fw-bold text-dark display-6" data-translate="signIn">Sign In</h2>
+                    <p class="text-muted" data-translate="enterCredentials">Enter your credentials to access your account</p>
+                </div>
+
+                <!-- Error Alert -->
+                <div id="loginError" class="alert alert-danger d-none border-0 shadow-sm align-items-center mb-4" role="alert" style="background-color: #fef2f2; color: #991b1b;">
+                    <i class="fas fa-exclamation-circle me-2 fs-5"></i>
+                    <span id="loginErrorText" class="fw-medium"></span>
+                </div>
+
+                <form id="loginForm" onsubmit="handleLogin(event)" class="needs-validation">
+                    <!-- Email -->
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control rounded-3 border-0 shadow-sm" id="emailInput" name="username" placeholder="name@example.com" required style="height: 60px;" data-translate-placeholder="emailPlaceholder">
+                        <label for="emailInput" class="text-muted ps-4" data-translate="emailAddress">Email address</label>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-floating mb-4">
+                        <input type="password" class="form-control rounded-3 border-0 shadow-sm" id="passwordInput" name="password" placeholder="Password" required style="height: 60px;" data-translate-placeholder="password">
+                        <label for="passwordInput" class="text-muted ps-4" data-translate="password">Password</label>
+                    </div>
+
+                    <!-- Options -->
+                    <div class="d-flex justify-content-between align-items-center mb-5">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="rememberCheck">
+                            <label class="form-check-label text-muted small" for="rememberCheck" data-translate="rememberMe">
+                                Remember me
+                            </label>
+                        </div>
+                        <a href="#" class="text-primary text-decoration-none small fw-bold" data-translate="forgotPassword">Forgot password?</a>
+                    </div>
+
+                    <!-- Action -->
+                    <button type="submit" class="btn btn-primary w-100 py-3 rounded-pill fw-bold shadow-lg mb-4 text-uppercase letter-spacing-1">
+                        <span data-translate="signIn">Sign In</span> <i class="fas fa-arrow-right ms-2"></i>
+                    </button>
+
+                    <!-- Divider -->
+                    <div class="position-relative text-center mb-4">
+                        <hr class="text-muted opacity-25">
+                        <span class="position-absolute top-50 start-50 translate-middle px-3 bg-light text-muted small" data-translate="or">or</span>
+                    </div>
+
+                    <!-- Sign Up Link -->
+                    <div class="text-center">
+                        <span class="text-muted" data-translate="dontHaveAccount">Don't have an account?</span>
+                        <a href="/register" class="text-primary fw-bold text-decoration-none ms-1" data-translate="createAccount">Create Account</a>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="mt-auto py-4 text-muted small" data-translate="copyrightText">
+                &copy; 2026 Oral AI Platform. All rights reserved.
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    async function handleLogin(e) {
+        e.preventDefault();
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        
+        // Loading state
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Signing In...';
+
+        const form = e.target;
+        const formData = new FormData(form);
+        
+        try {
+            const response = await fetch('/auth/token', {
+                method: 'POST',
+                body: formData
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                localStorage.setItem('access_token', data.access_token);
+                localStorage.setItem('user_info', JSON.stringify({
+                    name: data.name,
+                    role: data.role,
+                    id: data.user_id
+                }));
+                
+                // Success feedback styling
+                submitBtn.classList.remove('btn-primary');
+                submitBtn.classList.add('btn-success');
+                submitBtn.innerHTML = '<i class="fas fa-check me-2"></i> Success!';
+                
+                setTimeout(() => window.location.href = '/', 500);
+            } else {
+                // Error feedback
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+                
+                showError("Incorrect email or password.");
+            }
+        } catch (error) {
+            console.error("Login Error:", error);
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+            showError("Connection error. Please try again.");
+        }
+    }
+
+    function showError(message) {
+        const errorDiv = document.getElementById('loginError');
+        const errorText = document.getElementById('loginErrorText');
+        errorText.textContent = message;
+        errorDiv.classList.remove('d-none');
+        errorDiv.classList.add('d-flex', 'animate-shake'); 
+        
+        // Remove shake animation after it plays so it can be re-triggered
+        setTimeout(() => {
+            errorDiv.classList.remove('animate-shake');
+        }, 500);
+    }
+</script>
+
+<style>
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+.animate-shake {
+    animation: shake 0.4s ease-in-out;
+}
+</style>
+{% endblock %}

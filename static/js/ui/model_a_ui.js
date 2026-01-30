@@ -74,13 +74,16 @@ export class ModelAUI {
     }
 
     fillData(p) {
+        // Helper function for translations
+        const t = (key, fallback) => window.AppLanguage ? window.AppLanguage.t(key) : fallback;
+        
         const badge = document.getElementById('ma-tumour-badge');
         if (p.tumour_detected) {
             badge.className = 'badge bg-danger fs-5 mb-2';
-            badge.textContent = 'Tumour Detected';
+            badge.textContent = t('tumourDetected', 'Tumour Detected');
         } else {
             badge.className = 'badge bg-success fs-5 mb-2';
-            badge.textContent = 'No Tumour';
+            badge.textContent = t('noTumour', 'No Tumour');
         }
 
         const probPct = (p.tumour_probability * 100).toFixed(1);
@@ -91,7 +94,7 @@ export class ModelAUI {
         document.getElementById('ma-poi-value').textContent = p.pattern_of_invasion;
         
         const pniEl = document.getElementById('ma-pni-value');
-        pniEl.textContent = p.perineural_invasion ? 'Detected' : 'Not Detected';
+        pniEl.textContent = p.perineural_invasion ? t('detected', 'Detected') : t('notDetected', 'Not Detected');
         pniEl.style.color = p.perineural_invasion ? '#dc3545' : '#198754';
 
         document.getElementById('ma-tb-value').textContent = p.tumour_buds_count;

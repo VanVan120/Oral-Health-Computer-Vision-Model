@@ -2,9 +2,9 @@
     <div id="triage-view" class="hidden-section">
         <div class="triage-container">
             <div class="text-center mb-5">
-                <h5 class="ai-subtitle text-uppercase mb-3 fs-3">AI-POWERED DIAGNOSTICS</h5>
-                <h1 class="triage-title display-4 fw-bold text-dark mb-3 page-title-interactive">Intelligent Oral Disease Analysis</h1>
-                <p class="triage-subtitle lead text-muted mx-auto" style="max-width: 700px;">
+                <h5 class="ai-subtitle text-uppercase mb-3 fs-3" data-translate="aiPoweredDiagnostics">AI-POWERED DIAGNOSTICS</h5>
+                <h1 class="triage-title display-4 fw-bold text-dark mb-3 page-title-interactive" data-translate="intelligentOralAnalysis">Intelligent Oral Disease Analysis</h1>
+                <p class="triage-subtitle lead text-muted mx-auto" style="max-width: 700px;" data-translate="triageSubtitle">
                     Deploying state-of-the-art AI to classify clinical images and histopathology slides with precision. 
                     Upload your sample to begin the automated triage process.
                 </p>
@@ -19,11 +19,11 @@
                     <div class="upload-icon-wrapper mb-4 mx-auto">
                         <i class="fas fa-cloud-upload-alt upload-icon"></i>
                     </div>
-                    <h3 class="upload-text-main mb-2">Drop your image here, or click to browse</h3>
-                    <p class="upload-text-sub mb-4">Supports JPG, JPEG, PNG (Clinical or Histopathology)</p>
+                    <h3 class="upload-text-main mb-2" data-translate="dropImageHere">Drop your image here, or click to browse</h3>
+                    <p class="upload-text-sub mb-4" data-translate="supportsImageFormats">Supports JPG, JPEG, PNG (Clinical or Histopathology)</p>
                     
                     <div class="d-inline-flex align-items-center gap-2 text-primary fw-semibold bg-primary-subtle px-4 py-2 rounded-pill">
-                        <i class="fas fa-shield-alt"></i> Secure & Private Upload
+                        <i class="fas fa-shield-alt"></i> <span data-translate="securePrivateUpload">Secure & Private Upload</span>
                     </div>
                 </div>
                 <input type="file" id="main-file-input" class="d-none" accept="image/*">
@@ -31,17 +31,17 @@
 
             <div id="triage-loading" class="hidden-section">
                 <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
-                    <span class="visually-hidden">Loading...</span>
+                    <span class="visually-hidden" data-translate="loading">Loading...</span>
                 </div>
-                <p class="mt-3 text-primary fw-semibold fs-5">Analyzing Image Structure...</p>
-                <p class="text-muted small">Routing to appropriate specialist model</p>
+                <p class="mt-3 text-primary fw-semibold fs-5" data-translate="analyzingImageStructure">Analyzing Image Structure...</p>
+                <p class="text-muted small" data-translate="routingToModel">Routing to appropriate specialist model</p>
             </div>
 
             <!-- Divider -->
             <div class="my-5 position-relative">
                 <hr class="border-secondary opacity-25">
                 <span class="position-absolute top-50 start-50 translate-middle px-4 py-1 rounded-pill text-muted small text-uppercase letter-spacing-1 fw-bold" 
-                      style="background: rgba(255,255,255,0.8); backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.5);">
+                      style="background: rgba(255,255,255,0.8); backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.5);" data-translate="systemCapabilities">
                     System Capabilities
                 </span>
             </div>
@@ -53,11 +53,11 @@
                     <div class="feature-icon">
                         <i class="fas fa-random"></i>
                     </div>
-                    <h3 class="feature-title">Smart Triage</h3>
-                    <p class="feature-desc">
+                    <h3 class="feature-title" data-translate="smartTriage">Smart Triage</h3>
+                    <p class="feature-desc" data-translate="smartTriageFeatureDesc">
                         Automatically routes uploaded images to either the Histopathology or Clinical Screening model based on visual characteristics.
                     </p>
-                    <span class="feature-tag">Auto-Routing</span>
+                    <span class="feature-tag" data-translate="autoRouting">Auto-Routing</span>
                 </div>
 
                 <!-- Card 2: Histopathology -->
@@ -65,11 +65,11 @@
                     <div class="feature-icon">
                         <i class="fas fa-microscope"></i>
                     </div>
-                    <h3 class="feature-title">Histopathology</h3>
-                    <p class="feature-desc">
+                    <h3 class="feature-title" data-translate="histopathology">Histopathology</h3>
+                    <p class="feature-desc" data-translate="histopathologyFeatureDesc">
                         Deep learning analysis for tumour detection, grading, and invasion depth measurement on microscopic slides.
                     </p>
-                    <span class="feature-tag">Deep Learning</span>
+                    <span class="feature-tag" data-translate="deepLearning">Deep Learning</span>
                 </div>
 
                 <!-- Card 3: Clinical Screening -->
@@ -77,11 +77,11 @@
                     <div class="feature-icon">
                         <i class="fas fa-teeth"></i>
                     </div>
-                    <h3 class="feature-title">Clinical Screening</h3>
-                    <p class="feature-desc">
+                    <h3 class="feature-title" data-translate="clinicalScreening">Clinical Screening</h3>
+                    <p class="feature-desc" data-translate="clinicalScreeningFeatureDesc">
                         Real-time object detection for oral hygiene assessment and identification of potential lesions or abnormalities.
                     </p>
-                    <span class="feature-tag">Object Detection</span>
+                    <span class="feature-tag" data-translate="objectDetection">Object Detection</span>
                 </div>
             </div>
         </div>
