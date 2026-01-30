@@ -98,18 +98,18 @@
                              style="width: 12px; height: 12px; background-color: #22c55e; box-shadow: 0 0 0 2px #0f172a;"></div>
                     </div>
                     <div>
-                        <h5 class="fw-bold mb-0 fs-6 letter-spacing-wide">Oral AI Assistant</h5>
+                        <h5 class="fw-bold mb-0 fs-6 letter-spacing-wide" data-translate="oralAiAssistant">Oral AI Assistant</h5>
                         <div class="d-flex align-items-center gap-1">
                             <span class="d-inline-block rounded-circle bg-success" style="width: 6px; height: 6px; box-shadow: 0 0 8px #22c55e;"></span>
-                            <p class="small text-white-50 mb-0" style="font-size: 0.75rem;">Online & Ready</p>
+                            <p class="small text-white-50 mb-0" style="font-size: 0.75rem;" data-translate="onlineReady">Online & Ready</p>
                         </div>
                     </div>
                 </div>
                 <div class="d-flex gap-1">
-                    <button id="chat-minimize-btn" class="btn btn-sm btn-link text-white-50 hover-text-white rounded-circle p-2 transition-all" title="Minimize">
+                    <button id="chat-minimize-btn" class="btn btn-sm btn-link text-white-50 hover-text-white rounded-circle p-2 transition-all" data-translate-title="minimize" title="Minimize">
                         <i class="fas fa-minus"></i>
                     </button>
-                    <button id="chat-close-btn" class="btn btn-sm btn-link text-white-50 hover-text-white rounded-circle p-2 transition-all" title="Close">
+                    <button id="chat-close-btn" class="btn btn-sm btn-link text-white-50 hover-text-white rounded-circle p-2 transition-all" data-translate-title="close" title="Close">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
@@ -127,23 +127,23 @@
                     <div class="d-flex flex-column gap-1" style="max-width: 80%;">
                         <div class="bg-white p-3 rounded-4 rounded-tl-0 shadow-sm border border-light-subtle text-dark position-relative" 
                              style="border-top-left-radius: 4px !important; border-left: 3px solid #3b82f6;">
-                            <p class="mb-0 small" style="line-height: 1.5;">Hello! I'm your AI medical assistant. I can help explain your analysis results or answer general questions about oral health.</p>
+                            <p class="mb-0 small" style="line-height: 1.5;" data-translate="chatWelcomeMessage">Hello! I'm your AI medical assistant. I can help explain your analysis results or answer general questions about oral health.</p>
                         </div>
-                        <span class="text-muted ms-1 fw-medium" style="font-size: 10px; letter-spacing: 0.5px;">AI ASSISTANT • JUST NOW</span>
+                        <span class="text-muted ms-1 fw-medium" style="font-size: 10px; letter-spacing: 0.5px;"><span data-translate="aiAssistant">AI ASSISTANT</span> • <span data-translate="justNow">JUST NOW</span></span>
                     </div>
                 </div>
-    
+
                 <!-- Quick Actions (Suggestions) -->
                 <div class="d-flex flex-column gap-2 ps-5 chat-message-enter" style="animation-delay: 0.1s;">
-                    <p class="small text-muted mb-1 fw-bold text-uppercase" style="font-size: 0.7rem; letter-spacing: 1px;">Suggested Topics</p>
+                    <p class="small text-muted mb-1 fw-bold text-uppercase" style="font-size: 0.7rem; letter-spacing: 1px;" data-translate="suggestedTopics">Suggested Topics</p>
                     <div class="d-flex flex-wrap gap-2">
-                        <button class="btn btn-sm rounded-pill py-2 px-3 quick-action-chip quick-action-btn">
+                        <button class="btn btn-sm rounded-pill py-2 px-3 quick-action-chip quick-action-btn" data-translate="whatIsOralCancer">
                             What is Oral Cancer?
                         </button>
-                        <button class="btn btn-sm rounded-pill py-2 px-3 quick-action-chip quick-action-btn">
+                        <button class="btn btn-sm rounded-pill py-2 px-3 quick-action-chip quick-action-btn" data-translate="explainHistopathology">
                             Explain Histopathology
                         </button>
-                        <button class="btn btn-sm rounded-pill py-2 px-3 quick-action-chip quick-action-btn">
+                        <button class="btn btn-sm rounded-pill py-2 px-3 quick-action-chip quick-action-btn" data-translate="howDoesAiWork">
                             How does the AI work?
                         </button>
                     </div>
@@ -156,6 +156,7 @@
                     <input type="text" id="chat-input" 
                            class="form-control border-0 bg-transparent shadow-none ps-3 py-2 text-dark"
                            placeholder="Type your question..."
+                           data-translate-placeholder="chatInputPlaceholder"
                            style="font-size: 0.95rem;">
                     
                     <button id="chat-send-btn" class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center shadow-sm m-1 hover-scale" 
@@ -164,7 +165,7 @@
                     </button>
                 </div>
                 <div class="text-center mt-2">
-                    <p class="small text-muted mb-0 opacity-50" style="font-size: 10px;">AI can make mistakes. Verify important info.</p>
+                    <p class="small text-muted mb-0 opacity-50" style="font-size: 10px;" data-translate="aiDisclaimer">AI can make mistakes. Verify important info.</p>
                 </div>
             </div>
         </div>

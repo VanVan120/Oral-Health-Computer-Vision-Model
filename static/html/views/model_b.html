@@ -4,19 +4,19 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0 shadow-lg rounded-4">
                 <div class="modal-header border-0 bg-primary text-white rounded-top-4">
-                    <h5 class="modal-title"><i class="fas fa-robot me-2"></i>AI Analysis Insight</h5>
+                    <h5 class="modal-title"><i class="fas fa-robot me-2"></i><span data-translate="aiAnalysisInsight">AI Analysis Insight</span></h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">
                     <div class="d-flex align-items-start">
                         <i class="fas fa-quote-left text-primary opacity-25 fa-2x me-3"></i>
                         <p id="ai-suggestion-text" class="fs-5 text-dark mb-0" style="line-height: 1.6;">
-                            Loading suggestion...
+                            <span data-translate="loadingSuggestion">Loading suggestion...</span>
                         </p>
                     </div>
                 </div>
                 <div class="modal-footer border-0 bg-light rounded-bottom-4">
-                    <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal" data-translate="close">Close</button>
                 </div>
             </div>
         </div>
@@ -31,7 +31,7 @@
                         <i class="fas fa-arrow-left"></i>
                     </button>
                     <div>
-                        <h2 class="fw-bold mb-0 text-primary">Clinical Analysis</h2>
+                        <h2 class="fw-bold mb-0 text-primary" data-translate="clinicalAnalysis">Clinical Analysis</h2>
                     </div>
                 </div>
 
@@ -49,23 +49,23 @@
                                     </div>
 
                                     <!-- Fullscreen Toggle -->
-                                    <button class="btn-fullscreen" onclick="toggleFullscreen(this.parentElement)" title="Toggle Fullscreen">
+                                    <button class="btn-fullscreen" onclick="toggleFullscreen(this.parentElement)" data-translate-title="toggleFullscreen" title="Toggle Fullscreen">
                                         <i class="fas fa-expand"></i>
                                     </button>
                                     
                                     <!-- Quality Note Badge (Floating) -->
                                     <div id="mb-quality-note" class="viewport-badge warning d-none">
                                         <i class="fas fa-exclamation-triangle"></i>
-                                        <span id="mb-quality-text">Low Quality Image</span>
+                                        <span id="mb-quality-text" data-translate="lowQualityImage">Low Quality Image</span>
                                     </div>
 
                                     <!-- View Controls -->
                                     <div class="viewport-controls">
                                         <button class="control-btn active">
-                                            <i class="fas fa-vector-square"></i> Detections
+                                            <i class="fas fa-vector-square"></i> <span data-translate="detections">Detections</span>
                                         </button>
                                         <button class="control-btn" onclick="toggleFullscreen(this.closest('.analysis-viewport'))">
-                                            <i class="fas fa-expand"></i> Fullscreen
+                                            <i class="fas fa-expand"></i> <span data-translate="fullscreen">Fullscreen</span>
                                         </button>
                                     </div>
                                 </div>
@@ -78,13 +78,13 @@
                                 <div class="row g-3 mb-4">
                                     <div class="col-6">
                                         <div class="p-3 rounded-4 h-100 text-center border border-primary bg-primary-subtle">
-                                            <small class="text-primary fw-bold text-uppercase mb-2 d-block">Screening Result</small>
+                                            <small class="text-primary fw-bold text-uppercase mb-2 d-block" data-translate="screeningResult">Screening Result</small>
                                             <div id="mb-screening-result" class="h3 fw-bold text-primary mb-0">--</div>
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="p-3 rounded-4 h-100 text-center border border-success bg-success-subtle">
-                                            <small class="text-success fw-bold text-uppercase mb-2 d-block">Hygiene Score</small>
+                                            <small class="text-success fw-bold text-uppercase mb-2 d-block" data-translate="hygieneScore">Hygiene Score</small>
                                             <div id="mb-hygiene-score" class="h3 fw-bold text-success mb-0">--</div>
                                         </div>
                                     </div>
@@ -92,21 +92,21 @@
 
                                 <!-- Detailed Findings List & AI Recommendation -->
                                 <div class="flex-grow-1 mb-4">
-                                    <h6 class="text-uppercase text-muted fw-bold fs-7 mb-3">Detected Conditions & Analysis</h6>
+                                    <h6 class="text-uppercase text-muted fw-bold fs-7 mb-3" data-translate="detectedConditions">Detected Conditions & Analysis</h6>
                                     <div class="card border-0 bg-light rounded-4 h-100 overflow-hidden shadow-sm">
                                         <div class="card-body p-0 d-flex flex-column">
                                             <div id="mb-findings-list" class="overflow-auto p-3 custom-scrollbar flex-grow-1" style="min-height: 200px; max-height: 300px;">
                                                 <!-- Items injected here -->
                                                 <div class="text-center text-muted py-5">
                                                     <i class="fas fa-search display-6 mb-3 opacity-25"></i>
-                                                    <p class="small mb-0">Waiting for analysis...</p>
+                                                    <p class="small mb-0" data-translate="waitingForAnalysis">Waiting for analysis...</p>
                                                 </div>
                                             </div>
                                             <!-- Integrated AI Button -->
                                             <div class="p-3 bg-white border-top">
                                                 <button id="btn-ai-advice-b" class="btn btn-dark w-100 py-3 rounded-3 shadow-sm transition-all d-flex align-items-center justify-content-center">
                                                     <i class="fas fa-robot me-2"></i> 
-                                                    <span>View AI Recommendation</span>
+                                                    <span data-translate="viewAiRecommendation">View AI Recommendation</span>
                                                 </button>
                                             </div>
                                         </div>
@@ -123,19 +123,19 @@
                     <div class="col-md-4">
                         <button id="btn-report-b" class="btn btn-white bg-white border shadow-sm w-100 py-3 rounded-4 d-flex align-items-center justify-content-center transition-all hover-card">
                             <i class="fas fa-file-pdf text-danger me-2 fa-lg"></i>
-                            <span class="fw-bold text-dark">PDF Report</span>
+                            <span class="fw-bold text-dark" data-translate="pdfReport">PDF Report</span>
                         </button>
                     </div>
                     <div class="col-md-4">
                         <button id="btn-email-b" class="btn btn-white bg-white border shadow-sm w-100 py-3 rounded-4 d-flex align-items-center justify-content-center transition-all hover-card">
                             <i class="fas fa-envelope text-primary me-2 fa-lg"></i>
-                            <span class="fw-bold text-dark">Email Report</span>
+                            <span class="fw-bold text-dark" data-translate="emailReport">Email Report</span>
                         </button>
                     </div>
                     <div class="col-md-4">
                         <button id="btn-new-upload-b-bottom" class="btn btn-primary shadow w-100 py-3 rounded-4 d-flex align-items-center justify-content-center transition-all hover-card">
                             <i class="fas fa-redo me-2"></i>
-                            <span class="fw-bold">Start New Analysis</span>
+                            <span class="fw-bold" data-translate="startNewAnalysis">Start New Analysis</span>
                         </button>
                     </div>
                 </div>

@@ -1,0 +1,687 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row g-4">
+        <!-- Sidebar -->
+        <div class="col-lg-3">
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                <div class="list-group list-group-flush" id="settings-tabs" role="tablist">
+                    <a class="list-group-item list-group-item-action active p-3 d-flex align-items-center gap-3 border-0 fw-bold" 
+                       id="v-pills-general-tab" data-bs-toggle="pill" href="#v-pills-general" role="tab">
+                        <div class="bg-primary bg-opacity-10 text-primary rounded-circle p-2 d-flex justify-content-center align-items-center" style="width: 32px; height: 32px;"><i class="fas fa-cog"></i></div>
+                        <span data-translate="general">General</span>
+                    </a>
+                    <a class="list-group-item list-group-item-action p-3 d-flex align-items-center gap-3 border-0 fw-bold" 
+                       id="v-pills-security-tab" data-bs-toggle="pill" href="#v-pills-security" role="tab">
+                        <div class="bg-warning bg-opacity-10 text-warning rounded-circle p-2 d-flex justify-content-center align-items-center" style="width: 32px; height: 32px;"><i class="fas fa-shield-alt"></i></div>
+                        <span data-translate="security">Security</span>
+                    </a>
+                    
+                    <!-- Doctor Only Tab -->
+                    <a class="list-group-item list-group-item-action p-3 d-flex align-items-center gap-3 border-0 fw-bold d-none" 
+                       id="v-pills-patients-tab" data-bs-toggle="pill" href="#v-pills-patients" role="tab" onclick="loadPatientList()">
+                        <div class="bg-success bg-opacity-10 text-success rounded-circle p-2 d-flex justify-content-center align-items-center" style="width: 32px; height: 32px;"><i class="fas fa-users-cog"></i></div>
+                        <span data-translate="patientManagement">Patient Management</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="col-lg-9">
+            <div class="tab-content" id="v-pills-tabContent">
+                
+                <!-- General Settings -->
+                <div class="tab-pane fade show active" id="v-pills-general" role="tabpanel">
+                    <div class="card border-0 shadow-sm rounded-4 p-4">
+                        <h4 class="fw-bold mb-4" data-translate="generalPreferences">General Preferences</h4>
+                        
+                        <div class="mb-4">
+                            <label class="form-label fw-bold small text-muted text-uppercase mb-3" data-translate="languageRegion">Language & Region</label>
+                            <div class="p-3 border rounded-3 bg-light">
+                                <div class="d-flex align-items-center mb-2">
+                                    <i class="fas fa-globe text-primary me-2"></i>
+                                    <h6 class="mb-0" data-translate="preferredLanguage">Preferred Language</h6>
+                                </div>
+                                <select class="form-select mt-2" id="languageSelect" onchange="saveLanguagePreference()">
+                                    <option value="en" selected>English</option>
+                                    <option value="ms">Bahasa Melayu</option>
+                                    <option value="zh">中文 (Chinese)</option>
+                                    <option value="ta">தமிழ் (Tamil)</option>
+                                </select>
+                                <small class="text-muted mt-1 d-block" data-translate="selectLanguage">Select your preferred language for the interface</small>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="form-label fw-bold small text-muted text-uppercase mb-3" data-translate="reportSettings">Report Settings</label>
+                            <div class="d-flex align-items-center justify-content-between p-3 border rounded-3 bg-light">
+                                <div>
+                                    <h6 class="mb-1"><i class="fas fa-save me-2 text-success"></i><span data-translate="autoSaveReports">Auto-save Reports</span></h6>
+                                    <small class="text-muted" data-translate="autoSaveDesc">Automatically save analysis reports to your account</small>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="autoSaveSwitch" onchange="saveAutoSavePreference()" checked>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold small text-muted text-uppercase mb-3" data-translate="notifications">Notifications</label>
+                            <div class="d-flex align-items-center justify-content-between p-3 border rounded-3 bg-light mb-2">
+                                <div>
+                                    <h6 class="mb-1" data-translate="emailNotifications">Email Notifications</h6>
+                                    <small class="text-muted" data-translate="emailNotifDesc">Receive updates about appointments</small>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="emailNotificationSwitch" onchange="saveEmailPreference()" checked>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Settings -->
+                <div class="tab-pane fade" id="v-pills-security" role="tabpanel">
+                    <div class="card border-0 shadow-sm rounded-4 p-4">
+                        <h4 class="fw-bold mb-4" data-translate="securitySettings">Security Settings</h4>
+                        <div class="alert alert-info border-0 bg-info bg-opacity-10 text-info mb-4">
+                            <i class="fas fa-info-circle me-2"></i> <span data-translate="passwordChangeInfo">Password changes require re-authentication.</span>
+                        </div>
+                        
+                        <form id="changePasswordForm" onsubmit="handlePasswordChange(event)">
+                            <div class="mb-3">
+                                <label class="form-label" data-translate="currentPassword">Current Password</label>
+                                <input type="password" class="form-control" id="currentPassword" data-translate-placeholder="enterCurrentPassword" placeholder="Enter current password" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" data-translate="newPassword">New Password</label>
+                                <input type="password" class="form-control" id="newPassword" data-translate-placeholder="enterNewPassword" placeholder="Enter new password" required minlength="6">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" data-translate="confirmPassword">Confirm New Password</label>
+                                <input type="password" class="form-control" id="confirmPassword" data-translate-placeholder="confirmNewPassword" placeholder="Confirm new password" required minlength="6">
+                            </div>
+                            <button type="submit" class="btn btn-primary rounded-pill" id="updatePasswordBtn" data-translate="updatePassword">Update Password</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Patient Management (Doctor Only) -->
+                <div class="tab-pane fade" id="v-pills-patients" role="tabpanel">
+                    <div class="card border-0 shadow-sm rounded-4 p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div>
+                                <h4 class="fw-bold mb-1" data-translate="patientRecords">Patient Records</h4>
+                                <p class="text-muted small mb-0" data-translate="managePatients">Manage registered patients and their accounts.</p>
+                            </div>
+                            <button class="btn btn-primary rounded-pill btn-sm" onclick="loadPatientList()">
+                                <i class="fas fa-sync-alt me-1"></i> <span data-translate="refresh">Refresh</span>
+                            </button>
+                        </div>
+                        
+                        <div class="input-group mb-3">
+                            <span class="input-group-text bg-white border-end-0"><i class="fas fa-search text-muted"></i></span>
+                            <input type="text" class="form-control border-start-0 ps-0" id="patientSearch" data-translate-placeholder="searchPatients" placeholder="Search patients by name or email..." onkeyup="filterPatients()">
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle">
+                                <thead class="bg-light">
+                                    <tr>
+                                        <th class="border-0 rounded-start" data-translate="id">ID</th>
+                                        <th class="border-0" data-translate="patient">Patient</th>
+                                        <th class="border-0" data-translate="email">Email</th>
+                                        <th class="border-0" data-translate="status">Status</th>
+                                        <th class="border-0 rounded-end text-end" data-translate="actions">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="patientTableBody">
+                                    <tr>
+                                        <td colspan="5" class="text-center py-5 text-muted">
+                                            <span class="spinner-border spinner-border-sm me-2"></span> <span data-translate="loadingRecords">Loading records...</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit User Modal -->
+<div class="modal fade" id="editUserModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold">Edit Patient</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editUserForm">
+                    <input type="hidden" id="editUserId">
+                    <div class="mb-3">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="editUserName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" id="editUserEmail" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="btn btn-light rounded-pill" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary rounded-pill" onclick="saveUserChanges()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const userInfoStr = localStorage.getItem('user_info');
+        if(userInfoStr) {
+            const user = JSON.parse(userInfoStr);
+            if(user.role === 'doctor') {
+                document.getElementById('v-pills-patients-tab').classList.remove('d-none');
+            }
+        }
+        
+        // Load saved preferences
+        const savedLanguage = localStorage.getItem('preferred_language') || 'en';
+        document.getElementById('languageSelect').value = savedLanguage;
+        applyLanguage(savedLanguage); // Apply language immediately
+        
+        const autoSave = localStorage.getItem('auto_save_reports') !== 'false';
+        document.getElementById('autoSaveSwitch').checked = autoSave;
+        
+        const emailNotifications = localStorage.getItem('email_notifications') !== 'false';
+        document.getElementById('emailNotificationSwitch').checked = emailNotifications;
+        
+        // Check if URL has hash for security section
+        if (window.location.hash === '#security' || window.location.hash === '#v-pills-security') {
+            const securityTab = document.getElementById('v-pills-security-tab');
+            if (securityTab) {
+                const tab = new bootstrap.Tab(securityTab);
+                tab.show();
+            }
+        }
+    });
+    
+    // Translation Dictionary
+    const translations = {
+        en: {
+            general: 'General',
+            security: 'Security',
+            patientManagement: 'Patient Management',
+            generalPreferences: 'General Preferences',
+            languageRegion: 'Language & Region',
+            preferredLanguage: 'Preferred Language',
+            selectLanguage: 'Select your preferred language for the interface',
+            reportSettings: 'Report Settings',
+            autoSaveReports: 'Auto-save Reports',
+            autoSaveDesc: 'Automatically save analysis reports to your account',
+            notifications: 'Notifications',
+            emailNotifications: 'Email Notifications',
+            emailNotifDesc: 'Receive updates about appointments',
+            securitySettings: 'Security Settings',
+            passwordChangeInfo: 'Password changes require re-authentication.',
+            currentPassword: 'Current Password',
+            newPassword: 'New Password',
+            confirmPassword: 'Confirm New Password',
+            updatePassword: 'Update Password',
+            enterCurrentPassword: 'Enter current password',
+            enterNewPassword: 'Enter new password',
+            confirmNewPassword: 'Confirm new password'
+        },
+        ms: {
+            general: 'Umum',
+            security: 'Keselamatan',
+            patientManagement: 'Pengurusan Pesakit',
+            generalPreferences: 'Tetapan Umum',
+            languageRegion: 'Bahasa & Wilayah',
+            preferredLanguage: 'Bahasa Pilihan',
+            selectLanguage: 'Pilih bahasa pilihan anda untuk antara muka',
+            reportSettings: 'Tetapan Laporan',
+            autoSaveReports: 'Auto-simpan Laporan',
+            autoSaveDesc: 'Simpan laporan analisis secara automatik ke akaun anda',
+            notifications: 'Pemberitahuan',
+            emailNotifications: 'Pemberitahuan E-mel',
+            emailNotifDesc: 'Terima kemas kini tentang temujanji',
+            securitySettings: 'Tetapan Keselamatan',
+            passwordChangeInfo: 'Perubahan kata laluan memerlukan pengesahan semula.',
+            currentPassword: 'Kata Laluan Semasa',
+            newPassword: 'Kata Laluan Baharu',
+            confirmPassword: 'Sahkan Kata Laluan Baharu',
+            updatePassword: 'Kemas Kini Kata Laluan',
+            enterCurrentPassword: 'Masukkan kata laluan semasa',
+            enterNewPassword: 'Masukkan kata laluan baharu',
+            confirmNewPassword: 'Sahkan kata laluan baharu'
+        },
+        zh: {
+            general: '常规',
+            security: '安全',
+            patientManagement: '患者管理',
+            generalPreferences: '常规设置',
+            languageRegion: '语言和地区',
+            preferredLanguage: '首选语言',
+            selectLanguage: '选择您的界面首选语言',
+            reportSettings: '报告设置',
+            autoSaveReports: '自动保存报告',
+            autoSaveDesc: '自动将分析报告保存到您的帐户',
+            notifications: '通知',
+            emailNotifications: '电子邮件通知',
+            emailNotifDesc: '接收有关预约的更新',
+            securitySettings: '安全设置',
+            passwordChangeInfo: '密码更改需要重新验证。',
+            currentPassword: '当前密码',
+            newPassword: '新密码',
+            confirmPassword: '确认新密码',
+            updatePassword: '更新密码',
+            enterCurrentPassword: '输入当前密码',
+            enterNewPassword: '输入新密码',
+            confirmNewPassword: '确认新密码'
+        },
+        ta: {
+            general: 'பொதுவான',
+            security: 'பாதுகாப்பு',
+            patientManagement: 'நோயாளி மேலாண்மை',
+            generalPreferences: 'பொதுவான விருப்பத்தேர்வுகள்',
+            languageRegion: 'மொழி மற்றும் பிராந்தியம்',
+            preferredLanguage: 'விருப்பமான மொழி',
+            selectLanguage: 'இடைமுகத்திற்கான உங்கள் விருப்பமான மொழியைத் தேர்ந்தெடுக்கவும்',
+            reportSettings: 'அறிக்கை அமைப்புகள்',
+            autoSaveReports: 'தானாக சேமிப்பு அறிக்கைகள்',
+            autoSaveDesc: 'பகுப்பாய்வு அறிக்கைகளை உங்கள் கணக்கில் தானாகச் சேமிக்கவும்',
+            notifications: 'அறிவிப்புகள்',
+            emailNotifications: 'மின்னஞ்சல் அறிவிப்புகள்',
+            emailNotifDesc: 'சந்திப்புகள் பற்றிய புதுப்பிப்புகளைப் பெறுங்கள்',
+            securitySettings: 'பாதுகாப்பு அமைப்புகள்',
+            passwordChangeInfo: 'கடவுச்சொல் மாற்றங்களுக்கு மீண்டும் அங்கீகாரம் தேவை.',
+            currentPassword: 'தற்போதைய கடவுச்சொல்',
+            newPassword: 'புதிய கடவுச்சொல்',
+            confirmPassword: 'புதிய கடவுச்சொல்லை உறுதிப்படுத்தவும்',
+            updatePassword: 'கடவுச்சொல்லை புதுப்பிக்கவும்',
+            enterCurrentPassword: 'தற்போதைய கடவுச்சொல்லை உள்ளிடவும்',
+            enterNewPassword: 'புதிய கடவுச்சொல்லை உள்ளிடவும்',
+            confirmNewPassword: 'புதிய கடவுச்சொல்லை உறுதிப்படுத்தவும்'
+        }
+    };
+    
+    // Apply Language Function
+    function applyLanguage(lang) {
+        const t = translations[lang] || translations.en;
+        
+        // Update all translatable elements
+        document.querySelector('#v-pills-general-tab').innerHTML = `
+            <div class="bg-primary bg-opacity-10 text-primary rounded-circle p-2 d-flex justify-content-center align-items-center" style="width: 32px; height: 32px;"><i class="fas fa-cog"></i></div>
+            ${t.general}
+        `;
+        
+        document.querySelector('#v-pills-security-tab').innerHTML = `
+            <div class="bg-warning bg-opacity-10 text-warning rounded-circle p-2 d-flex justify-content-center align-items-center" style="width: 32px; height: 32px;"><i class="fas fa-shield-alt"></i></div>
+            ${t.security}
+        `;
+        
+        const patientTab = document.querySelector('#v-pills-patients-tab');
+        if (patientTab) {
+            patientTab.innerHTML = `
+                <div class="bg-success bg-opacity-10 text-success rounded-circle p-2 d-flex justify-content-center align-items-center" style="width: 32px; height: 32px;"><i class="fas fa-users-cog"></i></div>
+                ${t.patientManagement}
+            `;
+        }
+        
+        // Update page titles and labels
+        const elements = {
+            '.card h4': [t.generalPreferences, t.securitySettings],
+            'label:contains("Language")': t.languageRegion,
+            'label:contains("Report")': t.reportSettings,
+            'label:contains("Notifications")': t.notifications
+        };
+        
+        // Update specific text content
+        document.querySelectorAll('h6').forEach(h6 => {
+            if (h6.textContent.includes('Auto-save')) {
+                h6.innerHTML = `<i class="fas fa-save me-2 text-success"></i>${t.autoSaveReports}`;
+            } else if (h6.textContent.includes('Email')) {
+                h6.textContent = t.emailNotifications;
+            } else if (h6.textContent.includes('Preferred')) {
+                h6.textContent = t.preferredLanguage;
+            }
+        });
+        
+        // Update form labels
+        const labels = document.querySelectorAll('.form-label');
+        labels.forEach((label, idx) => {
+            const text = label.textContent.trim();
+            if (text.includes('Current Password')) label.textContent = t.currentPassword;
+            else if (text.includes('New Password') && !text.includes('Confirm')) label.textContent = t.newPassword;
+            else if (text.includes('Confirm')) label.textContent = t.confirmPassword;
+        });
+        
+        // Update placeholders
+        const currentPwdInput = document.getElementById('currentPassword');
+        if (currentPwdInput) currentPwdInput.placeholder = t.enterCurrentPassword;
+        
+        const newPwdInput = document.getElementById('newPassword');
+        if (newPwdInput) newPwdInput.placeholder = t.enterNewPassword;
+        
+        const confirmPwdInput = document.getElementById('confirmPassword');
+        if (confirmPwdInput) confirmPwdInput.placeholder = t.confirmNewPassword;
+        
+        // Update button
+        const updateBtn = document.getElementById('updatePasswordBtn');
+        if (updateBtn && !updateBtn.disabled) updateBtn.textContent = t.updatePassword;
+        
+        // Store current language in global variable for other functions
+        window.currentLanguage = lang;
+    }
+    
+    // Beautiful Toast Notification System
+    function showToast(message, type = 'success', duration = 4000) {
+        let container = document.getElementById('toast-container');
+        if (!container) {
+            container = document.createElement('div');
+            container.id = 'toast-container';
+            container.style.cssText = 'position: fixed; top: 20px; right: 20px; z-index: 9999; max-width: 400px;';
+            document.body.appendChild(container);
+        }
+        
+        const toastId = 'toast-' + Date.now();
+        
+        const iconMap = {
+            'success': { icon: 'fa-check-circle', color: '#10b981', bg: '#ecfdf5', border: '#10b981' },
+            'error': { icon: 'fa-times-circle', color: '#ef4444', bg: '#fef2f2', border: '#ef4444' },
+            'warning': { icon: 'fa-exclamation-triangle', color: '#f59e0b', bg: '#fffbeb', border: '#f59e0b' },
+            'info': { icon: 'fa-info-circle', color: '#3b82f6', bg: '#eff6ff', border: '#3b82f6' }
+        };
+        
+        const config = iconMap[type] || iconMap['info'];
+        
+        const toast = document.createElement('div');
+        toast.id = toastId;
+        toast.style.cssText = `
+            background: white;
+            border-left: 4px solid ${config.border};
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            min-width: 320px;
+            display: flex;
+            align-items: start;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
+            animation: slideInRight 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        `;
+        
+        toast.innerHTML = `
+            <div style="flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: ${config.bg}; display: flex; align-items: center; justify-content: center;">
+                <i class="fas ${config.icon}" style="color: ${config.color}; font-size: 18px;"></i>
+            </div>
+            <div style="flex: 1; padding-top: 2px;">
+                <div style="font-weight: 600; color: #1f2937; margin-bottom: 4px; font-size: 15px;">${type.charAt(0).toUpperCase() + type.slice(1)}</div>
+                <div style="color: #6b7280; font-size: 14px; line-height: 1.4;">${message}</div>
+            </div>
+            <button onclick="closeToast('${toastId}')" style="flex-shrink: 0; background: none; border: none; color: #9ca3af; cursor: pointer; padding: 0; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 4px; transition: all 0.2s;" onmouseover="this.style.background='#f3f4f6'; this.style.color='#1f2937';" onmouseout="this.style.background='none'; this.style.color='#9ca3af';">
+                <i class="fas fa-times"></i>
+            </button>
+            <div style="position: absolute; bottom: 0; left: 0; height: 3px; background: ${config.color}; opacity: 0.3; width: 100%; animation: progressBar ${duration}ms linear;"></div>
+        `;
+        
+        container.appendChild(toast);
+        
+        // Auto remove
+        const timeoutId = setTimeout(() => closeToast(toastId), duration);
+        toast.dataset.timeoutId = timeoutId;
+    }
+    
+    function closeToast(toastId) {
+        const toast = document.getElementById(toastId);
+        if (toast) {
+            if (toast.dataset.timeoutId) clearTimeout(parseInt(toast.dataset.timeoutId));
+            toast.style.animation = 'slideOutRight 0.3s ease-in-out';
+            setTimeout(() => toast.remove(), 300);
+        }
+    }
+    
+    // Save Language Preference
+    function saveLanguagePreference() {
+        const language = document.getElementById('languageSelect').value;
+        localStorage.setItem('preferred_language', language);
+        
+        // Apply language immediately on settings page
+        applyLanguage(language);
+        
+        // Update global language system if available
+        if (window.AppLanguage) {
+            window.AppLanguage.setLanguage(language);
+        }
+        
+        const languageNames = {
+            'en': 'English',
+            'ms': 'Bahasa Melayu',
+            'zh': 'Chinese (中文)',
+            'ta': 'Tamil (தமிழ்)'
+        };
+        
+        showToast(`Language changed to ${languageNames[language]}. Interface updated!`, 'success', 3000);
+    }
+    
+    // Save Email Notification Preference
+    function saveEmailPreference() {
+        const emailEnabled = document.getElementById('emailNotificationSwitch').checked;
+        localStorage.setItem('email_notifications', emailEnabled);
+        
+        if (emailEnabled) {
+            showToast('Email notifications enabled. You will receive appointment updates.', 'success', 3000);
+        } else {
+            showToast('Email notifications disabled. You will not receive appointment emails.', 'info', 3000);
+        }
+    }
+    
+    // Save Auto-save Preference
+    function saveAutoSavePreference() {
+        const autoSave = document.getElementById('autoSaveSwitch').checked;
+        localStorage.setItem('auto_save_reports', autoSave);
+        
+        if (autoSave) {
+            showToast('Auto-save enabled. Your reports will be saved automatically.', 'success', 3000);
+        } else {
+            showToast('Auto-save disabled. You will need to manually save reports.', 'info', 3000);
+        }
+    }
+    
+    // Password Change Handler
+    async function handlePasswordChange(event) {
+        event.preventDefault();
+        
+        const currentPassword = document.getElementById('currentPassword').value;
+        const newPassword = document.getElementById('newPassword').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const token = localStorage.getItem('access_token');
+        
+        // Validate passwords match
+        if (newPassword !== confirmPassword) {
+            showToast('New passwords do not match! Please try again.', 'error');
+            return;
+        }
+        
+        if (newPassword.length < 6) {
+            showToast('New password must be at least 6 characters long.', 'warning');
+            return;
+        }
+        
+        const btn = document.getElementById('updatePasswordBtn');
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Updating...';
+        
+        try {
+            const res = await fetch('/auth/change-password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    current_password: currentPassword,
+                    new_password: newPassword
+                })
+            });
+            
+            if (res.ok) {
+                showToast('Password updated successfully! Your account is now more secure.', 'success', 5000);
+                document.getElementById('changePasswordForm').reset();
+            } else {
+                const data = await res.json();
+                showToast(data.detail || 'Failed to update password. Please check your current password.', 'error');
+            }
+        } catch (e) {
+            console.error(e);
+            showToast('Network error. Please check your connection and try again.', 'error');
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = 'Update Password';
+        }
+    }
+
+    let currentPatients = [];
+
+    async function loadPatientList() {
+        const token = localStorage.getItem('access_token');
+        if(!token) return;
+
+        try {
+            const res = await fetch('/auth/users', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            
+            if(res.ok) {
+                currentPatients = await res.json();
+                renderPatients(currentPatients);
+            } else {
+                showToast('Failed to load patients. You might not have permission.', 'error');
+            }
+        } catch(e) {
+            console.error(e);
+            showToast('Error loading patient data. Please try again.', 'error');
+            document.getElementById('patientTableBody').innerHTML = '<tr><td colspan="5" class="text-center text-danger">Error loading data</td></tr>';
+        }
+    }
+
+    function renderPatients(patients) {
+        const tbody = document.getElementById('patientTableBody');
+        tbody.innerHTML = '';
+        
+        if(patients.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="5" class="text-center py-4">No patients found.</td></tr>';
+            return;
+        }
+
+        patients.forEach(p => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><span class="text-muted">#${p.id}</span></td>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <div class="bg-primary bg-opacity-10 text-primary rounded-circle d-flex align-items-center justify-content-center fw-bold me-3" style="width: 35px; height: 35px;">
+                            ${p.name.charAt(0).toUpperCase()}
+                        </div>
+                        <span class="fw-bold">${p.name}</span>
+                    </div>
+                </td>
+                <td><span class="text-muted">${p.email}</span></td>
+                <td><span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3">Active</span></td>
+                <td class="text-end">
+                    <button class="btn btn-sm btn-light text-primary hover-scale" onclick="openEditUser(${p.id})">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function filterPatients() {
+        const term = document.getElementById('patientSearch').value.toLowerCase();
+        const filtered = currentPatients.filter(p => 
+            p.name.toLowerCase().includes(term) || 
+            p.email.toLowerCase().includes(term)
+        );
+        renderPatients(filtered);
+    }
+
+    function openEditUser(id) {
+        const user = currentPatients.find(p => p.id === id);
+        if(!user) return;
+        
+        document.getElementById('editUserId').value = user.id;
+        document.getElementById('editUserName').value = user.name;
+        document.getElementById('editUserEmail').value = user.email; // Should be editable for admin
+        
+        new bootstrap.Modal(document.getElementById('editUserModal')).show();
+    }
+
+    async function saveUserChanges() {
+        const id = document.getElementById('editUserId').value;
+        const name = document.getElementById('editUserName').value;
+        const email = document.getElementById('editUserEmail').value;
+        const token = localStorage.getItem('access_token');
+        
+        try {
+            const res = await fetch(`/auth/users/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ name, email })
+            });
+
+            if(res.ok) {
+                bootstrap.Modal.getInstance(document.getElementById('editUserModal')).hide();
+                loadPatientList(); // Refresh
+                showToast('Patient information updated successfully!', 'success');
+            } else {
+                showToast('Update failed. Please try again.', 'error');
+            }
+        } catch(e) {
+            console.error(e);
+            showToast('Error updating patient information.', 'error');
+        }
+    }
+</script>
+
+<style>
+    .list-group-item.active {
+        background-color: #eff6ff;
+        color: #2563eb;
+        border-right: 3px solid #2563eb;
+    }
+    .hover-scale { transition: transform 0.2s; }
+    .hover-scale:hover { transform: scale(1.1); }
+    
+    /* Toast Animation Styles */
+    @keyframes slideInRight {
+        from { transform: translateX(400px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+    
+    @keyframes slideOutRight {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(400px); opacity: 0; }
+    }
+    
+    @keyframes progressBar {
+        from { width: 100%; }
+        to { width: 0%; }
+    }
+</style>
+{% endblock %}

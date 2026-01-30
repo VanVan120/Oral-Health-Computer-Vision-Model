@@ -14,6 +14,87 @@
     --glass-bg: #ffffff;
 }
 
+/* --- Dark Mode Variables --- */
+body.dark-mode {
+    --bg-color: #0f172a; /* Slate 900 */
+    --card-bg: #1e293b; /* Slate 800 */
+    --text-main: #f1f5f9; /* Slate 100 */
+    --text-muted: #94a3b8; /* Slate 400 */
+    --glass-border: #334155; /* Slate 700 */
+    --glass-bg: #1e293b;
+    background-image: radial-gradient(circle at 50% 0%, #1e3a5f 0%, #0f172a 100%);
+}
+
+body.dark-mode .card,
+body.dark-mode .modal-content {
+    background-color: var(--card-bg) !important;
+    color: var(--text-main);
+    border-color: var(--glass-border) !important;
+}
+
+body.dark-mode .bg-light {
+    background-color: #1e293b !important;
+}
+
+body.dark-mode .bg-white {
+    background-color: var(--card-bg) !important;
+}
+
+body.dark-mode .text-dark {
+    color: var(--text-main) !important;
+}
+
+body.dark-mode .text-muted {
+    color: var(--text-muted) !important;
+}
+
+body.dark-mode .border {
+    border-color: var(--glass-border) !important;
+}
+
+body.dark-mode .form-control {
+    background-color: #334155;
+    border-color: #475569;
+    color: var(--text-main);
+}
+
+body.dark-mode .form-control:focus {
+    background-color: #334155;
+    border-color: var(--primary-color);
+    color: var(--text-main);
+}
+
+body.dark-mode .list-group-item {
+    background-color: var(--card-bg);
+    border-color: var(--glass-border);
+    color: var(--text-main);
+}
+
+body.dark-mode .list-group-item.active {
+    background-color: #1e3a5f !important;
+}
+
+body.dark-mode .table {
+    color: var(--text-main);
+}
+
+body.dark-mode .table thead {
+    background-color: #1e293b !important;
+}
+
+body.dark-mode .dropdown-menu {
+    background-color: var(--card-bg);
+    border-color: var(--glass-border);
+}
+
+body.dark-mode .dropdown-item {
+    color: var(--text-main);
+}
+
+body.dark-mode .dropdown-item:hover {
+    background-color: #334155;
+}
+
 /* --- Global Styles --- */
 body {
     font-family: var(--font-main);
@@ -25,6 +106,7 @@ body {
     display: flex;
     flex-direction: column;
     background-image: radial-gradient(circle at 50% 0%, #eff6ff 0%, #f8fafc 100%);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Utility to hide sections */

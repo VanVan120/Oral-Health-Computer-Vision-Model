@@ -21,6 +21,9 @@ from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
 # Import new services
 from report_service import generate_expert_report, generate_public_report
 from chat_service import get_chat_response
+from database import create_db_and_tables
+from appointment_service import router as appointment_router
+from auth_service import router as auth_router
 
 # --- Security & Configuration Check ---
 load_dotenv()
@@ -74,6 +77,13 @@ OralHygieneModel = model_b_module.OralHygieneModel
 
 # --- Initialize App ---
 app = FastAPI(title="Unified Oral Disease Detection System")
+
+@app.on_event("startup")
+def on_startup():
+    create_db_and_tables()
+
+app.include_router(auth_router)
+app.include_router(appointment_router)
 
 app.add_middleware(
     CORSMiddleware,
@@ -155,6 +165,18 @@ def cookie_policy(request: Request):
 @app.get("/hipaa-compliance")
 def hipaa_compliance(request: Request):
     return templates.TemplateResponse("views/legal/hipaa_compliance.html", {"request": request})
+
+@app.get("/login")
+def login_page(request: Request):
+    return templates.TemplateResponse("views/login.html", {"request": request})
+
+@app.get("/register")
+def register_page(request: Request):
+    return templates.TemplateResponse("views/register.html", {"request": request})
+
+@app.get("/settings")
+def settings_page(request: Request):
+    return templates.TemplateResponse("views/settings.html", {"request": request})
 
 @app.post("/analyze")
 async def analyze_image(file: UploadFile = File(...)):

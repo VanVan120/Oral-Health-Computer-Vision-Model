@@ -1,21 +1,478 @@
-    <!-- Navbar -->
-    <nav class="navbar">
+    <nav class="navbar transition-all" id="mainNavbar">
         <div class="container">
             <div class="navbar-brand">
-                <div class="bg-white rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 40px; height: 40px;">
-                    <i class="fas fa-tooth" style="color: #2563eb; font-size: 1.2rem;"></i>
+                <div class="bg-white rounded-circle d-flex align-items-center justify-content-center shadow-lg transition-transform hover-scale" style="width: 45px; height: 45px;">
+                    <i class="fas fa-tooth text-gradient" style="background: -webkit-linear-gradient(#2563eb, #1d4ed8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.4rem;"></i>
                 </div>
-                <span>Oral AI</span>
+                <span class="ms-2 fw-bold tracking-tight" style="font-size: 1.25rem;">Oral AI</span>
             </div>
-            <div class="navbar-links">
-                <a href="/" id="nav-home">Home</a>
-                <a href="/about">About</a>
-                <a href="#" id="nav-services" onclick="showAnalysis(); return false;">Services</a>
-                <a href="/department">Department</a>
-                <a href="/pages">News</a>
-                <a href="/blog">Blog</a>
-                <a href="/contact">Contact</a>
+            <div class="navbar-links d-none d-md-flex">
+                <a href="/" id="nav-home" class="nav-item-link" data-translate="home">Home</a>
+                <a href="/about" class="nav-item-link" data-translate="about">About</a>
+                <a href="#" id="nav-services" class="nav-item-link" onclick="showAnalysis(); return false;" data-translate="services">Services</a>
+                <a href="/department" class="nav-item-link" data-translate="department">Department</a>
+                <a href="/pages" class="nav-item-link" data-translate="news">News</a>
+                <a href="/blog" class="nav-item-link" data-translate="blog">Blog</a>
+                <a href="/contact" class="nav-item-link" data-translate="contact">Contact</a>
             </div>
-            <button class="btn-appointment" onclick="showAnalysis()">Start Screening</button>
+            
+            <div class="d-flex align-items-center gap-3" id="navbar-actions">
+                <!-- Content injected by JS -->
+            </div>
         </div>
     </nav>
+
+    <!-- Profile Modal -->
+    <div class="modal fade" id="profileModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-2xl rounded-4 overflow-hidden">
+                <div class="modal-header border-0 bg-primary text-white p-4 position-relative">
+                    <div class="position-absolute w-100 h-100 top-0 start-0 opacity-10" style="background: url('https://www.transparenttextures.com/patterns/cubes.png');"></div>
+                    <div>
+                        <h5 class="modal-title fw-bold mb-1" data-translate="myProfile">My Profile</h5>
+                        <p class="mb-0 opacity-75 small" data-translate="managePersonalInfo">Manage your personal information</p>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white z-10" data-bs-dismiss="modal" data-translate="close" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <div class="text-center mt-n4 position-relative z-10">
+                        <div class="bg-white rounded-circle p-1 d-inline-block shadow-lg">
+                            <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center fs-1 fw-bold" style="width: 80px; height: 80px;" id="profileAvatar">
+                                U
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <form id="profileForm" onsubmit="handleProfileUpdate(event)" class="p-4 pt-2">
+                        <div class="text-center mb-4">
+                            <h5 class="fw-bold text-dark" id="profileNameDisplay">User Name</h5>
+                            <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3 py-1" id="profileRoleDisplay">Patient</span>
+                        </div>
+
+                        <div class="col-12 mb-3">
+                            <label class="form-label text-muted small fw-bold text-uppercase" data-translate="fullName">Full Name</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-0"><i class="fas fa-user text-muted"></i></span>
+                                <input type="text" class="form-control bg-light border-0 fw-medium" id="editName" required>
+                            </div>
+                        </div>
+
+                        <div class="col-12 mb-4">
+                            <label class="form-label text-muted small fw-bold text-uppercase" data-translate="emailAddress">Email Address</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-0"><i class="fas fa-envelope text-muted"></i></span>
+                                <input type="email" class="form-control bg-light border-0 text-muted" id="editEmail" disabled> <!-- Email usually immutable -->
+                            </div>
+                            <div class="form-text small"><i class="fas fa-lock me-1"></i><span data-translate="emailCannotChange">Email cannot be changed securely.</span></div>
+                        </div>
+                        
+                        <div class="card bg-light border-0 rounded-3 mb-4">
+                            <div class="card-body p-3 d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <div class="bg-success bg-opacity-10 text-success rounded-circle p-2 me-3">
+                                        <i class="fas fa-shield-alt"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="fw-bold mb-0 text-dark" data-translate="password">Password</h6>
+                                        <small class="text-muted" data-translate="changeYourPassword">Change your account password</small>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-sm btn-outline-secondary rounded-pill" onclick="goToChangePassword()" data-translate="change">Change</button>
+                            </div>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary rounded-pill py-2 fw-bold shadow-sm">
+                                <i class="fas fa-save me-2"></i><span data-translate="saveChanges">Save Changes</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .nav-item-link {
+            position: relative;
+            padding: 0.5rem 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-radius: 99px;
+        }
+        
+        .nav-item-link:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(4px);
+        }
+        
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+
+        .dropdown-item {
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-weight: 500;
+            color: #475569;
+            transition: all 0.2s;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f1f5f9;
+            color: #2563eb;
+            transform: translateX(3px);
+        }
+
+        .dropdown-item.text-danger:hover {
+            background-color: #fef2f2;
+            color: #ef4444;
+        }
+
+        /* Hover effect for notification button */
+        .notification-btn {
+            transition: all 0.2s ease;
+        }
+        .notification-btn:hover {
+            background-color: rgba(255, 255, 255, 0.25) !important;
+            transform: scale(1.05);
+            border-color: rgba(255, 255, 255, 0.5) !important;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+    </style>
+
+    <script>
+        function toggleNotifications() {
+            const dropdown = document.getElementById('notification-dropdown');
+            dropdown.classList.toggle('d-none');
+        }
+        
+        function markAllAsRead() {
+            const badge = document.getElementById('notification-badge');
+            const list = document.getElementById('notification-list');
+            
+            // Hide the badge
+            if (badge) {
+                badge.classList.add('d-none');
+            }
+            
+            // Show empty state
+            if (list && window.AppLanguage) {
+                const allCaughtUp = window.AppLanguage.t('allCaughtUp') || 'All Caught Up!';
+                const noNewNotif = window.AppLanguage.t('noNewNotificationsOrAppointments') || 'No new notifications or appointments.';
+                list.innerHTML = `
+                    <div class="py-5 text-center px-4">
+                        <div class="bg-light rounded-circle d-inline-flex p-4 mb-3 shadow-sm border border-light">
+                            <i class="fas fa-check-circle text-success fs-2 opacity-75"></i>
+                        </div>
+                        <h6 class="fw-bold text-dark mb-1">${allCaughtUp}</h6>
+                        <p class="mb-0 text-muted small text-opacity-75">${noNewNotif}</p>
+                    </div>
+                `;
+            }
+        }
+        
+        // Close notification dropdown when clicking outside
+        document.addEventListener('click', (event) => {
+            const notificationBell = document.getElementById('notification-bell');
+            const notificationDropdown = document.getElementById('notification-dropdown');
+            
+            if (notificationDropdown && !notificationDropdown.classList.contains('d-none')) {
+                // Check if click is outside both the bell and the dropdown
+                if (notificationBell && !notificationBell.contains(event.target) && 
+                    !notificationDropdown.contains(event.target)) {
+                    notificationDropdown.classList.add('d-none');
+                }
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem('access_token');
+            const userInfoStr = localStorage.getItem('user_info');
+            const navActions = document.getElementById('navbar-actions');
+            
+            if (token && userInfoStr) {
+                const user = JSON.parse(userInfoStr);
+                const roleKey = 'role' + user.role.charAt(0).toUpperCase() + user.role.slice(1).toLowerCase();
+                
+                // Translation helper
+                const t = (key, fallback) => window.AppLanguage ? window.AppLanguage.t(key) : fallback;
+                const translatedRole = t(roleKey, user.role);
+                
+                navActions.innerHTML = `
+                    <!-- Notification Bell -->
+                    <div class="position-relative cursor-pointer me-3" id="notification-bell" onclick="toggleNotifications()">
+                        <div class="rounded-circle d-flex align-items-center justify-content-center transition-all bg-white bg-opacity-10 notification-btn" style="width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.2);">
+                            <i class="fas fa-bell text-white"></i>
+                        </div>
+                        <span id="notification-badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-2 border-primary d-none shadow-sm">
+                            0
+                        </span>
+                        <!-- Notification Dropdown -->
+                        <div id="notification-dropdown" class="position-absolute end-0 mt-3 bg-white rounded-4 shadow-2xl d-none overflow-hidden animate-fade-up" style="width: 340px; z-index: 1000; top: 100%;">
+                            <div class="px-4 py-3 bg-light border-bottom d-flex justify-content-between align-items-center">
+                                <h6 class="fw-bold m-0 text-dark">${t('notificationsTitle', 'Notifications')}</h6>
+                                <button class="btn btn-link text-primary fw-bold p-0 text-decoration-none" style="font-size: 0.875rem; cursor: pointer;" onclick="markAllAsRead(); event.stopPropagation();">${t('markAllRead', 'Mark all read')}</button>
+                            </div>
+                            <div id="notification-list" class="fs-6 text-muted" style="max-height: 300px; overflow-y: auto;">
+                                <div class="py-5 text-center">
+                                    <div class="bg-light rounded-circle d-inline-flex p-3 mb-2">
+                                        <i class="fas fa-bell-slash text-muted opacity-50"></i>
+                                    </div>
+                                    <p class="mb-0 small">${t('noNewNotifications', 'No new notifications')}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Profile Dropdown -->
+                    <div class="dropdown">
+                        <div class="d-flex align-items-center cursor-pointer p-1 rounded-pill bg-white bg-opacity-10 hover-bg-opacity-20 transition-all pe-3" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="bg-white rounded-circle d-flex align-items-center justify-content-center text-primary fw-bold shadow-sm me-2" style="width: 38px; height: 38px;">
+                                ${user.name.charAt(0).toUpperCase()}
+                            </div>
+                            <div class="d-none d-lg-block text-start me-1">
+                                <div class="fw-bold text-white lh-1 small mb-1">${user.name.split(' ')[0]}</div>
+                            </div>
+                            <i class="fas fa-chevron-down text-white opacity-75 ms-2" style="font-size: 0.7rem;"></i>
+                        </div>
+                        
+                        <ul class="dropdown-menu dropdown-menu-end shadow-2xl border-0 mt-3 p-2 rounded-4 animate-fade-up" style="min-width: 220px;">
+                            <li class="px-2 py-2">
+                                <div class="d-flex align-items-center px-2">
+                                    <div class="bg-primary bg-opacity-10 text-primary rounded-circle d-flex align-items-center justify-content-center fw-bold me-3" style="width: 40px; height: 40px;">
+                                         ${user.name.charAt(0).toUpperCase()}
+                                    </div>
+                                    <div>
+                                        <div class="fw-bold text-dark text-truncate" style="max-width: 140px;">${user.name}</div>
+                                        <div class="small text-muted text-truncate" style="max-width: 140px;">${translatedRole}</div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li><hr class="dropdown-divider my-2 opacity-10"></li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center py-2" href="#" onclick="openProfileModal(); return false;">
+                                    <i class="fas fa-user-circle me-3 text-primary opacity-75" style="width: 20px;"></i>
+                                    <span>${t('myProfile', 'My Profile')}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item d-flex align-items-center py-2" href="/settings">
+                                    <i class="fas fa-cog me-3 text-primary opacity-75" style="width: 20px;"></i>
+                                    <span>${t('settings', 'Settings')}</span>
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider my-2 opacity-10"></li>
+                            <li>
+                                <a class="dropdown-item text-danger d-flex align-items-center py-2" href="#" onclick="logout()">
+                                    <i class="fas fa-sign-out-alt me-3 opacity-75" style="width: 20px;"></i>
+                                    <span>${t('logout', 'Logout')}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                `;
+                
+                // Check for notifications immediately
+                checkNotifications();
+            } else {
+                const path = window.location.pathname;
+                let content = '';
+
+                // Inline styles for specific hover effects
+                const style = `<style>.hover-bg-white-10:hover { background-color: rgba(255,255,255,0.15); }</style>`;
+
+                if (path === '/login') {
+                    // Login Page: Login is White Pill (Active). Sign Up is Outline/Ghost (Inactive).
+                    content = `
+                        <div class="d-flex align-items-center gap-3">
+                            <span class="btn bg-white text-primary rounded-pill px-4 py-2 fw-bold shadow-sm cursor-default d-flex align-items-center gap-2">
+                                <i class="fas fa-sign-in-alt"></i> <span data-translate="login">Login</span>
+                            </span>
+                            <a href="/register" class="btn border border-white text-white rounded-pill px-4 py-2 fw-bold hover-bg-white-10 transition-all d-flex align-items-center gap-2">
+                                <span data-translate="signUp">Sign Up</span>
+                            </a>
+                        </div>
+                    `;
+                } else if (path === '/register') {
+                    // Register Page: Login is Link/Ghost. Sign Up is White Pill (Active).
+                    content = `
+                        <div class="d-flex align-items-center gap-3">
+                            <a href="/login" class="text-white text-decoration-none fw-bold px-2 hover-opacity-100 opacity-90 transition-all d-flex align-items-center gap-2">
+                                <span data-translate="login">Login</span>
+                            </a>
+                            <span class="btn bg-white text-primary rounded-pill px-4 py-2 fw-bold shadow-sm cursor-default d-flex align-items-center gap-2">
+                                <i class="fas fa-user-plus"></i> <span data-translate="signUp">Sign Up</span>
+                            </span>
+                        </div>
+                    `;
+                } else {
+                    // Default (Home, About, etc): Login is Link. Sign Up is CTA (White Pill).
+                    content = `
+                        <div class="d-flex align-items-center gap-3">
+                             <a href="/login" class="text-white text-decoration-none fw-bold px-2 hover-opacity-100 opacity-90 transition-all d-flex align-items-center gap-2">
+                                <i class="fas fa-sign-in-alt opacity-75"></i> <span data-translate="login">Login</span>
+                            </a>
+                            <a href="/register" class="btn bg-white text-primary rounded-pill px-4 py-2 fw-bold shadow-lg hover-scale transition-transform d-flex align-items-center gap-2">
+                                <span data-translate="signUp">Sign Up</span> <i class="fas fa-arrow-right small"></i>
+                            </a>
+                        </div>
+                    `;
+                }
+
+                navActions.innerHTML = style + content;
+                
+                // Apply language translations to dynamically added content
+                if (window.AppLanguage) {
+                    window.AppLanguage.applyToPage();
+                }
+            }
+        });
+
+        async function checkNotifications() {
+            const token = localStorage.getItem('access_token');
+            const badge = document.getElementById('notification-badge');
+            const list = document.getElementById('notification-list');
+            
+            if (!token || !badge || !list) return;
+
+            try {
+                // Determine API endpoint - try appointments first as that seems to be the main "notification" source
+                const res = await fetch('/api/appointments/my-appointments', {
+                     headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                if (res.ok) {
+                    const data = await res.json();
+                    const today = new Date();
+                    // Filter for future appointments
+                    const notifications = data.filter(d => new Date(d.date_time) > today);
+                    
+                    if (notifications.length > 0) {
+                        // Update Badge - Show Red Dot
+                        badge.innerText = notifications.length;
+                        badge.classList.remove('d-none');
+                        badge.classList.add('animate-bounce'); // Add some animation if available
+                        
+                        // Populate List with Nicer UI
+                        list.innerHTML = notifications.map(n => {
+                            const date = new Date(n.date_time);
+                             return `
+                                <div class="px-3 py-3 border-bottom hover-bg-light transition-colors cursor-pointer group">
+                                    <div class="d-flex align-items-start">
+                                        <div class="bg-primary bg-opacity-10 text-primary rounded-circle p-2 me-3 d-flex align-items-center justify-content-center flex-shrink-0" style="width: 40px; height: 40px;">
+                                            <i class="fas fa-calendar-day fs-5"></i>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                                <h6 class="mb-0 text-dark fw-bold" style="font-size: 0.9rem;">Appointment</h6>
+                                                <span class="badge bg-white text-primary border border-primary border-opacity-25 rounded-pill shadow-sm" style="font-size: 0.65rem;">${date.toLocaleDateString()}</span>
+                                            </div>
+                                            <p class="mb-1 text-muted small lh-sm">
+                                                Meeting with <span class="fw-bold text-dark">${n.doctor_name || 'Doctor'}</span>
+                                            </p>
+                                            <div class="d-flex align-items-center small text-muted">
+                                                <i class="far fa-clock me-1 text-primary opacity-75"></i>
+                                                <span class="fw-semibold">${date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('') + `
+                            <div class="p-2 text-center bg-light border-top sticky-bottom">
+                                <a href="#" class="text-decoration-none small fw-bold text-primary hover-text-dark transition-colors">View Calendar <i class="fas fa-arrow-right ms-1"></i></a>
+                            </div>
+                        `;
+                    } else {
+                        // Empty State - Nicer with Icon
+                        badge.classList.add('d-none');
+                        const allCaughtUp = window.AppLanguage ? window.AppLanguage.t('allCaughtUp') : 'All Caught Up!';
+                        const noNewNotif = window.AppLanguage ? window.AppLanguage.t('noNewNotificationsOrAppointments') : 'No new notifications or appointments.';
+                        list.innerHTML = `
+                            <div class="py-5 text-center px-4">
+                                <div class="bg-light rounded-circle d-inline-flex p-4 mb-3 shadow-sm border border-light">
+                                    <i class="fas fa-check-circle text-success fs-2 opacity-75"></i>
+                                </div>
+                                <h6 class="fw-bold text-dark mb-1">${allCaughtUp}</h6>
+                                <p class="mb-0 text-muted small text-opacity-75">${noNewNotif}</p>
+                            </div>
+                        `;
+                    }
+                }
+            } catch (e) {
+                console.error("Notification check failed", e);
+            }
+        }
+
+        function openProfileModal() {
+            const userInfoStr = localStorage.getItem('user_info');
+            if (userInfoStr) {
+                const user = JSON.parse(userInfoStr);
+                document.getElementById('profileNameDisplay').innerText = user.name;
+                document.getElementById('profileAvatar').innerText = user.name.charAt(0).toUpperCase(); // Show first letter
+                document.getElementById('profileRoleDisplay').innerText = user.role.charAt(0).toUpperCase() + user.role.slice(1);
+                document.getElementById('editName').value = user.name;
+                
+                // Since we don't store email in localstorage user_info object often, let's decode token or just use name
+                // Actually, login sets {name, role, id} in user_info. It might NOT have email.
+                // Let's check token payload or just show a placeholder if missing
+                const token = localStorage.getItem('access_token');
+                if (token) {
+                    try {
+                        const payload = JSON.parse(atob(token.split('.')[1]));
+                        document.getElementById('editEmail').value = payload.sub || 'user@example.com';
+                    } catch(e) {
+                         document.getElementById('editEmail').value = 'user@example.com';
+                    }
+                }
+                
+                const modal = new bootstrap.Modal(document.getElementById('profileModal'));
+                modal.show();
+            }
+        }
+        
+        function goToChangePassword() {
+            // Close the profile modal first
+            const profileModal = bootstrap.Modal.getInstance(document.getElementById('profileModal'));
+            if (profileModal) {
+                profileModal.hide();
+            }
+            // Navigate to settings page with security tab hash
+            window.location.href = '/settings#security';
+        }
+
+        function handleProfileUpdate(e) {
+            e.preventDefault();
+            const newName = document.getElementById('editName').value;
+            if(!newName) return;
+
+            // Simulate Update
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalHTML = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Saving...';
+
+            setTimeout(() => {
+                // Update Local Data
+                const userInfoStr = localStorage.getItem('user_info');
+                if(userInfoStr) {
+                    const user = JSON.parse(userInfoStr);
+                    user.name = newName;
+                    localStorage.setItem('user_info', JSON.stringify(user));
+                }
+                
+                // Refresh Page to update navbar (simplest way) or update DOM
+                location.reload(); 
+            }, 800);
+        }
+
+        function logout() {
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('user_info');
+            window.location.href = '/login';
+        }
+    </script>

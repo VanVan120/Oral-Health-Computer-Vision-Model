@@ -1,20 +1,1333 @@
     <!-- ==================== HERO SECTION (Home) ==================== -->
     <div id="home-view">
-        <!-- Hero -->
-        <div class="hero-section">
+        <!-- Hero with Modern Design -->
+        <div class="hero-section position-relative overflow-hidden" style="min-height: 90vh; background: linear-gradient(135deg, #f0f7ff 0%, #e8f4f8 50%, #f5f0ff 100%);">
+            <!-- Animated Background Elements -->
+            <div class="position-absolute w-100 h-100" style="overflow: hidden; pointer-events: none;">
+                <!-- Floating Circles -->
+                <div class="position-absolute rounded-circle" style="width: 400px; height: 400px; background: linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(139, 92, 246, 0.05) 100%); top: -100px; right: -100px; animation: pulse-slow 8s ease-in-out infinite;"></div>
+                <div class="position-absolute rounded-circle" style="width: 300px; height: 300px; background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(37, 99, 235, 0.05) 100%); bottom: -50px; left: -50px; animation: pulse-slow 6s ease-in-out infinite 1s;"></div>
+                <div class="position-absolute rounded-circle" style="width: 200px; height: 200px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(236, 72, 153, 0.05) 100%); top: 40%; left: 30%; animation: float 10s ease-in-out infinite;"></div>
+                <!-- Grid Pattern -->
+                <div class="position-absolute w-100 h-100" style="background-image: radial-gradient(rgba(37, 99, 235, 0.03) 1px, transparent 1px); background-size: 40px 40px;"></div>
+            </div>
+            
+            <div class="container h-100 position-relative" style="z-index: 2;">
+                <div class="row align-items-center" style="min-height: 85vh;">
+                    <!-- Left Column: Content -->
+                    <div class="col-lg-6 text-start py-5">
+                        <!-- Trust Badge -->
+                        <div class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill mb-4" style="background: rgba(37, 99, 235, 0.1); border: 1px solid rgba(37, 99, 235, 0.2);">
+                            <span class="badge bg-primary rounded-circle p-1"><i class="fas fa-shield-alt" style="font-size: 10px;"></i></span>
+                            <small class="fw-semibold text-primary" data-translate="trustedBy">Trusted by 10,000+ Healthcare Professionals</small>
+                        </div>
+                        
+                        <h1 class="display-4 fw-bold mb-4 page-title-interactive" style="line-height: 1.2;">
+                            <span class="text-dark" data-translate="heroLine1">Next-Gen</span><br>
+                            <span style="background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;" data-translate="heroLine2">Oral Health AI</span><br>
+                            <span class="text-dark" data-translate="heroLine3">Platform</span>
+                        </h1>
+                        
+                        <p class="lead text-muted mb-5" style="max-width: 500px; font-size: 1.15rem;" data-translate="welcomeSubtitle">
+                            Seamlessly manage patient appointments and perform professional grade analysis for early detection of oral cancer using state-of-the-art AI.
+                        </p>
+                        
+                        <div class="d-flex flex-wrap gap-3 mb-5">
+                            <button class="btn btn-lg rounded-pill px-5 py-3 shadow-lg" onclick="showAnalysis()" style="background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); border: none; color: white; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 20px 40px rgba(37, 99, 235, 0.3)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 20px rgba(37, 99, 235, 0.2)';">
+                                <i class="fas fa-microscope me-2"></i><span data-translate="startScreening">Start AI Screening</span>
+                            </button>
+                            <button class="btn btn-lg rounded-pill px-4 py-3" onclick="scrollToCalendar()" style="background: white; border: 2px solid #e2e8f0; color: #1e293b; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#2563eb'; this.style.color='#2563eb';" onmouseout="this.style.borderColor='#e2e8f0'; this.style.color='#1e293b';">
+                                <i class="fas fa-calendar-check me-2"></i><span data-translate="bookAppointment">Book Appointment</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Mini Stats Row -->
+                        <div class="d-flex flex-wrap gap-4">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                                    <i class="fas fa-check text-white" style="font-size: 14px;"></i>
+                                </div>
+                                <div>
+                                    <div class="fw-bold text-dark" style="font-size: 0.95rem;">99.8%</div>
+                                    <small class="text-muted" style="font-size: 0.75rem;" data-translate="accuracy">Accuracy</small>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);">
+                                    <i class="fas fa-bolt text-white" style="font-size: 14px;"></i>
+                                </div>
+                                <div>
+                                    <div class="fw-bold text-dark" style="font-size: 0.95rem;">&lt;3 sec</div>
+                                    <small class="text-muted" style="font-size: 0.75rem;" data-translate="results">Results</small>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">
+                                    <i class="fas fa-lock text-white" style="font-size: 14px;"></i>
+                                </div>
+                                <div>
+                                    <div class="fw-bold text-dark" style="font-size: 0.95rem;">HIPAA</div>
+                                    <small class="text-muted" style="font-size: 0.75rem;" data-translate="secure">Secure</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column: Interactive Visual -->
+                    <div class="col-lg-6 d-none d-lg-block">
+                        <div class="position-relative" style="perspective: 1000px;">
+                            <!-- Main Feature Card -->
+                            <div class="position-relative mx-auto" style="max-width: 450px;">
+                                <!-- Background Glow -->
+                                <div class="position-absolute w-100 h-100 rounded-4" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%); filter: blur(40px); transform: scale(0.9);"></div>
+                                
+                                <!-- Main Card -->
+                                <div class="position-relative rounded-4 p-4 shadow-lg" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.8); animation: float 6s ease-in-out infinite;">
+                                    <!-- Card Header -->
+                                    <div class="d-flex align-items-center justify-content-between mb-4">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="rounded-circle" style="width: 12px; height: 12px; background: #ef4444;"></div>
+                                            <div class="rounded-circle" style="width: 12px; height: 12px; background: #f59e0b;"></div>
+                                            <div class="rounded-circle" style="width: 12px; height: 12px; background: #10b981;"></div>
+                                        </div>
+                                        <span class="badge rounded-pill px-3 py-2" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; font-size: 0.7rem;">
+                                            <i class="fas fa-circle me-1" style="font-size: 6px; animation: blink 1s infinite;"></i> LIVE ANALYSIS
+                                        </span>
+                                    </div>
+                                    
+                                    <!-- Scan Visual -->
+                                    <div class="position-relative rounded-3 mb-4 overflow-hidden" style="height: 200px; background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);">
+                                        <!-- Grid overlay -->
+                                        <div class="position-absolute w-100 h-100" style="background-image: linear-gradient(rgba(37, 99, 235, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(37, 99, 235, 0.1) 1px, transparent 1px); background-size: 20px 20px;"></div>
+                                        <!-- Scan line animation -->
+                                        <div class="position-absolute w-100" style="height: 2px; background: linear-gradient(90deg, transparent, #3b82f6, transparent); animation: scan 2s ease-in-out infinite; top: 0;"></div>
+                                        <!-- Center icon -->
+                                        <div class="position-absolute top-50 start-50 translate-middle text-center">
+                                            <i class="fas fa-teeth fa-3x mb-2" style="color: rgba(59, 130, 246, 0.5);"></i>
+                                            <div class="text-white-50 small" data-translate="readyToScan">Ready to Scan</div>
+                                        </div>
+                                        <!-- Corner brackets -->
+                                        <div class="position-absolute" style="top: 20px; left: 20px; width: 30px; height: 30px; border-left: 2px solid #3b82f6; border-top: 2px solid #3b82f6;"></div>
+                                        <div class="position-absolute" style="top: 20px; right: 20px; width: 30px; height: 30px; border-right: 2px solid #3b82f6; border-top: 2px solid #3b82f6;"></div>
+                                        <div class="position-absolute" style="bottom: 20px; left: 20px; width: 30px; height: 30px; border-left: 2px solid #3b82f6; border-bottom: 2px solid #3b82f6;"></div>
+                                        <div class="position-absolute" style="bottom: 20px; right: 20px; width: 30px; height: 30px; border-right: 2px solid #3b82f6; border-bottom: 2px solid #3b82f6;"></div>
+                                    </div>
+                                    
+                                    <!-- Results Preview -->
+                                    <div class="d-flex gap-3">
+                                        <div class="flex-fill p-3 rounded-3" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%); border: 1px solid rgba(16, 185, 129, 0.2);">
+                                            <div class="d-flex align-items-center gap-2 mb-1">
+                                                <i class="fas fa-chart-line text-success" style="font-size: 12px;"></i>
+                                                <small class="text-muted" data-translate="detection">Detection</small>
+                                            </div>
+                                            <div class="fw-bold text-success">98.5%</div>
+                                        </div>
+                                        <div class="flex-fill p-3 rounded-3" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%); border: 1px solid rgba(59, 130, 246, 0.2);">
+                                            <div class="d-flex align-items-center gap-2 mb-1">
+                                                <i class="fas fa-clock text-primary" style="font-size: 12px;"></i>
+                                                <small class="text-muted" data-translate="speed">Speed</small>
+                                            </div>
+                                            <div class="fw-bold text-primary">2.3s</div>
+                                        </div>
+                                        <div class="flex-fill p-3 rounded-3" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%); border: 1px solid rgba(139, 92, 246, 0.2);">
+                                            <div class="d-flex align-items-center gap-2 mb-1">
+                                                <i class="fas fa-brain" style="font-size: 12px; color: #8b5cf6;"></i>
+                                                <small class="text-muted" data-translate="aiModels">AI Models</small>
+                                            </div>
+                                            <div class="fw-bold" style="color: #8b5cf6;">3</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Floating Mini Cards -->
+                                <div class="position-absolute rounded-3 p-3 shadow-lg" style="background: white; top: -50px; right: -80px; animation: float 4s ease-in-out infinite 0.5s; border: 1px solid rgba(0,0,0,0.05); z-index: 10;">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="rounded-circle bg-success d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+                                            <i class="fas fa-check text-white" style="font-size: 12px;"></i>
+                                        </div>
+                                        <div>
+                                            <div class="fw-bold text-dark" style="font-size: 0.85rem;" data-translate="noIssues">No Issues</div>
+                                            <small class="text-muted" style="font-size: 0.7rem;" data-translate="detected">Detected</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="position-absolute rounded-3 p-3 shadow-lg" style="background: white; bottom: -40px; left: -50px; animation: float 5s ease-in-out infinite 1s; border: 1px solid rgba(0,0,0,0.05); z-index: 10;">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: linear-gradient(135deg, #3b82f6, #8b5cf6);">
+                                            <i class="fas fa-robot text-white" style="font-size: 12px;"></i>
+                                        </div>
+                                        <div>
+                                            <div class="fw-bold text-dark" style="font-size: 0.85rem;" data-translate="aiPowered">AI Powered</div>
+                                            <small class="text-muted" style="font-size: 0.7rem;" data-translate="analysis">Analysis</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="position-absolute bottom-0 start-50 translate-middle-x pb-4 d-none d-lg-block" style="animation: bounce 2s infinite;">
+                <div class="text-center">
+                    <small class="text-muted d-block mb-2" data-translate="scrollToExplore">Scroll to explore</small>
+                    <i class="fas fa-chevron-down text-primary"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions Dashboard - Redesigned -->
+        <section class="py-5 position-relative" style="background: white;">
             <div class="container">
-                <div class="row justify-content-center text-center">
-                    <div class="col-lg-10">
-                        <h5 class="ai-subtitle text-uppercase mb-3 fs-3">Advanced Oral Health</h5>
-                        <h1 class="display-3 fw-bold text-dark mb-4 page-title-interactive">AI-Powered Oral Disease Detection.</h1>
-                        <p class="lead text-muted mb-5 mx-auto" style="max-width: 700px;">Professional grade analysis for early detection of oral cancer and dental abnormalities using state-of-the-art Artificial Intelligence.</p>
-                        <button class="btn btn-primary btn-lg rounded-pill px-5" onclick="showAnalysis()">
-                            Start Screening <i class="fas fa-arrow-right ms-2"></i>
-                        </button>
+                <!-- Section Header -->
+                <div class="text-center mb-5">
+                    <span class="badge rounded-pill px-4 py-2 mb-3" style="background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%); color: #2563eb; font-weight: 600;" data-translate="quickAccess">QUICK ACCESS</span>
+                    <h2 class="display-6 fw-bold text-dark" data-translate="whatToDo">What would you like to do?</h2>
+                </div>
+                
+                <div class="row g-4 justify-content-center">
+                    <!-- Quick Action: Start Screening -->
+                    <div class="col-6 col-md-6 col-lg-3">
+                        <div class="quick-action-card-new h-100 rounded-4 p-4 text-center position-relative overflow-hidden" onclick="showAnalysis()" style="cursor: pointer; background: linear-gradient(135deg, #eff6ff 0%, #f0f7ff 100%); border: 1px solid rgba(37, 99, 235, 0.1); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 20px 40px rgba(37, 99, 235, 0.15)'; this.style.borderColor='#2563eb';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(37, 99, 235, 0.1)';">
+                            <div class="position-absolute top-0 end-0 p-3">
+                                <i class="fas fa-arrow-right text-primary opacity-50"></i>
+                            </div>
+                            <div class="rounded-3 d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px; background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);">
+                                <i class="fas fa-microscope fa-lg text-white"></i>
+                            </div>
+                            <h5 class="fw-bold text-dark mb-2" data-translate="aiScreening">AI Screening</h5>
+                            <p class="text-muted small mb-0" data-translate="analyzeImages">Analyze oral images with AI</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Action: Book Appointment -->
+                    <div class="col-6 col-md-6 col-lg-3">
+                        <div class="quick-action-card-new h-100 rounded-4 p-4 text-center position-relative overflow-hidden" onclick="quickBookAppointment()" style="cursor: pointer; background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%); border: 1px solid rgba(16, 185, 129, 0.1); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 20px 40px rgba(16, 185, 129, 0.15)'; this.style.borderColor='#10b981';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(16, 185, 129, 0.1)';">
+                            <div class="position-absolute top-0 end-0 p-3">
+                                <i class="fas fa-arrow-right text-success opacity-50"></i>
+                            </div>
+                            <div class="rounded-3 d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);">
+                                <i class="fas fa-calendar-plus fa-lg text-white"></i>
+                            </div>
+                            <h5 class="fw-bold text-dark mb-2" data-translate="bookAppointment">Book Appointment</h5>
+                            <p class="text-muted small mb-0" data-translate="scheduleVisit">Schedule your next visit</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Action: View Calendar -->
+                    <div class="col-6 col-md-6 col-lg-3">
+                        <div class="quick-action-card-new h-100 rounded-4 p-4 text-center position-relative overflow-hidden" onclick="scrollToCalendar()" style="cursor: pointer; background: linear-gradient(135deg, #faf5ff 0%, #f5f3ff 100%); border: 1px solid rgba(139, 92, 246, 0.1); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 20px 40px rgba(139, 92, 246, 0.15)'; this.style.borderColor='#8b5cf6';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(139, 92, 246, 0.1)';">
+                            <div class="position-absolute top-0 end-0 p-3">
+                                <i class="fas fa-arrow-right opacity-50" style="color: #8b5cf6;"></i>
+                            </div>
+                            <div class="rounded-3 d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px; background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);">
+                                <i class="fas fa-calendar-alt fa-lg text-white"></i>
+                            </div>
+                            <h5 class="fw-bold text-dark mb-2" data-translate="viewCalendar">View Calendar</h5>
+                            <p class="text-muted small mb-0" data-translate="manageSchedule">Manage your schedule</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Action: Get Help -->
+                    <div class="col-6 col-md-6 col-lg-3">
+                        <div class="quick-action-card-new h-100 rounded-4 p-4 text-center position-relative overflow-hidden" onclick="scrollToContact()" style="cursor: pointer; background: linear-gradient(135deg, #fff7ed 0%, #fffbeb 100%); border: 1px solid rgba(245, 158, 11, 0.1); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 20px 40px rgba(245, 158, 11, 0.15)'; this.style.borderColor='#f59e0b';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(245, 158, 11, 0.1)';">
+                            <div class="position-absolute top-0 end-0 p-3">
+                                <i class="fas fa-arrow-right opacity-50" style="color: #f59e0b;"></i>
+                            </div>
+                            <div class="rounded-3 d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);">
+                                <i class="fas fa-headset fa-lg text-white"></i>
+                            </div>
+                            <h5 class="fw-bold text-dark mb-2" data-translate="getHelp">Get Help</h5>
+                            <p class="text-muted small mb-0" data-translate="talkToExpert">Talk to an expert</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Calendar & Schedule Section -->
+        <section id="calendar-section" class="py-5 bg-light">
+            <div class="container">
+                <div class="row g-4 align-items-start">
+                    <!-- Left: Calendar Info & Controls -->
+                    <div class="col-lg-4">
+                        <div class="position-relative" style="padding-top: 10px;">
+                            <div class="mb-4">
+                                <h2 class="display-6 fw-bold text-dark mb-3" data-translate="appointmentCalendar">Appointment Calendar</h2>
+                                <p class="text-muted" data-translate="calendarDesc">View and manage your appointments. Click on any date to see details or book a new appointment.</p>
+                            </div>
+                            
+                            <!-- Calendar Status Card -->
+                            <div class="glass-card rounded-4 p-4 mb-4">
+                                <div class="d-flex align-items-center justify-content-between mb-3">
+                                    <h6 class="fw-bold text-dark mb-0"><i class="fas fa-user-circle me-2 text-primary"></i><span data-translate="status">Status</span></h6>
+                                    <span id="calendar-status" class="badge bg-secondary">Guest</span>
+                                </div>
+                                <div id="calendar-login-prompt" class="text-center py-3">
+                                    <p class="text-muted small mb-3" data-translate="loginToViewAppointments">Login to view your appointments</p>
+                                    <a href="/login" class="btn btn-sm btn-primary rounded-pill px-4" data-translate="logIn">Log In</a>
+                                </div>
+                                <div id="calendar-user-info" class="d-none">
+                                    <div id="upcoming-count" class="d-flex align-items-center justify-content-between py-2">
+                                        <span class="text-muted small" data-translate="upcomingAppointments">Upcoming Appointments</span>
+                                        <span class="badge bg-primary rounded-pill" id="appointment-count">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Calendar Legend - Only show relevant one based on role -->
+                            <div id="calendar-legend" class="glass-card rounded-4 p-4" style="display: none;">
+                                <h6 class="fw-bold text-dark mb-3"><i class="fas fa-palette me-2 text-primary"></i><span data-translate="colorGuide">Color Guide</span></h6>
+                                <div class="d-flex flex-column gap-3">
+                                    <div class="d-flex align-items-center gap-3 d-none" id="legend-patient-container">
+                                        <span style="width: 16px; height: 16px; border-radius: 4px; background-color: #2563eb; display: inline-block; flex-shrink: 0;"></span>
+                                        <span class="text-dark small" id="legend-patient-view" data-translate="yourAppointments">Your Appointments</span>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-3 d-none" id="legend-doctor-container">
+                                        <span style="width: 16px; height: 16px; border-radius: 4px; background-color: #10b981; display: inline-block; flex-shrink: 0;"></span>
+                                        <span class="text-dark small" id="legend-doctor-view" data-translate="patientAppointments">Patient Appointments</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right: Calendar Widget -->
+                    <div class="col-lg-8">
+                        <div class="glass-card rounded-4 p-4 shadow-sm">
+                            <div id="calendar" class="bg-white rounded-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking Modal -->
+        <div class="modal fade" id="bookingModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" data-translate="bookAppointment">Book Appointment</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="bookingForm">
+                            <input type="hidden" id="bookDate">
+                            <div class="mb-3">
+                                <label class="form-label" data-translate="doctor">Doctor</label>
+                                <select class="form-select" id="bookDoctorId" required>
+                                    <option value="">Select a doctor...</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label" data-translate="time">Time</label>
+                                <input type="time" class="form-control" id="bookTime" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label" data-translate="notes">Notes</label>
+                                <textarea class="form-control" id="bookNotes"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-translate="close">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="submitBooking()" data-translate="confirmBooking">Confirm Booking</button>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Edit Appointment Modal -->
+        <div class="modal fade" id="editAppointmentModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" data-translate="editAppointment">Edit Appointment</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editAppointmentForm">
+                            <input type="hidden" id="editAppointmentId">
+                            <div class="mb-3">
+                                <label class="form-label" data-translate="doctor">Doctor</label>
+                                <select class="form-select" id="editDoctorId" required>
+                                    <option value="">Select a doctor...</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label" data-translate="dateTime">Date & Time</label>
+                                <input type="datetime-local" class="form-control" id="editDateTime" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label" data-translate="notes">Notes</label>
+                                <textarea class="form-control" id="editNotes" rows="3"></textarea>
+                            </div>
+                            
+                            <div class="mb-3" id="editStatusContainer" style="display: none;">
+                                <label class="form-label" data-translate="status">Status</label>
+                                <select class="form-select" id="editStatus">
+                                    <option value="pending">Pending</option>
+                                    <option value="confirmed">Confirmed</option>
+                                    <option value="cancelled">Cancelled</option>
+                                    <option value="completed">Completed</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-translate="close">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="submitEditAppointment()" data-translate="saveChanges">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Doctor Day View Modal (New) -->
+        <div class="modal fade" id="doctorDayModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content border-0 shadow-lg" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);">
+                    <div class="modal-header border-bottom border-light">
+                        <div>
+                            <h5 class="modal-title fw-bold text-primary mb-1" data-translate="dailySchedule">Daily Schedule</h5>
+                            <p class="text-muted small mb-0" id="doctorModalDate" data-translate="selectDate">Select a date</p>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <div id="doctorDayContent" class="d-flex flex-column gap-3">
+                            <!-- Appointments will be injected here -->
+                        </div>
+                        <div id="doctorDayEmpty" class="text-center py-5 text-muted d-none">
+                            <div class="mb-3">
+                                <i class="fas fa-calendar-day fa-3x opacity-25"></i>
+                            </div>
+                            <h6 data-translate="noAppointments">No appointments scheduled</h6>
+                            <small data-translate="enjoyFreeTime">Enjoy your free time, Doctor.</small>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal" data-translate="close">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Patient Day View Modal (New) -->
+        <div class="modal fade" id="patientDayModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content border-0 shadow-lg" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);">
+                    <div class="modal-header border-bottom border-light">
+                        <div>
+                            <h5 class="modal-title fw-bold text-primary mb-1" data-translate="yourAppointments">Your Appointments</h5>
+                            <p class="text-muted small mb-0" id="patientModalDate">Select a date</p>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <div id="patientDayContent" class="d-flex flex-column gap-3">
+                            <!-- Appointments will be injected here -->
+                        </div>
+                        <div id="patientDayEmpty" class="text-center py-5 text-muted d-none">
+                            <div class="mb-3">
+                                <i class="fas fa-calendar-alt fa-3x opacity-25"></i>
+                            </div>
+                            <h6>No appointments on this date</h6>
+                            <small>Book a new appointment below</small>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-0 d-flex justify-content-between">
+                        <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal" data-translate="close">Close</button>
+                        <button type="button" class="btn btn-primary rounded-pill px-4" onclick="switchToBooking()" data-translate="bookAppointment">Book Appointment</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Guest Access Modal (New) -->
+        <div class="modal fade" id="guestAccessModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content border-0 shadow-lg overflow-hidden rounded-4">
+                    <div class="modal-body p-0">
+                        <div class="row g-0">
+                            <!-- Left: Accent -->
+                            <div class="col-sm-5 bg-primary d-flex flex-column align-items-center justify-content-center p-4 text-center">
+                                <div class="bg-white bg-opacity-25 rounded-circle d-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
+                                    <i class="fas fa-calendar-check fa-2x text-white"></i>
+                                </div>
+                                <h5 class="text-white fw-bold mb-2" data-translate="bookAppointment">Book Appointment</h5>
+                                <p class="text-white-50 small mb-0">Sign in to schedule a consultation with our specialists.</p>
+                            </div>
+                            <!-- Right: Content -->
+                            <div class="col-sm-7 p-4 bg-white">
+                                <div class="d-flex justify-content-end">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="text-center px-3 pb-2 pt-1">
+                                    <h4 class="fw-bold text-dark mb-2" data-translate="welcome">Welcome!</h4>
+                                    <p class="text-muted small mb-4" data-translate="needAccountToManage">You need an account to manage appointments.</p>
+                                    
+                                    <div class="d-grid gap-3">
+                                        <a href="/login" class="btn btn-primary rounded-pill fw-bold py-2 shadow-sm" data-translate="logIn">
+                                            Log In
+                                        </a>
+                                        <a href="/register" class="btn btn-outline-primary rounded-pill fw-bold py-2" data-translate="createAccount">
+                                            Create Account
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Script for Calendar Logic -->
+        <style>
+            /* ============ NEW HERO ANIMATIONS ============ */
+            @keyframes pulse-slow {
+                0%, 100% { transform: scale(1); opacity: 0.5; }
+                50% { transform: scale(1.1); opacity: 0.8; }
+            }
+            
+            @keyframes scan {
+                0% { top: 0; opacity: 0; }
+                10% { opacity: 1; }
+                90% { opacity: 1; }
+                100% { top: 100%; opacity: 0; }
+            }
+            
+            @keyframes blink {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.3; }
+            }
+            
+            @keyframes bounce {
+                0%, 100% { transform: translateY(0) translateX(-50%); }
+                50% { transform: translateY(-10px) translateX(-50%); }
+            }
+            
+            /* Calendar Event Styling */
+            .fc-event {
+                cursor: pointer;
+                border-radius: 4px !important;
+                padding: 2px 4px !important;
+                margin: 1px 0 !important;
+                font-size: 12px !important;
+                font-weight: 500 !important;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12) !important;
+                transition: transform 0.2s, box-shadow 0.2s !important;
+            }
+            
+            .fc-event:hover {
+                transform: translateY(-1px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15) !important;
+            }
+            
+            .fc-daygrid-event-dot {
+                display: none !important;
+            }
+            
+            .fc-event-time {
+                font-weight: 600 !important;
+            }
+            
+            .fc-event-title {
+                font-weight: 500 !important;
+            }
+            
+            /* Make days with events more noticeable */
+            .fc-daygrid-day.fc-day-today {
+                background-color: rgba(37, 99, 235, 0.05) !important;
+            }
+            
+            .fc-daygrid-day-events {
+                margin-bottom: 2px !important;
+            }
+            
+            /* Quick Action Cards - Old (keep for backwards compatibility) */
+            .quick-action-card {
+                background: #ffffff;
+                border: 1px solid #e2e8f0;
+                transition: all 0.3s ease;
+            }
+            
+            .quick-action-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                border-color: var(--primary-color);
+            }
+            
+            /* Float Animation for Hero Stats */
+            @keyframes float {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-10px); }
+            }
+            
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(400px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes slideOutRight {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(400px);
+                    opacity: 0;
+                }
+            }
+            
+            @keyframes progressBar {
+                from { width: 100%; }
+                to { width: 0%; }
+            }
+            
+            /* Calendar Section Styling */
+            #calendar-section .fc {
+                font-size: 14px;
+            }
+            
+            #calendar-section .fc-toolbar-title {
+                font-size: 1.25rem !important;
+                font-weight: 700 !important;
+            }
+            
+            /* Sticky sidebar on desktop */
+            @media (min-width: 992px) {
+                #calendar-section .sticky-top {
+                    position: sticky;
+                    top: 100px;
+                }
+            }
+        </style>
+        <script>
+            let calendar;
+            let currentUser = null; // Global user variable for calendar functions
+            
+            // Helper functions for quick actions
+            function scrollToCalendar() {
+                const calendarSection = document.getElementById('calendar-section');
+                if (calendarSection) {
+                    // Get navbar height for offset (navbar is sticky)
+                    const navbar = document.querySelector('.navbar');
+                    const navbarHeight = navbar ? navbar.offsetHeight : 80;
+                    
+                    // Calculate position with offset for navbar
+                    const elementPosition = calendarSection.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - navbarHeight - 20;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+            
+            function quickBookAppointment() {
+                const token = localStorage.getItem('access_token');
+                if (!token) {
+                    new bootstrap.Modal(document.getElementById('guestAccessModal')).show();
+                    return;
+                }
+                const user = JSON.parse(localStorage.getItem('user_info') || '{}');
+                if (user.role === 'doctor') {
+                    showToast('Doctors cannot book appointments. Patients will book with you.', 'info');
+                    return;
+                }
+                // Set today's date and open booking modal
+                const today = new Date().toISOString().split('T')[0];
+                window.selectedDate = today;
+                document.getElementById('bookDate').value = today;
+                loadDoctors();
+                new bootstrap.Modal(document.getElementById('bookingModal')).show();
+            }
+            
+            function showReports() {
+                // Navigate to reports/history page or show modal
+                showToast('Reports feature coming soon!', 'info');
+            }
+            
+            function scrollToContact() {
+                const ctaSection = document.querySelector('.bg-primary.position-relative.overflow-hidden');
+                if (ctaSection) {
+                    ctaSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+            
+            // Beautiful Toast Notification System
+            function showToast(message, type = 'success', duration = 4000) {
+                let container = document.getElementById('toast-container');
+                if (!container) {
+                    container = document.createElement('div');
+                    container.id = 'toast-container';
+                    container.style.cssText = 'position: fixed; top: 20px; right: 20px; z-index: 9999; max-width: 400px;';
+                    document.body.appendChild(container);
+                }
+                
+                const toastId = 'toast-' + Date.now();
+                
+                const iconMap = {
+                    'success': { icon: 'fa-check-circle', color: '#10b981', bg: '#ecfdf5', border: '#10b981' },
+                    'error': { icon: 'fa-times-circle', color: '#ef4444', bg: '#fef2f2', border: '#ef4444' },
+                    'warning': { icon: 'fa-exclamation-triangle', color: '#f59e0b', bg: '#fffbeb', border: '#f59e0b' },
+                    'info': { icon: 'fa-info-circle', color: '#3b82f6', bg: '#eff6ff', border: '#3b82f6' }
+                };
+                
+                const config = iconMap[type] || iconMap['info'];
+                
+                const toast = document.createElement('div');
+                toast.id = toastId;
+                toast.style.cssText = `
+                    background: white;
+                    border-left: 4px solid ${config.border};
+                    border-radius: 12px;
+                    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+                    padding: 16px 20px;
+                    margin-bottom: 12px;
+                    min-width: 320px;
+                    display: flex;
+                    align-items: start;
+                    gap: 12px;
+                    position: relative;
+                    overflow: hidden;
+                    animation: slideInRight 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                `;
+                
+                toast.innerHTML = `
+                    <div style="flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; background: ${config.bg}; display: flex; align-items: center; justify-content: center;">
+                        <i class="fas ${config.icon}" style="color: ${config.color}; font-size: 18px;"></i>
+                    </div>
+                    <div style="flex: 1; padding-top: 2px;">
+                        <div style="font-weight: 600; color: #1f2937; margin-bottom: 4px; font-size: 15px;">${type.charAt(0).toUpperCase() + type.slice(1)}</div>
+                        <div style="color: #6b7280; font-size: 14px; line-height: 1.4;">${message}</div>
+                    </div>
+                    <button onclick="closeToast('${toastId}')" style="flex-shrink: 0; background: none; border: none; color: #9ca3af; cursor: pointer; padding: 0; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 4px; transition: all 0.2s;" onmouseover="this.style.background='#f3f4f6'; this.style.color='#1f2937';" onmouseout="this.style.background='none'; this.style.color='#9ca3af';">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <div style="position: absolute; bottom: 0; left: 0; height: 3px; background: ${config.color}; opacity: 0.3; width: 100%; animation: progressBar ${duration}ms linear;"></div>
+                `;
+                
+                container.appendChild(toast);
+                
+                // Auto remove
+                const timeoutId = setTimeout(() => closeToast(toastId), duration);
+                toast.dataset.timeoutId = timeoutId;
+            }
+            
+            function closeToast(toastId) {
+                const toast = document.getElementById(toastId);
+                if (toast) {
+                    if (toast.dataset.timeoutId) clearTimeout(parseInt(toast.dataset.timeoutId));
+                    toast.style.animation = 'slideOutRight 0.3s ease-in-out';
+                    setTimeout(() => toast.remove(), 300);
+                }
+            }
+            
+            document.addEventListener('DOMContentLoaded', function() {
+                const token = localStorage.getItem('access_token');
+                const user = JSON.parse(localStorage.getItem('user_info') || '{}');
+                currentUser = user; // Set global user variable
+                
+                // Update UI based on auth
+                if(token) {
+                    document.getElementById('calendar-status').className = 'badge bg-success';
+                    const viewKey = user.role === 'doctor' ? 'doctorView' : 'patientView';
+                    const statusEl = document.getElementById('calendar-status');
+                    statusEl.setAttribute('data-translate', viewKey);
+                    statusEl.innerText = window.AppLanguage ? window.AppLanguage.t(viewKey) : (user.role === 'doctor' ? 'Doctor View' : 'Patient View');
+                    
+                    // Show user info, hide login prompt
+                    const loginPrompt = document.getElementById('calendar-login-prompt');
+                    const userInfo = document.getElementById('calendar-user-info');
+                    if (loginPrompt) loginPrompt.classList.add('d-none');
+                    if (userInfo) userInfo.classList.remove('d-none');
+                    
+                    // Show calendar legend - only show relevant item based on role
+                    const legendEl = document.getElementById('calendar-legend');
+                    if (legendEl) {
+                        legendEl.style.display = 'block';
+                        // Show only relevant legend item based on user role
+                        const patientLegend = document.getElementById('legend-patient-container');
+                        const doctorLegend = document.getElementById('legend-doctor-container');
+                        if (user.role === 'doctor') {
+                            // Doctor sees green = patient appointments
+                            if (patientLegend) patientLegend.classList.add('d-none');
+                            if (doctorLegend) doctorLegend.classList.remove('d-none');
+                        } else {
+                            // Patient sees blue = their own appointments
+                            if (doctorLegend) doctorLegend.classList.add('d-none');
+                            if (patientLegend) patientLegend.classList.remove('d-none');
+                        }
+                    }
+                }
+
+                const calendarEl = document.getElementById('calendar');
+                if (calendarEl) {
+                    // Map app language to FullCalendar locale
+                    const langMap = { 'en': 'en', 'ms': 'ms', 'zh': 'zh-cn', 'ta': 'ta-in' };
+                    const preferredLang = localStorage.getItem('preferred_language') || 'en';
+                    const calendarLocale = langMap[preferredLang] || 'en';
+                    
+                    calendar = new FullCalendar.Calendar(calendarEl, {
+                        initialView: 'dayGridMonth',
+                        themeSystem: 'bootstrap5',
+                        locale: calendarLocale,
+                        buttonText: {
+                            month: window.AppLanguage ? window.AppLanguage.t('month') : 'month',
+                            week: window.AppLanguage ? window.AppLanguage.t('week') : 'week'
+                        },
+                        headerToolbar: {
+                            left: 'prev,next today',
+                            center: 'title',
+                            right: 'dayGridMonth,timeGridWeek'
+                        },
+                        height: 'auto',
+                        contentHeight: 500,
+                        aspectRatio: 1.5,
+                        selectable: true,
+                        dayMaxEvents: 3,
+                        displayEventTime: true,
+                        eventDisplay: 'block',
+                        eventTimeFormat: {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            meridiem: 'short'
+                        },
+                        eventDidMount: function(info) {
+                            // Add icon to event
+                            const iconEl = document.createElement('i');
+                            iconEl.className = 'fas fa-calendar-check me-1';
+                            iconEl.style.fontSize = '11px';
+                            const titleEl = info.el.querySelector('.fc-event-title');
+                            if (titleEl) {
+                                titleEl.prepend(iconEl);
+                            }
+                            
+                            // Add tooltip
+                            const props = info.event.extendedProps;
+                            const timeStr = info.event.start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                            const tooltipContent = `
+                                <div style="text-align: left;">
+                                    <strong>${info.event.title}</strong><br>
+                                    <small><i class="fas fa-clock"></i> ${timeStr}</small><br>
+                                    <small><i class="fas fa-info-circle"></i> Status: ${props.status || 'Pending'}</small><br>
+                                    ${props.notes ? `<small><i class="fas fa-sticky-note"></i> ${props.notes}</small>` : ''}
+                                </div>
+                            `;
+                            info.el.setAttribute('data-bs-toggle', 'tooltip');
+                            info.el.setAttribute('data-bs-html', 'true');
+                            info.el.setAttribute('data-bs-placement', 'top');
+                            info.el.setAttribute('title', tooltipContent);
+                            new bootstrap.Tooltip(info.el);
+                        },
+                        eventsSet: function(events) {
+                            // Update appointment count badge
+                            const countBadge = document.getElementById('appointment-count');
+                            if (countBadge) {
+                                const upcomingCount = events.filter(e => new Date(e.start) >= new Date()).length;
+                                countBadge.textContent = upcomingCount;
+                            }
+                        },
+                        eventContent: function(arg) {
+                            // Custom event content with better formatting
+                            return {
+                                html: `<div class="fc-event-main-frame">
+                                    <div class="fc-event-time">${arg.timeText}</div>
+                                    <div class="fc-event-title-container">
+                                        <div class="fc-event-title fc-sticky">
+                                            <i class="fas fa-calendar-check me-1"></i>${arg.event.title}
+                                        </div>
+                                    </div>
+                                </div>`
+                            };
+                        },
+                        eventClick: function(info) {
+                            // Show event details in a better format
+                            const props = info.event.extendedProps;
+                            const timeStr = info.event.start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                            showToast(
+                                `<strong>${info.event.title}</strong><br>Time: ${timeStr}<br>Status: ${props.status || 'Pending'}${props.notes ? '<br>Notes: ' + props.notes : ''}`,
+                                'info',
+                                6000
+                            );
+                        },
+                        dateClick: function(info) {
+                            if (!token) {
+                                // Show Custom Guest Modal instad of alert
+                                new bootstrap.Modal(document.getElementById('guestAccessModal')).show();
+                                return;
+                            }
+                            
+                            // Store the selected date globally for booking
+                            window.selectedDate = info.dateStr;
+                            
+                            // Doctor View Logic
+                            if (user.role === 'doctor') {
+                                showDoctorDayView(info.dateStr);
+                                return;
+                            }
+                            
+                            // Patient View Logic - Show appointments first
+                            showPatientDayView(info.dateStr);
+                        },
+                        events: fetchEvents,
+                        windowResize: function(view) {
+                            calendar.updateSize();
+                        }
+                    });
+                    
+                    setTimeout(() => {
+                        calendar.render();
+                        calendar.updateSize();
+                    }, 100);
+                    
+                    if(token) updateNotifications();
+                }
+            });
+
+            function showDoctorDayView(selectedDate) {
+                const dateObj = new Date(selectedDate);
+                const dateLocaleMap = { 'en': 'en-US', 'ms': 'ms-MY', 'zh': 'zh-CN', 'ta': 'ta-IN' };
+                const dateLocale = dateLocaleMap[localStorage.getItem('preferred_language') || 'en'] || 'en-US';
+                document.getElementById('doctorModalDate').innerText = dateObj.toLocaleDateString(dateLocale, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+                
+                // Get all events for this day
+                const allEvents = calendar.getEvents();
+                const daysEvents = allEvents.filter(event => event.startStr.startsWith(selectedDate));
+
+                const listContainer = document.getElementById('doctorDayContent');
+                const emptyState = document.getElementById('doctorDayEmpty');
+                listContainer.innerHTML = '';
+
+                if (daysEvents.length === 0) {
+                    listContainer.classList.add('d-none');
+                    emptyState.classList.remove('d-none');
+                } else {
+                    listContainer.classList.remove('d-none');
+                    emptyState.classList.add('d-none');
+                    
+                    daysEvents.sort((a, b) => a.start - b.start).forEach(event => {
+                        const timeStr = event.start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                        const props = event.extendedProps;
+                        const appointmentId = props.appointment_id;
+                        
+                        const el = document.createElement('div');
+                        el.className = 'card border-0 shadow-sm hover-shadow transition-all';
+                        el.innerHTML = `
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center gap-3 flex-grow-1">
+                                        <div class="bg-primary bg-opacity-10 text-primary rounded-3 p-2 text-center" style="min-width: 60px;">
+                                            <div class="fw-bold">${timeStr}</div>
+                                        </div>
+                                        <div>
+                                            <h6 class="fw-bold mb-1">${props.patient_name || 'Patient'}</h6>
+                                            <div class="text-muted small"><i class="fas fa-sticky-note me-1"></i> ${props.notes || 'No notes provided'}</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="badge ${props.status === 'confirmed' ? 'bg-success' : 'bg-warning text-dark'} rounded-pill px-3">
+                                            ${props.status || 'Pending'}
+                                        </span>
+                                        <button class="btn btn-sm btn-outline-primary rounded-circle" onclick="openEditModal(${appointmentId})" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        listContainer.appendChild(el);
+                    });
+                }
+
+                new bootstrap.Modal(document.getElementById('doctorDayModal')).show();
+            }
+
+            function showPatientDayView(selectedDate) {
+                const dateObj = new Date(selectedDate);
+                const dateLocaleMap = { 'en': 'en-US', 'ms': 'ms-MY', 'zh': 'zh-CN', 'ta': 'ta-IN' };
+                const dateLocale = dateLocaleMap[localStorage.getItem('preferred_language') || 'en'] || 'en-US';
+                document.getElementById('patientModalDate').innerText = dateObj.toLocaleDateString(dateLocale, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+                
+                // Get all events for this day
+                const allEvents = calendar.getEvents();
+                const daysEvents = allEvents.filter(event => event.startStr.startsWith(selectedDate));
+
+                const listContainer = document.getElementById('patientDayContent');
+                const emptyState = document.getElementById('patientDayEmpty');
+                listContainer.innerHTML = '';
+
+                if (daysEvents.length === 0) {
+                    listContainer.classList.add('d-none');
+                    emptyState.classList.remove('d-none');
+                } else {
+                    listContainer.classList.remove('d-none');
+                    emptyState.classList.add('d-none');
+                    
+                    daysEvents.sort((a, b) => a.start - b.start).forEach(event => {
+                        const timeStr = event.start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                        const props = event.extendedProps;
+                        const appointmentId = props.appointment_id;
+                        
+                        const el = document.createElement('div');
+                        el.className = 'card border-0 shadow-sm hover-shadow transition-all';
+                        el.innerHTML = `
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center gap-3 flex-grow-1">
+                                        <div class="bg-primary bg-opacity-10 text-primary rounded-3 p-2 text-center" style="min-width: 60px;">
+                                            <div class="fw-bold">${timeStr}</div>
+                                        </div>
+                                        <div>
+                                            <h6 class="fw-bold mb-1 text-primary"><i class="fas fa-user-md me-1"></i>${props.doctor_name || 'Doctor'}</h6>
+                                            <div class="text-muted small"><i class="fas fa-sticky-note me-1"></i> ${props.notes || 'No notes provided'}</div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="badge ${props.status === 'confirmed' ? 'bg-success' : 'bg-warning text-dark'} rounded-pill px-3">
+                                            ${props.status || 'Pending'}
+                                        </span>
+                                        <button class="btn btn-sm btn-outline-primary rounded-circle" onclick="openEditModal(${appointmentId})" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        listContainer.appendChild(el);
+                    });
+                }
+
+                new bootstrap.Modal(document.getElementById('patientDayModal')).show();
+            }
+
+            function switchToBooking() {
+                // Close patient day modal
+                const patientModal = bootstrap.Modal.getInstance(document.getElementById('patientDayModal'));
+                if (patientModal) patientModal.hide();
+                
+                // Open booking modal with the selected date
+                setTimeout(() => {
+                    document.getElementById('bookDate').value = window.selectedDate;
+                    loadDoctors();
+                    new bootstrap.Modal(document.getElementById('bookingModal')).show();
+                }, 300); // Wait for modal close animation
+            }
+
+            async function openEditModal(appointmentId) {
+                const token = localStorage.getItem('access_token');
+                if (!token) return;
+                
+                try {
+                    // Fetch appointment details
+                    const res = await fetch('/api/appointments/my-appointments', {
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    });
+                    
+                    if (!res.ok) {
+                        showToast('Failed to load appointment details', 'error');
+                        return;
+                    }
+                    
+                    const appointments = await res.json();
+                    const appointment = appointments.find(a => a.id === appointmentId);
+                    
+                    if (!appointment) {
+                        showToast('Appointment not found', 'error');
+                        return;
+                    }
+                    
+                    // Load doctors list
+                    await loadDoctorsForEdit();
+                    
+                    // Populate form
+                    document.getElementById('editAppointmentId').value = appointment.id;
+                    document.getElementById('editDoctorId').value = appointment.doctor_id;
+                    
+                    // Format datetime for input
+                    const dt = new Date(appointment.date_time);
+                    const formattedDateTime = dt.getFullYear() + '-' + 
+                        String(dt.getMonth() + 1).padStart(2, '0') + '-' + 
+                        String(dt.getDate()).padStart(2, '0') + 'T' +
+                        String(dt.getHours()).padStart(2, '0') + ':' + 
+                        String(dt.getMinutes()).padStart(2, '0');
+                    document.getElementById('editDateTime').value = formattedDateTime;
+                    document.getElementById('editNotes').value = appointment.notes || '';
+                    document.getElementById('editStatus').value = appointment.status || 'pending';
+                    
+                    // Show status field only for doctors
+                    if (currentUser && currentUser.role === 'doctor') {
+                        document.getElementById('editStatusContainer').style.display = 'block';
+                    } else {
+                        document.getElementById('editStatusContainer').style.display = 'none';
+                    }
+                    
+                    // Close any open day view modals
+                    const doctorModal = bootstrap.Modal.getInstance(document.getElementById('doctorDayModal'));
+                    const patientModal = bootstrap.Modal.getInstance(document.getElementById('patientDayModal'));
+                    if (doctorModal) doctorModal.hide();
+                    if (patientModal) patientModal.hide();
+                    
+                    // Open edit modal
+                    setTimeout(() => {
+                        new bootstrap.Modal(document.getElementById('editAppointmentModal')).show();
+                    }, 300);
+                    
+                } catch (e) {
+                    console.error('Error opening edit modal:', e);
+                    showToast('Failed to open edit form', 'error');
+                }
+            }
+
+            async function loadDoctorsForEdit() {
+                try {
+                    const res = await fetch('/auth/doctors');
+                    if (res.ok) {
+                        const doctors = await res.json();
+                        const select = document.getElementById('editDoctorId');
+                        select.innerHTML = '<option value="">Select a doctor...</option>';
+                        
+                        doctors.forEach(doctor => {
+                            const option = document.createElement('option');
+                            option.value = doctor.id;
+                            option.textContent = doctor.name;
+                            select.appendChild(option);
+                        });
+                    }
+                } catch(e) {
+                    console.error('Failed to load doctors:', e);
+                }
+            }
+
+            async function submitEditAppointment() {
+                const token = localStorage.getItem('access_token');
+                if (!token) return;
+                
+                const appointmentId = document.getElementById('editAppointmentId').value;
+                const doctorId = document.getElementById('editDoctorId').value;
+                const dateTime = document.getElementById('editDateTime').value;
+                const notes = document.getElementById('editNotes').value;
+                const status = document.getElementById('editStatus').value;
+                
+                if (!doctorId) {
+                    showToast('Please select a doctor', 'warning');
+                    return;
+                }
+                
+                if (!dateTime) {
+                    showToast('Please select date and time', 'warning');
+                    return;
+                }
+                
+                const payload = {
+                    doctor_id: parseInt(doctorId),
+                    date_time: dateTime,
+                    notes: notes
+                };
+                
+                // Include status only if user is doctor
+                if (currentUser && currentUser.role === 'doctor') {
+                    payload.status = status;
+                }
+                
+                try {
+                    const res = await fetch(`/api/appointments/update/${appointmentId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify(payload)
+                    });
+                    
+                    if (res.ok) {
+                        showToast('Appointment updated successfully! All parties have been notified.', 'success', 5000);
+                        bootstrap.Modal.getInstance(document.getElementById('editAppointmentModal')).hide();
+                        
+                        // Refresh calendar to show updated appointment
+                        calendar.refetchEvents();
+                        updateNotifications();
+                    } else {
+                        const err = await res.json();
+                        showToast('Error: ' + (err.detail || 'Failed to update appointment'), 'error');
+                    }
+                } catch (e) {
+                    console.error('Error updating appointment:', e);
+                    showToast('Failed to update appointment. Please try again.', 'error');
+                }
+            }
+
+            async function loadDoctors() {
+                try {
+                    const res = await fetch('/auth/doctors');
+                    if (res.ok) {
+                        const doctors = await res.json();
+                        const select = document.getElementById('bookDoctorId');
+                        select.innerHTML = '<option value="">Select a doctor...</option>';
+                        
+                        doctors.forEach(doctor => {
+                            const option = document.createElement('option');
+                            option.value = doctor.id;
+                            option.textContent = doctor.name;
+                            select.appendChild(option);
+                        });
+                    }
+                } catch(e) {
+                    console.error('Failed to load doctors:', e);
+                }
+            }
+
+            async function submitBooking() {
+                const token = localStorage.getItem('access_token');
+                if(!token) return;
+
+                const date = document.getElementById('bookDate').value;
+                const time = document.getElementById('bookTime').value;
+                const doctorId = document.getElementById('bookDoctorId').value;
+                const notes = document.getElementById('bookNotes').value;
+                
+                if(!time) { showToast("Please select a time", 'warning'); return; }
+                if(!doctorId) { showToast("Please select a doctor", 'warning'); return; }
+                
+                const dateTime = `${date}T${time}:00`;
+                
+                const payload = {
+                    doctor_id: parseInt(doctorId),
+                    date_time: dateTime,
+                    notes: notes
+                };
+                
+                try {
+                    const res = await fetch('/api/appointments/book', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: JSON.stringify(payload)
+                    });
+                    
+                    if(res.ok) {
+                        showToast("Appointment booked successfully! We'll send you a confirmation.", 'success', 5000);
+                        bootstrap.Modal.getInstance(document.getElementById('bookingModal')).hide();
+                        calendar.refetchEvents();
+                        updateNotifications();
+                    } else {
+                        const err = await res.json();
+                        showToast("Error: " + err.detail, 'error');
+                    }
+                } catch(e) {
+                    console.error(e);
+                    showToast("Failed to book appointment. Please try again.", 'error');
+                }
+            }
+
+            async function fetchEvents(info, successCallback, failureCallback) {
+                const token = localStorage.getItem('access_token');
+                console.log('fetchEvents called, token exists:', !!token);
+                
+                // If no token, show nothing
+                if (!token) {
+                    successCallback([]);
+                    return;
+                }
+
+                try {
+                    const res = await fetch('/api/appointments/my-appointments', {
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+                    
+                    console.log('Fetch response status:', res.status);
+                    
+                    if (!res.ok) {
+                         // Token might be expired
+                         if(res.status === 401) {
+                             localStorage.removeItem('access_token');
+                             document.getElementById('calendar-status').innerText = 'Session Expired';
+                         }
+                         failureCallback("Failed to fetch");
+                         return;
+                    }
+
+                    const data = await res.json();
+                    console.log('Raw appointment data:', data);
+                    
+                    const events = data.map(appt => {
+                        // Create different title formats for doctor vs patient
+                        let eventTitle;
+                        let eventColor;
+                        
+                        if (currentUser && currentUser.role === 'doctor') {
+                            // Doctor sees patient name
+                            eventTitle = `${appt.patient_name || 'Patient'}`;
+                            eventColor = '#10b981'; // Green for doctor view
+                        } else {
+                            // Patient sees doctor name
+                            eventTitle = `Dr. ${appt.doctor_name || 'Unknown'}`;
+                            eventColor = '#2563eb'; // Blue for patient view
+                        }
+                        
+                        return {
+                            title: eventTitle,
+                            start: appt.date_time,
+                            color: eventColor,
+                            textColor: '#ffffff',
+                            borderColor: eventColor,
+                            extendedProps: {
+                                status: appt.status || 'pending',
+                                notes: appt.notes || '',
+                                patient_name: appt.patient_name || 'Patient',
+                                doctor_name: appt.doctor_name || 'Doctor',
+                                appointment_id: appt.id
+                            }
+                        };
+                    });
+                    
+                    console.log('Fetched appointments:', events); // Debug log
+                    successCallback(events);
+                } catch(e) {
+                    console.error('Error fetching events:', e);
+                    failureCallback(e);
+                }
+            }
+            
+            async function updateNotifications() {
+                // Delegate to global navbar function if available
+                if (typeof checkNotifications === 'function') {
+                    await checkNotifications();
+                } else {
+                    console.warn("Global checkNotifications not found");
+                }
+            }
+
+            // Sync function is now mostly for admin/dev to populate DB
+            async function initMockUsers() {
+                 const token = localStorage.getItem('access_token');
+                 if(!token) { showToast("Please login to sync.", 'warning'); return; }
+                 
+                await fetch('/api/appointments/seed_users', { 
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                showToast("Database seeded successfully!", 'success');
+            }
+        </script>
 
         <!-- About Section -->
         <section id="about" class="py-5 position-relative overflow-hidden">
@@ -32,9 +1345,9 @@
                     
                     <!-- Content Side -->
                     <div class="col-lg-6 ps-lg-5">
-                        <h6 class="text-primary fw-bold text-uppercase letter-spacing-2 mb-3">Why Choose Oral AI?</h6>
-                        <h2 class="display-6 fw-bold text-dark mb-4">Bridging Medical Expertise with Artificial Intelligence</h2>
-                        <p class="text-muted lead mb-4">We empower dental professionals with second-opinion AI tools that detect abnormalities faster and more accurately than ever before.</p>
+                        <h6 class="text-primary fw-bold text-uppercase letter-spacing-2 mb-3" data-translate="whyChooseTitle">Why Choose Oral AI?</h6>
+                        <h2 class="display-6 fw-bold text-dark mb-4" data-translate="whyChooseHeading">Bridging Medical Expertise with Artificial Intelligence</h2>
+                        <p class="text-muted lead mb-4" data-translate="whyChooseDesc">We empower dental professionals with second-opinion AI tools that detect abnormalities faster and more accurately than ever before.</p>
                         
                         <div class="row g-4 mb-4">
                             <div class="col-sm-6">
@@ -43,8 +1356,8 @@
                                         <i class="fas fa-bolt"></i>
                                     </div>
                                     <div class="ms-3">
-                                        <h6 class="mb-1 fw-bold text-dark">Instant Results</h6>
-                                        <small class="text-muted">Real-time analysis</small>
+                                        <h6 class="mb-1 fw-bold text-dark" data-translate="instantResults">Instant Results</h6>
+                                        <small class="text-muted" data-translate="instantResultsDesc">Real-time analysis</small>
                                     </div>
                                 </div>
                             </div>
@@ -54,8 +1367,8 @@
                                         <i class="fas fa-microscope"></i>
                                     </div>
                                     <div class="ms-3">
-                                        <h6 class="mb-1 fw-bold text-dark">High Precision</h6>
-                                        <small class="text-muted">Microscopic detail</small>
+                                        <h6 class="mb-1 fw-bold text-dark" data-translate="highPrecision">High Precision</h6>
+                                        <small class="text-muted" data-translate="highPrecisionDesc">Microscopic detail</small>
                                     </div>
                                 </div>
                             </div>
@@ -65,8 +1378,8 @@
                                         <i class="fas fa-shield-alt"></i>
                                     </div>
                                     <div class="ms-3">
-                                        <h6 class="mb-1 fw-bold text-dark">Secure Data</h6>
-                                        <small class="text-muted">HIPAA Compliant</small>
+                                        <h6 class="mb-1 fw-bold text-dark" data-translate="secureData">Secure Data</h6>
+                                        <small class="text-muted" data-translate="secureDataDesc">HIPAA Compliant</small>
                                     </div>
                                 </div>
                             </div>
@@ -76,15 +1389,15 @@
                                         <i class="fas fa-user-md"></i>
                                     </div>
                                     <div class="ms-3">
-                                        <h6 class="mb-1 fw-bold text-dark">Expert Support</h6>
-                                        <small class="text-muted">Verified by doctors</small>
+                                        <h6 class="mb-1 fw-bold text-dark" data-translate="expertSupport">Expert Support</h6>
+                                        <small class="text-muted" data-translate="expertSupportDesc">Verified by doctors</small>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
                         <button class="btn btn-primary rounded-pill px-4 py-2 shadow-sm" onclick="showAnalysis()">
-                            Discover More <i class="fas fa-arrow-right ms-2"></i>
+                            <span data-translate="discoverMore">Discover More</span> <i class="fas fa-arrow-right ms-2"></i>
                         </button>
                     </div>
                 </div>
@@ -98,9 +1411,9 @@
             
             <div class="container py-5 position-relative">
                 <div class="text-center mb-5 mx-auto" style="max-width: 700px;">
-                    <span class="badge bg-primary-subtle text-primary rounded-pill px-4 py-2 mb-3 fw-bold fs-6">OUR SERVICES</span>
-                    <h2 class="display-5 fw-bold text-dark mb-3">Comprehensive AI Analysis</h2>
-                    <p class="text-muted lead">Our multi-model architecture ensures every case is handled by a specialist algorithm designed for that specific modality.</p>
+                    <span class="badge bg-primary-subtle text-primary rounded-pill px-4 py-2 mb-3 fw-bold fs-6" data-translate="ourServices">OUR SERVICES</span>
+                    <h2 class="display-5 fw-bold text-dark mb-3" data-translate="comprehensiveAnalysis">Comprehensive AI Analysis</h2>
+                    <p class="text-muted lead" data-translate="comprehensiveAnalysisDesc">Our multi-model architecture ensures every case is handled by a specialist algorithm designed for that specific modality.</p>
                 </div>
                 
                 <div class="row g-4">
@@ -113,10 +1426,10 @@
                                         <i class="fas fa-random"></i>
                                     </div>
                                 </div>
-                                <h4 class="fw-bold text-dark mb-3">Smart Triage</h4>
-                                <p class="text-muted mb-4">Intelligent routing system that automatically classifies uploaded images and directs them to the appropriate diagnostic model.</p>
+                                <h4 class="fw-bold text-dark mb-3" data-translate="smartTriage">Smart Triage</h4>
+                                <p class="text-muted mb-4" data-translate="smartTriageDesc">Intelligent routing system that automatically classifies uploaded images and directs them to the appropriate diagnostic model.</p>
                                 <a href="#" onclick="showAnalysis(); return false;" class="text-decoration-none fw-bold text-primary stretched-link">
-                                    Try Triage <i class="fas fa-arrow-right ms-1"></i>
+                                    <span data-translate="tryTriage">Try Triage</span> <i class="fas fa-arrow-right ms-1"></i>
                                 </a>
                             </div>
                         </div>
@@ -131,10 +1444,10 @@
                                         <i class="fas fa-microscope"></i>
                                     </div>
                                 </div>
-                                <h4 class="fw-bold text-dark mb-3">Histopathology</h4>
-                                <p class="text-muted mb-4">Microscopic analysis for precise tumour grading, invasion depth measurement, and perineural invasion detection.</p>
+                                <h4 class="fw-bold text-dark mb-3" data-translate="histopathology">Histopathology</h4>
+                                <p class="text-muted mb-4" data-translate="histopathologyDesc">Microscopic analysis for precise tumour grading, invasion depth measurement, and perineural invasion detection.</p>
                                 <a href="#" onclick="showAnalysis(); return false;" class="text-decoration-none fw-bold text-success stretched-link">
-                                    Analyze Slide <i class="fas fa-arrow-right ms-1"></i>
+                                    <span data-translate="analyzeSlide">Analyze Slide</span> <i class="fas fa-arrow-right ms-1"></i>
                                 </a>
                             </div>
                         </div>
@@ -149,10 +1462,10 @@
                                         <i class="fas fa-teeth"></i>
                                     </div>
                                 </div>
-                                <h4 class="fw-bold text-dark mb-3">Clinical Screening</h4>
-                                <p class="text-muted mb-4">Real-time object detection for identifying lesions, caries, and other visible oral health concerns from standard photos.</p>
+                                <h4 class="fw-bold text-dark mb-3" data-translate="clinicalScreening">Clinical Screening</h4>
+                                <p class="text-muted mb-4" data-translate="clinicalScreeningDesc">Real-time object detection for identifying lesions, caries, and other visible oral health concerns from standard photos.</p>
                                 <a href="#" onclick="showAnalysis(); return false;" class="text-decoration-none fw-bold text-info stretched-link">
-                                    Start Screening <i class="fas fa-arrow-right ms-1"></i>
+                                    <span data-translate="startScreening">Start Screening</span> <i class="fas fa-arrow-right ms-1"></i>
                                 </a>
                             </div>
                         </div>
@@ -173,27 +1486,27 @@
                 <div class="row align-items-center">
                     <!-- Text & Stats Side -->
                     <div class="col-lg-7 text-white mb-5 mb-lg-0">
-                        <span class="badge bg-white text-primary rounded-pill px-4 py-2 mb-3 fw-bold fs-4">TRUSTED HEALTHCARE</span>
-                        <h2 class="display-5 fw-bold mb-4">Empowering Early Detection<br>Saving Lives.</h2>
-                        <p class="lead mb-5 opacity-90" style="max-width: 600px;">Join thousands of patients and clinicians who trust Oral AI for rapid, accurate, and accessible oral health screening.</p>
+                        <span class="badge bg-white text-primary rounded-pill px-4 py-2 mb-3 fw-bold fs-4" data-translate="trustedHealthcare">TRUSTED HEALTHCARE</span>
+                        <h2 class="display-5 fw-bold mb-4" data-translate="empoweringEarlyDetection">Empowering Early Detection<br>Saving Lives.</h2>
+                        <p class="lead mb-5 opacity-90" style="max-width: 600px;" data-translate="joinThousandsDesc">Join thousands of patients and clinicians who trust Oral AI for rapid, accurate, and accessible oral health screening.</p>
                         
                         <div class="row g-4">
                             <div class="col-sm-4">
                                 <div class="p-3 rounded-4 bg-white bg-opacity-10 border border-white border-opacity-10">
                                     <h2 class="fw-bold mb-1">99.8%</h2>
-                                    <small class="opacity-75 text-uppercase">Accuracy Rate</small>
+                                    <small class="opacity-75 text-uppercase" data-translate="accuracyRate">Accuracy Rate</small>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="p-3 rounded-4 bg-white bg-opacity-10 border border-white border-opacity-10">
                                     <h2 class="fw-bold mb-1">10k+</h2>
-                                    <small class="opacity-75 text-uppercase">Patients Screened</small>
+                                    <small class="opacity-75 text-uppercase" data-translate="patientsScreened">Patients Screened</small>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="p-3 rounded-4 bg-white bg-opacity-10 border border-white border-opacity-10">
                                     <h2 class="fw-bold mb-1">24/7</h2>
-                                    <small class="opacity-75 text-uppercase">AI Availability</small>
+                                    <small class="opacity-75 text-uppercase" data-translate="aiAvailability">AI Availability</small>
                                 </div>
                             </div>
                         </div>
@@ -202,19 +1515,19 @@
                     <!-- Contact Card Side -->
                     <div class="col-lg-5">
                         <div class="bg-white text-dark p-5 rounded-5 shadow-lg position-relative overflow-hidden">
-                            <div class="position-absolute top-0 end-0 bg-warning text-white px-3 py-1 rounded-bottom-start fw-bold small">
+                            <div class="position-absolute top-0 end-0 bg-warning text-white px-3 py-1 rounded-bottom-start fw-bold small" data-translate="supportLabel">
                                 SUPPORT
                             </div>
                             
-                            <h3 class="fw-bold mb-4">Need Expert Advice?</h3>
-                            <p class="text-muted mb-4">Our medical team is here to help interpret your results and guide your next steps.</p>
+                            <h3 class="fw-bold mb-4" data-translate="needExpertAdvice">Need Expert Advice?</h3>
+                            <p class="text-muted mb-4" data-translate="medicalTeamHelp">Our medical team is here to help interpret your results and guide your next steps.</p>
                             
                             <div class="d-flex align-items-center mb-4 p-3 bg-light rounded-4 transition-all hover-card position-relative">
                                 <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 48px; height: 48px;">
                                     <i class="fas fa-phone-alt"></i>
                                 </div>
                                 <div class="ms-3">
-                                    <small class="text-muted d-block">Call Us Now</small>
+                                    <small class="text-muted d-block" data-translate="callUsNow">Call Us Now</small>
                                     <a href="tel:+60389248000" class="fs-5 fw-bold text-dark text-decoration-none stretched-link">+60 3 8924 8000</a>
                                 </div>
                             </div>
@@ -224,12 +1537,12 @@
                                     <i class="fas fa-envelope"></i>
                                 </div>
                                 <div class="ms-3">
-                                    <small class="text-muted d-block">Email Support</small>
+                                    <small class="text-muted d-block" data-translate="emailSupport">Email Support</small>
                                     <a href="mailto:xxx@nottingam.edu,my" class="fs-5 fw-bold text-dark text-decoration-none stretched-link">xxx@nottingam.edu.my</a>
                                 </div>
                             </div>
                             
-                            <button class="btn btn-dark w-100 rounded-pill py-3 fw-bold" onclick="showAnalysis()">
+                            <button class="btn btn-dark w-100 rounded-pill py-3 fw-bold" onclick="showAnalysis()" data-translate="startScreening">
                                 Start Screening
                             </button>
                         </div>
@@ -242,9 +1555,9 @@
         <section class="py-5 bg-light position-relative">
             <div class="container py-5">
                 <div class="text-center mb-5">
-                    <span class="badge bg-white text-primary shadow-sm rounded-pill px-4 py-2 mb-3 fw-bold fs-6">TESTIMONIALS</span>
-                    <h2 class="display-5 fw-bold text-dark mb-3">What Our Patients Say</h2>
-                    <p class="text-muted lead mx-auto" style="max-width: 600px;">Real stories from people who have used our AI screening tool for early detection and peace of mind.</p>
+                    <span class="badge bg-white text-primary shadow-sm rounded-pill px-4 py-2 mb-3 fw-bold fs-6" data-translate="testimonialsLabel">TESTIMONIALS</span>
+                    <h2 class="display-5 fw-bold text-dark mb-3" data-translate="whatPatientsSay">What Our Patients Say</h2>
+                    <p class="text-muted lead mx-auto" style="max-width: 600px;" data-translate="testimonialsDesc">Real stories from people who have used our AI screening tool for early detection and peace of mind.</p>
                 </div>
 
                 <div class="row g-4">
@@ -258,12 +1571,12 @@
                                     </div>
                                     <i class="fas fa-quote-right text-primary opacity-25 fa-2x"></i>
                                 </div>
-                                <p class="text-muted mb-4">"The AI screening was incredibly fast. I was worried about a spot on my gum, and the tool gave me an immediate assessment that helped me decide to see a doctor."</p>
+                                <p class="text-muted mb-4" data-translate="testimonial1">"The AI screening was incredibly fast. I was worried about a spot on my gum, and the tool gave me an immediate assessment that helped me decide to see a doctor."</p>
                                 <div class="d-flex align-items-center pt-3 border-top border-light">
                                     <img src="https://randomuser.me/api/portraits/women/44.jpg" class="rounded-circle me-3 shadow-sm" width="50" height="50" alt="User">
                                     <div>
                                         <h6 class="fw-bold mb-0 text-dark">Amber Morales</h6>
-                                        <small class="text-primary fw-bold">Patient</small>
+                                        <small class="text-primary fw-bold" data-translate="rolePatient">Patient</small>
                                     </div>
                                 </div>
                             </div>
@@ -280,12 +1593,12 @@
                                     </div>
                                     <i class="fas fa-quote-right text-primary opacity-25 fa-2x"></i>
                                 </div>
-                                <p class="text-muted mb-4">"As a smoker, I worry about oral health. This app helps me keep track of changes. The report generation is very professional and easy to understand."</p>
+                                <p class="text-muted mb-4" data-translate="testimonial2">"As a smoker, I worry about oral health. This app helps me keep track of changes. The report generation is very professional and easy to understand."</p>
                                 <div class="d-flex align-items-center pt-3 border-top border-light">
                                     <img src="https://randomuser.me/api/portraits/men/32.jpg" class="rounded-circle me-3 shadow-sm" width="50" height="50" alt="User">
                                     <div>
                                         <h6 class="fw-bold mb-0 text-dark">David Chen</h6>
-                                        <small class="text-primary fw-bold">Regular User</small>
+                                        <small class="text-primary fw-bold" data-translate="roleRegularUser">Regular User</small>
                                     </div>
                                 </div>
                             </div>
@@ -302,12 +1615,12 @@
                                     </div>
                                     <i class="fas fa-quote-right text-primary opacity-25 fa-2x"></i>
                                 </div>
-                                <p class="text-muted mb-4">"I recommend this to my patients for self-monitoring between visits. The accuracy of the lesion detection is impressive and reliable."</p>
+                                <p class="text-muted mb-4" data-translate="testimonial3">"I recommend this to my patients for self-monitoring between visits. The accuracy of the lesion detection is impressive and reliable."</p>
                                 <div class="d-flex align-items-center pt-3 border-top border-light">
                                     <img src="https://randomuser.me/api/portraits/women/68.jpg" class="rounded-circle me-3 shadow-sm" width="50" height="50" alt="User">
                                     <div>
                                         <h6 class="fw-bold mb-0 text-dark">Sarah Johnson</h6>
-                                        <small class="text-primary fw-bold">Dental Hygienist</small>
+                                        <small class="text-primary fw-bold" data-translate="roleDentalHygienist">Dental Hygienist</small>
                                     </div>
                                 </div>
                             </div>
@@ -324,12 +1637,12 @@
                                     </div>
                                     <i class="fas fa-quote-right text-primary opacity-25 fa-2x"></i>
                                 </div>
-                                <p class="text-muted mb-4">"The interface is so easy to use. I just uploaded a photo and got results in seconds. It gave me peace of mind when I needed it most."</p>
+                                <p class="text-muted mb-4" data-translate="testimonial4">"The interface is so easy to use. I just uploaded a photo and got results in seconds. It gave me peace of mind when I needed it most."</p>
                                 <div class="d-flex align-items-center pt-3 border-top border-light">
                                     <img src="https://randomuser.me/api/portraits/men/85.jpg" class="rounded-circle me-3 shadow-sm" width="50" height="50" alt="User">
                                     <div>
                                         <h6 class="fw-bold mb-0 text-dark">Michael Ross</h6>
-                                        <small class="text-primary fw-bold">Patient</small>
+                                        <small class="text-primary fw-bold" data-translate="rolePatient">Patient</small>
                                     </div>
                                 </div>
                             </div>
@@ -346,12 +1659,12 @@
                                     </div>
                                     <i class="fas fa-quote-right text-primary opacity-25 fa-2x"></i>
                                 </div>
-                                <p class="text-muted mb-4">"Great tool for educational purposes too. It helps visualize what different oral conditions look like. Very helpful for students."</p>
+                                <p class="text-muted mb-4" data-translate="testimonial5">"Great tool for educational purposes too. It helps visualize what different oral conditions look like. Very helpful for students."</p>
                                 <div class="d-flex align-items-center pt-3 border-top border-light">
                                     <img src="https://randomuser.me/api/portraits/women/12.jpg" class="rounded-circle me-3 shadow-sm" width="50" height="50" alt="User">
                                     <div>
                                         <h6 class="fw-bold mb-0 text-dark">Emily Davis</h6>
-                                        <small class="text-primary fw-bold">Student</small>
+                                        <small class="text-primary fw-bold" data-translate="roleStudent">Student</small>
                                     </div>
                                 </div>
                             </div>
@@ -368,12 +1681,12 @@
                                     </div>
                                     <i class="fas fa-quote-right text-primary opacity-25 fa-2x"></i>
                                 </div>
-                                <p class="text-muted mb-4">"I had a concern about a sore that wasn't healing. The app suggested I see a specialist, and I'm glad I did. Early detection works."</p>
+                                <p class="text-muted mb-4" data-translate="testimonial6">"I had a concern about a sore that wasn't healing. The app suggested I see a specialist, and I'm glad I did. Early detection works."</p>
                                 <div class="d-flex align-items-center pt-3 border-top border-light">
                                     <img src="https://randomuser.me/api/portraits/men/45.jpg" class="rounded-circle me-3 shadow-sm" width="50" height="50" alt="User">
                                     <div>
                                         <h6 class="fw-bold mb-0 text-dark">Robert Wilson</h6>
-                                        <small class="text-primary fw-bold">Patient</small>
+                                        <small class="text-primary fw-bold" data-translate="rolePatient">Patient</small>
                                     </div>
                                 </div>
                             </div>

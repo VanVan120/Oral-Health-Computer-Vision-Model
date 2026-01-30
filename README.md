@@ -28,6 +28,9 @@ app_port: 7860
     - [The Pathology Expert](#2%EF%B8%8F%E2%83%A3-the-pathology-expert-model-a)
     - [The Hygiene Specialist](#3%EF%B8%8F%E2%83%A3-the-hygiene-specialist-model-b)
 - [✨ Key Features](#-key-features)
+- [📅 Appointment Management System](#-appointment-management-system)
+- [🔐 User Authentication & Roles](#-user-authentication--roles)
+- [🌍 Multi-Language Support](#-multi-language-support)
 - [Installation Guide](#-manual-installation--usage)
 - [Docker Deployment](#-docker-deployment)
 - [Project Structure](#-project-structure)
@@ -127,8 +130,10 @@ This project integrates a wide range of modern technologies, demonstrating exper
 ### **Backend & API**
 *   ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat&logo=fastapi&logoColor=white) **FastAPI**: High-performance, asynchronous web framework for serving models.
 *   ![Python](https://img.shields.io/badge/python-3670A0?style=flat&logo=python&logoColor=ffdd54) **Python 3.10**: The primary programming language.
+*   ![SQLite](https://img.shields.io/badge/SQLite-003B57?style=flat&logo=sqlite&logoColor=white) **SQLite + SQLModel**: Lightweight database for user accounts and appointments.
+*   ![JWT](https://img.shields.io/badge/JWT-000000?style=flat&logo=jsonwebtokens&logoColor=white) **JWT Authentication**: Secure, stateless token-based authentication.
 *   ![Google Gemini](https://img.shields.io/badge/Google%20Gemini-8E75B2?style=flat&logo=google&logoColor=white) **Google Gemini API**: Powers the RAG-based medical chatbot.
-*   ![Brevo](https://img.shields.io/badge/Brevo-009900?style=flat&logo=brevo&logoColor=white) **Brevo (Sendinblue)**: Transactional email API for delivering PDF reports.
+*   ![Brevo](https://img.shields.io/badge/Brevo-009900?style=flat&logo=brevo&logoColor=white) **Brevo (Sendinblue)**: Transactional email API for delivering PDF reports and appointment notifications.
 
 ### **DevOps & Deployment**
 *   ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=flat&logo=docker&logoColor=white) **Docker**: Containerization for consistent deployment across environments.
@@ -138,6 +143,8 @@ This project integrates a wide range of modern technologies, demonstrating exper
 ### **Frontend**
 *   ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=flat&logo=html5&logoColor=white) **HTML5 / CSS3**: Responsive and clean user interface.
 *   ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E) **Vanilla JavaScript**: Handles asynchronous API calls and dynamic UI updates.
+*   ![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?style=flat&logo=bootstrap&logoColor=white) **Bootstrap 5**: Modern UI components and responsive grid system.
+*   ![FullCalendar](https://img.shields.io/badge/FullCalendar-4285F4?style=flat&logo=googlecalendar&logoColor=white) **FullCalendar.js**: Interactive calendar for appointment scheduling.
 
 ---
 
@@ -177,8 +184,94 @@ The chatbot doesn't just "guess"; it uses **Retrieval-Augmented Generation (RAG)
 | **🤖 Medical Chatbot** | Integrated RAG-based Chatbot (powered by Gemini) that knows your specific analysis results and answers follow-up questions contextually. |
 | **📄 Smart Reporting Suite** | Generates professional PDF reports including **visual evidence**. Emails now deliver both the report and high-res **annotated images** directly to the user. |
 | **🖥️ Interactive Viewport** | New "Dark Mode" analysis interface with **Glassmorphism controls**, fullscreen inspection, and dynamic overlay toggles. |
+| **📅 Appointment System** | Full-featured booking system with interactive calendar, doctor selection, and appointment modification capabilities. |
+| **🔐 Role-Based Access** | Secure authentication with distinct **Doctor** and **Patient** views, each with tailored functionality. |
+| **🌍 Multi-Language UI** | Complete internationalization supporting **English**, **Malay (Bahasa)**, **Chinese (中文)**, and **Tamil (தமிழ்)**. |
+| **🔔 Smart Notifications** | Beautiful toast notification system with success, error, warning, and info states for better UX. |
 | **🔒 Privacy First** | HIPAA-compliant design: Images are processed in RAM and wiped immediately after analysis. |
 | **☁️ Cloud Native** | Fully containerized with Docker, ready for serverless deployment. |
+
+---
+
+## 📅 Appointment Management System
+
+The platform includes a comprehensive appointment scheduling system for healthcare coordination.
+
+### 🗓️ Interactive Calendar
+*   **FullCalendar Integration**: Beautiful, responsive calendar with month/week views.
+*   **Visual Indicators**: Appointments are displayed with color-coded events.
+    *   🔵 **Blue**: Patient's view (shows doctor name)
+    *   🟢 **Green**: Doctor's view (shows patient name)
+*   **Click-to-Book**: Patients can click any date to view existing appointments or book new ones.
+
+### ✏️ Appointment Features
+| Feature | Patient | Doctor |
+| :--- | :---: | :---: |
+| View Appointments | ✅ | ✅ |
+| Book New Appointment | ✅ | ❌ |
+| Select Preferred Doctor | ✅ | - |
+| Modify Date & Time | ✅ | ✅ |
+| Update Notes | ✅ | ✅ |
+| Change Status | ❌ | ✅ |
+
+### 📧 Automated Notifications
+*   **Email Alerts**: Both parties receive email notifications via **Brevo API** when:
+    *   A new appointment is booked
+    *   An existing appointment is modified
+*   **In-App Toasts**: Beautiful slide-in notifications confirm actions instantly.
+
+---
+
+## 🔐 User Authentication & Roles
+
+The system implements secure, role-based authentication using **JWT tokens**.
+
+### 👤 User Roles
+
+| Role | Capabilities |
+| :--- | :--- |
+| **Patient** | Book appointments, select doctors, view analysis history, modify own appointments, access AI screening tools |
+| **Doctor** | View patient appointments, update appointment status (confirm/complete/cancel), manage patient notes, access clinical reports |
+| **Guest** | Browse public pages, prompted to login for protected features |
+
+### 🔒 Security Features
+*   **Password Hashing**: BCrypt encryption for secure credential storage.
+*   **JWT Authentication**: Stateless token-based sessions with configurable expiry.
+*   **Protected Routes**: API endpoints validate tokens and enforce role permissions.
+*   **Session Management**: Automatic logout on token expiration with user-friendly prompts.
+
+### ⚙️ Settings Dashboard
+Users can manage their account through a dedicated settings page:
+*   **Profile Management**: Update name and email
+*   **Password Change**: Secure password update with current password verification
+*   **Notification Preferences**: Toggle email notifications for appointments
+*   **Language Selection**: Switch between supported languages
+*   **Patient Management** (Doctors only): View and manage patient information
+
+---
+
+## 🌍 Multi-Language Support
+
+The platform is fully internationalized to serve Malaysia's diverse population.
+
+### 🗣️ Supported Languages
+
+| Language | Code | Coverage |
+| :--- | :---: | :---: |
+| 🇬🇧 English | `en` | 100% |
+| 🇲🇾 Bahasa Melayu | `ms` | 100% |
+| 🇨🇳 中文 (Chinese) | `zh` | 100% |
+| 🇮🇳 தமிழ் (Tamil) | `ta` | 100% |
+
+### 🔄 Dynamic Translation
+*   **Instant Switching**: Language changes apply immediately without page reload.
+*   **Persistent Preference**: Selected language is saved to localStorage.
+*   **Complete Coverage**: All UI elements translated including:
+    *   Navigation & menus
+    *   Form labels & buttons
+    *   Calendar & appointment system
+    *   Error messages & notifications
+    *   Medical analysis reports
 
 ---
 
@@ -286,9 +379,16 @@ A quick look at the codebase organization:
  ┣ 📂 Model B             # 🦷 Hygiene Model (YOLOv8)
  ┣ 📂 Model Triage        # 🛡️ Router Model (MobileNet)
  ┣ 📂 static              # 🎨 Frontend (HTML, CSS, JS)
+ ┃  ┣ 📂 css              #    Stylesheets & animations
+ ┃  ┣ 📂 html/views       #    Page templates (home, login, settings...)
+ ┃  ┗ 📂 js               #    UI handlers & language translations
  ┣ 📜 main.py             # ⚡ FastAPI Application Entry Point
- ┣ 📜 report_gen.py       # 📄 PDF Generation Logic
- ┣ 📜 chatbot.py          # 🤖 AI Chatbot Logic
+ ┣ 📜 auth_service.py     # 🔐 Authentication & User Management
+ ┣ 📜 appointment_service.py # 📅 Appointment CRUD APIs
+ ┣ 📜 chat_service.py     # 🤖 AI Chatbot Logic
+ ┣ 📜 report_service.py   # 📄 PDF Generation & Email Delivery
+ ┣ 📜 database.py         # 💾 SQLite Database Setup
+ ┣ 📜 models.py           # 📋 SQLModel Schemas (User, Appointment)
  ┣ 📜 Dockerfile          # 🐳 Container Configuration
  ┗ 📜 requirements.txt    # 📦 Python Dependencies
 ```

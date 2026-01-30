@@ -129,6 +129,17 @@ class App {
             const userImgSrc = card.querySelector('img').src;
             const userName = card.querySelector('h6').innerText;
             const userRole = card.querySelector('small').innerText;
+            
+            // Translation helper - ensure AppLanguage is initialized
+            const t = (key, fallback) => {
+                if (window.AppLanguage && window.AppLanguage.translations && window.AppLanguage.current) {
+                    const lang = window.AppLanguage.translations[window.AppLanguage.current];
+                    if (lang && lang[key]) {
+                        return lang[key];
+                    }
+                }
+                return fallback;
+            };
 
             // Construct new elegant layout
             const newContent = `
@@ -150,14 +161,14 @@ class App {
                         <div>
                             <div class="d-flex align-items-center">
                                 <h6 class="fw-bold mb-0 text-dark" style="font-size: 1.1rem;">${userName}</h6>
-                                <span class="verified-badge"><i class="fas fa-check-circle me-1"></i> Verified</span>
+                                <span class="verified-badge"><i class="fas fa-check-circle me-1"></i> ${t('verified', 'Verified')}</span>
                             </div>
                             <small class="text-muted text-uppercase fw-bold" style="font-size: 0.75rem; letter-spacing: 1px;">${userRole}</small>
                         </div>
                     </div>
                     
                     <button class="btn-helpful" onclick="this.classList.toggle('active'); const icon = this.querySelector('i'); if(this.classList.contains('active')) { icon.classList.remove('far'); icon.classList.add('fas'); } else { icon.classList.remove('fas'); icon.classList.add('far'); } event.stopPropagation();">
-                        <i class="far fa-thumbs-up"></i> Helpful
+                        <i class="far fa-thumbs-up"></i> ${t('helpful', 'Helpful')}
                     </button>
                 </div>
             `;

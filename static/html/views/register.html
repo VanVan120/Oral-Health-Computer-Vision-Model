@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block content %}
+<script>
+    // Redirect if already logged in
+    if (localStorage.getItem('access_token')) {
+        window.location.replace('/');
+    }
+</script>
+<div class="container-fluid p-0 overflow-hidden">
+    <div class="row g-0 min-vh-100">
+        <!-- Right Column: Branding (Moved to right visually for register, or keep left? Keeping left for consistency) -->
+        <div class="col-lg-6 d-none d-lg-block position-relative order-lg-1">
+            <!-- Background Image -->
+            <div class="position-absolute w-100 h-100" 
+                 style="background: url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;">
+            </div>
+            <!-- Overlay -->
+            <div class="position-absolute w-100 h-100 bg-primary" style="opacity: 0.92; background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);"></div>
+            
+            <!-- Content -->
+            <div class="position-relative h-100 d-flex flex-column justify-content-center px-5 text-white" style="z-index: 2;">
+                <div class="mb-4">
+                    <div class="bg-white rounded-circle d-inline-flex align-items-center justify-content-center shadow-lg" style="width: 60px; height: 60px;">
+                        <i class="fas fa-user-plus text-primary fs-3"></i>
+                    </div>
+                </div>
+                <h1 class="display-4 fw-bold mb-4" data-translate="joinUsToday">Join Us Today.</h1>
+                <p class="lead opacity-75 mb-5" style="max-width: 500px;" data-translate="registerBrandingDesc">
+                    Create an account to access state-of-the-art AI oral screening, manage appointments with specialists, and track your oral health journey.
+                </p>
+                
+                <ul class="list-unstyled d-flex flex-column gap-3 opacity-90">
+                    <li class="d-flex align-items-center fs-5">
+                        <i class="fas fa-check-circle me-3"></i> <span data-translate="freeInitialScreening">Free Initial AI Screening</span>
+                    </li>
+                    <li class="d-flex align-items-center fs-5">
+                        <i class="fas fa-check-circle me-3"></i> <span data-translate="secureMedicalRecords">Secure Medical Records</span>
+                    </li>
+                    <li class="d-flex align-items-center fs-5">
+                        <i class="fas fa-check-circle me-3"></i> <span data-translate="directSpecialistBooking">Direct Specialist Booking</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Left Column: Form -->
+        <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center bg-light position-relative order-lg-2">
+            <!-- Mobile header -->
+            <div class="d-lg-none w-100 p-4 bg-primary text-white text-center mb-4">
+                <i class="fas fa-tooth fa-2x mb-2"></i>
+                <h3 class="fw-bold" data-translate="appName">Oral AI</h3>
+            </div>
+
+            <div class="w-100 p-4 p-md-5" style="max-width: 550px;">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold text-dark display-6" data-translate="createAccount">Create Account</h2>
+                    <p class="text-muted" data-translate="fillInDetails">Fill in your details to get started</p>
+                </div>
+
+                <form id="registerForm" onsubmit="handleRegister(event)" class="needs-validation">
+                    <!-- Full Name -->
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control rounded-3 border-0 shadow-sm" id="nameInput" name="name" placeholder="John Doe" required style="height: 60px;" data-translate-placeholder="fullNamePlaceholder">
+                        <label for="nameInput" class="text-muted ps-4" data-translate="fullName">Full Name</label>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control rounded-3 border-0 shadow-sm" id="emailInput" name="email" placeholder="name@example.com" required style="height: 60px;" data-translate-placeholder="emailPlaceholder">
+                        <label for="emailInput" class="text-muted ps-4" data-translate="emailAddress">Email address</label>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control rounded-3 border-0 shadow-sm" id="passwordInput" name="password" placeholder="Password" required style="height: 60px;" data-translate-placeholder="password">
+                        <label for="passwordInput" class="text-muted ps-4" data-translate="password">Password</label>
+                    </div>
+
+                    <!-- Role -->
+                    <div class="form-floating mb-4">
+                        <select class="form-select rounded-3 border-0 shadow-sm" id="roleInput" name="role" style="height: 60px; padding-top: 1.625rem;">
+                            <option value="patient" selected data-translate="rolePatient">Patient (I want to check my health)</option>
+                            <option value="doctor" data-translate="roleDoctor">Medical Professional (I want to treat)</option>
+                        </select>
+                        <label for="roleInput" class="text-muted ps-4" data-translate="iAmA">I am a...</label>
+                    </div>
+
+                    <!-- Action -->
+                    <button type="submit" class="btn btn-primary w-100 py-3 rounded-pill fw-bold shadow-lg mb-4 text-uppercase letter-spacing-1">
+                        <span data-translate="getStarted">Get Started</span> <i class="fas fa-arrow-right ms-2"></i>
+                    </button>
+
+                    <!-- Divider -->
+                    <div class="position-relative text-center mb-4">
+                        <hr class="text-muted opacity-25">
+                        <span class="position-absolute top-50 start-50 translate-middle px-3 bg-light text-muted small" data-translate="or">or</span>
+                    </div>
+
+                    <!-- Login Link -->
+                    <div class="text-center">
+                        <span class="text-muted" data-translate="alreadyHaveAccount">Already have an account?</span>
+                        <a href="/login" class="text-primary fw-bold text-decoration-none ms-1" data-translate="signIn">Sign In</a>
+                    </div>
+                </form>
+            </div>
+            
+             <div class="mt-auto py-4 text-muted small">
+                <span data-translate="bySigningUp">By signing up, you agree to our</span> <a href="/terms-of-service" data-translate="terms">Terms</a> & <a href="/privacy-policy" data-translate="privacyPolicy">Privacy Policy</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    async function handleRegister(e) {
+        e.preventDefault();
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        
+        // Loading state
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> Creating Account...';
+
+        const form = e.target;
+        const formData = new FormData(form);
+        const jsonData = Object.fromEntries(formData.entries());
+        
+        try {
+            const response = await fetch('/auth/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(jsonData)
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                localStorage.setItem('access_token', data.access_token);
+                localStorage.setItem('user_info', JSON.stringify({
+                    name: data.name,
+                    role: data.role,
+                    id: data.user_id
+                }));
+                
+                submitBtn.classList.remove('btn-primary');
+                submitBtn.classList.add('btn-success');
+                submitBtn.innerHTML = '<i class="fas fa-check me-2"></i> Success!';
+                
+                setTimeout(() => window.location.href = '/', 1000);
+            } else {
+                const err = await response.json();
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+                alert("Registration Failed: " + err.detail);
+            }
+        } catch (error) {
+            console.error("Register Error:", error);
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+            alert("An error occurred during registration.");
+        }
+    }
+</script>
+{% endblock %}
