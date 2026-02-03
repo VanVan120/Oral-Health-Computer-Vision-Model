@@ -1,41 +1,72 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <!-- ==================== HERO SECTION ==================== -->
-    <div class="hero-section" style="padding: 6rem 0 4rem 0;">
-        <div class="container">
-            <div class="row justify-content-center text-center">
-                <div class="col-lg-10">
-                    <h5 class="ai-subtitle text-uppercase mb-3 fs-3" data-translate="oralAiJournal">The Oral AI Journal</h5>
-                    <h1 class="display-3 fw-bold text-dark mb-4 page-title-interactive" data-translate="blogHeroTitle">Insights, Updates & Stories</h1>
-                    <p class="lead text-muted mb-5 mx-auto" style="max-width: 700px;" data-translate="blogHeroDesc">
-                        Deep dives into our technology, patient health guides, and the future of AI in dentistry.
-                    </p>
-                </div>
+    <!-- ==================== PAGE HEADER (Gradient Hero) ==================== -->
+    <div class="tw-relative tw-overflow-hidden tw-bg-gradient-to-br tw-from-blue-600 tw-via-blue-700 tw-to-indigo-800">
+        <!-- Decorative Elements -->
+        <div class="tw-absolute tw-inset-0 tw-opacity-10">
+            <div class="tw-absolute tw-top-0 tw-right-0 tw-w-96 tw-h-96 tw-bg-white tw-rounded-full tw-blur-3xl tw-transform tw-translate-x-1/2 tw--translate-y-1/2"></div>
+            <div class="tw-absolute tw-bottom-0 tw-left-0 tw-w-72 tw-h-72 tw-bg-teal-400 tw-rounded-full tw-blur-3xl tw-transform tw--translate-x-1/2 tw-translate-y-1/2"></div>
+        </div>
+        <div class="tw-relative tw-py-20 tw-px-4 tw-pb-32">
+            <div class="tw-max-w-4xl tw-mx-auto tw-text-center">
+                <!-- Breadcrumbs -->
+                <nav class="tw-flex tw-justify-center tw-mb-6">
+                    <ol class="tw-flex tw-items-center tw-space-x-2 tw-text-sm tw-text-blue-200 tw-opacity-70">
+                        <li><a href="/" class="hover:tw-opacity-100 tw-transition-opacity">Home</a></li>
+                        <li><i class="fas fa-chevron-right tw-text-xs"></i></li>
+                        <li class="tw-text-white tw-font-medium tw-opacity-100">Blog</li>
+                    </ol>
+                </nav>
+                <span class="tw-inline-flex tw-items-center tw-px-4 tw-py-2 tw-rounded-full tw-bg-white/10 tw-backdrop-blur tw-text-white tw-text-sm tw-font-medium tw-mb-6">
+                    <i class="fas fa-newspaper" style="margin-right: 8px; margin-left: -1px;"></i>
+                    <span data-translate="oralAiJournal">The Oral AI Journal</span>
+                </span>
+                <h1 class="tw-text-5xl md:tw-text-6xl lg:tw-text-7xl tw-font-bold tw-text-white tw-mb-8" style="letter-spacing: -0.02em; text-shadow: 0px 2px 4px rgba(0,0,0,0.1);" data-translate="blogHeroTitle">
+                    Insights, Updates & Stories
+                </h1>
+                <p class="tw-text-xl tw-text-blue-100 tw-mx-auto tw-font-medium" style="max-width: 650px; line-height: 1.6; letter-spacing: 0.01em; text-shadow: 0px 2px 4px rgba(0,0,0,0.1);" data-translate="blogHeroDesc">
+                    Deep dives into our technology, patient health guides, and the future of AI in dentistry.
+                </p>
             </div>
+        </div>
+        <!-- Wave Divider -->
+        <div class="tw-absolute tw-bottom-0 tw-left-0 tw-right-0">
+            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="tw-w-full tw-h-auto">
+                <path d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#f8fafc"/>
+            </svg>
         </div>
     </div>
 
     <!-- ==================== FEATURED POST ==================== -->
-    <section class="pb-5">
-        <div class="container">
-            <div class="card border-0 shadow-lg overflow-hidden rounded-4">
-                <div class="row g-0">
-                    <div class="col-lg-7 position-relative" style="min-height: 400px;">
-                        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=1000" class="img-fluid w-100 h-100 object-fit-cover position-absolute" alt="AI Architecture">
+    <section class="tw-bg-slate-50 tw-py-8 tw-relative tw-z-10">
+        <div class="tw-max-w-6xl tw-mx-auto tw-px-4 tw--mt-16">
+            <div class="tw-bg-white tw-rounded-3xl tw-shadow-2xl tw-overflow-hidden tw-border tw-border-slate-100">
+                <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2">
+                    <!-- Image -->
+                    <div class="tw-relative tw-aspect-video lg:tw-aspect-auto lg:tw-min-h-96">
+                        <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=1000" 
+                             class="tw-absolute tw-inset-0 tw-w-full tw-h-full tw-object-cover" 
+                             alt="AI Architecture">
+                        <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-black/50 tw-to-transparent lg:tw-bg-none"></div>
                     </div>
-                    <div class="col-lg-5 bg-dark text-white d-flex align-items-center">
-                        <div class="card-body p-5">
-                            <div class="mb-3">
-                                <span class="badge bg-primary rounded-pill px-3 py-2" data-translate="engineering">Engineering</span>
-                                <span class="text-white-50 ms-2">Dec 10, 2025</span>
-                            </div>
-                            <h2 class="display-6 fw-bold mb-4" data-translate="featuredPostTitle">The Architecture of Accuracy: Inside Oral AI's Dual-Model System</h2>
-                            <p class="lead text-white-50 mb-4" data-translate="featuredPostDesc">
-                                How we combined a Triage Router with specialized Clinical and Histopathological models to achieve 99.8% diagnostic precision.
-                            </p>
-                            <a href="https://research.google/blog/amie-a-research-ai-system-for-diagnostic-medical-reasoning-and-conversations/" target="_blank" class="btn btn-outline-light rounded-pill px-4 py-2" data-translate="readArticle">Read Article</a>
+                    <!-- Content -->
+                    <div class="tw-bg-gradient-to-br tw-from-slate-900 tw-to-slate-800 tw-p-8 lg:tw-p-12 tw-flex tw-flex-col tw-justify-center">
+                        <div class="tw-flex tw-items-center tw-gap-3 tw-mb-6">
+                            <span class="tw-px-4 tw-py-1.5 tw-bg-blue-500 tw-text-white tw-text-sm tw-font-semibold tw-rounded-full" data-translate="engineering">Engineering</span>
+                            <span class="tw-text-slate-400 tw-text-sm">Dec 10, 2025</span>
                         </div>
+                        <h2 class="tw-text-2xl lg:tw-text-3xl tw-font-bold tw-text-white tw-mb-4 tw-leading-tight" data-translate="featuredPostTitle">
+                            The Architecture of Accuracy: Inside Oral AI's Dual-Model System
+                        </h2>
+                        <p class="tw-text-slate-300 tw-text-lg tw-mb-8 tw-leading-relaxed" data-translate="featuredPostDesc">
+                            How we combined a Triage Router with specialized Clinical and Histopathological models to achieve 99.8% diagnostic precision.
+                        </p>
+                        <a href="https://research.google/blog/amie-a-research-ai-system-for-diagnostic-medical-reasoning-and-conversations/" target="_blank" 
+                           class="tw-inline-flex tw-items-center tw-self-start tw-px-6 tw-py-3 tw-bg-white tw-text-slate-900 tw-font-semibold tw-rounded-full hover:tw-bg-blue-50 tw-transition-all tw-duration-300 hover:tw-shadow-lg">
+                            <span data-translate="readArticle">Read Article</span>
+                            <i class="fas fa-arrow-right tw-ml-2"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -43,91 +74,144 @@
     </section>
 
     <!-- ==================== RECENT POSTS GRID ==================== -->
-    <section class="py-5 bg-light">
-        <div class="container py-5">
-            <div class="row mb-5 align-items-end">
-                <div class="col-md-8">
-                    <div class="d-flex align-items-center mb-2">
-                        <span class="bg-primary rounded-pill me-2" style="width: 40px; height: 4px;"></span>
-                        <h5 class="text-primary fw-bold text-uppercase m-0" data-translate="ourBlog">Our Blog</h5>
+    <section class="tw-bg-slate-50 tw-py-20">
+        <div class="tw-max-w-6xl tw-mx-auto tw-px-4">
+            <!-- Section Header -->
+            <div class="tw-flex tw-flex-col md:tw-flex-row md:tw-items-end md:tw-justify-between tw-mb-12">
+                <div>
+                    <div class="tw-flex tw-items-center tw-gap-3 tw-mb-3">
+                        <div class="tw-w-10 tw-h-1 tw-bg-blue-500 tw-rounded-full"></div>
+                        <span class="tw-text-blue-600 tw-font-semibold tw-uppercase tw-tracking-wider tw-text-sm" data-translate="ourBlog">Our Blog</span>
                     </div>
-                    <h2 class="display-5 fw-bold text-dark" data-translate="latestArticles">Latest Articles</h2>
+                    <h2 class="tw-text-3xl lg:tw-text-4xl tw-font-bold tw-text-slate-800" data-translate="latestArticles">Latest Articles</h2>
                 </div>
             </div>
-            
-            <div class="row g-4">
+
+            <!-- Blog Grid -->
+            <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-8">
                 <!-- Post 1 -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100 border-0 shadow-sm hover-card transition-all rounded-4 overflow-hidden">
-                        <div class="card-img-top position-relative overflow-hidden" style="height: 240px;">
-                            <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=500" class="img-fluid w-100 h-100 object-fit-cover" style="transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" alt="Oral Health Signs">
-                            <div class="position-absolute top-0 end-0 m-3">
-                                <span class="badge bg-white text-dark shadow-sm rounded-pill px-3 py-2 fw-bold">Dec 8</span>
+                <article class="tw-group">
+                    <div class="tw-bg-white tw-rounded-2xl tw-overflow-hidden tw-shadow-lg tw-border tw-border-slate-100 tw-transition-all tw-duration-300 hover:tw--translate-y-1 hover:tw-shadow-xl hover:tw-border-blue-200">
+                        <!-- Image -->
+                        <div class="tw-relative tw-aspect-video tw-overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=500" 
+                                 class="tw-w-full tw-h-full tw-object-cover tw-transition-transform tw-duration-500 group-hover:tw-scale-105" 
+                                 alt="Oral Health Signs">
+                            <div class="tw-absolute tw-top-4 tw-right-4">
+                                <span class="tw-px-3 tw-py-1.5 tw-bg-white tw-text-slate-700 tw-text-xs tw-font-bold tw-rounded-full tw-shadow-lg">Dec 8</span>
                             </div>
                         </div>
-                        <div class="card-body p-4 d-flex flex-column">
-                            <div class="mb-3">
-                                <span class="badge bg-success-subtle text-success rounded-pill px-3 py-1" data-translate="patientHealth">Patient Health</span>
-                            </div>
-                            <h4 class="fw-bold text-dark mb-3"><a href="https://www.mayoclinic.org/healthy-lifestyle/adult-health/in-depth/dental-health/art-20047475" target="_blank" class="text-decoration-none text-dark stretched-link" data-translate="blogPost1Title">5 Early Signs of Oral Health Issues You Shouldn't Ignore</a></h4>
-                            <p class="text-muted small mb-4 flex-grow-1" data-translate="blogPost1Desc">
+                        <!-- Content -->
+                        <div class="tw-p-6">
+                            <span class="tw-inline-block tw-px-3 tw-py-1 tw-bg-emerald-100 tw-text-emerald-600 tw-text-xs tw-font-semibold tw-rounded-full tw-mb-4" data-translate="patientHealth">Patient Health</span>
+                            <h3 class="tw-text-lg tw-font-bold tw-text-slate-800 tw-mb-3 tw-leading-snug group-hover:tw-text-blue-600 tw-transition-colors">
+                                <a href="https://www.mayoclinic.org/healthy-lifestyle/adult-health/in-depth/dental-health/art-20047475" target="_blank" class="tw-block" data-translate="blogPost1Title">
+                                    5 Early Signs of Oral Health Issues You Shouldn't Ignore
+                                </a>
+                            </h3>
+                            <p class="tw-text-slate-500 tw-text-sm tw-mb-4 tw-line-clamp-2" data-translate="blogPost1Desc">
                                 From subtle discoloration to minor sensitivity, learn what your mouth is trying to tell you before it becomes a major problem.
                             </p>
-                            <div class="mt-auto">
-                                <span class="text-primary fw-bold text-decoration-none" data-translate="readArticle">Read Article <i class="fas fa-arrow-right ms-1"></i></span>
-                            </div>
+                            <a href="https://www.mayoclinic.org/healthy-lifestyle/adult-health/in-depth/dental-health/art-20047475" target="_blank" 
+                               class="tw-inline-flex tw-items-center tw-text-blue-600 tw-font-semibold tw-text-sm hover:tw-text-blue-700 tw-transition-colors">
+                                <span data-translate="readArticle">Read Article</span>
+                                <i class="fas fa-arrow-right tw-ml-2 tw-transition-transform group-hover:tw-translate-x-1"></i>
+                            </a>
                         </div>
                     </div>
-                </div>
+                </article>
 
                 <!-- Post 2 -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100 border-0 shadow-sm hover-card transition-all rounded-4 overflow-hidden">
-                        <div class="card-img-top position-relative overflow-hidden" style="height: 240px;">
-                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=500" class="img-fluid w-100 h-100 object-fit-cover" style="transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" alt="Data Team">
-                            <div class="position-absolute top-0 end-0 m-3">
-                                <span class="badge bg-white text-dark shadow-sm rounded-pill px-3 py-2 fw-bold">Dec 1</span>
+                <article class="tw-group">
+                    <div class="tw-bg-white tw-rounded-2xl tw-overflow-hidden tw-shadow-lg tw-border tw-border-slate-100 tw-transition-all tw-duration-300 hover:tw--translate-y-1 hover:tw-shadow-xl hover:tw-border-blue-200">
+                        <!-- Image -->
+                        <div class="tw-relative tw-aspect-video tw-overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=500" 
+                                 class="tw-w-full tw-h-full tw-object-cover tw-transition-transform tw-duration-500 group-hover:tw-scale-105" 
+                                 alt="Data Team">
+                            <div class="tw-absolute tw-top-4 tw-right-4">
+                                <span class="tw-px-3 tw-py-1.5 tw-bg-white tw-text-slate-700 tw-text-xs tw-font-bold tw-rounded-full tw-shadow-lg">Dec 1</span>
                             </div>
                         </div>
-                        <div class="card-body p-4 d-flex flex-column">
-                            <div class="mb-3">
-                                <span class="badge bg-info-subtle text-info rounded-pill px-3 py-1" data-translate="behindTheScenes">Behind the Scenes</span>
-                            </div>
-                            <h4 class="fw-bold text-dark mb-3"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10164664/" target="_blank" class="text-decoration-none text-dark stretched-link" data-translate="blogPost2Title">From Data to Diagnosis: How We Built Our Dataset</a></h4>
-                            <p class="text-muted small mb-4 flex-grow-1" data-translate="blogPost2Desc">
+                        <!-- Content -->
+                        <div class="tw-p-6">
+                            <span class="tw-inline-block tw-px-3 tw-py-1 tw-bg-cyan-100 tw-text-cyan-600 tw-text-xs tw-font-semibold tw-rounded-full tw-mb-4" data-translate="behindTheScenes">Behind the Scenes</span>
+                            <h3 class="tw-text-lg tw-font-bold tw-text-slate-800 tw-mb-3 tw-leading-snug group-hover:tw-text-blue-600 tw-transition-colors">
+                                <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10164664/" target="_blank" class="tw-block" data-translate="blogPost2Title">
+                                    From Data to Diagnosis: How We Built Our Dataset
+                                </a>
+                            </h3>
+                            <p class="tw-text-slate-500 tw-text-sm tw-mb-4 tw-line-clamp-2" data-translate="blogPost2Desc">
                                 A look at the rigorous curation process our Dataset Team uses to ensure our AI learns from the highest quality medical imagery.
                             </p>
-                            <div class="mt-auto">
-                                <span class="text-primary fw-bold text-decoration-none" data-translate="readArticle">Read Article <i class="fas fa-arrow-right ms-1"></i></span>
-                            </div>
+                            <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10164664/" target="_blank" 
+                               class="tw-inline-flex tw-items-center tw-text-blue-600 tw-font-semibold tw-text-sm hover:tw-text-blue-700 tw-transition-colors">
+                                <span data-translate="readArticle">Read Article</span>
+                                <i class="fas fa-arrow-right tw-ml-2 tw-transition-transform group-hover:tw-translate-x-1"></i>
+                            </a>
                         </div>
                     </div>
-                </div>
+                </article>
 
                 <!-- Post 3 -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100 border-0 shadow-sm hover-card transition-all rounded-4 overflow-hidden">
-                        <div class="card-img-top position-relative overflow-hidden" style="height: 240px;">
-                            <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&q=80&w=500" class="img-fluid w-100 h-100 object-fit-cover" style="transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" alt="Tele-Dentistry">
-                            <div class="position-absolute top-0 end-0 m-3">
-                                <span class="badge bg-white text-dark shadow-sm rounded-pill px-3 py-2 fw-bold">Nov 25</span>
+                <article class="tw-group">
+                    <div class="tw-bg-white tw-rounded-2xl tw-overflow-hidden tw-shadow-lg tw-border tw-border-slate-100 tw-transition-all tw-duration-300 hover:tw--translate-y-1 hover:tw-shadow-xl hover:tw-border-blue-200">
+                        <!-- Image -->
+                        <div class="tw-relative tw-aspect-video tw-overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?auto=format&fit=crop&q=80&w=500" 
+                                 class="tw-w-full tw-h-full tw-object-cover tw-transition-transform tw-duration-500 group-hover:tw-scale-105" 
+                                 alt="Tele-Dentistry">
+                            <div class="tw-absolute tw-top-4 tw-right-4">
+                                <span class="tw-px-3 tw-py-1.5 tw-bg-white tw-text-slate-700 tw-text-xs tw-font-bold tw-rounded-full tw-shadow-lg">Nov 25</span>
                             </div>
                         </div>
-                        <div class="card-body p-4 d-flex flex-column">
-                            <div class="mb-3">
-                                <span class="badge bg-warning-subtle text-warning rounded-pill px-3 py-1" data-translate="futureTech">Future Tech</span>
-                            </div>
-                            <h4 class="fw-bold text-dark mb-3"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9748636/" target="_blank" class="text-decoration-none text-dark stretched-link" data-translate="blogPost3Title">The Future of Tele-Dentistry: AI as a First Responder</a></h4>
-                            <p class="text-muted small mb-4 flex-grow-1" data-translate="blogPost3Desc">
+                        <!-- Content -->
+                        <div class="tw-p-6">
+                            <span class="tw-inline-block tw-px-3 tw-py-1 tw-bg-amber-100 tw-text-amber-600 tw-text-xs tw-font-semibold tw-rounded-full tw-mb-4" data-translate="futureTech">Future Tech</span>
+                            <h3 class="tw-text-lg tw-font-bold tw-text-slate-800 tw-mb-3 tw-leading-snug group-hover:tw-text-blue-600 tw-transition-colors">
+                                <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9748636/" target="_blank" class="tw-block" data-translate="blogPost3Title">
+                                    The Future of Tele-Dentistry: AI as a First Responder
+                                </a>
+                            </h3>
+                            <p class="tw-text-slate-500 tw-text-sm tw-mb-4 tw-line-clamp-2" data-translate="blogPost3Desc">
                                 Imagine getting a preliminary diagnosis from your smartphone. Here's how Oral AI is making remote screening a reality.
                             </p>
-                            <div class="mt-auto">
-                                <span class="text-primary fw-bold text-decoration-none" data-translate="readArticle">Read Article <i class="fas fa-arrow-right ms-1"></i></span>
-                            </div>
+                            <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9748636/" target="_blank" 
+                               class="tw-inline-flex tw-items-center tw-text-blue-600 tw-font-semibold tw-text-sm hover:tw-text-blue-700 tw-transition-colors">
+                                <span data-translate="readArticle">Read Article</span>
+                                <i class="fas fa-arrow-right tw-ml-2 tw-transition-transform group-hover:tw-translate-x-1"></i>
+                            </a>
                         </div>
                     </div>
-                </div>
+                </article>
             </div>
+        </div>
+    </section>
+
+    <!-- ==================== NEWSLETTER SIGNUP ==================== -->
+    <section class="tw-bg-gradient-to-br tw-from-blue-600 tw-to-indigo-700 tw-py-20 tw-relative tw-overflow-hidden">
+        <div class="tw-absolute tw-inset-0 tw-opacity-10">
+            <div class="tw-absolute tw-top-1/2 tw-left-1/4 tw-w-96 tw-h-96 tw-bg-white tw-rounded-full tw-blur-3xl"></div>
+            <div class="tw-absolute tw-bottom-0 tw-right-1/4 tw-w-64 tw-h-64 tw-bg-teal-400 tw-rounded-full tw-blur-3xl"></div>
+        </div>
+        <div class="tw-max-w-4xl tw-mx-auto tw-px-4 tw-text-center tw-relative tw-z-10">
+            <div class="tw-w-16 tw-h-16 tw-bg-white/10 tw-backdrop-blur tw-rounded-2xl tw-flex tw-items-center tw-justify-center tw-mx-auto tw-mb-6">
+                <i class="fas fa-envelope-open-text tw-text-3xl tw-text-white"></i>
+            </div>
+            <h2 class="tw-text-3xl lg:tw-text-4xl tw-font-bold tw-text-white tw-mb-4" data-translate="stayUpdated">Stay Updated</h2>
+            <p class="tw-text-xl tw-text-blue-100 tw-mb-8 tw-max-w-2xl tw-mx-auto" data-translate="newsletterDesc">
+                Subscribe to our newsletter for the latest insights on AI in dentistry, health tips, and product updates.
+            </p>
+            <form class="tw-flex tw-flex-col sm:tw-flex-row tw-gap-4 tw-max-w-lg tw-mx-auto">
+                <input type="email" 
+                       placeholder="Enter your email" 
+                       class="tw-flex-1 tw-px-6 tw-py-4 tw-rounded-full tw-bg-white/10 tw-backdrop-blur tw-border tw-border-white/20 tw-text-white placeholder:tw-text-blue-200 focus:tw-outline-none focus:tw-border-white focus:tw-bg-white/20 tw-transition-all"
+                       data-translate-placeholder="emailPlaceholder">
+                <button type="submit" 
+                        class="tw-px-8 tw-py-4 tw-bg-white tw-text-blue-600 tw-font-semibold tw-rounded-full hover:tw-bg-blue-50 tw-transition-all tw-duration-300 hover:tw-shadow-lg">
+                    <span data-translate="subscribe">Subscribe</span>
+                </button>
+            </form>
         </div>
     </section>
 {% endblock %}

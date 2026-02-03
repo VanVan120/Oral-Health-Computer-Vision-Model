@@ -1,125 +1,259 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <!-- ==================== HERO SECTION (Department) ==================== -->
-    <div class="hero-section" style="padding: 6rem 0 4rem 0;">
-        <div class="container">
-            <div class="row justify-content-center text-center">
-                <div class="col-lg-10">
-                    <h5 class="ai-subtitle text-uppercase mb-3 fs-3" data-translate="ourExperts">Our Experts</h5>
-                    <h1 class="display-3 fw-bold text-dark mb-4 page-title-interactive" data-translate="meetTheTeam">Meet The Team</h1>
-                    <p class="lead text-muted mb-5 mx-auto" style="max-width: 700px;" data-translate="departmentHeroDesc">
-                        The brilliant minds behind Oral AI, dedicated to revolutionizing dental diagnostics through collaboration and innovation.
-                    </p>
-                </div>
+    <!-- ==================== PAGE HEADER (Gradient Hero) ==================== -->
+    <div class="tw-relative tw-overflow-hidden tw-bg-gradient-to-br tw-from-blue-600 tw-via-blue-700 tw-to-indigo-800">
+        <!-- Decorative Elements -->
+        <div class="tw-absolute tw-inset-0 tw-opacity-10">
+            <div class="tw-absolute tw-top-0 tw-right-0 tw-w-96 tw-h-96 tw-bg-white tw-rounded-full tw-blur-3xl tw-transform tw-translate-x-1/2 tw--translate-y-1/2"></div>
+            <div class="tw-absolute tw-bottom-0 tw-left-0 tw-w-72 tw-h-72 tw-bg-teal-400 tw-rounded-full tw-blur-3xl tw-transform tw--translate-x-1/2 tw-translate-y-1/2"></div>
+        </div>
+        <div class="tw-relative tw-py-20 tw-px-4 tw-pb-32">
+            <div class="tw-max-w-4xl tw-mx-auto tw-text-center">
+                <!-- Breadcrumbs -->
+                <nav class="tw-flex tw-justify-center tw-mb-6">
+                    <ol class="tw-flex tw-items-center tw-space-x-2 tw-text-sm tw-text-blue-200 tw-opacity-70">
+                        <li><a href="/" class="hover:tw-opacity-100 tw-transition-opacity">Home</a></li>
+                        <li><i class="fas fa-chevron-right tw-text-xs"></i></li>
+                        <li class="tw-text-white tw-font-medium tw-opacity-100">Our Team</li>
+                    </ol>
+                </nav>
+                <span class="tw-inline-flex tw-items-center tw-px-4 tw-py-2 tw-rounded-full tw-bg-white/10 tw-backdrop-blur tw-text-white tw-text-sm tw-font-medium tw-mb-6">
+                    <i class="fas fa-users" style="margin-right: 8px; margin-left: -1px;"></i>
+                    <span data-translate="ourExperts">Our Experts</span>
+                </span>
+                <h1 class="tw-text-5xl md:tw-text-6xl lg:tw-text-7xl tw-font-bold tw-text-white tw-mb-8" style="letter-spacing: -0.02em; text-shadow: 0px 2px 4px rgba(0,0,0,0.1);" data-translate="meetTheTeam">
+                    Meet The Team
+                </h1>
+                <p class="tw-text-xl tw-text-blue-100 tw-mx-auto tw-font-medium" style="max-width: 650px; line-height: 1.6; letter-spacing: 0.01em; text-shadow: 0px 2px 4px rgba(0,0,0,0.1);" data-translate="departmentHeroDesc">
+                    The brilliant minds behind Oral AI, dedicated to revolutionizing dental diagnostics through collaboration and innovation.
+                </p>
             </div>
+        </div>
+        <!-- Wave Divider -->
+        <div class="tw-absolute tw-bottom-0 tw-left-0 tw-right-0">
+            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="tw-w-full tw-h-auto">
+                <path d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#f8fafc"/>
+            </svg>
         </div>
     </div>
 
-    <!-- Development Team Section -->
-    <section class="py-5 bg-light">
-        <div class="container py-5">
-            <div class="row g-5 justify-content-center">
-                
-                <!-- Backend Design -->
-                <div class="col-lg-5">
-                    <div class="text-center mb-4">
-                        <span class="badge bg-info-subtle text-info rounded-pill px-4 py-2 mb-3 fw-bold fs-6" data-translate="systems">SYSTEMS</span>
-                        <h2 class="display-6 fw-bold text-dark" data-translate="backendDesign">Backend Design</h2>
-                    </div>
-                    <div class="card h-100 border-0 shadow-sm hover-card transition-all">
-                        <div class="card-img-top overflow-hidden position-relative d-flex align-items-center justify-content-center bg-light" style="height: 350px;">
-                            <img src="/static/images/team/backend_1.jpg" class="img-fluid" style="max-height: 100%; max-width: 100%; width: auto;" alt="Backend Developer" onerror="this.src='https://ui-avatars.com/api/?name=Backend+Dev&background=random&size=300'">
+    <!-- ==================== DEVELOPMENT TEAM ==================== -->
+    <section class="tw-bg-slate-50 tw-py-20">
+        <div class="tw-max-w-6xl tw-mx-auto tw-px-4">
+            <!-- Section Header -->
+            <div class="tw-text-center tw-mb-16">
+                <span class="tw-inline-flex tw-items-center tw-px-4 tw-py-2 tw-rounded-full tw-bg-blue-100 tw-text-blue-600 tw-text-sm tw-font-semibold tw-mb-4">
+                    <i class="fas fa-code tw-mr-2"></i>
+                    <span data-translate="developmentTeam">Development Team</span>
+                </span>
+                <h2 class="tw-text-3xl lg:tw-text-4xl tw-font-bold tw-text-slate-800 tw-mb-4" data-translate="coreDevelopers">Core Developers</h2>
+                <p class="tw-text-slate-500 tw-max-w-2xl tw-mx-auto" data-translate="coreDevsDesc">The engineers bringing our AI vision to life.</p>
+            </div>
+
+            <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-8 tw-max-w-4xl tw-mx-auto">
+                <!-- Backend Developer -->
+                <div class="tw-group">
+                    <div class="tw-bg-white tw-rounded-3xl tw-overflow-hidden tw-shadow-lg tw-border tw-border-slate-100 tw-transition-all tw-duration-300 hover:tw--translate-y-2 hover:tw-shadow-2xl">
+                        <!-- Role Badge -->
+                        <div class="tw-bg-gradient-to-r tw-from-cyan-500 tw-to-blue-500 tw-px-6 tw-py-3">
+                            <span class="tw-text-white tw-text-sm tw-font-semibold tw-uppercase tw-tracking-wider" data-translate="systems">SYSTEMS</span>
                         </div>
-                        <div class="card-body p-4 text-center">
-                            <h4 class="fw-bold text-dark mb-1">Ivan Char Cheng Jun</h4>
-                            <p class="text-info fw-medium mb-3" data-translate="backendDeveloper">Backend Developer</p>
-                            <p class="text-muted small" data-translate="backendDevDesc">Architecting robust APIs and managing high-performance model inference engines.</p>
+                        <!-- Image -->
+                        <div class="tw-relative tw-aspect-square tw-overflow-hidden tw-bg-slate-100">
+                            <img src="/static/images/team/backend_1.jpg" 
+                                 class="tw-w-full tw-h-full tw-object-cover tw-transition-transform tw-duration-500 group-hover:tw-scale-105" 
+                                 alt="Backend Developer" 
+                                 onerror="this.src='https://ui-avatars.com/api/?name=Ivan+Char&background=0ea5e9&color=fff&size=400'">
+                        </div>
+                        <!-- Info -->
+                        <div class="tw-p-6 tw-text-center">
+                            <h3 class="tw-text-xl tw-font-bold tw-text-slate-800 tw-mb-1">Ivan Char Cheng Jun</h3>
+                            <p class="tw-text-teal-500 tw-font-medium tw-mb-3" data-translate="backendDeveloper">Backend Developer</p>
+                            <p class="tw-text-slate-500 tw-text-sm tw-mb-4" data-translate="backendDevDesc">Architecting robust APIs and managing high-performance model inference engines.</p>
+                            <!-- Social Links -->
+                            <div class="tw-flex tw-justify-center tw-gap-3">
+                                <a href="#" class="tw-w-10 tw-h-10 tw-rounded-full tw-bg-slate-100 tw-flex tw-items-center tw-justify-center tw-text-slate-500 hover:tw-bg-blue-500 hover:tw-text-white tw-transition-all">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="#" class="tw-w-10 tw-h-10 tw-rounded-full tw-bg-slate-100 tw-flex tw-items-center tw-justify-center tw-text-slate-500 hover:tw-bg-slate-800 hover:tw-text-white tw-transition-all">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="mailto:" class="tw-w-10 tw-h-10 tw-rounded-full tw-bg-slate-100 tw-flex tw-items-center tw-justify-center tw-text-slate-500 hover:tw-bg-teal-500 hover:tw-text-white tw-transition-all">
+                                    <i class="fas fa-envelope"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Frontend Design -->
-                <div class="col-lg-5">
-                    <div class="text-center mb-4">
-                        <span class="badge bg-success-subtle text-success rounded-pill px-4 py-2 mb-3 fw-bold fs-6" data-translate="uiux">UI/UX</span>
-                        <h2 class="display-6 fw-bold text-dark" data-translate="frontendDesign">Frontend Design</h2>
-                    </div>
-                    <div class="card h-100 border-0 shadow-sm hover-card transition-all">
-                        <div class="card-img-top overflow-hidden position-relative d-flex align-items-center justify-content-center bg-light" style="height: 350px;">
-                            <img src="/static/images/team/frontend_1.jpg" class="img-fluid" style="max-height: 100%; max-width: 100%; width: auto;" alt="Frontend Developer" onerror="this.src='https://ui-avatars.com/api/?name=Frontend+Dev&background=random&size=300'">
+                <!-- Frontend Developer -->
+                <div class="tw-group">
+                    <div class="tw-bg-white tw-rounded-3xl tw-overflow-hidden tw-shadow-lg tw-border tw-border-slate-100 tw-transition-all tw-duration-300 hover:tw--translate-y-2 hover:tw-shadow-2xl">
+                        <!-- Role Badge -->
+                        <div class="tw-bg-gradient-to-r tw-from-emerald-500 tw-to-teal-500 tw-px-6 tw-py-3">
+                            <span class="tw-text-white tw-text-sm tw-font-semibold tw-uppercase tw-tracking-wider" data-translate="uiux">UI/UX</span>
                         </div>
-                        <div class="card-body p-4 text-center">
-                            <h4 class="fw-bold text-dark mb-1">Kazuki Ichikawa</h4>
-                            <p class="text-success fw-medium mb-3" data-translate="frontendDeveloper">Frontend Developer</p>
-                            <p class="text-muted small" data-translate="frontendDevDesc">Crafting intuitive and responsive user interfaces for seamless medical analysis.</p>
+                        <!-- Image -->
+                        <div class="tw-relative tw-aspect-square tw-overflow-hidden tw-bg-slate-100">
+                            <img src="/static/images/team/frontend_1.jpg" 
+                                 class="tw-w-full tw-h-full tw-object-cover tw-transition-transform tw-duration-500 group-hover:tw-scale-105" 
+                                 alt="Frontend Developer" 
+                                 onerror="this.src='https://ui-avatars.com/api/?name=Kazuki+I&background=10b981&color=fff&size=400'">
+                        </div>
+                        <!-- Info -->
+                        <div class="tw-p-6 tw-text-center">
+                            <h3 class="tw-text-xl tw-font-bold tw-text-slate-800 tw-mb-1">Kazuki Ichikawa</h3>
+                            <p class="tw-text-teal-500 tw-font-medium tw-mb-3" data-translate="frontendDeveloper">Frontend Developer</p>
+                            <p class="tw-text-slate-500 tw-text-sm tw-mb-4" data-translate="frontendDevDesc">Crafting intuitive and responsive user interfaces for seamless medical analysis.</p>
+                            <!-- Social Links -->
+                            <div class="tw-flex tw-justify-center tw-gap-3">
+                                <a href="#" class="tw-w-10 tw-h-10 tw-rounded-full tw-bg-slate-100 tw-flex tw-items-center tw-justify-center tw-text-slate-500 hover:tw-bg-blue-500 hover:tw-text-white tw-transition-all">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="#" class="tw-w-10 tw-h-10 tw-rounded-full tw-bg-slate-100 tw-flex tw-items-center tw-justify-center tw-text-slate-500 hover:tw-bg-slate-800 hover:tw-text-white tw-transition-all">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="mailto:" class="tw-w-10 tw-h-10 tw-rounded-full tw-bg-slate-100 tw-flex tw-items-center tw-justify-center tw-text-slate-500 hover:tw-bg-teal-500 hover:tw-text-white tw-transition-all">
+                                    <i class="fas fa-envelope"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- Dataset Annotation & Preparation Section -->
-    <section class="bg-white position-relative" style="padding: 8rem 0;">
-        <!-- Subtle top border/divider -->
-        <div class="position-absolute top-0 start-50 translate-middle-x w-75 border-top" style="opacity: 0.1;"></div>
-
-        <div class="container">
-            <div class="row justify-content-center mb-5">
-                <div class="col-lg-8 text-center">
-                    <span class="badge bg-primary-subtle text-primary rounded-pill px-4 py-2 mb-4 fw-bold fs-6 shadow-sm" data-translate="dataTeam">DATA TEAM</span>
-                    <h2 class="display-5 fw-bold text-dark mb-3" data-translate="datasetAnnotation">Dataset Annotation & Preparation</h2>
-                    <p class="text-muted lead" data-translate="datasetAnnotationDesc">Ensuring the highest quality data for training our AI models.</p>
-                    <!-- Decorative underline -->
-                    <div class="mt-4 mx-auto" style="width: 60px; height: 4px; background: linear-gradient(90deg, var(--bs-primary), var(--bs-info)); border-radius: 2px;"></div>
-                </div>
+    <!-- ==================== DATA TEAM ==================== -->
+    <section class="tw-bg-white tw-py-20 tw-relative tw-overflow-hidden">
+        <!-- Decorative Element -->
+        <div class="tw-absolute tw-top-0 tw-left-0 tw-w-full tw-h-1 tw-bg-gradient-to-r tw-from-blue-500 tw-via-teal-500 tw-to-blue-500"></div>
+        
+        <div class="tw-max-w-6xl tw-mx-auto tw-px-4">
+            <!-- Section Header -->
+            <div class="tw-text-center tw-mb-16">
+                <span class="tw-inline-flex tw-items-center tw-px-4 tw-py-2 tw-rounded-full tw-bg-indigo-100 tw-text-indigo-600 tw-text-sm tw-font-semibold tw-mb-4">
+                    <i class="fas fa-database tw-mr-2"></i>
+                    <span data-translate="dataTeam">DATA TEAM</span>
+                </span>
+                <h2 class="tw-text-3xl lg:tw-text-4xl tw-font-bold tw-text-slate-800 tw-mb-4" data-translate="datasetAnnotation">Dataset Annotation & Preparation</h2>
+                <p class="tw-text-slate-500 tw-max-w-2xl tw-mx-auto" data-translate="datasetAnnotationDesc">Ensuring the highest quality data for training our AI models.</p>
+                <!-- Decorative underline -->
+                <div class="tw-mt-6 tw-mx-auto tw-w-20 tw-h-1 tw-bg-gradient-to-r tw-from-blue-500 tw-to-teal-500 tw-rounded-full"></div>
             </div>
-            
-            <div class="row g-4 justify-content-center">
+
+            <div class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-8">
                 <!-- Member 1 -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100 border-0 shadow-sm hover-card transition-all">
-                        <div class="card-img-top overflow-hidden position-relative d-flex align-items-center justify-content-center bg-light" style="height: 300px;">
-                            <img src="/static/images/team/dataset_1.jpeg" class="img-fluid" style="max-height: 100%; max-width: 100%; width: auto;" alt="Team Member" onerror="this.src='https://ui-avatars.com/api/?name=Member+1&background=random&size=300'">
+                <div class="tw-group">
+                    <div class="tw-bg-white tw-rounded-3xl tw-overflow-hidden tw-shadow-lg tw-border tw-border-slate-100 tw-transition-all tw-duration-300 hover:tw--translate-y-2 hover:tw-shadow-2xl hover:tw-border-blue-200">
+                        <!-- Image with Circular Overlay -->
+                        <div class="tw-relative tw-pt-8 tw-px-8">
+                            <div class="tw-relative tw-w-40 tw-h-40 tw-mx-auto">
+                                <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-br tw-from-blue-500 tw-to-indigo-500 tw-rounded-full tw-opacity-20 tw-transform tw-scale-110 tw-transition-transform tw-duration-300 group-hover:tw-scale-125"></div>
+                                <img src="/static/images/team/dataset_1.jpeg" 
+                                     class="tw-w-full tw-h-full tw-rounded-full tw-object-cover tw-border-4 tw-border-white tw-shadow-lg tw-relative tw-z-10" 
+                                     alt="Team Member" 
+                                     onerror="this.src='https://ui-avatars.com/api/?name=Abdullah+S&background=6366f1&color=fff&size=200&rounded=true'">
+                            </div>
                         </div>
-                        <div class="card-body p-4 text-center">
-                            <h4 class="fw-bold text-dark mb-1">Abdullah Sayed Ahmed Sayed</h4>
-                            <p class="text-primary fw-medium mb-3" data-translate="datasetSpecialist">Dataset Specialist</p>
-                            <p class="text-muted small" data-translate="datasetSpecialistDesc1">Expert in medical image annotation and data preprocessing pipelines.</p>
+                        <!-- Info -->
+                        <div class="tw-p-6 tw-text-center">
+                            <h3 class="tw-text-lg tw-font-bold tw-text-slate-800 tw-mb-1">Abdullah Sayed Ahmed Sayed</h3>
+                            <p class="tw-text-teal-500 tw-font-medium tw-text-sm tw-mb-3" data-translate="datasetSpecialist">Dataset Specialist</p>
+                            <p class="tw-text-slate-500 tw-text-sm tw-mb-4" data-translate="datasetSpecialistDesc1">Expert in medical image annotation and data preprocessing pipelines.</p>
+                            <!-- Social Links -->
+                            <div class="tw-flex tw-justify-center tw-gap-2">
+                                <a href="#" class="tw-w-9 tw-h-9 tw-rounded-full tw-bg-slate-100 tw-flex tw-items-center tw-justify-center tw-text-slate-400 hover:tw-bg-blue-500 hover:tw-text-white tw-transition-all tw-text-sm">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="mailto:" class="tw-w-9 tw-h-9 tw-rounded-full tw-bg-slate-100 tw-flex tw-items-center tw-justify-center tw-text-slate-400 hover:tw-bg-teal-500 hover:tw-text-white tw-transition-all tw-text-sm">
+                                    <i class="fas fa-envelope"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Member 2 -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100 border-0 shadow-sm hover-card transition-all">
-                        <div class="card-img-top overflow-hidden position-relative d-flex align-items-center justify-content-center bg-light" style="height: 300px;">
-                            <img src="/static/images/team/dataset_2.jpg" class="img-fluid" style="max-height: 100%; max-width: 100%; width: auto;" alt="Team Member" onerror="this.src='https://ui-avatars.com/api/?name=Member+2&background=random&size=300'">
+                <div class="tw-group">
+                    <div class="tw-bg-white tw-rounded-3xl tw-overflow-hidden tw-shadow-lg tw-border tw-border-slate-100 tw-transition-all tw-duration-300 hover:tw--translate-y-2 hover:tw-shadow-2xl hover:tw-border-blue-200">
+                        <!-- Image with Circular Overlay -->
+                        <div class="tw-relative tw-pt-8 tw-px-8">
+                            <div class="tw-relative tw-w-40 tw-h-40 tw-mx-auto">
+                                <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-br tw-from-emerald-500 tw-to-teal-500 tw-rounded-full tw-opacity-20 tw-transform tw-scale-110 tw-transition-transform tw-duration-300 group-hover:tw-scale-125"></div>
+                                <img src="/static/images/team/dataset_2.jpg" 
+                                     class="tw-w-full tw-h-full tw-rounded-full tw-object-cover tw-border-4 tw-border-white tw-shadow-lg tw-relative tw-z-10" 
+                                     alt="Team Member" 
+                                     onerror="this.src='https://ui-avatars.com/api/?name=Youssif+M&background=10b981&color=fff&size=200&rounded=true'">
+                            </div>
                         </div>
-                        <div class="card-body p-4 text-center">
-                            <h4 class="fw-bold text-dark mb-1">Youssif Mahmoud Gomaa Sayed</h4>
-                            <p class="text-primary fw-medium mb-3" data-translate="datasetSpecialist">Dataset Specialist</p>
-                            <p class="text-muted small" data-translate="datasetSpecialistDesc2">Specializes in data quality assurance and dataset balancing techniques.</p>
+                        <!-- Info -->
+                        <div class="tw-p-6 tw-text-center">
+                            <h3 class="tw-text-lg tw-font-bold tw-text-slate-800 tw-mb-1">Youssif Mahmoud Gomaa Sayed</h3>
+                            <p class="tw-text-teal-500 tw-font-medium tw-text-sm tw-mb-3" data-translate="datasetSpecialist">Dataset Specialist</p>
+                            <p class="tw-text-slate-500 tw-text-sm tw-mb-4" data-translate="datasetSpecialistDesc2">Specializes in data quality assurance and dataset balancing techniques.</p>
+                            <!-- Social Links -->
+                            <div class="tw-flex tw-justify-center tw-gap-2">
+                                <a href="#" class="tw-w-9 tw-h-9 tw-rounded-full tw-bg-slate-100 tw-flex tw-items-center tw-justify-center tw-text-slate-400 hover:tw-bg-blue-500 hover:tw-text-white tw-transition-all tw-text-sm">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="mailto:" class="tw-w-9 tw-h-9 tw-rounded-full tw-bg-slate-100 tw-flex tw-items-center tw-justify-center tw-text-slate-400 hover:tw-bg-teal-500 hover:tw-text-white tw-transition-all tw-text-sm">
+                                    <i class="fas fa-envelope"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Member 3 -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100 border-0 shadow-sm hover-card transition-all">
-                        <div class="card-img-top overflow-hidden position-relative d-flex align-items-center justify-content-center bg-light" style="height: 300px;">
-                            <img src="/static/images/team/dataset_3.jpg" class="img-fluid" style="max-height: 100%; max-width: 100%; width: auto;" alt="Team Member" onerror="this.src='https://ui-avatars.com/api/?name=Member+3&background=random&size=300'">
+                <div class="tw-group">
+                    <div class="tw-bg-white tw-rounded-3xl tw-overflow-hidden tw-shadow-lg tw-border tw-border-slate-100 tw-transition-all tw-duration-300 hover:tw--translate-y-2 hover:tw-shadow-2xl hover:tw-border-blue-200">
+                        <!-- Image with Circular Overlay -->
+                        <div class="tw-relative tw-pt-8 tw-px-8">
+                            <div class="tw-relative tw-w-40 tw-h-40 tw-mx-auto">
+                                <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-br tw-from-violet-500 tw-to-purple-500 tw-rounded-full tw-opacity-20 tw-transform tw-scale-110 tw-transition-transform tw-duration-300 group-hover:tw-scale-125"></div>
+                                <img src="/static/images/team/dataset_3.jpg" 
+                                     class="tw-w-full tw-h-full tw-rounded-full tw-object-cover tw-border-4 tw-border-white tw-shadow-lg tw-relative tw-z-10" 
+                                     alt="Team Member" 
+                                     onerror="this.src='https://ui-avatars.com/api/?name=Abdurrahman+B&background=8b5cf6&color=fff&size=200&rounded=true'">
+                            </div>
                         </div>
-                        <div class="card-body p-4 text-center">
-                            <h4 class="fw-bold text-dark mb-1">Abdurrahman Bin Milhan</h4>
-                            <p class="text-primary fw-medium mb-3" data-translate="datasetSpecialist">Dataset Specialist</p>
-                            <p class="text-muted small" data-translate="datasetSpecialistDesc3">Focuses on pathological feature extraction and metadata management.</p>
+                        <!-- Info -->
+                        <div class="tw-p-6 tw-text-center">
+                            <h3 class="tw-text-lg tw-font-bold tw-text-slate-800 tw-mb-1">Abdurrahman Bin Milhan</h3>
+                            <p class="tw-text-teal-500 tw-font-medium tw-text-sm tw-mb-3" data-translate="datasetSpecialist">Dataset Specialist</p>
+                            <p class="tw-text-slate-500 tw-text-sm tw-mb-4" data-translate="datasetSpecialistDesc3">Focuses on pathological feature extraction and metadata management.</p>
+                            <!-- Social Links -->
+                            <div class="tw-flex tw-justify-center tw-gap-2">
+                                <a href="#" class="tw-w-9 tw-h-9 tw-rounded-full tw-bg-slate-100 tw-flex tw-items-center tw-justify-center tw-text-slate-400 hover:tw-bg-blue-500 hover:tw-text-white tw-transition-all tw-text-sm">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="mailto:" class="tw-w-9 tw-h-9 tw-rounded-full tw-bg-slate-100 tw-flex tw-items-center tw-justify-center tw-text-slate-400 hover:tw-bg-teal-500 hover:tw-text-white tw-transition-all tw-text-sm">
+                                    <i class="fas fa-envelope"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- ==================== JOIN THE TEAM CTA ==================== -->
+    <section class="tw-bg-gradient-to-br tw-from-blue-600 tw-to-indigo-700 tw-py-20 tw-relative tw-overflow-hidden">
+        <div class="tw-absolute tw-inset-0 tw-opacity-10">
+            <div class="tw-absolute tw-top-1/2 tw-left-1/2 tw-w-96 tw-h-96 tw-bg-white tw-rounded-full tw-blur-3xl tw-transform tw--translate-x-1/2 tw--translate-y-1/2"></div>
+        </div>
+        <div class="tw-max-w-4xl tw-mx-auto tw-px-4 tw-text-center tw-relative tw-z-10">
+            <h2 class="tw-text-3xl lg:tw-text-4xl tw-font-bold tw-text-white tw-mb-6" data-translate="joinOurMission">Join Our Mission</h2>
+            <p class="tw-text-xl tw-text-blue-100 tw-mb-8 tw-max-w-2xl tw-mx-auto" data-translate="joinDesc">
+                We're always looking for talented individuals passionate about healthcare and AI. Let's shape the future of dental diagnostics together.
+            </p>
+            <a href="/contact" class="tw-inline-flex tw-items-center tw-px-8 tw-py-4 tw-bg-white tw-text-blue-600 tw-font-semibold tw-rounded-full tw-shadow-lg hover:tw-shadow-xl tw-transition-all tw-duration-300 hover:tw--translate-y-1">
+                <span data-translate="getInTouch">Get in Touch</span>
+                <i class="fas fa-arrow-right tw-ml-3"></i>
+            </a>
         </div>
     </section>
 {% endblock %}
