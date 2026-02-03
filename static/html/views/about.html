@@ -1,56 +1,135 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <!-- ==================== HERO SECTION (About) ==================== -->
-    <div class="hero-section" style="padding: 6rem 0 4rem 0;">
-        <div class="container">
-            <div class="row justify-content-center text-center">
-                <div class="col-lg-10">
-                    <h5 class="ai-subtitle text-uppercase mb-3 fs-3" data-translate="whoWeAre">Who We Are</h5>
-                    <h1 class="display-3 fw-bold text-dark mb-4 page-title-interactive" data-translate="aboutOralAI">About Oral AI</h1>
-                    <p class="lead text-muted mb-5 mx-auto" style="max-width: 700px;" data-translate="aboutHeroDesc">
-                        Pioneering the future of dental diagnostics through the convergence of medical expertise and advanced artificial intelligence.
-                    </p>
-                </div>
+    <!-- ==================== PAGE HEADER (Gradient Hero) ==================== -->
+    <div class="tw-relative tw-overflow-hidden tw-bg-gradient-to-br tw-from-blue-600 tw-via-blue-700 tw-to-indigo-800">
+        <!-- Decorative Elements -->
+        <div class="tw-absolute tw-inset-0 tw-opacity-10">
+            <div class="tw-absolute tw-top-0 tw-right-0 tw-w-96 tw-h-96 tw-bg-white tw-rounded-full tw-blur-3xl tw-transform tw-translate-x-1/2 tw--translate-y-1/2"></div>
+            <div class="tw-absolute tw-bottom-0 tw-left-0 tw-w-72 tw-h-72 tw-bg-teal-400 tw-rounded-full tw-blur-3xl tw-transform tw--translate-x-1/2 tw-translate-y-1/2"></div>
+        </div>
+        <div class="tw-relative tw-py-20 tw-px-4 tw-pb-32">
+            <div class="tw-max-w-4xl tw-mx-auto tw-text-center">
+                <!-- Breadcrumbs -->
+                <nav class="tw-flex tw-justify-center tw-mb-6">
+                    <ol class="tw-flex tw-items-center tw-space-x-2 tw-text-sm tw-text-blue-200 tw-opacity-70">
+                        <li><a href="/" class="hover:tw-opacity-100 tw-transition-opacity">Home</a></li>
+                        <li><i class="fas fa-chevron-right tw-text-xs"></i></li>
+                        <li class="tw-text-white tw-font-medium tw-opacity-100">About</li>
+                    </ol>
+                </nav>
+                <h1 class="tw-text-5xl md:tw-text-6xl lg:tw-text-7xl tw-font-bold tw-text-white tw-mb-8" style="letter-spacing: -0.02em; text-shadow: 0px 2px 4px rgba(0,0,0,0.1);" data-translate="pioneeringAI">
+                    Pioneering AI in Oral Health
+                </h1>
+                <p class="tw-text-xl tw-text-blue-100 tw-mx-auto tw-font-medium" style="max-width: 650px; line-height: 1.6; letter-spacing: 0.01em; text-shadow: 0px 2px 4px rgba(0,0,0,0.1);" data-translate="aboutHeroDesc">
+                    Transforming dental diagnostics through the convergence of medical expertise and cutting-edge artificial intelligence.
+                </p>
             </div>
+        </div>
+        <!-- Wave Divider -->
+        <div class="tw-absolute tw-bottom-0 tw-left-0 tw-right-0">
+            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="tw-w-full tw-h-auto">
+                <path d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#f8fafc"/>
+            </svg>
         </div>
     </div>
 
-    <!-- Mission & Vision -->
-    <section class="py-5 bg-white">
-        <div class="container py-5">
-            <div class="row align-items-center g-5">
-                <div class="col-lg-6">
-                    <img src="https://img.freepik.com/free-photo/medical-team-meeting-hospital_107420-84789.jpg" class="img-fluid rounded-4 shadow-lg" alt="Our Team">
+    <!-- ==================== STATS ROW ==================== -->
+    <section class="tw-bg-slate-50 tw-py-8 tw-relative tw-z-10">
+        <div class="tw-max-w-6xl tw-mx-auto tw-px-4">
+            <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-6 tw--mt-20">
+                <!-- Stat 1 -->
+                <div class="tw-bg-white/80 tw-backdrop-blur-md tw-rounded-2xl tw-p-8 tw-shadow-lg tw-border tw-border-slate-100 tw-text-center tw-transform tw-transition-all tw-duration-300 hover:tw--translate-y-1 hover:tw-shadow-xl">
+                    <div class="tw-w-16 tw-h-16 tw-bg-gradient-to-br tw-from-blue-500 tw-to-blue-600 tw-rounded-2xl tw-flex tw-items-center tw-justify-center tw-mx-auto tw-mb-4 tw-shadow-lg tw-shadow-blue-500/30">
+                        <i class="fas fa-bullseye tw-text-2xl tw-text-white"></i>
+                    </div>
+                    <h3 class="tw-text-4xl tw-font-bold tw-text-slate-800 tw-mb-2">98%</h3>
+                    <p class="tw-text-slate-500 tw-font-medium" data-translate="analysisAccuracy">Analysis Accuracy</p>
                 </div>
-                <div class="col-lg-6">
-                    <h6 class="text-primary fw-bold text-uppercase letter-spacing-2 mb-3" data-translate="ourMission">Our Mission</h6>
-                    <h2 class="display-6 fw-bold text-dark mb-4" data-translate="democratizingHealthcare">Democratizing Advanced Oral Healthcare</h2>
-                    <p class="text-muted lead mb-4" data-translate="missionDesc">
+                <!-- Stat 2 -->
+                <div class="tw-bg-white/80 tw-backdrop-blur-md tw-rounded-2xl tw-p-8 tw-shadow-lg tw-border tw-border-slate-100 tw-text-center tw-transform tw-transition-all tw-duration-300 hover:tw--translate-y-1 hover:tw-shadow-xl">
+                    <div class="tw-w-16 tw-h-16 tw-bg-gradient-to-br tw-from-teal-500 tw-to-teal-600 tw-rounded-2xl tw-flex tw-items-center tw-justify-center tw-mx-auto tw-mb-4 tw-shadow-lg tw-shadow-teal-500/30">
+                        <i class="fas fa-microscope tw-text-2xl tw-text-white"></i>
+                    </div>
+                    <h3 class="tw-text-4xl tw-font-bold tw-text-slate-800 tw-mb-2">500+</h3>
+                    <p class="tw-text-slate-500 tw-font-medium" data-translate="scansProcessed">Scans Processed</p>
+                </div>
+                <!-- Stat 3 -->
+                <div class="tw-bg-white/80 tw-backdrop-blur-md tw-rounded-2xl tw-p-8 tw-shadow-lg tw-border tw-border-slate-100 tw-text-center tw-transform tw-transition-all tw-duration-300 hover:tw--translate-y-1 hover:tw-shadow-xl">
+                    <div class="tw-w-16 tw-h-16 tw-bg-gradient-to-br tw-from-indigo-500 tw-to-indigo-600 tw-rounded-2xl tw-flex tw-items-center tw-justify-center tw-mx-auto tw-mb-4 tw-shadow-lg tw-shadow-indigo-500/30">
+                        <i class="fas fa-clock tw-text-2xl tw-text-white"></i>
+                    </div>
+                    <h3 class="tw-text-4xl tw-font-bold tw-text-slate-800 tw-mb-2">24/7</h3>
+                    <p class="tw-text-slate-500 tw-font-medium" data-translate="systemAvailability">System Availability</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== MISSION SECTION ==================== -->
+    <section class="tw-bg-slate-50 tw-py-20">
+        <div class="tw-max-w-6xl tw-mx-auto tw-px-4">
+            <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-16 tw-items-center">
+                <!-- Text Content -->
+                <div class="tw-order-2 lg:tw-order-1">
+                    <span class="tw-inline-flex tw-items-center tw-px-4 tw-py-2 tw-rounded-full tw-bg-blue-100 tw-text-blue-600 tw-text-sm tw-font-semibold tw-mb-6">
+                        <i class="fas fa-flag" style="margin-right: 8px; margin-left: -1px;"></i>
+                        <span data-translate="ourMission">Our Mission</span>
+                    </span>
+                    <h2 class="tw-text-3xl lg:tw-text-4xl tw-font-bold tw-text-slate-800 tw-mb-6 tw-leading-tight" data-translate="democratizingHealthcare">
+                        Democratizing Advanced Oral Healthcare
+                    </h2>
+                    <p class="tw-text-lg tw-text-slate-600 tw-leading-relaxed tw-mb-8" data-translate="missionDesc">
                         Our mission is to make high-quality oral disease detection accessible to everyone. By leveraging cutting-edge AI technology, we provide dental professionals with powerful tools to identify potential issues early, leading to better patient outcomes and saved lives.
                     </p>
-                    
-                    <div class="row g-4 mt-2">
-                        <div class="col-sm-6">
-                            <div class="p-4 bg-light rounded-4 border border-light-subtle h-100 hover-shadow">
-                                <div class="d-flex align-items-center mb-3">
-                                    <div class="bg-white p-3 rounded-circle shadow-sm text-primary me-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                                        <i class="fas fa-bullseye fa-lg"></i>
-                                    </div>
-                                    <h3 class="fw-bold text-dark mb-0">99.9%</h3>
-                                </div>
-                                <p class="text-muted mb-0 fw-medium" data-translate="analysisAccuracy">Analysis Accuracy</p>
+                    <div class="tw-space-y-4">
+                        <div class="tw-flex tw-items-start tw-gap-4">
+                            <div class="tw-flex-shrink-0 tw-w-10 tw-h-10 tw-bg-teal-100 tw-rounded-xl tw-flex tw-items-center tw-justify-center">
+                                <i class="fas fa-check tw-text-teal-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="tw-font-semibold tw-text-slate-800" data-translate="aiPowered">AI-Powered Analysis</h4>
+                                <p class="tw-text-slate-500 tw-text-sm" data-translate="aiPoweredDesc">State-of-the-art deep learning models for accurate diagnosis</p>
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="p-4 bg-light rounded-4 border border-light-subtle h-100 hover-shadow">
-                                <div class="d-flex align-items-center mb-3">
-                                    <div class="bg-white p-3 rounded-circle shadow-sm text-primary me-3 d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
-                                        <i class="fas fa-clock fa-lg"></i>
-                                    </div>
-                                    <h3 class="fw-bold text-dark mb-0">24/7</h3>
+                        <div class="tw-flex tw-items-start tw-gap-4">
+                            <div class="tw-flex-shrink-0 tw-w-10 tw-h-10 tw-bg-teal-100 tw-rounded-xl tw-flex tw-items-center tw-justify-center">
+                                <i class="fas fa-check tw-text-teal-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="tw-font-semibold tw-text-slate-800" data-translate="instantResults">Instant Results</h4>
+                                <p class="tw-text-slate-500 tw-text-sm" data-translate="instantResultsDesc">Get comprehensive reports in under 2 seconds</p>
+                            </div>
+                        </div>
+                        <div class="tw-flex tw-items-start tw-gap-4">
+                            <div class="tw-flex-shrink-0 tw-w-10 tw-h-10 tw-bg-teal-100 tw-rounded-xl tw-flex tw-items-center tw-justify-center">
+                                <i class="fas fa-check tw-text-teal-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="tw-font-semibold tw-text-slate-800" data-translate="hipaaCompliant">HIPAA Compliant</h4>
+                                <p class="tw-text-slate-500 tw-text-sm" data-translate="hipaaCompliantDesc">Enterprise-grade security for all patient data</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Image -->
+                <div class="tw-order-1 lg:tw-order-2">
+                    <div class="tw-relative">
+                        <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-br tw-from-blue-500 tw-to-teal-500 tw-rounded-3xl tw-transform tw-rotate-3 tw-opacity-20"></div>
+                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=800" 
+                             class="tw-relative tw-rounded-3xl tw-shadow-2xl tw-w-full tw-object-cover" 
+                             alt="Medical Team" 
+                             style="height: 500px;">
+                        <!-- Floating Card -->
+                        <div class="tw-absolute tw--bottom-6 tw--left-6 tw-bg-white tw-rounded-2xl tw-p-6 tw-shadow-xl tw-border tw-border-slate-100">
+                            <div class="tw-flex tw-items-center tw-gap-4">
+                                <div class="tw-w-12 tw-h-12 tw-bg-green-100 tw-rounded-full tw-flex tw-items-center tw-justify-center">
+                                    <i class="fas fa-shield-alt tw-text-green-500"></i>
                                 </div>
-                                <p class="text-muted mb-0 fw-medium" data-translate="systemAvailability">System Availability</p>
+                                <div>
+                                    <p class="tw-text-2xl tw-font-bold tw-text-slate-800">100%</p>
+                                    <p class="tw-text-sm tw-text-slate-500" data-translate="dataSecure">Data Secure</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -59,131 +138,122 @@
         </div>
     </section>
 
-    <!-- Values Section -->
-    <section class="py-5 bg-light">
-        <div class="container py-5">
-            <div class="text-center mb-5">
-                <h6 class="text-primary fw-bold text-uppercase mb-2" data-translate="ourCoreValues">Our Core Values</h6>
-                <h2 class="display-5 fw-bold text-dark mb-3" data-translate="whatDrivesUs">What Drives Us</h2>
+    <!-- ==================== VALUES SECTION ==================== -->
+    <section class="tw-bg-white tw-py-20">
+        <div class="tw-max-w-6xl tw-mx-auto tw-px-4">
+            <div class="tw-text-center tw-mb-16">
+                <span class="tw-inline-flex tw-items-center tw-px-4 tw-py-2 tw-rounded-full tw-bg-indigo-100 tw-text-indigo-600 tw-text-sm tw-font-semibold tw-mb-4">
+                    <i class="fas fa-star tw-mr-2"></i>
+                    <span data-translate="ourCoreValues">Our Core Values</span>
+                </span>
+                <h2 class="tw-text-3xl lg:tw-text-4xl tw-font-bold tw-text-slate-800 tw-mb-4" data-translate="whatDrivesUs">What Drives Us</h2>
+                <p class="tw-text-slate-500 tw-max-w-2xl tw-mx-auto" data-translate="valuesDesc">The principles that guide every decision we make and every feature we build.</p>
             </div>
-            <div class="row g-4">
+            
+            <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-8">
                 <!-- Value 1 -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100 border-0 shadow-sm hover-card transition-all">
-                        <div class="card-body p-5 text-center">
-                            <div class="mb-4">
-                                <div class="d-inline-flex align-items-center justify-content-center bg-primary text-white rounded-4 shadow-sm" style="width: 64px; height: 64px; font-size: 1.75rem;">
-                                    <i class="fas fa-heartbeat"></i>
-                                </div>
-                            </div>
-                            <h4 class="fw-bold text-dark mb-3" data-translate="patientFirst">Patient First</h4>
-                            <p class="text-muted mb-4" data-translate="patientFirstDesc">Every algorithm we develop and every feature we build is designed with the ultimate goal of improving patient care and safety.</p>
-                        </div>
+                <div class="tw-group tw-bg-white tw-rounded-2xl tw-p-8 tw-border tw-border-slate-100 tw-shadow-lg tw-transition-all tw-duration-300 hover:tw--translate-y-1 hover:tw-shadow-xl hover:tw-border-blue-200">
+                    <div class="tw-w-16 tw-h-16 tw-bg-gradient-to-br tw-from-rose-500 tw-to-pink-500 tw-rounded-2xl tw-flex tw-items-center tw-justify-center tw-mb-6 tw-shadow-lg tw-shadow-rose-500/30 tw-transition-transform tw-duration-300 group-hover:tw-scale-110">
+                        <i class="fas fa-heartbeat tw-text-2xl tw-text-white"></i>
                     </div>
+                    <h3 class="tw-text-xl tw-font-bold tw-text-slate-800 tw-mb-3" data-translate="patientFirst">Patient First</h3>
+                    <p class="tw-text-slate-500 tw-leading-relaxed" data-translate="patientFirstDesc">
+                        Every algorithm we develop and every feature we build is designed with the ultimate goal of improving patient care and safety.
+                    </p>
                 </div>
 
                 <!-- Value 2 -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100 border-0 shadow-sm hover-card transition-all">
-                        <div class="card-body p-5 text-center">
-                            <div class="mb-4">
-                                <div class="d-inline-flex align-items-center justify-content-center bg-success text-white rounded-4 shadow-sm" style="width: 64px; height: 64px; font-size: 1.75rem;">
-                                    <i class="fas fa-microscope"></i>
-                                </div>
-                            </div>
-                            <h4 class="fw-bold text-dark mb-3" data-translate="scientificRigor">Scientific Rigor</h4>
-                            <p class="text-muted mb-4" data-translate="scientificRigorDesc">We adhere to the highest standards of scientific validation. Our models are rigorously tested and continuously improved.</p>
-                        </div>
+                <div class="tw-group tw-bg-white tw-rounded-2xl tw-p-8 tw-border tw-border-slate-100 tw-shadow-lg tw-transition-all tw-duration-300 hover:tw--translate-y-1 hover:tw-shadow-xl hover:tw-border-blue-200">
+                    <div class="tw-w-16 tw-h-16 tw-bg-gradient-to-br tw-from-emerald-500 tw-to-teal-500 tw-rounded-2xl tw-flex tw-items-center tw-justify-center tw-mb-6 tw-shadow-lg tw-shadow-emerald-500/30 tw-transition-transform tw-duration-300 group-hover:tw-scale-110">
+                        <i class="fas fa-microscope tw-text-2xl tw-text-white"></i>
                     </div>
+                    <h3 class="tw-text-xl tw-font-bold tw-text-slate-800 tw-mb-3" data-translate="scientificRigor">Scientific Rigor</h3>
+                    <p class="tw-text-slate-500 tw-leading-relaxed" data-translate="scientificRigorDesc">
+                        We adhere to the highest standards of scientific validation. Our models are rigorously tested and continuously improved.
+                    </p>
                 </div>
 
                 <!-- Value 3 -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100 border-0 shadow-sm hover-card transition-all">
-                        <div class="card-body p-5 text-center">
-                            <div class="mb-4">
-                                <div class="d-inline-flex align-items-center justify-content-center bg-info text-white rounded-4 shadow-sm" style="width: 64px; height: 64px; font-size: 1.75rem;">
-                                    <i class="fas fa-shield-alt"></i>
-                                </div>
-                            </div>
-                            <h4 class="fw-bold text-dark mb-3" data-translate="dataPrivacy">Data Privacy</h4>
-                            <p class="text-muted mb-4" data-translate="dataPrivacyDesc">We treat patient data with the utmost respect and security, complying with all major healthcare data protection regulations.</p>
-                        </div>
+                <div class="tw-group tw-bg-white tw-rounded-2xl tw-p-8 tw-border tw-border-slate-100 tw-shadow-lg tw-transition-all tw-duration-300 hover:tw--translate-y-1 hover:tw-shadow-xl hover:tw-border-blue-200">
+                    <div class="tw-w-16 tw-h-16 tw-bg-gradient-to-br tw-from-blue-500 tw-to-indigo-500 tw-rounded-2xl tw-flex tw-items-center tw-justify-center tw-mb-6 tw-shadow-lg tw-shadow-blue-500/30 tw-transition-transform tw-duration-300 group-hover:tw-scale-110">
+                        <i class="fas fa-shield-alt tw-text-2xl tw-text-white"></i>
                     </div>
+                    <h3 class="tw-text-xl tw-font-bold tw-text-slate-800 tw-mb-3" data-translate="dataPrivacy">Data Privacy</h3>
+                    <p class="tw-text-slate-500 tw-leading-relaxed" data-translate="dataPrivacyDesc">
+                        We treat patient data with the utmost respect and security, complying with all major healthcare data protection regulations.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Technology Stack Section -->
-    <section class="py-5 bg-white position-relative overflow-hidden">
+    <!-- ==================== TECHNOLOGY SECTION ==================== -->
+    <section class="tw-bg-gradient-to-br tw-from-slate-50 tw-to-slate-100 tw-py-20 tw-relative tw-overflow-hidden">
         <!-- Background Decoration -->
-        <div class="position-absolute top-0 end-0 w-50 h-100 bg-light rounded-start-pill" style="opacity: 0.5; z-index: 0;"></div>
-
-        <div class="container py-5 position-relative" style="z-index: 1;">
-            <div class="row justify-content-center mb-5">
-                <div class="col-lg-8 text-center">
-                    <h6 class="text-primary fw-bold text-uppercase mb-2" data-translate="ourTechnology">Our Technology</h6>
-                    <h2 class="display-5 fw-bold text-dark mb-3" data-translate="poweredByInnovation">Powered by Innovation</h2>
-                    <p class="lead text-muted mb-4" data-translate="techSectionDesc">Click on the cards below to explore the cutting-edge tools behind our AI.</p>
-                </div>
+        <div class="tw-absolute tw-top-0 tw-right-0 tw-w-1/2 tw-h-full tw-bg-gradient-to-l tw-from-blue-50 tw-to-transparent tw-opacity-50"></div>
+        
+        <div class="tw-max-w-6xl tw-mx-auto tw-px-4 tw-relative tw-z-10">
+            <div class="tw-text-center tw-mb-16">
+                <span class="tw-inline-flex tw-items-center tw-px-4 tw-py-2 tw-rounded-full tw-bg-blue-100 tw-text-blue-600 tw-text-sm tw-font-semibold tw-mb-4">
+                    <i class="fas fa-cogs tw-mr-2"></i>
+                    <span data-translate="ourTechnology">Our Technology</span>
+                </span>
+                <h2 class="tw-text-3xl lg:tw-text-4xl tw-font-bold tw-text-slate-800 tw-mb-4" data-translate="poweredByInnovation">Powered by Innovation</h2>
+                <p class="tw-text-slate-500 tw-max-w-2xl tw-mx-auto" data-translate="techSectionDesc">Click on the cards below to explore the cutting-edge tools behind our AI.</p>
             </div>
 
-            <div class="row g-4 justify-content-center">
+            <div class="tw-grid tw-grid-cols-1 md:tw-grid-cols-3 tw-gap-8">
                 <!-- PyTorch Card -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100 border-0 shadow-lg rounded-4 overflow-hidden tech-card" 
-                         onclick="openTechModal('pytorch')"
-                         style="cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;">
-                        <div class="card-body p-5 text-center d-flex flex-column align-items-center justify-content-center">
-                            <div class="icon-wrapper mb-4 p-4 rounded-circle bg-danger-subtle text-danger position-relative">
-                                <i class="fas fa-fire fa-3x"></i>
-                                <div class="pulse-ring bg-danger"></div>
+                <div class="tw-group tw-cursor-pointer" onclick="openTechModal('pytorch')">
+                    <div class="tw-bg-white tw-rounded-2xl tw-p-8 tw-border tw-border-slate-100 tw-shadow-lg tw-transition-all tw-duration-300 tw-h-full tw-flex tw-flex-col tw-items-center tw-text-center group-hover:tw--translate-y-2 group-hover:tw-shadow-2xl group-hover:tw-border-red-200">
+                        <div class="tw-relative tw-mb-6">
+                            <div class="tw-w-20 tw-h-20 tw-bg-gradient-to-br tw-from-red-500 tw-to-orange-500 tw-rounded-2xl tw-flex tw-items-center tw-justify-center tw-shadow-lg tw-shadow-red-500/30 tw-transition-transform tw-duration-300 group-hover:tw-scale-110">
+                                <i class="fas fa-fire tw-text-3xl tw-text-white"></i>
                             </div>
-                            <h3 class="fw-bold text-dark mb-2">PyTorch</h3>
-                            <p class="text-muted mb-4" data-translate="deepLearningFramework">Deep Learning Framework</p>
-                            <button class="btn btn-outline-danger rounded-pill px-4 fw-bold mt-auto stretched-link">
-                                <span data-translate="explore">Explore</span> <i class="fas fa-arrow-right ms-2"></i>
-                            </button>
+                            <div class="tw-absolute tw-inset-0 tw-bg-red-500 tw-rounded-2xl tw-animate-ping tw-opacity-20"></div>
                         </div>
+                        <h3 class="tw-text-xl tw-font-bold tw-text-slate-800 tw-mb-2">PyTorch</h3>
+                        <p class="tw-text-slate-500 tw-mb-6 tw-flex-grow" data-translate="deepLearningFramework">Deep Learning Framework</p>
+                        <span class="tw-inline-flex tw-items-center tw-text-red-500 tw-font-semibold tw-transition-colors group-hover:tw-text-red-600">
+                            <span data-translate="explore">Explore</span>
+                            <i class="fas fa-arrow-right tw-ml-2 tw-transition-transform group-hover:tw-translate-x-1"></i>
+                        </span>
                     </div>
                 </div>
 
                 <!-- CUDA Card -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100 border-0 shadow-lg rounded-4 overflow-hidden tech-card" 
-                         onclick="openTechModal('cuda')"
-                         style="cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;">
-                        <div class="card-body p-5 text-center d-flex flex-column align-items-center justify-content-center">
-                            <div class="icon-wrapper mb-4 p-4 rounded-circle bg-success-subtle text-success position-relative">
-                                <i class="fas fa-microchip fa-3x"></i>
-                                <div class="pulse-ring bg-success"></div>
+                <div class="tw-group tw-cursor-pointer" onclick="openTechModal('cuda')">
+                    <div class="tw-bg-white tw-rounded-2xl tw-p-8 tw-border tw-border-slate-100 tw-shadow-lg tw-transition-all tw-duration-300 tw-h-full tw-flex tw-flex-col tw-items-center tw-text-center group-hover:tw--translate-y-2 group-hover:tw-shadow-2xl group-hover:tw-border-green-200">
+                        <div class="tw-relative tw-mb-6">
+                            <div class="tw-w-20 tw-h-20 tw-bg-gradient-to-br tw-from-green-500 tw-to-emerald-500 tw-rounded-2xl tw-flex tw-items-center tw-justify-center tw-shadow-lg tw-shadow-green-500/30 tw-transition-transform tw-duration-300 group-hover:tw-scale-110">
+                                <i class="fas fa-microchip tw-text-3xl tw-text-white"></i>
                             </div>
-                            <h3 class="fw-bold text-dark mb-2">NVIDIA CUDA</h3>
-                            <p class="text-muted mb-4" data-translate="gpuAcceleration">GPU Acceleration</p>
-                            <button class="btn btn-outline-success rounded-pill px-4 fw-bold mt-auto stretched-link">
-                                <span data-translate="explore">Explore</span> <i class="fas fa-arrow-right ms-2"></i>
-                            </button>
+                            <div class="tw-absolute tw-inset-0 tw-bg-green-500 tw-rounded-2xl tw-animate-ping tw-opacity-20"></div>
                         </div>
+                        <h3 class="tw-text-xl tw-font-bold tw-text-slate-800 tw-mb-2">NVIDIA CUDA</h3>
+                        <p class="tw-text-slate-500 tw-mb-6 tw-flex-grow" data-translate="gpuAcceleration">GPU Acceleration</p>
+                        <span class="tw-inline-flex tw-items-center tw-text-green-500 tw-font-semibold tw-transition-colors group-hover:tw-text-green-600">
+                            <span data-translate="explore">Explore</span>
+                            <i class="fas fa-arrow-right tw-ml-2 tw-transition-transform group-hover:tw-translate-x-1"></i>
+                        </span>
                     </div>
                 </div>
 
                 <!-- YOLO Card -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100 border-0 shadow-lg rounded-4 overflow-hidden tech-card" 
-                         onclick="openTechModal('yolo')"
-                         style="cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;">
-                        <div class="card-body p-5 text-center d-flex flex-column align-items-center justify-content-center">
-                            <div class="icon-wrapper mb-4 p-4 rounded-circle bg-primary-subtle text-primary position-relative">
-                                <i class="fas fa-eye fa-3x"></i>
-                                <div class="pulse-ring bg-primary"></div>
+                <div class="tw-group tw-cursor-pointer" onclick="openTechModal('yolo')">
+                    <div class="tw-bg-white tw-rounded-2xl tw-p-8 tw-border tw-border-slate-100 tw-shadow-lg tw-transition-all tw-duration-300 tw-h-full tw-flex tw-flex-col tw-items-center tw-text-center group-hover:tw--translate-y-2 group-hover:tw-shadow-2xl group-hover:tw-border-blue-200">
+                        <div class="tw-relative tw-mb-6">
+                            <div class="tw-w-20 tw-h-20 tw-bg-gradient-to-br tw-from-blue-500 tw-to-indigo-500 tw-rounded-2xl tw-flex tw-items-center tw-justify-center tw-shadow-lg tw-shadow-blue-500/30 tw-transition-transform tw-duration-300 group-hover:tw-scale-110">
+                                <i class="fas fa-eye tw-text-3xl tw-text-white"></i>
                             </div>
-                            <h3 class="fw-bold text-dark mb-2">YOLO</h3>
-                            <p class="text-muted mb-4" data-translate="realTimeObjectDetection">Real-Time Object Detection</p>
-                            <button class="btn btn-outline-primary rounded-pill px-4 fw-bold mt-auto stretched-link">
-                                <span data-translate="explore">Explore</span> <i class="fas fa-arrow-right ms-2"></i>
-                            </button>
+                            <div class="tw-absolute tw-inset-0 tw-bg-blue-500 tw-rounded-2xl tw-animate-ping tw-opacity-20"></div>
                         </div>
+                        <h3 class="tw-text-xl tw-font-bold tw-text-slate-800 tw-mb-2">YOLO</h3>
+                        <p class="tw-text-slate-500 tw-mb-6 tw-flex-grow" data-translate="realTimeObjectDetection">Real-Time Object Detection</p>
+                        <span class="tw-inline-flex tw-items-center tw-text-blue-500 tw-font-semibold tw-transition-colors group-hover:tw-text-blue-600">
+                            <span data-translate="explore">Explore</span>
+                            <i class="fas fa-arrow-right tw-ml-2 tw-transition-transform group-hover:tw-translate-x-1"></i>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -193,75 +263,45 @@
     <!-- Tech Detail Modal -->
     <div class="modal fade" id="techModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
-                <div class="modal-header border-0 p-4 bg-light">
-                    <div class="d-flex align-items-center">
-                        <div id="modal-icon-wrapper" class="p-3 rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
-                            <i id="modal-icon" class="fas fa-code fa-2x"></i>
+            <div class="tw-bg-white tw-rounded-3xl tw-shadow-2xl tw-overflow-hidden tw-border-0">
+                <div class="tw-bg-gradient-to-r tw-from-slate-50 tw-to-slate-100 tw-p-6 tw-flex tw-items-center tw-justify-between">
+                    <div class="tw-flex tw-items-center tw-gap-4">
+                        <div id="modal-icon-wrapper" class="tw-w-14 tw-h-14 tw-rounded-xl tw-flex tw-items-center tw-justify-center tw-bg-blue-100 tw-text-blue-600">
+                            <i id="modal-icon" class="fas fa-code tw-text-2xl"></i>
                         </div>
                         <div>
-                            <h3 id="modal-title" class="fw-bold mb-0">Technology</h3>
-                            <p id="modal-subtitle" class="text-muted mb-0 small text-uppercase fw-bold">Overview</p>
+                            <h3 id="modal-title" class="tw-text-xl tw-font-bold tw-text-slate-800">Technology</h3>
+                            <p id="modal-subtitle" class="tw-text-sm tw-text-slate-500 tw-uppercase tw-tracking-wider tw-font-medium">Overview</p>
                         </div>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="tw-w-10 tw-h-10 tw-rounded-full tw-bg-slate-200 tw-text-slate-600 tw-flex tw-items-center tw-justify-center hover:tw-bg-slate-300 tw-transition-colors" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fas fa-times"></i>
+                    </button>
                 </div>
-                <div class="modal-body p-0">
-                    <!-- Tabs -->
-                    <div class="d-flex border-bottom">
-                        <button class="flex-fill btn btn-lg rounded-0 fw-bold py-3 active-tab" id="tab-beginner" onclick="switchModalTab('beginner')" data-translate="beginner">
+                <div class="tw-border-b tw-border-slate-200">
+                    <div class="tw-flex">
+                        <button class="tw-flex-1 tw-py-4 tw-font-semibold tw-text-blue-600 tw-border-b-2 tw-border-blue-600" id="tab-beginner" onclick="switchModalTab('beginner')" data-translate="beginner">
                             Beginner
                         </button>
-                        <button class="flex-fill btn btn-lg rounded-0 fw-bold py-3 text-muted" id="tab-advanced" onclick="switchModalTab('advanced')" data-translate="advanced">
+                        <button class="tw-flex-1 tw-py-4 tw-font-semibold tw-text-slate-400 tw-border-b-2 tw-border-transparent hover:tw-text-slate-600" id="tab-advanced" onclick="switchModalTab('advanced')" data-translate="advanced">
                             Advanced
                         </button>
                     </div>
-                    <!-- Content -->
-                    <div class="p-5">
-                        <div id="content-beginner" class="animate-fade-in">
-                            <p class="lead text-dark" style="line-height: 1.8;">Beginner content goes here.</p>
-                        </div>
-                        <div id="content-advanced" class="d-none animate-fade-in">
-                            <p class="lead text-dark" style="line-height: 1.8;">Advanced content goes here.</p>
-                        </div>
+                </div>
+                <div class="tw-p-8">
+                    <div id="content-beginner" class="tw-animate-fade-in">
+                        <p class="tw-text-lg tw-text-slate-600 tw-leading-relaxed">Beginner content goes here.</p>
+                    </div>
+                    <div id="content-advanced" class="tw-hidden tw-animate-fade-in">
+                        <p class="tw-text-lg tw-text-slate-600 tw-leading-relaxed">Advanced content goes here.</p>
                     </div>
                 </div>
-                <div class="modal-footer border-0 bg-light p-3">
-                    <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal" data-translate="close">Close</button>
+                <div class="tw-bg-slate-50 tw-p-4 tw-flex tw-justify-end">
+                    <button type="button" class="tw-px-6 tw-py-2 tw-bg-slate-200 tw-text-slate-700 tw-rounded-full tw-font-medium hover:tw-bg-slate-300 tw-transition-colors" data-bs-dismiss="modal" data-translate="close">Close</button>
                 </div>
             </div>
         </div>
     </div>
-
-    <style>
-        .tech-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 1rem 3rem rgba(0,0,0,.175)!important;
-        }
-        
-        .pulse-ring {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
-            opacity: 0.6;
-            z-index: -1;
-        }
-
-        @keyframes pulse-ring {
-            0% { transform: scale(0.8); opacity: 0.5; }
-            100% { transform: scale(1.5); opacity: 0; }
-        }
-
-        .active-tab {
-            background-color: #fff;
-            color: var(--bs-primary);
-            border-bottom: 3px solid var(--bs-primary);
-        }
-    </style>
 
     <script>
         // Helper function for translations
@@ -273,7 +313,7 @@
                 title: "PyTorch",
                 subtitle: t('techPytorchSubtitle', 'Deep Learning Framework'),
                 icon: "fas fa-fire",
-                colorClass: "danger",
+                colorClass: "red",
                 beginner: t('techPytorchBeginner', "PyTorch, developed by Facebook, is another deep learning framework widely used for building neural networks. Its straightforward, Pythonic nature makes it easy for beginners to grasp the basics of model creation and training. Beginners will appreciate PyTorch's flexibility in creating simple models for image classification without having to worry about too much technical overhead."),
                 advanced: t('techPytorchAdvanced', "Advanced users can use PyTorch's dynamic computation graph, allowing greater flexibility when building complex architectures, custom loss functions, and optimizers. It's a great choice for researchers, as PyTorch offers seamless experimentation with cutting-edge models like Vision Language Models, Generative Adversarial Networks (GANs) and deep reinforcement learning. Thanks to its efficient memory management and GPU support, it also excels in handling large datasets.")
             },
@@ -281,7 +321,7 @@
                 title: "NVIDIA CUDA",
                 subtitle: t('techCudaSubtitle', 'GPU Acceleration'),
                 icon: "fas fa-microchip",
-                colorClass: "success",
+                colorClass: "green",
                 beginner: t('techCudaBeginner', "CUDA is a parallel computing platform and programming model developed by NVIDIA, while cuDNN is a GPU-accelerated library for deep neural networks. For beginners, these tools may seem technical, but their primary purpose is to accelerate the training of deep learning models by utilizing GPU power. By setting up CUDA and cuDNN properly within the training environment, a significant boost in speed and optimization of model training can be achieved, especially when working with frameworks like TensorFlow and PyTorch."),
                 advanced: t('techCudaAdvanced', "Experts can harness the full power of CUDA and cuDNN to optimize performance in high-demand applications. This includes writing custom CUDA kernels for specific operations, managing GPU memory efficiently, and fine-tuning neural network training for maximum speed and scalability. These tools are essential for developers working with large datasets and needing top-tier performance from their models.")
             },
@@ -289,7 +329,7 @@
                 title: "YOLO",
                 subtitle: t('techYoloSubtitle', 'Real-Time Object Detection'),
                 icon: "fas fa-eye",
-                colorClass: "primary",
+                colorClass: "blue",
                 beginner: t('techYoloBeginner', "YOLO (You Only Look Once) is a fast object detection algorithm that is especially popular for real-time applications. Beginners can use pre-trained YOLO models to quickly detect objects in images or videos with relatively simple code. The ease of use makes YOLO a great entry point for those looking to explore object detection without needing to build complex models from scratch."),
                 advanced: t('techYoloAdvanced', "YOLO provides opportunities for fine-tuning models on custom datasets to detect specific objects, improving detection speed and accuracy. YOLO's lightweight nature allows it to be deployed in resource-constrained environments, like mobile devices, making it a go-to solution for real-time applications. Professionals can also experiment with newer versions of YOLO, adjusting parameters to fit specific project needs.")
             }
@@ -308,15 +348,20 @@
             document.getElementById('modal-subtitle').textContent = data.subtitle;
             
             const iconEl = document.getElementById('modal-icon');
-            iconEl.className = data.icon + " fa-2x";
+            iconEl.className = data.icon + " tw-text-2xl";
             
             const iconWrapper = document.getElementById('modal-icon-wrapper');
-            // Reset classes
-            iconWrapper.className = `p-3 rounded-circle me-3 d-flex align-items-center justify-content-center bg-${data.colorClass}-subtle text-${data.colorClass}`;
+            // Reset classes with Tailwind
+            const colorMap = {
+                'red': 'tw-bg-red-100 tw-text-red-600',
+                'green': 'tw-bg-green-100 tw-text-green-600',
+                'blue': 'tw-bg-blue-100 tw-text-blue-600'
+            };
+            iconWrapper.className = `tw-w-14 tw-h-14 tw-rounded-xl tw-flex tw-items-center tw-justify-center ${colorMap[data.colorClass] || colorMap['blue']}`;
 
             // Update Content
-            document.getElementById('content-beginner').innerHTML = `<p class="lead text-dark" style="line-height: 1.8;">${data.beginner}</p>`;
-            document.getElementById('content-advanced').innerHTML = `<p class="lead text-dark" style="line-height: 1.8;">${data.advanced}</p>`;
+            document.getElementById('content-beginner').innerHTML = `<p class="tw-text-lg tw-text-slate-600 tw-leading-relaxed">${data.beginner}</p>`;
+            document.getElementById('content-advanced').innerHTML = `<p class="tw-text-lg tw-text-slate-600 tw-leading-relaxed">${data.advanced}</p>`;
 
             // Reset Tabs to Beginner
             switchModalTab('beginner');
@@ -333,21 +378,15 @@
             const contentAdvanced = document.getElementById('content-advanced');
 
             if (level === 'beginner') {
-                tabBeginner.classList.add('active-tab', 'text-primary');
-                tabBeginner.classList.remove('text-muted');
-                tabAdvanced.classList.remove('active-tab', 'text-primary');
-                tabAdvanced.classList.add('text-muted');
-
-                contentBeginner.classList.remove('d-none');
-                contentAdvanced.classList.add('d-none');
+                tabBeginner.className = 'tw-flex-1 tw-py-4 tw-font-semibold tw-text-blue-600 tw-border-b-2 tw-border-blue-600';
+                tabAdvanced.className = 'tw-flex-1 tw-py-4 tw-font-semibold tw-text-slate-400 tw-border-b-2 tw-border-transparent hover:tw-text-slate-600';
+                contentBeginner.classList.remove('tw-hidden');
+                contentAdvanced.classList.add('tw-hidden');
             } else {
-                tabAdvanced.classList.add('active-tab', 'text-primary');
-                tabAdvanced.classList.remove('text-muted');
-                tabBeginner.classList.remove('active-tab', 'text-primary');
-                tabBeginner.classList.add('text-muted');
-
-                contentAdvanced.classList.remove('d-none');
-                contentBeginner.classList.add('d-none');
+                tabAdvanced.className = 'tw-flex-1 tw-py-4 tw-font-semibold tw-text-blue-600 tw-border-b-2 tw-border-blue-600';
+                tabBeginner.className = 'tw-flex-1 tw-py-4 tw-font-semibold tw-text-slate-400 tw-border-b-2 tw-border-transparent hover:tw-text-slate-600';
+                contentAdvanced.classList.remove('tw-hidden');
+                contentBeginner.classList.add('tw-hidden');
             }
         }
     </script>

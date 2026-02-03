@@ -2,135 +2,228 @@
 
 {% block content %}
     <!-- ==================== HERO SECTION ==================== -->
-    <div class="hero-section" style="padding: 6rem 0 4rem 0;">
-        <div class="container">
-            <div class="row justify-content-center text-center">
-                <div class="col-lg-10">
-                    <h5 class="ai-subtitle text-uppercase mb-3 fs-3" data-translate="industryInsights">Industry Insights</h5>
-                    <h1 class="display-3 fw-bold text-dark mb-4 page-title-interactive" data-translate="eraOfMedicalAi">The Era of Medical AI</h1>
-                    <p class="lead text-muted mb-5 mx-auto" style="max-width: 700px;" data-translate="pagesHeroDesc">
-                        Discover how Artificial Intelligence is reshaping the landscape of healthcare, from early diagnosis to personalized treatment plans.
-                    </p>
-                </div>
+    <section class="tw-relative tw-bg-gradient-to-br tw-from-blue-600 tw-via-blue-700 tw-to-indigo-800 tw-pt-32 tw-pb-24 tw-overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="tw-absolute tw-inset-0 tw-opacity-10">
+            <div class="tw-absolute tw-top-20 tw-left-10 tw-w-72 tw-h-72 tw-bg-white tw-rounded-full tw-blur-3xl"></div>
+            <div class="tw-absolute tw-bottom-10 tw-right-20 tw-w-96 tw-h-96 tw-bg-teal-300 tw-rounded-full tw-blur-3xl"></div>
+        </div>
+        
+        <div class="tw-container tw-mx-auto tw-px-4 tw-relative tw-z-10 tw-pb-24">
+            <!-- Breadcrumb -->
+            <nav class="tw-flex tw-justify-center tw-mb-6" aria-label="Breadcrumb">
+                <ol class="tw-flex tw-items-center tw-space-x-2 tw-text-sm tw-text-blue-200 tw-opacity-70">
+                    <li><a href="/" class="hover:tw-opacity-100 tw-transition-opacity">Home</a></li>
+                    <li><i class="fas fa-chevron-right tw-text-xs tw-mx-2"></i></li>
+                    <li class="tw-text-white tw-font-medium tw-opacity-100" data-translate="industryInsights">Industry Insights</li>
+                </ol>
+            </nav>
+            
+            <div class="tw-max-w-4xl tw-mx-auto tw-text-center">
+                <span class="tw-inline-flex tw-items-center tw-bg-white/20 tw-backdrop-blur-sm tw-text-white tw-text-sm tw-font-semibold tw-px-4 tw-py-2 tw-rounded-full tw-mb-6">
+                    <i class="fas fa-newspaper" style="margin-right: 8px; margin-left: -1px;"></i>
+                    <span data-translate="industryInsights">Industry Insights</span>
+                </span>
+                <h1 class="tw-text-5xl md:tw-text-6xl lg:tw-text-7xl tw-font-bold tw-text-white tw-mb-8" style="letter-spacing: -0.02em; text-shadow: 0px 2px 4px rgba(0,0,0,0.1);" data-translate="eraOfMedicalAi">
+                    The Era of Medical AI
+                </h1>
+                <p class="tw-text-xl tw-text-blue-100 tw-mx-auto tw-font-medium" style="max-width: 650px; line-height: 1.6; letter-spacing: 0.01em; text-shadow: 0px 2px 4px rgba(0,0,0,0.1);" data-translate="pagesHeroDesc">
+                    Discover how Artificial Intelligence is reshaping the landscape of healthcare, from early diagnosis to personalized treatment plans.
+                </p>
             </div>
         </div>
-    </div>
+        
+        <!-- Wave Divider -->
+        <div class="tw-absolute tw-bottom-0 tw-left-0 tw-right-0">
+            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="tw-w-full">
+                <path d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#f8fafc"/>
+            </svg>
+        </div>
+    </section>
 
-    <!-- ==================== NEWS GRID ==================== -->
-    <section class="py-5 bg-light">
-        <div class="container py-5">
-            <div class="row g-4">
+    <!-- ==================== FEATURED ARTICLES ==================== -->
+    <section class="tw-py-16 tw-bg-slate-50">
+        <div class="tw-container tw-mx-auto tw-px-4">
+            <!-- Section Header -->
+            <div class="tw-text-center tw-mb-12">
+                <h2 class="tw-text-3xl tw-font-bold tw-text-slate-800 tw-mb-4">Featured Stories</h2>
+                <p class="tw-text-slate-500 tw-max-w-xl tw-mx-auto">Breakthrough discoveries and innovations transforming healthcare</p>
+            </div>
+            
+            <!-- Featured Row (2 Large Cards) -->
+            <div class="tw-grid md:tw-grid-cols-2 tw-gap-8 tw-mb-12">
                 
-                <!-- Article 1 -->
-                <div class="col-lg-6">
-                    <div class="card h-100 border-0 shadow-sm hover-card transition-all overflow-hidden">
-                        <div class="row g-0 h-100">
-                            <div class="col-md-5 position-relative" style="min-height: 250px;">
-                                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=500" class="img-fluid w-100 h-100 object-fit-cover position-absolute" alt="AI Diagnostics">
+                <!-- Article 1 - Featured -->
+                <article class="tw-group tw-bg-white tw-rounded-2xl tw-shadow-lg tw-overflow-hidden tw-border tw-border-slate-100 hover:tw-shadow-xl hover:tw-border-blue-200 tw-transition-all tw-duration-300">
+                    <div class="tw-flex tw-flex-col lg:tw-flex-row tw-h-full">
+                        <div class="lg:tw-w-2/5 tw-relative tw-overflow-hidden" style="min-height: 240px;">
+                            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=500" 
+                                 alt="AI Diagnostics" 
+                                 class="tw-absolute tw-inset-0 tw-w-full tw-h-full tw-object-cover group-hover:tw-scale-105 tw-transition-transform tw-duration-500">
+                            <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-black/30 tw-to-transparent"></div>
+                        </div>
+                        <div class="lg:tw-w-3/5 tw-p-6 tw-flex tw-flex-col">
+                            <div class="tw-flex tw-items-center tw-gap-3 tw-mb-4">
+                                <span class="tw-bg-blue-100 tw-text-blue-600 tw-text-xs tw-font-semibold tw-px-3 tw-py-1 tw-rounded-full" data-translate="diagnostics">Diagnostics</span>
+                                <span class="tw-text-slate-400 tw-text-sm">Dec 5, 2025</span>
                             </div>
-                            <div class="col-md-7">
-                                <div class="card-body p-4 d-flex flex-column h-100">
-                                    <div class="mb-2">
-                                        <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-1" data-translate="diagnostics">Diagnostics</span>
-                                        <small class="text-muted ms-2">Dec 5, 2025</small>
-                                    </div>
-                                    <h3 class="h4 fw-bold text-dark mb-3" data-translate="newsArticle1Title">AI Outperforms Human Experts in Early Cancer Detection</h3>
-                                    <p class="text-muted small mb-4 flex-grow-1" data-translate="newsArticle1Desc">Recent studies show deep learning models achieving 99% accuracy in identifying early-stage anomalies in medical imaging, significantly reducing false negatives.</p>
-                                    <a href="https://www.news-medical.net/news/20250102/AI-based-models-can-outperform-human-experts-at-identifying-ovarian-cancer.aspx" target="_blank" class="text-primary fw-bold text-decoration-none" data-translate="readFullStory">Read Full Story <i class="fas fa-arrow-right ms-1"></i></a>
-                                </div>
-                            </div>
+                            <h3 class="tw-text-xl tw-font-bold tw-text-slate-800 tw-mb-3 group-hover:tw-text-blue-600 tw-transition-colors" data-translate="newsArticle1Title">
+                                AI Outperforms Human Experts in Early Cancer Detection
+                            </h3>
+                            <p class="tw-text-slate-500 tw-text-sm tw-mb-4 tw-flex-grow tw-leading-relaxed" data-translate="newsArticle1Desc">
+                                Recent studies show deep learning models achieving 99% accuracy in identifying early-stage anomalies in medical imaging, significantly reducing false negatives.
+                            </p>
+                            <a href="https://www.news-medical.net/news/20250102/AI-based-models-can-outperform-human-experts-at-identifying-ovarian-cancer.aspx" 
+                               target="_blank" 
+                               class="tw-inline-flex tw-items-center tw-text-blue-600 tw-font-semibold tw-text-sm hover:tw-text-blue-700 tw-transition-colors">
+                                <span data-translate="readFullStory">Read Full Story</span>
+                                <i class="fas fa-arrow-right tw-ml-2 group-hover:tw-translate-x-1 tw-transition-transform"></i>
+                            </a>
                         </div>
                     </div>
-                </div>
+                </article>
 
-                <!-- Article 2 -->
-                <div class="col-lg-6">
-                    <div class="card h-100 border-0 shadow-sm hover-card transition-all overflow-hidden">
-                        <div class="row g-0 h-100">
-                            <div class="col-md-5 position-relative" style="min-height: 250px;">
-                                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=500" class="img-fluid w-100 h-100 object-fit-cover position-absolute" alt="Robotic Surgery">
+                <!-- Article 2 - Featured -->
+                <article class="tw-group tw-bg-white tw-rounded-2xl tw-shadow-lg tw-overflow-hidden tw-border tw-border-slate-100 hover:tw-shadow-xl hover:tw-border-blue-200 tw-transition-all tw-duration-300">
+                    <div class="tw-flex tw-flex-col lg:tw-flex-row tw-h-full">
+                        <div class="lg:tw-w-2/5 tw-relative tw-overflow-hidden" style="min-height: 240px;">
+                            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=500" 
+                                 alt="Robotic Surgery" 
+                                 class="tw-absolute tw-inset-0 tw-w-full tw-h-full tw-object-cover group-hover:tw-scale-105 tw-transition-transform tw-duration-500">
+                            <div class="tw-absolute tw-inset-0 tw-bg-gradient-to-t tw-from-black/30 tw-to-transparent"></div>
+                        </div>
+                        <div class="lg:tw-w-3/5 tw-p-6 tw-flex tw-flex-col">
+                            <div class="tw-flex tw-items-center tw-gap-3 tw-mb-4">
+                                <span class="tw-bg-emerald-100 tw-text-emerald-600 tw-text-xs tw-font-semibold tw-px-3 tw-py-1 tw-rounded-full" data-translate="robotics">Robotics</span>
+                                <span class="tw-text-slate-400 tw-text-sm">Nov 28, 2025</span>
                             </div>
-                            <div class="col-md-7">
-                                <div class="card-body p-4 d-flex flex-column h-100">
-                                    <div class="mb-2">
-                                        <span class="badge bg-success-subtle text-success rounded-pill px-3 py-1" data-translate="robotics">Robotics</span>
-                                        <small class="text-muted ms-2">Nov 28, 2025</small>
-                                    </div>
-                                    <h3 class="h4 fw-bold text-dark mb-3" data-translate="newsArticle2Title">Precision Surgery: The Rise of AI-Assisted Operations</h3>
-                                    <p class="text-muted small mb-4 flex-grow-1" data-translate="newsArticle2Desc">Surgeons are now leveraging AI-powered robotic arms to perform complex procedures with sub-millimeter precision, minimizing recovery time for patients.</p>
-                                    <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12181090/" target="_blank" class="text-primary fw-bold text-decoration-none" data-translate="readFullStory">Read Full Story <i class="fas fa-arrow-right ms-1"></i></a>
-                                </div>
-                            </div>
+                            <h3 class="tw-text-xl tw-font-bold tw-text-slate-800 tw-mb-3 group-hover:tw-text-blue-600 tw-transition-colors" data-translate="newsArticle2Title">
+                                Precision Surgery: The Rise of AI-Assisted Operations
+                            </h3>
+                            <p class="tw-text-slate-500 tw-text-sm tw-mb-4 tw-flex-grow tw-leading-relaxed" data-translate="newsArticle2Desc">
+                                Surgeons are now leveraging AI-powered robotic arms to perform complex procedures with sub-millimeter precision, minimizing recovery time for patients.
+                            </p>
+                            <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12181090/" 
+                               target="_blank" 
+                               class="tw-inline-flex tw-items-center tw-text-blue-600 tw-font-semibold tw-text-sm hover:tw-text-blue-700 tw-transition-colors">
+                                <span data-translate="readFullStory">Read Full Story</span>
+                                <i class="fas fa-arrow-right tw-ml-2 group-hover:tw-translate-x-1 tw-transition-transform"></i>
+                            </a>
                         </div>
                     </div>
-                </div>
+                </article>
+            </div>
 
+            <!-- Regular Articles Grid (3 Columns) -->
+            <div class="tw-grid md:tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-8">
+                
                 <!-- Article 3 -->
-                <div class="col-lg-4">
-                    <div class="card h-100 border-0 shadow-sm hover-card transition-all">
-                        <div class="card-img-top overflow-hidden position-relative" style="height: 200px;">
-                            <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&q=80&w=500" class="img-fluid w-100 h-100 object-fit-cover" alt="Drug Discovery">
-                        </div>
-                        <div class="card-body p-4">
-                            <div class="mb-3">
-                                <span class="badge bg-info-subtle text-info rounded-pill px-3 py-1" data-translate="pharma">Pharma</span>
-                            </div>
-                            <h4 class="fw-bold text-dark mb-3" data-translate="newsArticle3Title">Accelerating Drug Discovery</h4>
-                            <p class="text-muted small mb-4" data-translate="newsArticle3Desc">Generative AI is slashing drug development timelines from years to months by predicting molecular interactions.</p>
-                            <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11510778/" target="_blank" class="text-primary fw-bold text-decoration-none" data-translate="learnMore">Learn More <i class="fas fa-arrow-right ms-1"></i></a>
+                <article class="tw-group tw-bg-white tw-rounded-2xl tw-shadow-lg tw-overflow-hidden tw-border tw-border-slate-100 hover:tw-shadow-xl hover:tw-border-blue-200 tw-transition-all tw-duration-300">
+                    <div class="tw-relative tw-h-48 tw-overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&q=80&w=500" 
+                             alt="Drug Discovery" 
+                             class="tw-w-full tw-h-full tw-object-cover group-hover:tw-scale-105 tw-transition-transform tw-duration-500">
+                        <div class="tw-absolute tw-top-4 tw-left-4">
+                            <span class="tw-bg-cyan-100 tw-text-cyan-600 tw-text-xs tw-font-semibold tw-px-3 tw-py-1 tw-rounded-full" data-translate="pharma">Pharma</span>
                         </div>
                     </div>
-                </div>
+                    <div class="tw-p-6">
+                        <h4 class="tw-text-lg tw-font-bold tw-text-slate-800 tw-mb-3 group-hover:tw-text-blue-600 tw-transition-colors" data-translate="newsArticle3Title">
+                            Accelerating Drug Discovery
+                        </h4>
+                        <p class="tw-text-slate-500 tw-text-sm tw-mb-4 tw-leading-relaxed" data-translate="newsArticle3Desc">
+                            Generative AI is slashing drug development timelines from years to months by predicting molecular interactions.
+                        </p>
+                        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11510778/" 
+                           target="_blank" 
+                           class="tw-inline-flex tw-items-center tw-text-blue-600 tw-font-semibold tw-text-sm hover:tw-text-blue-700 tw-transition-colors">
+                            <span data-translate="learnMore">Learn More</span>
+                            <i class="fas fa-arrow-right tw-ml-2 group-hover:tw-translate-x-1 tw-transition-transform"></i>
+                        </a>
+                    </div>
+                </article>
 
                 <!-- Article 4 -->
-                <div class="col-lg-4">
-                    <div class="card h-100 border-0 shadow-sm hover-card transition-all">
-                        <div class="card-img-top overflow-hidden position-relative" style="height: 200px;">
-                            <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80&w=500" class="img-fluid w-100 h-100 object-fit-cover" alt="Personalized Medicine">
-                        </div>
-                        <div class="card-body p-4">
-                            <div class="mb-3">
-                                <span class="badge bg-warning-subtle text-warning rounded-pill px-3 py-1" data-translate="genomics">Genomics</span>
-                            </div>
-                            <h4 class="fw-bold text-dark mb-3" data-translate="newsArticle4Title">Hyper-Personalized Medicine</h4>
-                            <p class="text-muted small mb-4" data-translate="newsArticle4Desc">AI algorithms analyzing genomic data can now tailor treatment plans specifically to an individual's DNA profile.</p>
-                            <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10617817/" target="_blank" class="text-primary fw-bold text-decoration-none" data-translate="learnMore">Learn More <i class="fas fa-arrow-right ms-1"></i></a>
+                <article class="tw-group tw-bg-white tw-rounded-2xl tw-shadow-lg tw-overflow-hidden tw-border tw-border-slate-100 hover:tw-shadow-xl hover:tw-border-blue-200 tw-transition-all tw-duration-300">
+                    <div class="tw-relative tw-h-48 tw-overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80&w=500" 
+                             alt="Personalized Medicine" 
+                             class="tw-w-full tw-h-full tw-object-cover group-hover:tw-scale-105 tw-transition-transform tw-duration-500">
+                        <div class="tw-absolute tw-top-4 tw-left-4">
+                            <span class="tw-bg-amber-100 tw-text-amber-600 tw-text-xs tw-font-semibold tw-px-3 tw-py-1 tw-rounded-full" data-translate="genomics">Genomics</span>
                         </div>
                     </div>
-                </div>
+                    <div class="tw-p-6">
+                        <h4 class="tw-text-lg tw-font-bold tw-text-slate-800 tw-mb-3 group-hover:tw-text-blue-600 tw-transition-colors" data-translate="newsArticle4Title">
+                            Hyper-Personalized Medicine
+                        </h4>
+                        <p class="tw-text-slate-500 tw-text-sm tw-mb-4 tw-leading-relaxed" data-translate="newsArticle4Desc">
+                            AI algorithms analyzing genomic data can now tailor treatment plans specifically to an individual's DNA profile.
+                        </p>
+                        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10617817/" 
+                           target="_blank" 
+                           class="tw-inline-flex tw-items-center tw-text-blue-600 tw-font-semibold tw-text-sm hover:tw-text-blue-700 tw-transition-colors">
+                            <span data-translate="learnMore">Learn More</span>
+                            <i class="fas fa-arrow-right tw-ml-2 group-hover:tw-translate-x-1 tw-transition-transform"></i>
+                        </a>
+                    </div>
+                </article>
 
                 <!-- Article 5 -->
-                <div class="col-lg-4">
-                    <div class="card h-100 border-0 shadow-sm hover-card transition-all">
-                        <div class="card-img-top overflow-hidden position-relative" style="height: 200px;">
-                            <img src="https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&q=80&w=500" class="img-fluid w-100 h-100 object-fit-cover" alt="Virtual Assistants">
-                        </div>
-                        <div class="card-body p-4">
-                            <div class="mb-3">
-                                <span class="badge bg-danger-subtle text-danger rounded-pill px-3 py-1" data-translate="patientCare">Patient Care</span>
-                            </div>
-                            <h4 class="fw-bold text-dark mb-3" data-translate="newsArticle5Title">24/7 Virtual Health Assistants</h4>
-                            <p class="text-muted small mb-4" data-translate="newsArticle5Desc">LLM-powered chatbots are providing instant, accurate medical triage and mental health support globally.</p>
-                            <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11140094/" target="_blank" class="text-primary fw-bold text-decoration-none" data-translate="learnMore">Learn More <i class="fas fa-arrow-right ms-1"></i></a>
+                <article class="tw-group tw-bg-white tw-rounded-2xl tw-shadow-lg tw-overflow-hidden tw-border tw-border-slate-100 hover:tw-shadow-xl hover:tw-border-blue-200 tw-transition-all tw-duration-300">
+                    <div class="tw-relative tw-h-48 tw-overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&q=80&w=500" 
+                             alt="Virtual Assistants" 
+                             class="tw-w-full tw-h-full tw-object-cover group-hover:tw-scale-105 tw-transition-transform tw-duration-500">
+                        <div class="tw-absolute tw-top-4 tw-left-4">
+                            <span class="tw-bg-rose-100 tw-text-rose-600 tw-text-xs tw-font-semibold tw-px-3 tw-py-1 tw-rounded-full" data-translate="patientCare">Patient Care</span>
                         </div>
                     </div>
-                </div>
+                    <div class="tw-p-6">
+                        <h4 class="tw-text-lg tw-font-bold tw-text-slate-800 tw-mb-3 group-hover:tw-text-blue-600 tw-transition-colors" data-translate="newsArticle5Title">
+                            24/7 Virtual Health Assistants
+                        </h4>
+                        <p class="tw-text-slate-500 tw-text-sm tw-mb-4 tw-leading-relaxed" data-translate="newsArticle5Desc">
+                            LLM-powered chatbots are providing instant, accurate medical triage and mental health support globally.
+                        </p>
+                        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11140094/" 
+                           target="_blank" 
+                           class="tw-inline-flex tw-items-center tw-text-blue-600 tw-font-semibold tw-text-sm hover:tw-text-blue-700 tw-transition-colors">
+                            <span data-translate="learnMore">Learn More</span>
+                            <i class="fas fa-arrow-right tw-ml-2 group-hover:tw-translate-x-1 tw-transition-transform"></i>
+                        </a>
+                    </div>
+                </article>
 
             </div>
         </div>
     </section>
 
     <!-- ==================== CTA SECTION ==================== -->
-    <section class="py-5 bg-white">
-        <div class="container py-5">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 text-center">
-                    <h2 class="display-6 fw-bold text-dark mb-4" data-translate="joinTheRevolution">Join the Revolution</h2>
-                    <p class="lead text-muted mb-5" data-translate="joinRevolutionDesc">Oral AI is at the forefront of this transformation. Experience our cutting-edge diagnostic tools today.</p>
-                    <button class="btn btn-primary btn-lg rounded-pill px-5 py-3 shadow-sm" onclick="showAnalysis()" data-translate="tryOralAiNow">
-                        Try Oral AI Now
-                    </button>
-                </div>
+    <section class="tw-py-20 tw-bg-gradient-to-r tw-from-blue-600 tw-to-indigo-700 tw-relative tw-overflow-hidden">
+        <!-- Background decorations -->
+        <div class="tw-absolute tw-inset-0 tw-opacity-10">
+            <div class="tw-absolute tw-top-0 tw-right-0 tw-w-64 tw-h-64 tw-bg-white tw-rounded-full tw-blur-3xl"></div>
+            <div class="tw-absolute tw-bottom-0 tw-left-0 tw-w-96 tw-h-96 tw-bg-teal-300 tw-rounded-full tw-blur-3xl"></div>
+        </div>
+        
+        <div class="tw-container tw-mx-auto tw-px-4 tw-relative tw-z-10">
+            <div class="tw-max-w-3xl tw-mx-auto tw-text-center">
+                <span class="tw-inline-flex tw-items-center tw-bg-white/20 tw-backdrop-blur-sm tw-text-white tw-text-sm tw-font-medium tw-px-4 tw-py-2 tw-rounded-full tw-mb-6">
+                    <i class="fas fa-rocket tw-mr-2"></i>
+                    Be Part of the Future
+                </span>
+                <h2 class="tw-text-3xl md:tw-text-4xl tw-font-bold tw-text-white tw-mb-6" data-translate="joinTheRevolution">
+                    Join the Revolution
+                </h2>
+                <p class="tw-text-xl tw-text-blue-100 tw-mb-10 tw-leading-relaxed" data-translate="joinRevolutionDesc">
+                    Oral AI is at the forefront of this transformation. Experience our cutting-edge diagnostic tools today.
+                </p>
+                <button onclick="showAnalysis()" 
+                        class="tw-bg-white tw-text-blue-600 tw-font-bold tw-px-10 tw-py-4 tw-rounded-full tw-shadow-lg hover:tw-shadow-xl hover:tw-bg-blue-50 tw-transition-all tw-duration-300 tw-transform hover:tw--translate-y-1">
+                    <span data-translate="tryOralAiNow">Try Oral AI Now</span>
+                    <i class="fas fa-arrow-right tw-ml-2"></i>
+                </button>
             </div>
         </div>
     </section>

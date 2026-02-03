@@ -1,0 +1,344 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="tw-relative tw-bg-gradient-to-br tw-from-blue-600 tw-via-blue-700 tw-to-indigo-800 tw-pt-32 tw-pb-24 tw-overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="tw-absolute tw-inset-0 tw-opacity-10">
+            <div class="tw-absolute tw-top-20 tw-left-10 tw-w-72 tw-h-72 tw-bg-white tw-rounded-full tw-blur-3xl"></div>
+            <div class="tw-absolute tw-bottom-10 tw-right-20 tw-w-96 tw-h-96 tw-bg-teal-300 tw-rounded-full tw-blur-3xl"></div>
+        </div>
+        
+        <div class="tw-container tw-mx-auto tw-px-4 tw-relative tw-z-10 tw-pb-24">
+            <!-- Breadcrumb -->
+            <nav class="tw-flex tw-justify-center tw-mb-6" aria-label="Breadcrumb">
+                <ol class="tw-flex tw-items-center tw-space-x-2 tw-text-sm tw-text-blue-200 tw-opacity-70">
+                    <li><a href="/" class="hover:tw-opacity-100 tw-transition-opacity">Home</a></li>
+                    <li><i class="fas fa-chevron-right tw-text-xs tw-mx-2"></i></li>
+                    <li class="tw-text-white tw-font-medium tw-opacity-100">Our Services</li>
+                </ol>
+            </nav>
+            
+            <div class="tw-max-w-4xl tw-mx-auto tw-text-center">
+                <span class="tw-inline-flex tw-items-center tw-bg-white/20 tw-backdrop-blur-sm tw-text-white tw-text-sm tw-font-semibold tw-px-4 tw-py-2 tw-rounded-full tw-mb-6">
+                    <i class="fas fa-cogs" style="margin-right: 8px; margin-left: -1px;"></i>
+                    AI-Powered Diagnostics
+                </span>
+                <h1 class="tw-text-5xl md:tw-text-6xl lg:tw-text-7xl tw-font-bold tw-text-white tw-mb-8" style="letter-spacing: -0.02em; text-shadow: 0px 2px 4px rgba(0,0,0,0.1);">
+                    Our Services
+                </h1>
+                <p class="tw-text-xl tw-text-blue-100 tw-mx-auto tw-font-medium" style="max-width: 650px; line-height: 1.6; letter-spacing: 0.01em; text-shadow: 0px 2px 4px rgba(0,0,0,0.1);">
+                    Advanced AI diagnostic tools designed to revolutionize oral health assessment with precision and speed.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Wave Divider -->
+        <div class="tw-absolute tw-bottom-0 tw-left-0 tw-right-0">
+            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="tw-w-full">
+                <path d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#f8fafc"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- ==================== MAIN SERVICES GRID ==================== -->
+    <section class="tw-py-20 tw-bg-slate-50">
+        <div class="tw-container tw-mx-auto tw-px-4">
+            <!-- Section Header -->
+            <div class="tw-text-center tw-mb-16">
+                <span class="tw-inline-block tw-bg-blue-100 tw-text-blue-600 tw-text-sm tw-font-semibold tw-px-4 tw-py-2 tw-rounded-full tw-mb-4">
+                    Core Diagnostics
+                </span>
+                <h2 class="tw-text-3xl md:tw-text-4xl tw-font-bold tw-text-slate-800 tw-mb-4">
+                    AI Diagnostic Features
+                </h2>
+                <p class="tw-text-slate-500 tw-max-w-xl tw-mx-auto tw-leading-relaxed">
+                    Our suite of specialized AI models provides comprehensive oral health analysis
+                </p>
+            </div>
+
+            <!-- Services Grid (2 cols mobile, 3 cols desktop) -->
+            <div class="tw-grid tw-grid-cols-1 sm:tw-grid-cols-2 lg:tw-grid-cols-3 tw-gap-8">
+                
+                <!-- Service Card 1: Caries Detection -->
+                <div class="tw-group tw-bg-white tw-rounded-2xl tw-p-8 tw-shadow-lg tw-border-2 tw-border-transparent hover:tw-border-blue-500 tw-transition-all tw-duration-300 hover:tw-shadow-xl">
+                    <div class="tw-w-16 tw-h-16 tw-bg-gradient-to-br tw-from-blue-500 tw-to-blue-600 tw-rounded-2xl tw-flex tw-items-center tw-justify-center tw-mb-6 group-hover:tw-scale-110 tw-transition-transform tw-duration-300 tw-shadow-lg tw-shadow-blue-200">
+                        <i class="fas fa-search tw-text-white tw-text-2xl"></i>
+                    </div>
+                    <h3 class="tw-text-xl tw-font-bold tw-text-slate-800 tw-mb-3 group-hover:tw-text-blue-600 tw-transition-colors">
+                        Caries Detection
+                    </h3>
+                    <p class="tw-text-slate-500 tw-leading-relaxed tw-mb-4">
+                        Our advanced AI model detects dental caries at early stages with 98% accuracy, enabling preventive treatment before progression.
+                    </p>
+                    <ul class="tw-space-y-2 tw-text-sm tw-text-slate-600 tw-mb-6">
+                        <li class="tw-flex tw-items-center">
+                            <i class="fas fa-check tw-text-teal-500 tw-mr-2"></i>
+                            Early-stage detection
+                        </li>
+                        <li class="tw-flex tw-items-center">
+                            <i class="fas fa-check tw-text-teal-500 tw-mr-2"></i>
+                            Multi-surface analysis
+                        </li>
+                        <li class="tw-flex tw-items-center">
+                            <i class="fas fa-check tw-text-teal-500 tw-mr-2"></i>
+                            Severity grading
+                        </li>
+                    </ul>
+                    <a href="/triage" class="tw-inline-flex tw-items-center tw-text-blue-600 tw-font-semibold tw-text-sm hover:tw-text-blue-700 tw-transition-colors">
+                        Try Caries Detection
+                        <i class="fas fa-arrow-right tw-ml-2 group-hover:tw-translate-x-1 tw-transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- Service Card 2: Gingivitis Screening -->
+                <div class="tw-group tw-bg-white tw-rounded-2xl tw-p-8 tw-shadow-lg tw-border-2 tw-border-transparent hover:tw-border-blue-500 tw-transition-all tw-duration-300 hover:tw-shadow-xl">
+                    <div class="tw-w-16 tw-h-16 tw-bg-gradient-to-br tw-from-teal-500 tw-to-teal-600 tw-rounded-2xl tw-flex tw-items-center tw-justify-center tw-mb-6 group-hover:tw-scale-110 tw-transition-transform tw-duration-300 tw-shadow-lg tw-shadow-teal-200">
+                        <i class="fas fa-shield-alt tw-text-white tw-text-2xl"></i>
+                    </div>
+                    <h3 class="tw-text-xl tw-font-bold tw-text-slate-800 tw-mb-3 group-hover:tw-text-blue-600 tw-transition-colors">
+                        Gingivitis Screening
+                    </h3>
+                    <p class="tw-text-slate-500 tw-leading-relaxed tw-mb-4">
+                        Comprehensive gum health assessment using AI to detect inflammation, bleeding risk, and periodontal disease indicators.
+                    </p>
+                    <ul class="tw-space-y-2 tw-text-sm tw-text-slate-600 tw-mb-6">
+                        <li class="tw-flex tw-items-center">
+                            <i class="fas fa-check tw-text-teal-500 tw-mr-2"></i>
+                            Gum inflammation detection
+                        </li>
+                        <li class="tw-flex tw-items-center">
+                            <i class="fas fa-check tw-text-teal-500 tw-mr-2"></i>
+                            Periodontal risk score
+                        </li>
+                        <li class="tw-flex tw-items-center">
+                            <i class="fas fa-check tw-text-teal-500 tw-mr-2"></i>
+                            Treatment recommendations
+                        </li>
+                    </ul>
+                    <a href="/triage" class="tw-inline-flex tw-items-center tw-text-blue-600 tw-font-semibold tw-text-sm hover:tw-text-blue-700 tw-transition-colors">
+                        Try Gingivitis Screening
+                        <i class="fas fa-arrow-right tw-ml-2 group-hover:tw-translate-x-1 tw-transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- Service Card 3: Oral Cancer Analysis -->
+                <div class="tw-group tw-bg-white tw-rounded-2xl tw-p-8 tw-shadow-lg tw-border-2 tw-border-transparent hover:tw-border-blue-500 tw-transition-all tw-duration-300 hover:tw-shadow-xl">
+                    <div class="tw-w-16 tw-h-16 tw-bg-gradient-to-br tw-from-rose-500 tw-to-rose-600 tw-rounded-2xl tw-flex tw-items-center tw-justify-center tw-mb-6 group-hover:tw-scale-110 tw-transition-transform tw-duration-300 tw-shadow-lg tw-shadow-rose-200">
+                        <i class="fas fa-heartbeat tw-text-white tw-text-2xl"></i>
+                    </div>
+                    <h3 class="tw-text-xl tw-font-bold tw-text-slate-800 tw-mb-3 group-hover:tw-text-blue-600 tw-transition-colors">
+                        Oral Cancer Analysis
+                    </h3>
+                    <p class="tw-text-slate-500 tw-leading-relaxed tw-mb-4">
+                        AI-powered screening for precancerous lesions and abnormalities, crucial for early intervention and improved outcomes.
+                    </p>
+                    <ul class="tw-space-y-2 tw-text-sm tw-text-slate-600 tw-mb-6">
+                        <li class="tw-flex tw-items-center">
+                            <i class="fas fa-check tw-text-teal-500 tw-mr-2"></i>
+                            Lesion identification
+                        </li>
+                        <li class="tw-flex tw-items-center">
+                            <i class="fas fa-check tw-text-teal-500 tw-mr-2"></i>
+                            Risk stratification
+                        </li>
+                        <li class="tw-flex tw-items-center">
+                            <i class="fas fa-check tw-text-teal-500 tw-mr-2"></i>
+                            Referral guidance
+                        </li>
+                    </ul>
+                    <a href="/triage" class="tw-inline-flex tw-items-center tw-text-blue-600 tw-font-semibold tw-text-sm hover:tw-text-blue-700 tw-transition-colors">
+                        Try Cancer Screening
+                        <i class="fas fa-arrow-right tw-ml-2 group-hover:tw-translate-x-1 tw-transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- Service Card 4: AI Triage Router -->
+                <div class="tw-group tw-bg-white tw-rounded-2xl tw-p-8 tw-shadow-lg tw-border-2 tw-border-transparent hover:tw-border-blue-500 tw-transition-all tw-duration-300 hover:tw-shadow-xl">
+                    <div class="tw-w-16 tw-h-16 tw-bg-gradient-to-br tw-from-indigo-500 tw-to-indigo-600 tw-rounded-2xl tw-flex tw-items-center tw-justify-center tw-mb-6 group-hover:tw-scale-110 tw-transition-transform tw-duration-300 tw-shadow-lg tw-shadow-indigo-200">
+                        <i class="fas fa-route tw-text-white tw-text-2xl"></i>
+                    </div>
+                    <h3 class="tw-text-xl tw-font-bold tw-text-slate-800 tw-mb-3 group-hover:tw-text-blue-600 tw-transition-colors">
+                        Smart Triage Router
+                    </h3>
+                    <p class="tw-text-slate-500 tw-leading-relaxed tw-mb-4">
+                        Intelligent routing system that automatically directs images to the appropriate specialized model for optimal analysis.
+                    </p>
+                    <ul class="tw-space-y-2 tw-text-sm tw-text-slate-600 tw-mb-6">
+                        <li class="tw-flex tw-items-center">
+                            <i class="fas fa-check tw-text-teal-500 tw-mr-2"></i>
+                            Automatic classification
+                        </li>
+                        <li class="tw-flex tw-items-center">
+                            <i class="fas fa-check tw-text-teal-500 tw-mr-2"></i>
+                            Multi-model support
+                        </li>
+                        <li class="tw-flex tw-items-center">
+                            <i class="fas fa-check tw-text-teal-500 tw-mr-2"></i>
+                            Instant routing
+                        </li>
+                    </ul>
+                    <a href="/triage" class="tw-inline-flex tw-items-center tw-text-blue-600 tw-font-semibold tw-text-sm hover:tw-text-blue-700 tw-transition-colors">
+                        Use Smart Triage
+                        <i class="fas fa-arrow-right tw-ml-2 group-hover:tw-translate-x-1 tw-transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- Service Card 5: Detailed Reporting -->
+                <div class="tw-group tw-bg-white tw-rounded-2xl tw-p-8 tw-shadow-lg tw-border-2 tw-border-transparent hover:tw-border-blue-500 tw-transition-all tw-duration-300 hover:tw-shadow-xl">
+                    <div class="tw-w-16 tw-h-16 tw-bg-gradient-to-br tw-from-amber-500 tw-to-amber-600 tw-rounded-2xl tw-flex tw-items-center tw-justify-center tw-mb-6 group-hover:tw-scale-110 tw-transition-transform tw-duration-300 tw-shadow-lg tw-shadow-amber-200">
+                        <i class="fas fa-file-medical-alt tw-text-white tw-text-2xl"></i>
+                    </div>
+                    <h3 class="tw-text-xl tw-font-bold tw-text-slate-800 tw-mb-3 group-hover:tw-text-blue-600 tw-transition-colors">
+                        Detailed Reporting
+                    </h3>
+                    <p class="tw-text-slate-500 tw-leading-relaxed tw-mb-4">
+                        Generate comprehensive PDF reports with analysis results, confidence scores, and actionable recommendations.
+                    </p>
+                    <ul class="tw-space-y-2 tw-text-sm tw-text-slate-600 tw-mb-6">
+                        <li class="tw-flex tw-items-center">
+                            <i class="fas fa-check tw-text-teal-500 tw-mr-2"></i>
+                            PDF export
+                        </li>
+                        <li class="tw-flex tw-items-center">
+                            <i class="fas fa-check tw-text-teal-500 tw-mr-2"></i>
+                            Visual annotations
+                        </li>
+                        <li class="tw-flex tw-items-center">
+                            <i class="fas fa-check tw-text-teal-500 tw-mr-2"></i>
+                            Shareable results
+                        </li>
+                    </ul>
+                    <a href="/triage" class="tw-inline-flex tw-items-center tw-text-blue-600 tw-font-semibold tw-text-sm hover:tw-text-blue-700 tw-transition-colors">
+                        Generate Report
+                        <i class="fas fa-arrow-right tw-ml-2 group-hover:tw-translate-x-1 tw-transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- Service Card 6: AI Consultation -->
+                <div class="tw-group tw-bg-white tw-rounded-2xl tw-p-8 tw-shadow-lg tw-border-2 tw-border-transparent hover:tw-border-blue-500 tw-transition-all tw-duration-300 hover:tw-shadow-xl">
+                    <div class="tw-w-16 tw-h-16 tw-bg-gradient-to-br tw-from-purple-500 tw-to-purple-600 tw-rounded-2xl tw-flex tw-items-center tw-justify-center tw-mb-6 group-hover:tw-scale-110 tw-transition-transform tw-duration-300 tw-shadow-lg tw-shadow-purple-200">
+                        <i class="fas fa-robot tw-text-white tw-text-2xl"></i>
+                    </div>
+                    <h3 class="tw-text-xl tw-font-bold tw-text-slate-800 tw-mb-3 group-hover:tw-text-blue-600 tw-transition-colors">
+                        AI Consultation
+                    </h3>
+                    <p class="tw-text-slate-500 tw-leading-relaxed tw-mb-4">
+                        Interactive AI chatbot providing instant answers to oral health questions and guidance based on analysis results.
+                    </p>
+                    <ul class="tw-space-y-2 tw-text-sm tw-text-slate-600 tw-mb-6">
+                        <li class="tw-flex tw-items-center">
+                            <i class="fas fa-check tw-text-teal-500 tw-mr-2"></i>
+                            24/7 availability
+                        </li>
+                        <li class="tw-flex tw-items-center">
+                            <i class="fas fa-check tw-text-teal-500 tw-mr-2"></i>
+                            Contextual responses
+                        </li>
+                        <li class="tw-flex tw-items-center">
+                            <i class="fas fa-check tw-text-teal-500 tw-mr-2"></i>
+                            Evidence-based info
+                        </li>
+                    </ul>
+                    <a href="/" class="tw-inline-flex tw-items-center tw-text-blue-600 tw-font-semibold tw-text-sm hover:tw-text-blue-700 tw-transition-colors">
+                        Start Chat
+                        <i class="fas fa-arrow-right tw-ml-2 group-hover:tw-translate-x-1 tw-transition-transform"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== HOW IT WORKS ==================== -->
+    <section class="tw-py-20 tw-bg-white">
+        <div class="tw-container tw-mx-auto tw-px-4">
+            <div class="tw-text-center tw-mb-16">
+                <span class="tw-inline-block tw-bg-teal-100 tw-text-teal-600 tw-text-sm tw-font-semibold tw-px-4 tw-py-2 tw-rounded-full tw-mb-4">
+                    Simple Process
+                </span>
+                <h2 class="tw-text-3xl md:tw-text-4xl tw-font-bold tw-text-slate-800 tw-mb-4">
+                    How It Works
+                </h2>
+                <p class="tw-text-slate-500 tw-max-w-xl tw-mx-auto tw-leading-relaxed">
+                    Get your AI-powered oral health analysis in three simple steps
+                </p>
+            </div>
+
+            <div class="tw-grid md:tw-grid-cols-3 tw-gap-8 tw-max-w-5xl tw-mx-auto">
+                <!-- Step 1 -->
+                <div class="tw-text-center tw-relative">
+                    <div class="tw-w-20 tw-h-20 tw-bg-gradient-to-br tw-from-blue-500 tw-to-blue-600 tw-rounded-full tw-flex tw-items-center tw-justify-center tw-mx-auto tw-mb-6 tw-shadow-lg tw-shadow-blue-200">
+                        <span class="tw-text-white tw-text-2xl tw-font-bold">1</span>
+                    </div>
+                    <!-- Connector line (hidden on mobile) -->
+                    <div class="tw-hidden md:tw-block tw-absolute tw-top-10 tw-left-[60%] tw-w-[80%] tw-h-0.5 tw-bg-gradient-to-r tw-from-blue-300 tw-to-teal-300"></div>
+                    <h3 class="tw-text-xl tw-font-bold tw-text-slate-800 tw-mb-3">Upload Image</h3>
+                    <p class="tw-text-slate-500">
+                        Take a photo of your teeth or upload an existing dental image through our secure platform
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="tw-text-center tw-relative">
+                    <div class="tw-w-20 tw-h-20 tw-bg-gradient-to-br tw-from-teal-500 tw-to-teal-600 tw-rounded-full tw-flex tw-items-center tw-justify-center tw-mx-auto tw-mb-6 tw-shadow-lg tw-shadow-teal-200">
+                        <span class="tw-text-white tw-text-2xl tw-font-bold">2</span>
+                    </div>
+                    <!-- Connector line (hidden on mobile) -->
+                    <div class="tw-hidden md:tw-block tw-absolute tw-top-10 tw-left-[60%] tw-w-[80%] tw-h-0.5 tw-bg-gradient-to-r tw-from-teal-300 tw-to-indigo-300"></div>
+                    <h3 class="tw-text-xl tw-font-bold tw-text-slate-800 tw-mb-3">AI Analysis</h3>
+                    <p class="tw-text-slate-500">
+                        Our advanced AI models analyze your image for various oral health conditions in seconds
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="tw-text-center">
+                    <div class="tw-w-20 tw-h-20 tw-bg-gradient-to-br tw-from-indigo-500 tw-to-indigo-600 tw-rounded-full tw-flex tw-items-center tw-justify-center tw-mx-auto tw-mb-6 tw-shadow-lg tw-shadow-indigo-200">
+                        <span class="tw-text-white tw-text-2xl tw-font-bold">3</span>
+                    </div>
+                    <h3 class="tw-text-xl tw-font-bold tw-text-slate-800 tw-mb-3">Get Results</h3>
+                    <p class="tw-text-slate-500">
+                        Receive detailed analysis with confidence scores, recommendations, and downloadable reports
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CTA SECTION ==================== -->
+    <section class="tw-py-20 tw-bg-gradient-to-r tw-from-blue-600 tw-to-indigo-700 tw-relative tw-overflow-hidden">
+        <!-- Background decorations -->
+        <div class="tw-absolute tw-inset-0 tw-opacity-10">
+            <div class="tw-absolute tw-top-0 tw-right-0 tw-w-64 tw-h-64 tw-bg-white tw-rounded-full tw-blur-3xl"></div>
+            <div class="tw-absolute tw-bottom-0 tw-left-0 tw-w-96 tw-h-96 tw-bg-teal-300 tw-rounded-full tw-blur-3xl"></div>
+        </div>
+        
+        <div class="tw-container tw-mx-auto tw-px-4 tw-relative tw-z-10">
+            <div class="tw-max-w-3xl tw-mx-auto tw-text-center">
+                <span class="tw-inline-flex tw-items-center tw-bg-white/20 tw-backdrop-blur-sm tw-text-white tw-text-sm tw-font-medium tw-px-4 tw-py-2 tw-rounded-full tw-mb-6">
+                    <i class="fas fa-bolt tw-mr-2"></i>
+                    Start Your Analysis
+                </span>
+                <h2 class="tw-text-3xl md:tw-text-4xl tw-font-bold tw-text-white tw-mb-6">
+                    Ready to Experience AI Diagnostics?
+                </h2>
+                <p class="tw-text-xl tw-text-blue-100 tw-mb-10 tw-leading-relaxed">
+                    Upload your first image and see the power of AI-driven oral health analysis in action.
+                </p>
+                <div class="tw-flex tw-flex-col sm:tw-flex-row tw-gap-4 tw-justify-center">
+                    <a href="/triage" 
+                       class="tw-bg-white tw-text-blue-600 tw-font-bold tw-px-10 tw-py-4 tw-rounded-full tw-shadow-lg hover:tw-shadow-xl hover:tw-bg-blue-50 tw-transition-all tw-duration-300 tw-transform hover:tw--translate-y-1">
+                        Start Analysis
+                        <i class="fas fa-arrow-right tw-ml-2"></i>
+                    </a>
+                    <a href="/contact" 
+                       class="tw-bg-transparent tw-text-white tw-font-bold tw-px-10 tw-py-4 tw-rounded-full tw-border-2 tw-border-white/50 hover:tw-bg-white/10 tw-transition-all tw-duration-300">
+                        Contact Us
+                        <i class="fas fa-envelope tw-ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
