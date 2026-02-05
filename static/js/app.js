@@ -326,6 +326,9 @@ class App {
         const btnHeatmap = document.getElementById('ma-btn-heatmap');
         if (btnHeatmap) btnHeatmap.addEventListener('click', () => this.modelAUI.switchImage('heatmap'));
         
+        const btnSegmentation = document.getElementById('ma-btn-segmentation');
+        if (btnSegmentation) btnSegmentation.addEventListener('click', () => this.modelAUI.switchImage('segmentation'));
+        
         const btnReportA = document.getElementById('btn-report-a');
         if (btnReportA) btnReportA.addEventListener('click', () => this.downloadReport('A'));
 

@@ -108,7 +108,7 @@ export class ModelBUI {
         list.innerHTML = '';
         
         if (data.detections.length === 0) {
-            list.innerHTML = `<div class="text-center text-muted py-5"><i class="fas fa-check-circle display-4 mb-3 text-success"></i><p>${t('noIssuesDetected', 'No specific issues detected.')}</p></div>`;
+            list.innerHTML = `<div class="no-issues"><i class="fas fa-check-circle"></i><p>${t('noIssuesDetected', 'No specific issues detected.')}</p></div>`;
         } else {
             const counts = {};
             data.detections.forEach(d => counts[d.class] = (counts[d.class] || 0) + 1);
@@ -119,9 +119,9 @@ export class ModelBUI {
                 const translatedCls = t(conditionKey, cls);
                 const detectedText = t('detectedCount', '{count} detected').replace('{count}', count);
                 list.innerHTML += `
-                    <div class="d-flex justify-content-between align-items-center p-3 bg-light rounded border">
-                        <span class="fw-medium text-secondary">${translatedCls}</span>
-                        <span class="badge bg-primary-subtle text-primary-emphasis rounded-pill">${detectedText}</span>
+                    <div class="finding-item">
+                        <span class="finding-name">${translatedCls}</span>
+                        <span class="finding-count">${detectedText}</span>
                     </div>`;
             }
         }
