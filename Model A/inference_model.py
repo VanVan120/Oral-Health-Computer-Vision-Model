@@ -9,7 +9,6 @@ import cv2
 import base64
 from io import BytesIO
 from stain_utils import MacenkoNormalizer
-from yolo_visualizer import CellSegmentationVisualizer
 
 # --- 1. Model Architecture (Must match Training Notebook) ---
 
@@ -101,12 +100,8 @@ class ModelAInference:
         # Initialize Stain Normalizer
         self.normalizer = MacenkoNormalizer()
         
-        # Initialize YOLO Visualizer (for bounding box segmentation)
-        try:
-            self.yolo_visualizer = CellSegmentationVisualizer()
-        except:
-            print("⚠️ YOLO visualizer not available, using Grad-CAM only")
-            self.yolo_visualizer = None
+        # YOLO Removed
+        self.yolo_visualizer = None
         
         self.transform = transforms.Compose([
             transforms.Resize((224, 224)),
@@ -242,15 +237,7 @@ class ModelAInference:
                 img_resized.save(buff_orig, format="JPEG")
                 original_b64 = base64.b64encode(buff_orig.getvalue()).decode("utf-8")
                 
-                # Generate YOLO Segmentation (bounding boxes for individual cells)
-                if self.yolo_visualizer:
-                    try:
-                        yolo_result = self.yolo_visualizer.detect_and_visualize(image_path)
-                        if yolo_result["status"] == "success":
-                            segmentation_b64 = yolo_result["segmentation_overlay"]
-                            print(f"[INFO] YOLO detections: {yolo_result['detection_details']}")
-                    except Exception as e:
-                        print(f"[WARNING] YOLO segmentation failed: {e}")
+                # YOLO segmentation removed on request
 
             return {
                 "status": "success",
