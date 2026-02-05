@@ -567,6 +567,7 @@ const AppLanguage = {
             // Model B Results
             qualityNoteLowRes: 'Low Resolution. Switched to Standard Mode for better stability.',
             screeningResultNormal: 'Normal',
+            screeningResultNoIssuesDetected: 'No Issues Detected',
             screeningResultRefertoDentist: 'Refer to Dentist',
             hygieneScoreHigh: 'High',
             hygieneScoreMedium: 'Medium',
@@ -1172,6 +1173,7 @@ const AppLanguage = {
             // Model B Results
             qualityNoteLowRes: 'Resolusi Rendah. Beralih ke Mod Standard untuk kestabilan lebih baik.',
             screeningResultNormal: 'Normal',
+            screeningResultNoIssuesDetected: 'Tiada Masalah Dikesan',
             screeningResultRefertoDentist: 'Rujuk kepada Doktor Gigi',
             hygieneScoreHigh: 'Tinggi',
             hygieneScoreMedium: 'Sederhana',
@@ -1748,6 +1750,7 @@ const AppLanguage = {
             // Model B Results
             qualityNoteLowRes: '低分辨率。已切换到标准模式以获得更好的稳定性。',
             screeningResultNormal: '正常',
+            screeningResultNoIssuesDetected: '未检测到问题',
             screeningResultRefertoDentist: '建议就医',
             hygieneScoreHigh: '高',
             hygieneScoreMedium: '中',
@@ -2339,6 +2342,7 @@ const AppLanguage = {
             // Model B Results
             qualityNoteLowRes: 'குறைந்த தெளிவுத்திறன். சிறந்த நிலைத்தன்மைக்கு நிலையான பயன்முறைக்கு மாற்றப்பட்டது.',
             screeningResultNormal: 'சாதாரணம்',
+            screeningResultNoIssuesDetected: 'சிக்கல்கள் கண்டறியப்படவில்லை',
             screeningResultRefertoDentist: 'பல் மருத்துவரிடம் அனுப்பவும்',
             hygieneScoreHigh: 'உயர்',
             hygieneScoreMedium: 'நடுத்தரம்',

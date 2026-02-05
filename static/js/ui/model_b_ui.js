@@ -101,7 +101,7 @@ export class ModelBUI {
         // Translate screening result
         const screeningResultKey = 'screeningResult' + data.screening_result.replace(/\s+/g, '');
         screenRes.textContent = t(screeningResultKey, data.screening_result);
-        screenRes.className = `h3 fw-bold mb-0 ${data.screening_result === 'Normal' ? 'text-success' : 'text-danger'}`;
+        screenRes.className = `h5 fw-bold mb-0 ${data.screening_result === 'Normal' ? 'text-success' : 'text-danger'}`;
 
         const hygieneRes = document.getElementById('mb-hygiene-score');
         // Translate hygiene score
@@ -111,7 +111,7 @@ export class ModelBUI {
         if (data.hygiene_score === 'High') color = 'text-success';
         if (data.hygiene_score === 'Medium') color = 'text-warning';
         if (data.hygiene_score === 'Low') color = 'text-danger';
-        hygieneRes.className = `h3 fw-bold mb-0 ${color}`;
+        hygieneRes.className = `h5 fw-bold mb-0 ${color}`;
 
         const list = document.getElementById('mb-findings-list');
         list.innerHTML = '';
