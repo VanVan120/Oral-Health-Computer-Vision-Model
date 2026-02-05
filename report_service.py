@@ -282,7 +282,12 @@ def generate_expert_report(data: dict, image_bytes: bytes = None) -> bytes:
         "staining variations, and other technical factors. Neither the AI system nor its operators assume responsibility for clinical decisions "
         "made based solely on this report without proper medical oversight.")
 
-    return pdf.output(dest='S').encode('latin-1')
+    output = pdf.output(dest='S')
+    # Handle different FPDF versions: some return str, some return bytes/bytearray
+    if isinstance(output, (bytes, bytearray)):
+        return bytes(output)
+    else:
+        return output.encode('latin-1')
 
 def generate_public_report(data: dict, image_bytes: bytes = None) -> bytes:
     """
@@ -550,4 +555,9 @@ def generate_public_report(data: dict, image_bytes: bytes = None) -> bytes:
         "educational and screening purposes only. Neither the AI system nor its operators assume responsibility for treatment decisions or "
         "outcomes based on this screening report.")
 
-    return pdf.output(dest='S').encode('latin-1')
+    output = pdf.output(dest='S')
+    # Handle different FPDF versions: some return str, some return bytes/bytearray
+    if isinstance(output, (bytes, bytearray)):
+        return bytes(output)
+    else:
+        return output.encode('latin-1')
