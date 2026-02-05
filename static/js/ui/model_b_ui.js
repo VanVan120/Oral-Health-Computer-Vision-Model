@@ -49,6 +49,9 @@ export class ModelBUI {
             const img = document.getElementById('mb-preview-image');
             img.src = e.target.result;
             
+            // Set blurred background
+            document.getElementById('mb-viewport').style.backgroundImage = `url('${e.target.result}')`;
+            
             img.onload = () => {
                 this.drawBoxes(data.detections, img);
             };
@@ -66,8 +69,13 @@ export class ModelBUI {
         // Helper function for translations
         const t = (key, fallback) => window.AppLanguage ? window.AppLanguage.t(key) : fallback;
 
-        // Show Quality Note if present
+        // Show Quality Note if present - DISABLED as per user request
         const qualityAlert = document.getElementById('mb-quality-note');
+        if (qualityAlert) {
+            qualityAlert.classList.add('d-none');
+        }
+
+        /*
         const qualityText = document.getElementById('mb-quality-text');
         if (data.quality_note && qualityAlert && qualityText) {
             // Translate quality note if it matches known patterns
@@ -87,6 +95,7 @@ export class ModelBUI {
         } else if (qualityAlert) {
             qualityAlert.classList.add('d-none');
         }
+        */
 
         const screenRes = document.getElementById('mb-screening-result');
         // Translate screening result
