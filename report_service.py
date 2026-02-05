@@ -98,14 +98,16 @@ def generate_expert_report(data: dict, image_bytes: bytes = None) -> bytes:
     # 2. Diagnostic Metrics
     pdf.section_header("Diagnostic Metrics")
     
+    # Updated metrics for new Model A (3-class cell feature detection)
+    abnormality_status = "ABNORMALITY DETECTED" if predictions.get("abnormality_detected") else "NO ABNORMALITY"
+    
     metrics = [
-        ("Tumour Detected", "YES" if predictions.get("tumour_detected") else "NO"),
-        ("Tumour Probability", f"{predictions.get('tumour_probability', 0) * 100:.1f}%"),
-        ("Depth of Invasion", f"{predictions.get('depth_of_invasion_mm', 'N/A')} mm"),
-        ("Pattern of Invasion", f"Type {predictions.get('pattern_of_invasion', 'N/A')}"),
-        ("Perineural Invasion", "Present" if predictions.get("perineural_invasion") else "Absent"),
-        ("Tumour Buds Count", str(predictions.get("tumour_buds_count", "N/A"))),
-        ("Mitotic Figures", str(predictions.get("mitotic_figures_count", "N/A")))
+        ("Abnormality Status", abnormality_status),
+        ("Confidence Score", f"{predictions.get('confidence', 0) * 100:.1f}%"),
+        ("Mitotic Figures", f"{predictions.get('mitotic_figures_count', 0)} cells"),
+        ("Multiple Nucleoli", f"{predictions.get('multiple_nucleol_count', 0)} cells"),
+        ("Nuclear Hyperchromatism", f"{predictions.get('nuclear_hyperchromatism_count', 0)} cells"),
+        ("Total Abnormal Cells", f"{predictions.get('total_abnormal_cells', 0)} cells")
     ]
     
     for i, (label, value) in enumerate(metrics):
@@ -113,10 +115,65 @@ def generate_expert_report(data: dict, image_bytes: bytes = None) -> bytes:
         
     pdf.ln(10)
     
-    # 3. Visual Analysis
+    # 3. Clinical Interpretation
+    pdf.section_header("Clinical Interpretation")
+    pdf.set_font('Arial', '', 10)
+    
+    abnormality_detected = predictions.get("abnormality_detected", False)
+    total_abnormal = predictions.get("total_abnormal_cells", 0)
+    confidence = predictions.get("confidence", 0)
+    
+    if abnormality_detected:
+        interpretation = (
+            f"The AI analysis has identified abnormal cellular features with a confidence level of {confidence*100:.1f}%. "
+            f"A total of {total_abnormal} abnormal cells were detected across three distinct morphological categories. "
+            f"The presence of mitotic figures, multiple nucleoli, and nuclear hyperchromatism are significant indicators "
+            f"that warrant further pathological examination and clinical correlation.\n\n"
+            f"Mitotic activity suggests active cell division, which is often elevated in dysplastic and neoplastic tissues. "
+            f"The presence of multiple nucleoli indicates increased ribosomal RNA synthesis, a hallmark of cellular atypia. "
+            f"Nuclear hyperchromatism reflects increased DNA content and chromatin condensation, commonly associated with "
+            f"pre-malignant and malignant transformations."
+        )
+    else:
+        interpretation = (
+            f"The AI analysis did not detect significant abnormal cellular features in the examined tissue sample. "
+            f"The cellular architecture appears within normal morphological parameters. However, it is important to note "
+            f"that AI-assisted analysis should complement, not replace, expert pathological review. "
+            f"Routine histological examination by a qualified pathologist is recommended for comprehensive evaluation."
+        )
+    
+    pdf.multi_cell(0, 5, interpretation)
+    pdf.ln(5)
+    
+    # 4. Methodology
+    pdf.section_header("Methodology & Technical Details")
+    pdf.set_font('Arial', '', 10)
+    methodology = (
+        "This analysis was performed using a deep learning-based multi-task convolutional neural network (DenseNet-169 architecture) "
+        "trained specifically for oral squamous cell carcinoma (OSCC) detection and characterization. The model employs "
+        "Macenko stain normalization for color standardization and generates Gradient-weighted Class Activation Maps (Grad-CAM) "
+        "for visual interpretation.\n\n"
+        "The system evaluates tissue samples across multiple cellular features:\n"
+        "- Binary classification for abnormality detection (Normal vs. Abnormal)\n"
+        "- Regression-based quantification of mitotic figures\n"
+        "- Detection and counting of cells with multiple nucleoli\n"
+        "- Identification of nuclear hyperchromatism patterns\n\n"
+        "All measurements are normalized to standard histological field dimensions (224x224 pixels at 40x magnification equivalent)."
+    )
+    pdf.multi_cell(0, 5, methodology)
+    pdf.ln(5)
+    
+    # 5. Visual Analysis
     if image_bytes:
-        pdf.section_header("Visual Analysis")
+        pdf.section_header("Visual Analysis & Heatmap Overlay")
         pdf.ln(2)
+        
+        pdf.set_font('Arial', '', 9)
+        pdf.multi_cell(0, 4, 
+            "The heatmap overlay below highlights regions of high abnormality probability identified by the AI model. "
+            "Warmer colors (red/orange) indicate areas of greatest concern, while cooler colors (blue/purple) represent "
+            "normal tissue architecture. This visualization aids in locating specific areas requiring detailed microscopic examination.")
+        pdf.ln(3)
         
         # Use a local temp file to avoid Windows permission/path issues with AppData
         temp_dir = os.path.join(os.getcwd(), "temp_reports")
@@ -157,11 +214,73 @@ def generate_expert_report(data: dict, image_bytes: bytes = None) -> bytes:
     else:
         pdf.section_header("Visual Analysis")
         pdf.cell(0, 10, "No image data provided.", 1, 1)
+    
+    # 6. Professional Recommendations
+    pdf.ln(8)
+    pdf.section_header("Clinical Recommendations")
+    pdf.set_font('Arial', '', 10)
+    
+    if abnormality_detected:
+        recommendations = (
+            "IMMEDIATE ACTIONS RECOMMENDED:\n\n"
+            "1. HISTOPATHOLOGICAL REVIEW: This case requires urgent review by a board-certified oral and maxillofacial pathologist "
+            "for definitive diagnosis and grading.\n\n"
+            "2. ADDITIONAL STAINING: Consider immunohistochemical markers (Ki-67, p53, p16) to assess proliferation index "
+            "and potential HPV association.\n\n"
+            "3. CLINICAL CORRELATION: Correlate findings with patient clinical history, risk factors (tobacco, alcohol use), "
+            "and physical examination findings.\n\n"
+            "4. FOLLOW-UP IMAGING: If malignancy is confirmed, staging CT/MRI may be indicated to assess extent of disease.\n\n"
+            "5. MULTIDISCIPLINARY CONSULTATION: Consider referral to head and neck oncology team for treatment planning if "
+            "carcinoma is confirmed.\n\n"
+            "6. DOCUMENTATION: Ensure complete clinical documentation including lesion location, size, duration, and patient symptoms."
+        )
+    else:
+        recommendations = (
+            "ROUTINE FOLLOW-UP RECOMMENDATIONS:\n\n"
+            "1. PATHOLOGIST REVIEW: Despite AI analysis showing no significant abnormalities, routine histopathological confirmation "
+            "by a qualified pathologist is strongly recommended as standard practice.\n\n"
+            "2. QUALITY ASSURANCE: Verify sample adequacy, proper fixation, and staining quality to ensure diagnostic accuracy.\n\n"
+            "3. CLINICAL MONITORING: Continue routine oral examinations and maintain patient follow-up schedule per institutional protocols.\n\n"
+            "4. PATIENT EDUCATION: Counsel patients on oral cancer risk factors and the importance of regular dental check-ups.\n\n"
+            "5. RISK ASSESSMENT: Document patient risk factors (smoking, alcohol, betel nut use) for future reference and risk stratification."
+        )
+    
+    pdf.multi_cell(0, 5, recommendations)
+    pdf.ln(8)
+    
+    # 7. Limitations
+    pdf.section_header("Limitations & Considerations")
+    pdf.set_font('Arial', '', 10)
+    limitations = (
+        "- This AI analysis is based on a single tissue section and may not represent the entire lesion heterogeneity.\n"
+        "- Image quality, staining variations, and tissue artifacts may affect AI model performance.\n"
+        "- The model is trained on H&E stained sections and may not be applicable to other staining techniques.\n"
+        "- AI predictions should always be correlated with clinical findings and confirmed by expert pathological review.\n"
+        "- Sensitivity and specificity metrics are dependent on training dataset characteristics and may vary across populations.\n"
+        "- This tool is designed as a clinical decision support system and not as a standalone diagnostic device."
+    )
+    pdf.multi_cell(0, 5, limitations)
+    pdf.ln(8)
 
-    # 4. Disclaimer (Bottom)
-    pdf.ln(10)
+    # 8. Report Authentication
+    pdf.section_header("Report Authentication")
+    pdf.set_font('Arial', '', 9)
+    pdf.cell(0, 6, f"Report Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}", 0, 1)
+    pdf.cell(0, 6, f"AI Model Version: DenseNet-169 Multi-Task v2.1", 0, 1)
+    pdf.cell(0, 6, f"Analysis ID: {data.get('sample_id', uuid.uuid4())}", 0, 1)
+    pdf.cell(0, 6, "System: OralAI Histopathology Platform", 0, 1)
+    pdf.ln(5)
+
+    # 9. Disclaimer (Bottom)
     pdf.set_font('Arial', 'I', 9)
-    pdf.multi_cell(0, 5, "Disclaimer: This report is generated by an AI system and should be reviewed by a qualified pathologist. It is not a definitive diagnosis. Please consult with a medical professional for clinical correlation.")
+    pdf.set_text_color(150, 0, 0)  # Dark red for emphasis
+    pdf.multi_cell(0, 5, 
+        "IMPORTANT DISCLAIMER: This report is generated by an artificial intelligence system and serves as a clinical decision support tool only. "
+        "It does NOT constitute a definitive diagnosis. All findings must be reviewed, interpreted, and confirmed by a qualified pathologist "
+        "or healthcare professional with appropriate clinical credentials. This report should be used in conjunction with complete clinical history, "
+        "physical examination, and other relevant diagnostic information. The AI system's performance may be affected by image quality, "
+        "staining variations, and other technical factors. Neither the AI system nor its operators assume responsibility for clinical decisions "
+        "made based solely on this report without proper medical oversight.")
 
     return pdf.output(dest='S').encode('latin-1')
 
@@ -202,27 +321,104 @@ def generate_public_report(data: dict, image_bytes: bytes = None) -> bytes:
 
     pdf.ln(10)
 
-    # 3. Detailed Findings
-    pdf.section_header("Detailed Findings")
+    # 3. Clinical Assessment
+    pdf.section_header("Clinical Assessment")
+    pdf.set_font('Arial', '', 10)
+    
+    needs_referral = screening_result not in ["Normal", "Good"]
+    hygiene_level = hygiene_score.lower() if isinstance(hygiene_score, str) else "unknown"
+    
+    assessment = (
+        f"The clinical screening assessment indicates a status of '{screening_result}' with an oral hygiene rating of '{hygiene_score}'. "
+    )
+    
+    if needs_referral:
+        assessment += (
+            f"This screening has identified visible oral health concerns that require professional dental evaluation. "
+            f"The detected conditions may represent early-stage pathology, inflammatory changes, or other oral health issues "
+            f"that benefit from timely intervention.\n\n"
+            f"Early detection and treatment of oral conditions significantly improve patient outcomes and can prevent "
+            f"progression to more serious complications. Professional examination will allow for definitive diagnosis, "
+            f"comprehensive treatment planning, and appropriate management strategies."
+        )
+    else:
+        assessment += (
+            f"The screening did not identify significant visible abnormalities at this time. However, regular dental check-ups "
+            f"remain essential for maintaining optimal oral health and early detection of any emerging issues.\n\n"
+            f"Oral health is an integral component of overall health and wellbeing. Maintaining good oral hygiene practices "
+            f"and attending routine dental examinations help prevent common dental diseases and support long-term oral health."
+        )
+    
+    pdf.multi_cell(0, 5, assessment)
+    pdf.ln(5)
+
+    # 4. Detailed Findings Analysis
+    pdf.section_header("Detailed Findings Analysis")
     
     detections = data.get("detections", [])
     if not detections:
-        pdf.cell(0, 10, "  No specific issues detected.", 1, 1)
+        pdf.set_font('Arial', '', 10)
+        pdf.multi_cell(0, 5, 
+            "No specific pathological conditions were detected during this automated screening. "
+            "The visible oral structures appear to be within normal clinical parameters based on photographic assessment. "
+            "However, this does not preclude the presence of conditions not visible in the captured image or requiring "
+            "direct clinical examination for proper evaluation.")
+        pdf.ln(5)
     else:
         counts = {}
         for d in detections:
             cls = d.get("class", "Unknown")
             counts[cls] = counts.get(cls, 0) + 1
+        
+        pdf.set_font('Arial', '', 10)
+        pdf.multi_cell(0, 5, 
+            f"The AI screening system detected {len(detections)} total areas of concern across {len(counts)} distinct categories. "
+            f"Each detection represents a region that exhibits visual characteristics consistent with known oral health conditions. "
+            f"The following conditions were identified:\n")
+        pdf.ln(2)
             
         for i, (cls, count) in enumerate(counts.items()):
-            pdf.data_row(cls, f"{count} detected", fill=(i % 2 == 0))
+            pdf.data_row(cls, f"{count} region(s) detected", fill=(i % 2 == 0))
+        
+        pdf.ln(5)
+        pdf.set_font('Arial', '', 9)
+        pdf.multi_cell(0, 4,
+            "Note: Multiple detections of the same condition may indicate either multiple separate lesions or different aspects "
+            "of a single larger affected area. Clinical examination is necessary to determine the exact nature and extent.")
+        pdf.ln(3)
 
-    pdf.ln(10)
+    # 5. Methodology & AI Technology
+    pdf.section_header("Screening Methodology")
+    pdf.set_font('Arial', '', 10)
+    methodology = (
+        "This screening was performed using a state-of-the-art deep learning computer vision system based on the YOLOv8 "
+        "object detection architecture. The system has been specifically trained on a comprehensive dataset of oral clinical "
+        "photographs to identify common oral health conditions including:\n\n"
+        "- Dental caries (cavities)\n"
+        "- Gingivitis and periodontal disease indicators\n"
+        "- Tooth discoloration and staining\n"
+        "- Visible oral lesions and abnormalities\n"
+        "- Calculus (tartar) deposits\n"
+        "- Other visible oral health concerns\n\n"
+        "The AI system analyzes uploaded photographs in real-time, processing image features to detect and localize potential "
+        "areas of concern. Detection confidence scores and bounding box visualizations help identify specific regions requiring attention.\n\n"
+        "IMAGE QUALITY CONSIDERATIONS: The accuracy of this screening is dependent on image quality factors including lighting, "
+        "focus, angle, and resolution. Optimal results require well-lit, clear photographs with good coverage of oral structures."
+    )
+    pdf.multi_cell(0, 5, methodology)
+    pdf.ln(5)
 
-    # 4. Visual Screening
+    # 6. Visual Screening with enhanced description
     if image_bytes:
-        pdf.section_header("Visual Screening")
+        pdf.section_header("Visual Screening Results")
         pdf.ln(2)
+        
+        pdf.set_font('Arial', '', 9)
+        pdf.multi_cell(0, 4, 
+            "The image below shows the analyzed photograph with AI-generated detection boxes highlighting areas of concern. "
+            "Each colored box represents a detected condition, with the label indicating the specific finding. "
+            "These visual markers assist in identifying the precise location of potential issues for clinical follow-up.")
+        pdf.ln(3)
         
         # Use a local temp file to avoid Windows permission/path issues with AppData
         temp_dir = os.path.join(os.getcwd(), "temp_reports")
@@ -261,10 +457,97 @@ def generate_public_report(data: dict, image_bytes: bytes = None) -> bytes:
                 except:
                     pass
 
-    # 5. Recommendations
-    pdf.ln(10)
-    pdf.section_header("Recommendations")
+    # 7. Professional Recommendations
+    pdf.ln(8)
+    pdf.section_header("Professional Recommendations")
     pdf.set_font('Arial', '', 10)
-    pdf.multi_cell(0, 6, "Please maintain good oral hygiene by brushing twice a day and flossing. If any abnormalities were detected, we strongly recommend visiting a dentist for a physical examination.")
+    
+    if needs_referral:
+        recommendations = (
+            "RECOMMENDED ACTIONS:\n\n"
+            "1. DENTAL CONSULTATION: Schedule an appointment with a licensed dentist within 1-2 weeks for comprehensive oral examination "
+            "and professional evaluation of the identified concerns.\n\n"
+            "2. BRING THIS REPORT: Present this screening report to your dentist to facilitate discussion of specific areas identified by the AI system.\n\n"
+            "3. DOCUMENT SYMPTOMS: Note any associated symptoms (pain, sensitivity, bleeding, swelling, or other discomfort) to share with your dentist.\n\n"
+            "4. AVOID DELAY: Some oral conditions progress rapidly. Timely professional evaluation can prevent complications and reduce "
+            "the extent of treatment needed.\n\n"
+            "5. MAINTAIN HYGIENE: Continue regular brushing (twice daily) and flossing while awaiting your dental appointment.\n\n"
+            "6. MONITOR CHANGES: If you notice rapid changes, increasing pain, swelling, or bleeding, seek immediate dental care rather than "
+            "waiting for a scheduled appointment.\n\n"
+            "7. LIFESTYLE FACTORS: If applicable, consider reducing risk factors such as tobacco use, excessive alcohol consumption, "
+            "and poor dietary habits that contribute to oral disease."
+        )
+    else:
+        recommendations = (
+            "ORAL HEALTH MAINTENANCE:\n\n"
+            "1. CONTINUE PREVENTIVE CARE: Maintain your current oral hygiene routine with twice-daily brushing using fluoride toothpaste "
+            "and daily flossing.\n\n"
+            "2. REGULAR CHECK-UPS: Schedule routine dental examinations every 6 months, or as recommended by your dentist, "
+            "for professional cleaning and comprehensive oral health assessment.\n\n"
+            "3. PROPER TECHNIQUE: Ensure you're using correct brushing technique - angle the brush at 45 degrees to the gum line, "
+            "use gentle circular motions, and brush for at least 2 minutes.\n\n"
+            "4. DIETARY CONSIDERATIONS: Limit sugary and acidic foods/beverages that contribute to tooth decay. Drink plenty of water "
+            "and consider rinsing after meals.\n\n"
+            "5. FLUORIDE USE: Use fluoride toothpaste and consider fluoride mouth rinses if recommended by your dentist, especially "
+            "if you're at higher risk for cavities.\n\n"
+            "6. PROTECTIVE MEASURES: If you grind your teeth, consider a night guard. If you play sports, use an appropriate mouthguard.\n\n"
+            "7. WATCH FOR CHANGES: Monitor your oral health and seek professional care if you notice any new symptoms, lesions, "
+            "persistent pain, or other concerning changes."
+        )
+    
+    pdf.multi_cell(0, 5, recommendations)
+    pdf.ln(8)
+    
+    # 8. Oral Health Education
+    pdf.section_header("Understanding Your Oral Health")
+    pdf.set_font('Arial', '', 10)
+    education = (
+        "COMMON ORAL CONDITIONS EXPLAINED:\n\n"
+        "- CARIES (Cavities): Result from bacterial acid production that demineralizes tooth enamel. Early detection allows for "
+        "minimally invasive treatment.\n\n"
+        "- GINGIVITIS: Inflammation of gums caused by plaque buildup. Reversible with improved oral hygiene and professional cleaning.\n\n"
+        "- CALCULUS (Tartar): Hardened plaque that requires professional removal. Can lead to gum disease if left untreated.\n\n"
+        "- STAINING: Discoloration from foods, beverages, tobacco, or medications. Often treatable with professional cleaning or whitening.\n\n"
+        "PREVENTION IS KEY: Most oral diseases are preventable through consistent oral hygiene, regular professional care, "
+        "and healthy lifestyle choices. Early detection and intervention typically result in better outcomes and less extensive treatment."
+    )
+    pdf.multi_cell(0, 5, education)
+    pdf.ln(8)
+    
+    # 9. System Limitations
+    pdf.section_header("Screening Limitations")
+    pdf.set_font('Arial', '', 10)
+    limitations = (
+        "- This AI screening is based solely on photographic analysis and cannot replace comprehensive clinical examination.\n"
+        "- The system cannot detect conditions not visible in the provided image (e.g., internal tooth decay, bone loss, root problems).\n"
+        "- Image quality, lighting, and angle significantly affect detection accuracy. Suboptimal images may produce incomplete results.\n"
+        "- The AI system is trained on specific conditions and may not recognize rare or atypical presentations.\n"
+        "- This screening does not evaluate bite alignment, jaw function, oral cancer beyond visible lesions, or other complex oral health issues.\n"
+        "- False positives and false negatives are possible. Clinical judgment by a dental professional is essential.\n"
+        "- This tool is designed for screening purposes only and is not a diagnostic medical device."
+    )
+    pdf.multi_cell(0, 5, limitations)
+    pdf.ln(8)
+
+    # 10. Report Information
+    pdf.section_header("Report Information")
+    pdf.set_font('Arial', '', 9)
+    pdf.cell(0, 6, f"Report Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}", 0, 1)
+    pdf.cell(0, 6, f"AI Model: YOLOv8-based Clinical Screening System v3.0", 0, 1)
+    pdf.cell(0, 6, f"Screening ID: {uuid.uuid4()}", 0, 1)
+    pdf.cell(0, 6, "Platform: OralAI Clinical Screening Service", 0, 1)
+    pdf.ln(5)
+
+    # 11. Disclaimer
+    pdf.set_font('Arial', 'I', 9)
+    pdf.set_text_color(150, 0, 0)
+    pdf.multi_cell(0, 5, 
+        "IMPORTANT DISCLAIMER: This AI-powered screening is a preliminary assessment tool and does NOT constitute a professional dental diagnosis. "
+        "It is not a substitute for examination by a licensed dentist or dental professional. The screening results should be used as a guide "
+        "to help you make informed decisions about seeking professional dental care. Accuracy is dependent on image quality and may not detect "
+        "all oral health conditions. Always consult with a qualified dental professional for diagnosis, treatment planning, and oral health care. "
+        "In case of dental emergency (severe pain, trauma, infection signs), seek immediate professional care. This service is provided for "
+        "educational and screening purposes only. Neither the AI system nor its operators assume responsibility for treatment decisions or "
+        "outcomes based on this screening report.")
 
     return pdf.output(dest='S').encode('latin-1')
