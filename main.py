@@ -26,7 +26,9 @@ from appointment_service import router as appointment_router
 from auth_service import router as auth_router
 
 # --- Security & Configuration Check ---
-load_dotenv()
+# Explicitly load .env file from the current directory
+env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '.env')
+load_dotenv(dotenv_path=env_path, override=True)
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 if not GEMINI_API_KEY or GEMINI_API_KEY == "replace_with_your_key_here":
