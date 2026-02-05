@@ -59,6 +59,9 @@ export class ModelAUI {
             
             document.getElementById('ma-image-preview').src = this.maOriginalSrc;
             
+            // Set background for blur effect
+            document.getElementById('ma-viewport').style.backgroundImage = `url('${this.maOriginalSrc}')`;
+            
             // Store segmentation overlay (YOLO bounding boxes)
             if (preds.predictions.segmentation_overlay) {
                 this.maSegmentationSrc = "data:image/jpeg;base64," + preds.predictions.segmentation_overlay;
@@ -136,13 +139,17 @@ export class ModelAUI {
 
         if (type === 'original') {
             img.src = this.maOriginalSrc;
+            document.getElementById('ma-viewport').style.backgroundImage = `url('${this.maOriginalSrc}')`;
             btnOrig.classList.add('active');
         } else if (type === 'segmentation' && this.maSegmentationSrc) {
             img.src = this.maSegmentationSrc;
+            // Keep background as original for context
+             document.getElementById('ma-viewport').style.backgroundImage = `url('${this.maOriginalSrc}')`;
             if (btnSeg) btnSeg.classList.add('active');
         } else {
             // Default to heatmap
             img.src = this.maHeatmapSrc;
+            document.getElementById('ma-viewport').style.backgroundImage = `url('${this.maHeatmapSrc}')`;
             btnHeat.classList.add('active');
         }
     }
