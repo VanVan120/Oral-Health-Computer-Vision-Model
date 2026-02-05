@@ -9,49 +9,63 @@ import cv2
 import base64
 from io import BytesIO
 from stain_utils import MacenkoNormalizer
+from yolo_visualizer import CellSegmentationVisualizer
 
 # --- 1. Model Architecture (Must match Training Notebook) ---
 
-class UpsampleBlock(nn.Module):
-    def __init__(self, in_channels, out_channels):
-        super().__init__()
-        self.conv = nn.Sequential(
-            nn.Conv2d(in_channels, out_channels, kernel_size=3, padding=1),
-            nn.BatchNorm2d(out_channels),
-            nn.ReLU(inplace=True),
-            nn.Conv2d(out_channels, out_channels, kernel_size=3, padding=1),
-            nn.BatchNorm2d(out_channels),
-            nn.ReLU(inplace=True)
-        )
-        self.upsample = nn.Upsample(scale_factor=2, mode='bilinear', align_corners=True)
-
-    def forward(self, x):
-        return self.upsample(self.conv(x))
+# Class names for the 3-class detection
+CLASS_NAMES = {
+    0: 'Mitotic Figures',
+    1: 'Multiple Nucleol',
+    2: 'Nuclear Hyperchromatism'
+}
 
 class OSCCMultiTaskModel(nn.Module):
+    """
+    Multi-Task Model for OSCC Cell Feature Detection
+    
+    Tasks:
+    1. TVNT: Binary classification (Abnormality detected vs Normal)
+    2. Mitotic Figures Count: Regression
+    3. Multiple Nucleol Count: Regression
+    4. Nuclear Hyperchromatism Count: Regression
+    """
     def __init__(self):
         super().__init__()
-        self.backbone = models.densenet169(pretrained=False) # Pretrained not needed for inference loading
+        self.backbone = models.densenet169(weights=None)  # Pretrained not needed for inference
         num_ftrs = self.backbone.classifier.in_features
         self.backbone.classifier = nn.Identity()
         
-        self.head_tvnt = nn.Sequential(nn.Linear(num_ftrs, 256), nn.ReLU(), nn.Dropout(0.2), nn.Linear(256, 2))
-        self.head_poi = nn.Sequential(nn.Linear(num_ftrs, 256), nn.ReLU(), nn.Dropout(0.2), nn.Linear(256, 5))
-        self.head_pni = nn.Sequential(nn.Linear(num_ftrs, 256), nn.ReLU(), nn.Dropout(0.2), nn.Linear(256, 2))
-        self.head_tb = nn.Sequential(nn.Linear(num_ftrs, 128), nn.ReLU(), nn.Linear(128, 1))
-        self.head_mi = nn.Sequential(nn.Linear(num_ftrs, 128), nn.ReLU(), nn.Linear(128, 1))
-        
-        self.decoder = nn.Sequential(
-            UpsampleBlock(num_ftrs, 512), UpsampleBlock(512, 256),
-            UpsampleBlock(256, 128), UpsampleBlock(128, 64),
-            UpsampleBlock(64, 32), nn.Conv2d(32, 1, kernel_size=1)
+        # TVNT Head (Binary Classification)
+        self.head_tvnt = nn.Sequential(
+            nn.Linear(num_ftrs, 256),
+            nn.ReLU(),
+            nn.Dropout(0.3),
+            nn.Linear(256, 2)
         )
-
-        # --- NEW: PNI Segmentation Decoder ---
-        self.decoder_pni = nn.Sequential(
-            UpsampleBlock(num_ftrs, 512), UpsampleBlock(512, 256),
-            UpsampleBlock(256, 128), UpsampleBlock(128, 64),
-            UpsampleBlock(64, 32), nn.Conv2d(32, 1, kernel_size=1)
+        
+        # Mitotic Figures Count (Regression)
+        self.head_mitotic = nn.Sequential(
+            nn.Linear(num_ftrs, 128),
+            nn.ReLU(),
+            nn.Dropout(0.2),
+            nn.Linear(128, 1)
+        )
+        
+        # Multiple Nucleol Count (Regression)
+        self.head_nucleol = nn.Sequential(
+            nn.Linear(num_ftrs, 128),
+            nn.ReLU(),
+            nn.Dropout(0.2),
+            nn.Linear(128, 1)
+        )
+        
+        # Nuclear Hyperchromatism Count (Regression)
+        self.head_hyperchrom = nn.Sequential(
+            nn.Linear(num_ftrs, 128),
+            nn.ReLU(),
+            nn.Dropout(0.2),
+            nn.Linear(128, 1)
         )
 
     def forward(self, x):
@@ -62,12 +76,9 @@ class OSCCMultiTaskModel(nn.Module):
         
         return {
             'tvnt': self.head_tvnt(pooled),
-            'poi': self.head_poi(pooled),
-            'pni': self.head_pni(pooled),
-            'tb': self.head_tb(pooled),
-            'mi': self.head_mi(pooled),
-            'doi': self.decoder(features),
-            'pni_seg': self.decoder_pni(features)
+            'mitotic': self.head_mitotic(pooled),
+            'nucleol': self.head_nucleol(pooled),
+            'hyperchrom': self.head_hyperchrom(pooled)
         }
 
 # --- 2. Inference Wrapper Class ---
@@ -79,9 +90,8 @@ class ModelAInference:
         
         self.model = OSCCMultiTaskModel()
         if os.path.exists(model_path):
-            # strict=False allows loading weights even if we added new heads (like pni_seg)
-            # weights_only=False is required for PyTorch 2.6+ when loading full models or older checkpoints
             self.model.load_state_dict(torch.load(model_path, map_location=self.device, weights_only=False), strict=False)
+            print("Model weights loaded successfully.")
         else:
             print(f"WARNING: Model file {model_path} not found. Using random weights.")
             
@@ -91,24 +101,18 @@ class ModelAInference:
         # Initialize Stain Normalizer
         self.normalizer = MacenkoNormalizer()
         
+        # Initialize YOLO Visualizer (for bounding box segmentation)
+        try:
+            self.yolo_visualizer = CellSegmentationVisualizer()
+        except:
+            print("⚠️ YOLO visualizer not available, using Grad-CAM only")
+            self.yolo_visualizer = None
+        
         self.transform = transforms.Compose([
             transforms.Resize((224, 224)),
             transforms.ToTensor(),
             transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
         ])
-
-    def calculate_doi(self, mask_tensor):
-        """Calculates DOI (mm) from segmentation mask."""
-        mask = torch.sigmoid(mask_tensor).squeeze().cpu().numpy()
-        mask = (mask > 0.5).astype(np.uint8)
-        
-        if np.sum(mask) == 0: return 0.0
-        
-        y_indices, _ = np.where(mask > 0)
-        if len(y_indices) == 0: return 0.0
-        
-        pixel_depth = np.max(y_indices) - np.min(y_indices)
-        return float(pixel_depth * 0.00025) # 0.25 microns/pixel -> mm
 
     def generate_heatmap(self, img_tensor, pred_score):
         """Generates Grad-CAM heatmap."""
@@ -163,13 +167,12 @@ class ModelAInference:
     def predict(self, image_path):
         """
         Runs inference on a single image.
-        Returns a dictionary of predictions.
+        Returns a dictionary of predictions for 3-class cell feature detection.
         """
         try:
             image = Image.open(image_path).convert("RGB")
             
-            # --- NEW: Apply Stain Normalization ---
-            # Convert PIL -> Numpy
+            # Apply Stain Normalization
             img_np = np.array(image)
             try:
                 img_norm_np = self.normalizer.normalize(img_np)
@@ -177,7 +180,6 @@ class ModelAInference:
             except Exception as e:
                 print(f"Warning: Stain normalization failed ({e}). Using original image.")
                 image_norm = image
-            # --------------------------------------
 
             img_tensor = self.transform(image_norm).unsqueeze(0).to(self.device)
             
@@ -187,37 +189,42 @@ class ModelAInference:
             # Process Outputs
             tvnt_prob = F.softmax(outputs['tvnt'], dim=1)[0]
             
-            # --- NEW: Confidence Threshold Check ---
-            # If the model is not confident enough (e.g., < 60%), we flag it as uncertain/invalid
+            # Confidence Threshold Check
             confidence_score = float(tvnt_prob[1].item()) if tvnt_prob[1].item() > tvnt_prob[0].item() else float(tvnt_prob[0].item())
             
-            if confidence_score < 0.60:
+            if confidence_score < 0.55:
                  return {
                     "status": "error",
                     "message": "The uploaded image does not appear to be a valid histopathological sample. Confidence too low."
                 }
-            # ---------------------------------------
 
-            is_tumour = tvnt_prob[1].item() > 0.5
+            # Abnormality detection (any of the 3 classes present)
+            abnormality_detected = tvnt_prob[1].item() > 0.5
             
-            poi_probs = F.softmax(outputs['poi'], dim=1)[0]
-            poi_class = torch.argmax(poi_probs).item()
+            # Get counts for each class (ensure non-negative)
+            # Raw outputs from regression heads
+            raw_mitotic = outputs['mitotic'].item()
+            raw_nucleol = outputs['nucleol'].item()
+            raw_hyperchrom = outputs['hyperchrom'].item()
             
-            pni_prob = F.softmax(outputs['pni'], dim=1)[0]
-            has_pni = pni_prob[1].item() > 0.5
+            print(f"[DEBUG] Raw outputs - Mitotic: {raw_mitotic:.4f}, Nucleol: {raw_nucleol:.4f}, Hyperchrom: {raw_hyperchrom:.4f}")
             
-            tb_count = max(0, int(outputs['tb'].item()))
-            mi_count = max(0, int(outputs['mi'].item()))
+            mitotic_count = max(0, int(round(raw_mitotic)))
+            nucleol_count = max(0, int(round(raw_nucleol)))
+            hyperchrom_count = max(0, int(round(raw_hyperchrom)))
             
-            doi_mm = self.calculate_doi(outputs['doi'])
+            # Total abnormal cells count
+            total_abnormal = mitotic_count + nucleol_count + hyperchrom_count
             
-            # Generate Heatmap (Only if tumour is detected to save resources)
+            # Generate Heatmap (if abnormality detected)
             heatmap_b64 = None
             original_b64 = None
-            if is_tumour:
+            segmentation_b64 = None  # For YOLO bounding boxes
+            
+            if abnormality_detected:
                 heatmap = self.generate_heatmap(img_tensor, outputs['tvnt'])
                 
-                # Create Overlay
+                # Create Grad-CAM Overlay
                 img_resized = image.resize((224, 224))
                 img_np = np.array(img_resized)
                 heatmap_color = cv2.applyColorMap(np.uint8(255 * heatmap), cv2.COLORMAP_JET)
@@ -225,29 +232,38 @@ class ModelAInference:
                 
                 overlay = cv2.addWeighted(img_np, 0.6, heatmap_color, 0.4, 0)
                 
-                # Convert Overlay to Base64 string for API response
+                # Convert Grad-CAM to Base64
                 pil_img = Image.fromarray(overlay)
                 buff = BytesIO()
                 pil_img.save(buff, format="JPEG")
                 heatmap_b64 = base64.b64encode(buff.getvalue()).decode("utf-8")
 
-                # Convert Original Resized to Base64 (for consistent display)
                 buff_orig = BytesIO()
                 img_resized.save(buff_orig, format="JPEG")
                 original_b64 = base64.b64encode(buff_orig.getvalue()).decode("utf-8")
+                
+                # Generate YOLO Segmentation (bounding boxes for individual cells)
+                if self.yolo_visualizer:
+                    try:
+                        yolo_result = self.yolo_visualizer.detect_and_visualize(image_path)
+                        if yolo_result["status"] == "success":
+                            segmentation_b64 = yolo_result["segmentation_overlay"]
+                            print(f"[INFO] YOLO detections: {yolo_result['detection_details']}")
+                    except Exception as e:
+                        print(f"[WARNING] YOLO segmentation failed: {e}")
 
             return {
                 "status": "success",
                 "predictions": {
-                    "tumour_detected": is_tumour,
-                    "tumour_probability": float(tvnt_prob[1].item()),
-                    "pattern_of_invasion": poi_class, # 0-4
-                    "depth_of_invasion_mm": round(doi_mm, 4),
-                    "tumour_buds_count": tb_count,
-                    "perineural_invasion": has_pni,
-                    "mitotic_figures_count": mi_count,
-                    "heatmap_overlay": heatmap_b64, # Base64 string or None
-                    "original_resized": original_b64 # Base64 string or None
+                    "abnormality_detected": abnormality_detected,
+                    "confidence": float(confidence_score),
+                    "mitotic_figures_count": mitotic_count,
+                    "multiple_nucleol_count": nucleol_count,
+                    "nuclear_hyperchromatism_count": hyperchrom_count,
+                    "total_abnormal_cells": total_abnormal,
+                    "heatmap_overlay": heatmap_b64,
+                    "segmentation_overlay": segmentation_b64,  # NEW: YOLO bounding boxes
+                    "original_resized": original_b64
                 }
             }
             
