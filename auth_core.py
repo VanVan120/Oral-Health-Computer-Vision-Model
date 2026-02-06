@@ -1,7 +1,8 @@
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
 from typing import Optional, Union
-from jose import jwt, JWTError
+import jwt
+from jwt import PyJWTError as JWTError
 
 # Config
 SECRET_KEY = "SECRET_KEY_GOES_HERE" # In prod, use env var
