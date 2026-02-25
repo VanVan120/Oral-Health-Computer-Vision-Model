@@ -70,4 +70,25 @@ export class APIService {
         });
         return await response.json();
     }
+
+    static async saveHabitLog(payload) {
+        const response = await fetch('/habits/log', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        if (!response.ok) {
+            const err = await response.json();
+            throw new Error(err.detail || 'Failed to save habit log');
+        }
+        return await response.json();
+    }
+
+    static async getHabitHistory(userId) {
+        const response = await fetch(`/habits/history/${userId}`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch habit history');
+        }
+        return await response.json();
+    }
 }

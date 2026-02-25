@@ -1,0 +1,284 @@
+<!-- ==================== PREVENTATIVE CARE HUB ==================== -->
+<div id="preventative-care-view" class="hidden-section">
+
+    <!-- ===== ACTION PLAN BANNER ===== -->
+    <div id="action-plan-banner" class="action-plan-banner d-none">
+        <div class="container">
+            <div class="action-plan-inner">
+                <div class="action-plan-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="action-plan-text">
+                    <strong>Action Required:</strong> Improve your oral routine.
+                    <span id="action-plan-detail">Our latest scan detected issues that need attention.</span>
+                </div>
+                <button class="btn action-plan-btn" onclick="window.openActionPlanChat()">
+                    <i class="fas fa-magic me-2"></i>Get Personalized Plan
+                </button>
+                <button class="btn-close btn-close-white ms-3" onclick="this.closest('.action-plan-banner').classList.add('d-none')" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+
+    <section class="py-5" style="background: linear-gradient(135deg, #f0f7ff 0%, #e8f4f8 50%, #f5f0ff 100%); min-height: 90vh;">
+        <div class="container">
+
+            <!-- Section Header -->
+            <div class="text-center mb-5 pt-4">
+                <div class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill mb-3" style="background: rgba(37, 99, 235, 0.1); border: 1px solid rgba(37, 99, 235, 0.2);">
+                    <i class="fas fa-heartbeat text-primary"></i>
+                    <small class="fw-semibold text-primary">Preventative Care Hub</small>
+                </div>
+                <h2 class="display-5 fw-bold mb-3">
+                    <span class="text-dark">Lifestyle &amp; </span>
+                    <span style="background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Habits Tracker</span>
+                </h2>
+                <p class="text-muted mx-auto" style="max-width: 600px;">Track your daily oral health habits, get AI-powered advice, and build a routine that protects your smile.</p>
+            </div>
+
+            <div class="row g-4">
+
+                <!-- ===== LEFT COLUMN: HABIT TRACKER CARD ===== -->
+                <div class="col-lg-5">
+                    <div class="habit-tracker-card">
+                        <div class="habit-card-header">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="habit-card-icon">
+                                    <i class="fas fa-clipboard-check"></i>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold mb-0 text-white">Today's Log</h5>
+                                    <small class="text-white-50" id="habit-date-display"></small>
+                                </div>
+                            </div>
+                            <span class="badge bg-white bg-opacity-25 rounded-pill px-3 py-2" id="habit-streak-badge">
+                                <i class="fas fa-fire me-1"></i><span id="habit-streak-count">0</span> day streak
+                            </span>
+                        </div>
+
+                        <div class="habit-card-body">
+                            <!-- Bad Habits Section -->
+                            <div class="habit-section">
+                                <div class="habit-section-label bad">
+                                    <i class="fas fa-times-circle me-2"></i>Bad Habits to Avoid
+                                </div>
+                                <div class="habit-toggle-row bad">
+                                    <div class="habit-info">
+                                        <i class="fas fa-smoking"></i>
+                                        <span>Smoked Cigarettes</span>
+                                    </div>
+                                    <label class="habit-switch bad">
+                                        <input type="checkbox" id="habit-smoked">
+                                        <span class="habit-slider"></span>
+                                    </label>
+                                </div>
+                                <div class="habit-toggle-row bad">
+                                    <div class="habit-info">
+                                        <i class="fas fa-candy-cane"></i>
+                                        <span>Ate Sweet Candy/Drinks</span>
+                                    </div>
+                                    <label class="habit-switch bad">
+                                        <input type="checkbox" id="habit-sweets">
+                                        <span class="habit-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Good Habits Section -->
+                            <div class="habit-section mt-3">
+                                <div class="habit-section-label good">
+                                    <i class="fas fa-check-circle me-2"></i>Good Habits to Build
+                                </div>
+                                <div class="habit-toggle-row good">
+                                    <div class="habit-info">
+                                        <i class="fas fa-tooth"></i>
+                                        <span>Brushed After Meal</span>
+                                    </div>
+                                    <label class="habit-switch good">
+                                        <input type="checkbox" id="habit-brushed">
+                                        <span class="habit-slider"></span>
+                                    </label>
+                                </div>
+                                <div class="habit-toggle-row good">
+                                    <div class="habit-info">
+                                        <i class="fas fa-teeth"></i>
+                                        <span>Used Dental Floss</span>
+                                    </div>
+                                    <label class="habit-switch good">
+                                        <input type="checkbox" id="habit-floss">
+                                        <span class="habit-slider"></span>
+                                    </label>
+                                </div>
+                                <div class="habit-toggle-row good">
+                                    <div class="habit-info">
+                                        <i class="fas fa-shield-alt"></i>
+                                        <span>Used Sensodyne</span>
+                                    </div>
+                                    <label class="habit-switch good">
+                                        <input type="checkbox" id="habit-sensodyne">
+                                        <span class="habit-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="habit-card-footer">
+                            <button class="btn habit-save-btn w-100" id="btn-save-habits" onclick="window.saveHabitLog()">
+                                <i class="fas fa-save me-2"></i>Save Today's Log
+                            </button>
+                            <div id="habit-save-status" class="text-center mt-2 small" style="min-height: 20px;"></div>
+                        </div>
+                    </div>
+
+                    <!-- 7-Day Mini History -->
+                    <div class="habit-history-card mt-4">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <h6 class="fw-bold mb-0"><i class="fas fa-chart-bar me-2 text-primary"></i>7-Day Overview</h6>
+                            <div class="habit-legend d-flex align-items-center gap-2">
+                                <span class="legend-dot excellent"></span><small class="text-muted">5</small>
+                                <span class="legend-dot good"></span><small class="text-muted">4</small>
+                                <span class="legend-dot average"></span><small class="text-muted">3</small>
+                                <span class="legend-dot poor"></span><small class="text-muted">&le;2</small>
+                            </div>
+                        </div>
+                        <div id="habit-history-grid" class="habit-history-grid">
+                            <!-- Filled by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== RIGHT COLUMN: PREVENTION SECTION ===== -->
+                <div class="col-lg-7">
+
+                    <!-- Oral Cancer Prevention Section -->
+                    <div class="prevention-section-card">
+                        <div class="prevention-header">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="prevention-icon">
+                                    <i class="fas fa-ribbon"></i>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold mb-0">Ways to Prevent Oral Cancer</h5>
+                                    <small class="text-muted">Evidence-based prevention strategies</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="prevention-grid">
+                            <!-- Card 1: Stop Tobacco -->
+                            <div class="prevention-item" style="--accent: #ef4444;">
+                                <div class="prevention-item-icon" style="background: linear-gradient(135deg, #fee2e2, #fecaca);">
+                                    <i class="fas fa-ban" style="color: #ef4444;"></i>
+                                </div>
+                                <div class="prevention-item-content">
+                                    <h6 class="fw-bold mb-1">Stop Tobacco Use</h6>
+                                    <p class="text-muted mb-0 small">Tobacco (smoking or chewing) is the #1 risk factor for oral cancer. Quitting reduces risk by up to 50% within 5 years.</p>
+                                </div>
+                                <div class="prevention-item-tag" style="background: #fef2f2; color: #ef4444;">Critical</div>
+                            </div>
+
+                            <!-- Card 2: Limit Alcohol -->
+                            <div class="prevention-item" style="--accent: #f59e0b;">
+                                <div class="prevention-item-icon" style="background: linear-gradient(135deg, #fef3c7, #fde68a);">
+                                    <i class="fas fa-wine-glass-alt" style="color: #f59e0b;"></i>
+                                </div>
+                                <div class="prevention-item-content">
+                                    <h6 class="fw-bold mb-1">Limit Alcohol Intake</h6>
+                                    <p class="text-muted mb-0 small">Heavy drinking increases oral cancer risk 6x. Combined with tobacco, risk multiplies up to 30x. Moderation is key.</p>
+                                </div>
+                                <div class="prevention-item-tag" style="background: #fffbeb; color: #f59e0b;">Important</div>
+                            </div>
+
+                            <!-- Card 3: Healthy Diet -->
+                            <div class="prevention-item" style="--accent: #10b981;">
+                                <div class="prevention-item-icon" style="background: linear-gradient(135deg, #d1fae5, #a7f3d0);">
+                                    <i class="fas fa-apple-alt" style="color: #10b981;"></i>
+                                </div>
+                                <div class="prevention-item-content">
+                                    <h6 class="fw-bold mb-1">Eat a Healthy Diet</h6>
+                                    <p class="text-muted mb-0 small">Fruits and vegetables rich in antioxidants (vitamins A, C, E) protect oral cells. Avoid excessive sugar and processed foods.</p>
+                                </div>
+                                <div class="prevention-item-tag" style="background: #ecfdf5; color: #10b981;">Recommended</div>
+                            </div>
+
+                            <!-- Card 4: Visit Dentist -->
+                            <div class="prevention-item" style="--accent: #2563eb;">
+                                <div class="prevention-item-icon" style="background: linear-gradient(135deg, #dbeafe, #bfdbfe);">
+                                    <i class="fas fa-user-md" style="color: #2563eb;"></i>
+                                </div>
+                                <div class="prevention-item-content">
+                                    <h6 class="fw-bold mb-1">Visit Your Dentist Regularly</h6>
+                                    <p class="text-muted mb-0 small">Regular check-ups (every 6 months) enable early detection. Dentists can spot pre-cancerous lesions before symptoms appear.</p>
+                                </div>
+                                <div class="prevention-item-tag" style="background: #eff6ff; color: #2563eb;">Essential</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Tips Card -->
+                    <div class="quick-tips-card mt-4">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="quick-tip-item">
+                                    <div class="quick-tip-icon" style="background: linear-gradient(135deg, #2563eb, #1d4ed8);">
+                                        <i class="fas fa-tooth text-white"></i>
+                                    </div>
+                                    <h6 class="fw-bold mb-1">Brush 2x Daily</h6>
+                                    <small class="text-muted">After breakfast &amp; before bed, for at least 2 minutes each.</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="quick-tip-item">
+                                    <div class="quick-tip-icon" style="background: linear-gradient(135deg, #10b981, #059669);">
+                                        <i class="fas fa-teeth text-white"></i>
+                                    </div>
+                                    <h6 class="fw-bold mb-1">Floss Daily</h6>
+                                    <small class="text-muted">Removes 40% of plaque your brush can't reach between teeth.</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="quick-tip-item">
+                                    <div class="quick-tip-icon" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+                                        <i class="fas fa-tint text-white"></i>
+                                    </div>
+                                    <h6 class="fw-bold mb-1">Stay Hydrated</h6>
+                                    <small class="text-muted">Water washes away bacteria &amp; keeps saliva levels healthy.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Action Plan Chat Modal -->
+<div class="modal fade" id="actionPlanModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+            <div class="modal-header border-0 text-white p-4" style="background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);">
+                <div>
+                    <h5 class="modal-title fw-bold mb-1"><i class="fas fa-magic me-2"></i>Personalized Care Plan</h5>
+                    <small class="opacity-75">AI-powered oral health recommendations</small>
+                </div>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4" style="max-height: 60vh; overflow-y: auto;">
+                <div id="action-plan-response" class="action-plan-response">
+                    <div class="text-center py-5">
+                        <div class="spinner-border text-primary mb-3" role="status"></div>
+                        <p class="text-muted">Generating your personalized care plan...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer border-0 bg-light">
+                <button type="button" class="btn btn-light rounded-pill px-4" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary rounded-pill px-4" onclick="window.openChatWidget()">
+                    <i class="fas fa-comments me-2"></i>Continue in Chat
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

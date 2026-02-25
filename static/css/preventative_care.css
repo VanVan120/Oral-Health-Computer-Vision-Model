@@ -1,0 +1,546 @@
+/* ==================== PREVENTATIVE CARE HUB ==================== */
+
+/* --- Action Plan Banner --- */
+.action-plan-banner {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    padding: 14px 0;
+    position: relative;
+    z-index: 5;
+    animation: slideDown 0.4s ease-out;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.action-plan-inner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.action-plan-icon {
+    width: 42px;
+    height: 42px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    animation: pulse-warning 2s ease-in-out infinite;
+}
+
+@keyframes pulse-warning {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.action-plan-text {
+    color: #fff;
+    flex: 1;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.action-plan-btn {
+    background: rgba(255, 255, 255, 0.95) !important;
+    color: #dc2626 !important;
+    border: none;
+    border-radius: 50px;
+    padding: 8px 20px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.action-plan-btn:hover {
+    background: #fff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Habit Tracker Card (Glassmorphism) --- */
+.habit-tracker-card {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.habit-tracker-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(31, 38, 135, 0.18);
+}
+
+.habit-card-header {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 50%, #7c3aed 100%);
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.habit-card-icon {
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.2rem;
+}
+
+.habit-card-body {
+    padding: 24px;
+}
+
+.habit-section-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.habit-section-label.bad { color: #ef4444; }
+.habit-section-label.good { color: #10b981; }
+
+.habit-toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-radius: 14px;
+    margin-bottom: 8px;
+    transition: all 0.2s ease;
+}
+
+.habit-toggle-row.bad {
+    background: rgba(239, 68, 68, 0.05);
+    border: 1px solid rgba(239, 68, 68, 0.1);
+}
+
+.habit-toggle-row.bad:hover {
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.habit-toggle-row.good {
+    background: rgba(16, 185, 129, 0.05);
+    border: 1px solid rgba(16, 185, 129, 0.1);
+}
+
+.habit-toggle-row.good:hover {
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.habit-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--text-main, #1e293b);
+}
+
+.habit-info i {
+    width: 20px;
+    text-align: center;
+    opacity: 0.7;
+}
+
+/* --- Custom Toggle Switch --- */
+.habit-switch {
+    position: relative;
+    display: inline-block;
+    width: 52px;
+    height: 28px;
+    flex-shrink: 0;
+}
+
+.habit-switch input { opacity: 0; width: 0; height: 0; }
+
+.habit-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #e2e8f0;
+    border-radius: 28px;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.habit-slider::before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 3px;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* Bad habit toggles -> red when ON */
+.habit-switch.bad input:checked + .habit-slider {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+/* Good habit toggles -> green when ON */
+.habit-switch.good input:checked + .habit-slider {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.habit-switch input:checked + .habit-slider::before {
+    transform: translateX(24px);
+}
+
+.habit-card-footer {
+    padding: 0 24px 24px;
+}
+
+.habit-save-btn {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
+    color: #fff !important;
+    border: none;
+    border-radius: 14px;
+    padding: 14px 24px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.habit-save-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);
+}
+
+.habit-save-btn:disabled {
+    opacity: 0.7;
+    transform: none;
+    cursor: not-allowed;
+}
+
+/* --- 7-Day History Card --- */
+.habit-history-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 4px 16px rgba(31, 38, 135, 0.08);
+}
+
+.habit-history-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+}
+
+.habit-day-cell {
+    text-align: center;
+    padding: 10px 4px 8px;
+    border-radius: 14px;
+    background: rgba(241, 245, 249, 0.7);
+    border: 1px solid rgba(226, 232, 240, 0.6);
+    transition: all 0.2s ease;
+}
+
+.habit-day-cell:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.habit-day-cell.today {
+    border-color: rgba(37, 99, 235, 0.35);
+    background: rgba(37, 99, 235, 0.06);
+}
+
+.habit-day-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted, #64748b);
+    margin-bottom: 4px;
+}
+
+.habit-day-date {
+    font-size: 0.7rem;
+    color: var(--text-muted, #94a3b8);
+    margin-bottom: 6px;
+}
+
+.habit-day-score {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: #fff;
+    transition: transform 0.2s;
+}
+
+.habit-day-cell:hover .habit-day-score {
+    transform: scale(1.1);
+}
+
+.habit-day-score.excellent { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 3px 10px rgba(16, 185, 129, 0.3); }
+.habit-day-score.good { background: linear-gradient(135deg, #3b82f6, #2563eb); box-shadow: 0 3px 10px rgba(59, 130, 246, 0.3); }
+.habit-day-score.average { background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 3px 10px rgba(245, 158, 11, 0.3); }
+.habit-day-score.poor { background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 3px 10px rgba(239, 68, 68, 0.3); }
+.habit-day-score.none {
+    background: transparent;
+    border: 2px dashed #cbd5e1;
+    color: #94a3b8;
+    font-size: 0.7rem;
+    box-shadow: none;
+}
+
+/* Legend dots */
+.habit-legend {
+    flex-wrap: wrap;
+}
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    display: inline-block;
+}
+.legend-dot.excellent { background: #10b981; }
+.legend-dot.good { background: #3b82f6; }
+.legend-dot.average { background: #f59e0b; }
+.legend-dot.poor { background: #ef4444; }
+
+/* --- Prevention Section Card --- */
+.prevention-section-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.12);
+}
+
+.prevention-header {
+    padding: 24px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.prevention-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #fecaca, #fca5a5);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ef4444;
+    font-size: 1.2rem;
+}
+
+.prevention-grid {
+    display: flex;
+    flex-direction: column;
+}
+
+.prevention-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    transition: all 0.2s ease;
+    cursor: default;
+}
+
+.prevention-item:last-child { border-bottom: none; }
+
+.prevention-item:hover {
+    background: rgba(37, 99, 235, 0.03);
+}
+
+.prevention-item-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.prevention-item-content {
+    flex: 1;
+}
+
+.prevention-item-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    align-self: flex-start;
+    margin-top: 2px;
+}
+
+/* --- Quick Tips Card --- */
+.quick-tips-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 4px 16px rgba(31, 38, 135, 0.08);
+}
+
+.quick-tip-item {
+    text-align: center;
+    padding: 12px;
+}
+
+.quick-tip-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+    font-size: 1.1rem;
+}
+
+/* --- Action Plan Modal --- */
+.action-plan-response {
+    line-height: 1.8;
+    font-size: 0.95rem;
+}
+
+.action-plan-response h1,
+.action-plan-response h2,
+.action-plan-response h3 {
+    color: var(--primary-color, #2563eb);
+    margin-top: 1rem;
+}
+
+.action-plan-response ul, .action-plan-response ol {
+    padding-left: 1.5rem;
+}
+
+.action-plan-response li {
+    margin-bottom: 0.5rem;
+}
+
+/* --- Dark Mode Overrides --- */
+body.dark-mode .habit-tracker-card,
+body.dark-mode .habit-history-card,
+body.dark-mode .prevention-section-card,
+body.dark-mode .quick-tips-card {
+    background: rgba(30, 41, 59, 0.85);
+    border-color: rgba(51, 65, 85, 0.5);
+}
+
+body.dark-mode .habit-toggle-row.bad {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.2);
+}
+
+body.dark-mode .habit-toggle-row.good {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.2);
+}
+
+body.dark-mode .habit-slider {
+    background-color: #475569;
+}
+
+body.dark-mode .prevention-item:hover {
+    background: rgba(37, 99, 235, 0.08);
+}
+
+body.dark-mode .habit-day-score.none {
+    background: transparent;
+    border-color: #475569;
+    color: #64748b;
+}
+
+body.dark-mode .habit-day-cell {
+    background: rgba(51, 65, 85, 0.5);
+    border-color: rgba(71, 85, 105, 0.5);
+}
+
+body.dark-mode .prevention-header {
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+body.dark-mode .prevention-item {
+    border-color: rgba(255, 255, 255, 0.04);
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .habit-history-grid {
+        grid-template-columns: repeat(7, 1fr);
+        gap: 6px;
+    }
+
+    .habit-day-cell {
+        padding: 8px 2px 6px;
+    }
+
+    .habit-day-score {
+        width: 32px;
+        height: 32px;
+        font-size: 0.75rem;
+    }
+
+    .habit-day-date {
+        font-size: 0.6rem;
+    }
+
+    .habit-legend {
+        display: none !important;
+    }
+
+    .action-plan-inner {
+        gap: 10px;
+    }
+
+    .action-plan-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .prevention-item {
+        flex-wrap: wrap;
+    }
+
+    .prevention-item-tag {
+        margin-top: 8px;
+    }
+}

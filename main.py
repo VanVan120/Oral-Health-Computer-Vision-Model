@@ -24,6 +24,7 @@ from chat_service import get_chat_response
 from database import create_db_and_tables
 from appointment_service import router as appointment_router
 from auth_service import router as auth_router
+from habits_service import router as habits_router
 
 # --- Security & Configuration Check ---
 # Explicitly load .env file from the current directory
@@ -86,6 +87,7 @@ def on_startup():
 
 app.include_router(auth_router)
 app.include_router(appointment_router)
+app.include_router(habits_router)
 
 app.add_middleware(
     CORSMiddleware,

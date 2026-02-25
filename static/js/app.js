@@ -3,6 +3,7 @@ import { UIManager } from './ui/ui_manager.js';
 import { ModelAUI } from './ui/model_a_ui.js';
 import { ModelBUI } from './ui/model_b_ui.js';
 import { ChatUI } from './ui/chat_ui.js';
+import { HabitsUI } from './ui/habits_ui.js';
 
 class App {
     constructor() {
@@ -11,6 +12,7 @@ class App {
         this.modelBUI = new ModelBUI();
         // Pass context provider to ChatUI
         this.chatUI = new ChatUI(() => this.currentAnalysisData);
+        this.habitsUI = new HabitsUI(() => this.currentAnalysisData);
         
         this.initEventListeners();
         this.initDragAndDrop();
@@ -251,6 +253,9 @@ class App {
         } else if (view === 'services') {
             const servicesLink = document.getElementById('nav-services');
             if (servicesLink) servicesLink.classList.add('active');
+        } else if (view === 'care') {
+            const careLink = document.getElementById('nav-care');
+            if (careLink) careLink.classList.add('active');
         }
     }
 
@@ -258,6 +263,9 @@ class App {
         // Navigation
         window.showHome = () => {
             if (document.getElementById('home-view')) {
+                // Also hide preventative care view
+                const careView = document.getElementById('preventative-care-view');
+                if (careView) careView.classList.add('hidden-section');
                 UIManager.showHome();
                 this.updateNavState('home');
             } else {
@@ -267,6 +275,9 @@ class App {
 
         window.showAnalysis = () => {
             if (document.getElementById('triage-view')) {
+                // Also hide preventative care view
+                const careView = document.getElementById('preventative-care-view');
+                if (careView) careView.classList.add('hidden-section');
                 UIManager.showAnalysis();
                 this.updateNavState('services');
             } else {
@@ -290,6 +301,16 @@ class App {
                 setTimeout(() => {
                     UIManager.showAnalysis();
                     this.updateNavState('services');
+                    history.replaceState(null, null, ' ');
+                }, 100);
+            }
+        }
+
+        // Care Hub redirect hash
+        if (window.location.hash === '#care-hub') {
+            if (document.getElementById('preventative-care-view')) {
+                setTimeout(() => {
+                    if (this.habitsUI) this.habitsUI.showView();
                     history.replaceState(null, null, ' ');
                 }, 100);
             }
@@ -392,6 +413,11 @@ class App {
             }
 
             this.currentAnalysisData = data;
+
+            // Check for action plan banner (Preventative Care Hub)
+            if (this.habitsUI) {
+                this.habitsUI.checkForActionBanner();
+            }
 
             if (data.model_used === "Model A (Histopathology)") {
                 this.modelAUI.show(data.final_analysis, file);
