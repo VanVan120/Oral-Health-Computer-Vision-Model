@@ -23,11 +23,13 @@ class OSCCMultiTaskModel(nn.Module):
     """
     Multi-Task Model for OSCC Cell Feature Detection
     
-    Tasks:
-    1. TVNT: Binary classification (Abnormality detected vs Normal)
-    2. Mitotic Figures Count: Regression
-    3. Multiple Nucleol Count: Regression
-    4. Nuclear Hyperchromatism Count: Regression
+    Quantifies 3 cellular anomalies (from Roboflow dataset) and derives
+    an overall Abnormality (TVNT) score from their presence:
+    
+    1. Mitotic Figures Count: Regression
+    2. Multiple Nucleol Count: Regression
+    3. Nuclear Hyperchromatism Count: Regression
+    4. TVNT: Binary classification (Abnormality detected vs Normal) — derived output
     """
     def __init__(self):
         super().__init__()

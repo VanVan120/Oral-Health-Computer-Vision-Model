@@ -95,21 +95,21 @@ graph TD
 *   **Architecture**: **Multi-Task DenseNet169** with Custom Regression/Classification Heads.
 *   **Input**: Histopathological (H&E Stained) Microscope Slides.
 *   **Preprocessing (Macenko Normalization)**: Pathology slides vary greatly in color depending on the lab's staining process. We use **Macenko Normalization** to mathematically align the color distribution of every input slide to a "reference" standard before the AI sees it. This makes the model robust to different scanners and staining protocols.
-*   **Multi-Task Capabilities (4 Output Heads)**:
-    *   **TVNT (Binary Classification)**: Detects presence of abnormal cells vs normal tissue.
-    *   **Mitotic Figures Count (Regression)**: Counts cells undergoing mitosis - a key indicator of tumor proliferation.
-    *   **Multiple Nucleoli Count (Regression)**: Counts cells with multiple nucleoli - associated with aggressive tumor behavior.
-    *   **Nuclear Hyperchromatism Count (Regression)**: Counts cells with abnormally dark nuclei - indicates chromatin abnormalities.
+*   **3 Cellular Anomaly Classes** (from Roboflow dataset):
+    *   **Mitotic Figures (Regression)**: Counts cells undergoing mitosis — a key indicator of tumor proliferation.
+    *   **Multiple Nucleoli (Regression)**: Counts cells with multiple nucleoli — associated with aggressive tumor behavior.
+    *   **Nuclear Hyperchromatism (Regression)**: Counts cells with abnormally dark nuclei — indicates chromatin abnormalities.
+*   **Derived Output — TVNT (Binary Classification)**: Uses the presence/absence of the 3 anomalies above to determine an overall **Abnormality Score** (Abnormal Tissue vs Normal Tissue). If any of the 3 cellular features are detected at significant levels, the tissue is classified as abnormal.
 
 #### 📊 Model A Performance Metrics (Validation Set)
 
 | Task | Metric | Score |
 |:-----|:-------|------:|
-| **TVNT (Classification)** | AUC-ROC | **1.0000** |
-| **TVNT (Classification)** | F1 Score | **0.9952** |
-| **TVNT (Classification)** | Accuracy | **99.08%** |
-| **TVNT (Classification)** | Precision | **100.00%** |
-| **TVNT (Classification)** | Recall | **99.05%** |
+| **Abnormality Detection (TVNT)** | AUC-ROC | **1.0000** |
+| **Abnormality Detection (TVNT)** | F1 Score | **0.9952** |
+| **Abnormality Detection (TVNT)** | Accuracy | **99.08%** |
+| **Abnormality Detection (TVNT)** | Precision | **100.00%** |
+| **Abnormality Detection (TVNT)** | Recall | **99.05%** |
 | **Mitotic Figures** | MAE | **0.125 cells** |
 | **Mitotic Figures** | Exact Match Rate | **92.66%** |
 | **Multiple Nucleoli** | MAE | **0.009 cells** |
@@ -117,7 +117,7 @@ graph TD
 | **Nuclear Hyperchromatism** | MAE | **0.009 cells** |
 | **Nuclear Hyperchromatism** | Exact Match Rate | **100.00%** |
 
-> **Note**: The model achieves near-perfect classification (AUC-ROC = 1.0) for abnormality detection and highly accurate cell counting with all count predictions within ±1 of ground truth (100% accuracy).
+> **Note**: The model quantifies 3 cellular anomalies from a Roboflow-annotated dataset and uses their presence to derive the overall Abnormality (TVNT) score. It achieves near-perfect classification (AUC-ROC = 1.0) for abnormality detection and highly accurate cell counting with all count predictions within ±1 of ground truth (100% accuracy).
 
 ### 3️⃣ The Hygiene Specialist (Model B)
 *   **Architecture**: **YOLOv8** (You Only Look Once) + **SAHI** (Slicing Aided Hyper Inference).
@@ -142,7 +142,7 @@ Our multi-model system has been rigorously evaluated on held-out validation data
 <details>
 <summary><b>📊 Click to see Detailed Evaluation Results</b></summary>
 
-#### TVNT (Abnormality Detection) - Binary Classification
+#### Abnormality Detection (TVNT) — Derived from 3 Cellular Anomaly Classes
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │  🎯 Tile-level AUC-ROC:   1.0000                            │
@@ -159,7 +159,7 @@ Our multi-model system has been rigorously evaluated on held-out validation data
 └─────────────────────────────────────────────────────────────┘
 ```
 
-#### Cell Feature Counting (Regression Tasks)
+#### 3 Cellular Anomaly Counts (Regression Tasks — Roboflow Dataset)
 | Feature | MAE | Exact Match | Within ±1 |
 |:--------|----:|------------:|----------:|
 | Mitotic Figures | 0.125 cells | 92.66% | 100% |
@@ -254,6 +254,9 @@ The chatbot doesn't just "guess"; it uses **Retrieval-Augmented Generation (RAG)
 | **🌍 Multi-Language UI** | Complete internationalization supporting **English**, **Malay (Bahasa)**, **Chinese (中文)**, and **Tamil (தமிழ்)**. |
 | **🔔 Smart Notifications** | Beautiful toast notification system with success, error, warning, and info states for better UX. |
 | **🔒 Privacy First** | HIPAA-compliant design: Images are processed in RAM and wiped immediately after analysis. |
+| **🏃 Preventative Care Hub** | Daily habit tracker with toggle switches for smoking, sweets, brushing, flossing, and Sensodyne usage. 7-day history grid with color-coded scores and streak tracking. |
+| **🎯 Action Plan Banner** | Dynamic alert when Model B detects Gingivitis/Caries. One-click access to AI-generated personalized oral care improvement plans. |
+| **🎗️ Oral Cancer Prevention** | Evidence-based prevention guide covering tobacco, alcohol, diet, and regular dental visits with severity-tagged cards. |
 | **☁️ Cloud Native** | Fully containerized with Docker, ready for serverless deployment. |
 
 ---
@@ -442,7 +445,7 @@ A quick look at the codebase organization:
 📦 Oral-Health-Computer-Vision-Model
  ┣ 📂 Model A             # 🧬 Pathology Model (DenseNet/ResNet)
  ┣ 📂 Model B             # 🦷 Hygiene Model (YOLOv8)
- ┣ 📂 Model Triage        # 🛡️ Router Model (MobileNet)
+ ┣ 📂 Model Triage        # 🛡️ Router Model (ResNet18)
  ┣ 📂 static              # 🎨 Frontend (HTML, CSS, JS)
  ┃  ┣ 📂 css              #    Stylesheets & animations
  ┃  ┣ 📂 html/views       #    Page templates (home, login, settings...)
@@ -450,10 +453,11 @@ A quick look at the codebase organization:
  ┣ 📜 main.py             # ⚡ FastAPI Application Entry Point
  ┣ 📜 auth_service.py     # 🔐 Authentication & User Management
  ┣ 📜 appointment_service.py # 📅 Appointment CRUD APIs
- ┣ 📜 chat_service.py     # 🤖 AI Chatbot Logic
+ ┣ 📜 chat_service.py     # 🤖 AI Chatbot Logic (RAG + Lifestyle Guidelines)
+ ┣ 📜 habits_service.py   # 🏃 Daily Habit Tracking API (POST/GET)
  ┣ 📜 report_service.py   # 📄 PDF Generation & Email Delivery
  ┣ 📜 database.py         # 💾 SQLite Database Setup
- ┣ 📜 models.py           # 📋 SQLModel Schemas (User, Appointment)
+ ┣ 📜 models.py           # 📋 SQLModel Schemas (User, Appointment, DailyHabitLog)
  ┣ 📜 Dockerfile          # 🐳 Container Configuration
  ┗ 📜 requirements.txt    # 📦 Python Dependencies
 ```
