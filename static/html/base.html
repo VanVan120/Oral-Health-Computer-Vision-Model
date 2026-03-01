@@ -43,16 +43,44 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
         }
+        
+        /* AI Insight Feedback Hover & Placeholder Styles */
+        .ai-feedback-btn {
+            cursor: pointer;
+            transition: all 0.2s ease !important;
+        }
+        .ai-feedback-btn:hover {
+            transform: translateY(-3px) scale(1.05) !important;
+        }
+        .ai-feedback-btn.hover-emerald:hover {
+            background-color: #10b981 !important;
+            color: #ffffff !important;
+            border-color: #10b981 !important;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4) !important;
+        }
+        .ai-feedback-btn.hover-rose:hover {
+            background-color: #f43f5e !important;
+            color: #ffffff !important;
+            border-color: #f43f5e !important;
+            box-shadow: 0 4px 12px rgba(244, 63, 94, 0.4) !important;
+        }
+        /* Make placeholder text much clearer */
+        .custom-placeholder::placeholder { 
+            color: #b0bec5 !important; 
+            opacity: 1 !important; 
+            font-style: italic; 
+            font-weight: 400;
+        }
     </style>
 
     <!-- Marked.js for Markdown parsing -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
     <!-- Custom Styles -->
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/style.css?v=2.1">
     <link rel="stylesheet" href="/static/css/animations.css">
     <link rel="stylesheet" href="/static/css/viewport.css">
-    <link rel="stylesheet" href="/static/css/model_a_modern.css">
+    <link rel="stylesheet" href="/static/css/model_a_modern.css?v=2.1">
     <link rel="stylesheet" href="/static/css/preventative_care.css">
     
     <!-- Global Language Support -->

@@ -21,6 +21,29 @@
                         <p id="ai-suggestion-text-a" class="fs-5 mb-0" style="line-height: 1.8; color: #e2e8f0;">
                             <span data-translate="loadingSuggestion">Loading suggestion...</span>
                         </p>
+                        
+                        <!-- Beautiful Feedback UI -->
+                        <div id="ai-suggestion-feedback-container-a" class="mt-4 pt-3 border-top border-secondary border-opacity-25 d-none">
+                             <div class="d-flex align-items-center justify-content-between mb-2" id="ai-suggestion-feedback-buttons-a">
+                                <span class="text-white-50 fw-medium" style="font-size: 0.85rem; letter-spacing: 0.5px;"><i class="far fa-comment-dots me-2"></i>WAS THIS HELPFUL?</span>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-sm rounded-circle d-flex align-items-center justify-content-center feedback-btn-a text-secondary transition-all ai-feedback-btn hover-emerald" data-helpful="true" style="width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.02); transition: all 0.2s ease;">
+                                        <i class="fas fa-thumbs-up"></i>
+                                    </button>
+                                    <button class="btn btn-sm rounded-circle d-flex align-items-center justify-content-center feedback-btn-a text-secondary transition-all ai-feedback-btn hover-rose" data-helpful="false" style="width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.02); transition: all 0.2s ease;">
+                                        <i class="fas fa-thumbs-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="correction-form mt-3 d-none" id="ai-suggestion-correction-form-a">
+                                <textarea class="form-control mb-3 shadow-none custom-placeholder" rows="2" placeholder="Tell us how we can improve this insight (optional)..." id="ai-suggestion-correction-input-a" style="background: rgba(73, 71, 71, 0.05); border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; font-size: 0.95rem; padding: 12px 16px; scrollbar-width: thin; resize: none; color: #ffffff;"></textarea>
+                                <div class="d-flex justify-content-end">
+                                    <button class="btn text-white px-4 py-2" id="submit-ai-suggestion-feedback-a" style="background: linear-gradient(135deg, #3b82f6, #8b5cf6); border-radius: 20px; font-weight: 500; font-size: 0.9rem; border: none; box-shadow: 0 4px 10px rgba(59, 130, 246, 0.2);">
+                                        <i class="fas fa-paper-plane me-2"></i>Submit Feedback
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer border-0 px-4 pb-4">
