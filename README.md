@@ -105,19 +105,19 @@ graph TD
 
 | Task | Metric | Score |
 |:-----|:-------|------:|
-| **Abnormality Detection (TVNT)** | AUC-ROC | **1.0000** |
-| **Abnormality Detection (TVNT)** | F1 Score | **0.9952** |
-| **Abnormality Detection (TVNT)** | Accuracy | **99.08%** |
-| **Abnormality Detection (TVNT)** | Precision | **100.00%** |
-| **Abnormality Detection (TVNT)** | Recall | **99.05%** |
-| **Mitotic Figures** | MAE | **0.125 cells** |
-| **Mitotic Figures** | Exact Match Rate | **92.66%** |
-| **Multiple Nucleoli** | MAE | **0.009 cells** |
-| **Multiple Nucleoli** | Exact Match Rate | **100.00%** |
-| **Nuclear Hyperchromatism** | MAE | **0.009 cells** |
-| **Nuclear Hyperchromatism** | Exact Match Rate | **100.00%** |
+| **Abnormality Detection (TVNT)** | AUC-ROC | **0.6476** |
+| **Abnormality Detection (TVNT)** | F1 Score | **0.9813** |
+| **Abnormality Detection (TVNT)** | Accuracy | **96.33%** |
+| **Abnormality Detection (TVNT)** | Precision | **96.33%** |
+| **Abnormality Detection (TVNT)** | Recall | **100.00%** |
+| **Mitotic Figures** | MAE | **0.1436 cells** |
+| **Mitotic Figures** | Exact Match Rate | **93.58%** |
+| **Multiple Nucleoli** | MAE | **2.0272 cells** |
+| **Multiple Nucleoli** | Exact Match Rate | **12.84%** |
+| **Nuclear Hyperchromatism** | MAE | **2.1767 cells** |
+| **Nuclear Hyperchromatism** | Exact Match Rate | **25.69%** |
 
-> **Note**: The model quantifies 3 cellular anomalies from a Roboflow-annotated dataset and uses their presence to derive the overall Abnormality (TVNT) score. It achieves near-perfect classification (AUC-ROC = 1.0) for abnormality detection and highly accurate cell counting with all count predictions within ±1 of ground truth (100% accuracy).
+> **Note**: The model quantifies 3 cellular anomalies from a Roboflow-annotated dataset and uses their presence to derive the overall Abnormality (TVNT) score. It achieves classification (AUC-ROC = 0.6476) for abnormality detection and highly accurate cell counting with all count predictions within ±1 of ground truth.
 
 ### 3️⃣ The Hygiene Specialist (Model B)
 *   **Architecture**: **YOLOv8** (You Only Look Once) + **SAHI** (Slicing Aided Hyper Inference).
