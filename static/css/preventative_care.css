@@ -502,6 +502,396 @@ body.dark-mode .prevention-item {
     border-color: rgba(255, 255, 255, 0.04);
 }
 
+body.dark-mode .daily-tip-card {
+    background: rgba(30, 41, 59, 0.85);
+    border-color: rgba(51, 65, 85, 0.5);
+}
+
+body.dark-mode .daily-tip-text {
+    color: #94a3b8;
+}
+
+/* ==================== LOCKED / SAVED STATE ==================== */
+
+/* Locked toggle switch */
+.habit-switch.locked {
+    opacity: 0.65;
+    pointer-events: none;
+}
+
+.habit-switch.locked .habit-slider {
+    cursor: not-allowed;
+}
+
+/* Locked card body subtle overlay */
+.habits-locked {
+    position: relative;
+}
+
+.habits-locked::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+body.dark-mode .habits-locked::after {
+    background: rgba(15, 23, 42, 0.15);
+}
+
+/* Saved button state */
+.habit-saved-btn {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    cursor: default !important;
+    transform: none !important;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25) !important;
+}
+
+.habit-saved-btn:hover {
+    transform: none !important;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25) !important;
+}
+
+/* ==================== SCORE POPUP OVERLAY ==================== */
+
+.score-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: overlayFadeIn 0.3s ease-out;
+    padding: 20px;
+}
+
+.score-popup-overlay.closing {
+    animation: overlayFadeOut 0.35s ease-in forwards;
+}
+
+@keyframes overlayFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes overlayFadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.score-popup-card {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    border-radius: 28px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow:
+        0 24px 80px rgba(0, 0, 0, 0.25),
+        0 0 0 1px rgba(255, 255, 255, 0.1);
+    animation: popupBounceIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-origin: center center;
+}
+
+.score-popup-overlay.closing .score-popup-card {
+    animation: popupBounceOut 0.3s ease-in forwards;
+}
+
+@keyframes popupBounceIn {
+    0% { transform: scale(0.4) translateY(40px); opacity: 0; }
+    60% { transform: scale(1.05) translateY(-5px); opacity: 1; }
+    100% { transform: scale(1) translateY(0); }
+}
+
+@keyframes popupBounceOut {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0.7) translateY(30px); opacity: 0; }
+}
+
+body.dark-mode .score-popup-card {
+    background: #1e293b;
+}
+
+/* Top glow bar */
+.score-popup-glow {
+    height: 6px;
+    width: 100%;
+}
+
+/* Content */
+.score-popup-content {
+    padding: 36px 32px 32px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+/* Emoji ring */
+.score-popup-emoji-ring {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    border: 4px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    animation: emojiPulse 0.6s ease-out 0.3s both;
+}
+
+body.dark-mode .score-popup-emoji-ring {
+    background: rgba(51, 65, 85, 0.95);
+}
+
+@keyframes emojiPulse {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.score-popup-emoji {
+    font-size: 2.5rem;
+    line-height: 1;
+}
+
+/* Score number */
+.score-popup-score {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 6px;
+    background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: scoreCountUp 0.4s ease-out 0.45s both;
+}
+
+body.dark-mode .score-popup-score {
+    background: linear-gradient(135deg, #f1f5f9 0%, #94a3b8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+@keyframes scoreCountUp {
+    0% { transform: scale(0.5); opacity: 0; }
+    60% { transform: scale(1.1); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.score-popup-total {
+    font-size: 1.4rem;
+    font-weight: 600;
+    opacity: 0.4;
+}
+
+/* Stars row */
+.score-popup-stars {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+.popup-star {
+    font-size: 1.4rem;
+    animation: starPop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+.popup-star.filled {
+    color: #f59e0b;
+    filter: drop-shadow(0 2px 4px rgba(245, 158, 11, 0.4));
+}
+
+.popup-star.empty {
+    color: #e2e8f0;
+}
+
+body.dark-mode .popup-star.empty {
+    color: #475569;
+}
+
+@keyframes starPop {
+    0% { transform: scale(0) rotate(-30deg); opacity: 0; }
+    70% { transform: scale(1.3) rotate(5deg); }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+/* Subtitle */
+.score-popup-subtitle {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    animation: subtitleSlide 0.4s ease-out 0.8s both;
+}
+
+.score-popup-excellent .score-popup-subtitle { color: #10b981; }
+.score-popup-good .score-popup-subtitle { color: #3b82f6; }
+.score-popup-average .score-popup-subtitle { color: #f59e0b; }
+.score-popup-poor .score-popup-subtitle { color: #ef4444; }
+
+@keyframes subtitleSlide {
+    0% { transform: translateY(10px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Message */
+.score-popup-message {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-main, #334155);
+    line-height: 1.5;
+    margin-bottom: 24px;
+    animation: subtitleSlide 0.4s ease-out 0.95s both;
+}
+
+body.dark-mode .score-popup-message {
+    color: #cbd5e1;
+}
+
+/* Close / Awesome button */
+.score-popup-close-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 36px;
+    border: none;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: subtitleSlide 0.4s ease-out 1.1s both;
+}
+
+.score-popup-excellent .score-popup-close-btn { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 4px 16px rgba(16, 185, 129, 0.35); }
+.score-popup-good .score-popup-close-btn { background: linear-gradient(135deg, #3b82f6, #2563eb); box-shadow: 0 4px 16px rgba(59, 130, 246, 0.35); }
+.score-popup-average .score-popup-close-btn { background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 4px 16px rgba(245, 158, 11, 0.35); }
+.score-popup-poor .score-popup-close-btn { background: linear-gradient(135deg, #ef4444, #dc2626); box-shadow: 0 4px 16px rgba(239, 68, 68, 0.35); }
+
+.score-popup-close-btn:hover {
+    transform: translateY(-2px) scale(1.03);
+    filter: brightness(1.1);
+}
+
+.score-popup-close-btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* Confetti inside popup */
+.score-popup-confetti {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: visible;
+}
+
+.confetti-particle {
+    position: absolute;
+    animation: confettiFall 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation-delay: var(--delay, 0s);
+    opacity: 0;
+}
+
+@keyframes confettiFall {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+    80% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(var(--x), var(--y)) rotate(var(--r));
+        opacity: 0;
+    }
+}
+
+/* ==================== DAILY TIP CARD ==================== */
+
+.daily-tip-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    padding: 20px 24px;
+    box-shadow: 0 4px 16px rgba(31, 38, 135, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.daily-tip-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(31, 38, 135, 0.12);
+}
+
+.daily-tip-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 10px;
+}
+
+.daily-tip-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    flex-shrink: 0;
+}
+
+.daily-tip-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #f59e0b;
+}
+
+.daily-tip-text {
+    font-size: 0.88rem;
+    color: var(--text-muted, #64748b);
+    line-height: 1.6;
+    margin: 0;
+    padding-left: 58px;
+}
+
+/* ==================== LEVEL BADGE ==================== */
+
+.habit-level-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 50px;
+    border: 1.5px solid;
+    white-space: nowrap;
+    color: #94a3b8;
+    background: rgba(148, 163, 184, 0.1);
+    border-color: rgba(148, 163, 184, 0.25);
+    transition: all 0.3s ease;
+}
+
 /* --- Responsive --- */
 @media (max-width: 768px) {
     .habit-history-grid {
@@ -542,5 +932,42 @@ body.dark-mode .prevention-item {
 
     .prevention-item-tag {
         margin-top: 8px;
+    }
+
+    .habit-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .habit-level-badge {
+        font-size: 0.6rem;
+        padding: 4px 8px;
+    }
+
+    .score-popup-card {
+        max-width: 340px;
+        border-radius: 22px;
+    }
+
+    .score-popup-content {
+        padding: 28px 24px 24px;
+    }
+
+    .score-popup-emoji-ring {
+        width: 72px;
+        height: 72px;
+    }
+
+    .score-popup-emoji {
+        font-size: 2rem;
+    }
+
+    .score-popup-score {
+        font-size: 2.4rem;
+    }
+
+    .daily-tip-text {
+        padding-left: 0;
     }
 }

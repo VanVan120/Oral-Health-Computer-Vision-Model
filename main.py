@@ -20,7 +20,7 @@ from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
 
 # Import new services
 from report_service import generate_expert_report, generate_public_report
-from chat_service import get_chat_response
+from chat_service import get_chat_response, router as chat_router
 from database import create_db_and_tables
 from appointment_service import router as appointment_router
 from auth_service import router as auth_router
@@ -88,6 +88,7 @@ def on_startup():
 app.include_router(auth_router)
 app.include_router(appointment_router)
 app.include_router(habits_router)
+app.include_router(chat_router)
 
 app.add_middleware(
     CORSMiddleware,

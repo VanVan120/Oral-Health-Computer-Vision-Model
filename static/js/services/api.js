@@ -91,4 +91,24 @@ export class APIService {
         }
         return await response.json();
     }
+
+    static async submitChatFeedback(payload) {
+        const token = localStorage.getItem('access_token');
+        if (!token) throw new Error("User must be logged in to provide feedback.");
+
+        const response = await fetch('/api/chat/feedback', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+            const err = await response.json();
+            throw new Error(err.detail || 'Failed to submit feedback');
+        }
+        return await response.json();
+    }
 }

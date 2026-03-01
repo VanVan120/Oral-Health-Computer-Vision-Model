@@ -2,6 +2,14 @@ import os
 import json
 import google.generativeai as genai
 from dotenv import load_dotenv
+from fastapi import APIRouter, Depends, HTTPException, status
+from pydantic import BaseModel
+from sqlmodel import Session
+from typing import Optional
+from database import get_session
+from models import GenAIFeedback
+from auth_service import get_current_user
+from models import User
 
 # Load environment variables
 load_dotenv()
@@ -9,11 +17,14 @@ load_dotenv()
 # Configure API Key
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
+router = APIRouter(prefix="/api/chat", tags=["chat"])
+
 if GEMINI_API_KEY:
     genai.configure(api_key=GEMINI_API_KEY)
 else:
     print("WARNING: GEMINI_API_KEY not found in environment variables.")
 
+# ... Existing chat_service.py logic ...
 SYSTEM_INSTRUCTION = """
 You are a helpful, empathetic, and professional medical assistant for an Oral Cancer AI Platform.
 Your goal is to help users understand their analysis results.
@@ -64,3 +75,33 @@ def get_chat_response(user_message: str, analysis_context: dict) -> str:
         print(f"Chat Error Details: {e}")
         # Return the actual error for debugging purposes (in development)
         return f"I encountered an error connecting to the AI service: {str(e)}"
+
+class FeedbackCreate(BaseModel):
+    prompt: str
+    gemini_response: str
+    is_helpful: bool
+    user_correction: Optional[str] = None
+
+@router.post("/feedback", status_code=status.HTTP_201_CREATED)
+async def submit_chat_feedback(
+    feedback: FeedbackCreate,
+    session: Session = Depends(get_session),
+    current_user: User = Depends(get_current_user)
+):
+    try:
+        new_feedback = GenAIFeedback(
+            user_id=current_user.id,
+            prompt=feedback.prompt,
+            gemini_response=feedback.gemini_response,
+            is_helpful=feedback.is_helpful,
+            user_correction=feedback.user_correction
+        )
+        
+        session.add(new_feedback)
+        session.commit()
+        session.refresh(new_feedback)
+        
+        return {"message": "Feedback saved successfully", "id": new_feedback.id}
+    except Exception as e:
+        session.rollback()
+        raise HTTPException(status_code=500, detail=str(e))

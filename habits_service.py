@@ -5,13 +5,13 @@ from typing import List, Optional
 from datetime import date, timedelta
 
 from database import get_session
-from models import DailyHabitLog
+from models import DailyHabitLog, User
+from auth_service import get_current_user
 
 router = APIRouter(prefix="/habits", tags=["habits"])
 
 
 class HabitLogRequest(BaseModel):
-    user_id: int
     smoked_cigarettes: bool = False
     ate_sweets: bool = False
     brushed_after_meal: bool = False
@@ -31,13 +31,14 @@ class HabitLogResponse(BaseModel):
 
 
 @router.post("/log", response_model=HabitLogResponse)
-async def save_daily_habits(request: HabitLogRequest, session: Session = Depends(get_session)):
-    """Save or update today's habit log for a user."""
+async def save_daily_habits(request: HabitLogRequest, current_user: User = Depends(get_current_user), session: Session = Depends(get_session)):
+    """Save or update today's habit log for the authenticated user."""
     today = date.today()
+    user_id = current_user.id
 
     # Check if a log already exists for today
     statement = select(DailyHabitLog).where(
-        DailyHabitLog.user_id == request.user_id,
+        DailyHabitLog.user_id == user_id,
         DailyHabitLog.date == today
     )
     existing_log = session.exec(statement).first()
@@ -56,7 +57,7 @@ async def save_daily_habits(request: HabitLogRequest, session: Session = Depends
     else:
         # Create new log
         new_log = DailyHabitLog(
-            user_id=request.user_id,
+            user_id=user_id,
             date=today,
             smoked_cigarettes=request.smoked_cigarettes,
             ate_sweets=request.ate_sweets,
@@ -70,15 +71,15 @@ async def save_daily_habits(request: HabitLogRequest, session: Session = Depends
         return new_log
 
 
-@router.get("/history/{user_id}", response_model=List[HabitLogResponse])
-async def get_habit_history(user_id: int, session: Session = Depends(get_session)):
-    """Retrieve the last 7 days of habits for a user."""
+@router.get("/history", response_model=List[HabitLogResponse])
+async def get_habit_history(current_user: User = Depends(get_current_user), session: Session = Depends(get_session)):
+    """Retrieve the last 7 days of habits for the authenticated user."""
     seven_days_ago = date.today() - timedelta(days=6)
 
     statement = (
         select(DailyHabitLog)
         .where(
-            DailyHabitLog.user_id == user_id,
+            DailyHabitLog.user_id == current_user.id,
             DailyHabitLog.date >= seven_days_ago
         )
         .order_by(DailyHabitLog.date.desc())

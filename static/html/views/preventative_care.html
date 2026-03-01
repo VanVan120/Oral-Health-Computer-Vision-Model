@@ -51,9 +51,14 @@
                                     <small class="text-white-50" id="habit-date-display"></small>
                                 </div>
                             </div>
-                            <span class="badge bg-white bg-opacity-25 rounded-pill px-3 py-2" id="habit-streak-badge">
-                                <i class="fas fa-fire me-1"></i><span id="habit-streak-count">0</span> day streak
-                            </span>
+                            <div class="d-flex align-items-center gap-2 flex-wrap">
+                                <span class="habit-level-badge" id="habit-level-badge">
+                                    <i class="fas fa-seedling me-1"></i>Starter
+                                </span>
+                                <span class="badge bg-white bg-opacity-25 rounded-pill px-3 py-2" id="habit-streak-badge">
+                                    <i class="fas fa-fire me-1"></i><span id="habit-streak-count">0</span> day streak
+                                </span>
+                            </div>
                         </div>
 
                         <div class="habit-card-body">
@@ -144,6 +149,11 @@
                         <div id="habit-history-grid" class="habit-history-grid">
                             <!-- Filled by JS -->
                         </div>
+                    </div>
+
+                    <!-- Daily Tip of the Day -->
+                    <div id="daily-tip-container" class="mt-4">
+                        <!-- Filled by JS -->
                     </div>
                 </div>
 
