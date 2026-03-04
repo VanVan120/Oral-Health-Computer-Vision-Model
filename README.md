@@ -28,9 +28,11 @@ app_port: 7860
     - [The Pathology Expert](#2%EF%B8%8F%E2%83%A3-the-pathology-expert-model-a)
     - [The Hygiene Specialist](#3%EF%B8%8F%E2%83%A3-the-hygiene-specialist-model-b)
 - [✨ Key Features](#-key-features)
+- [🏃 Preventative Care Hub](#-preventative-care-hub)
 - [📅 Appointment Management System](#-appointment-management-system)
 - [🔐 User Authentication & Roles](#-user-authentication--roles)
 - [🌍 Multi-Language Support](#-multi-language-support)
+- [🚀 Latest Enhancements](#-latest-enhancements-v20)
 - [Installation Guide](#-manual-installation--usage)
 - [Docker Deployment](#-docker-deployment)
 - [Project Structure](#-project-structure)
@@ -254,10 +256,76 @@ The chatbot doesn't just "guess"; it uses **Retrieval-Augmented Generation (RAG)
 | **🌍 Multi-Language UI** | Complete internationalization supporting **English**, **Malay (Bahasa)**, **Chinese (中文)**, and **Tamil (தமிழ்)**. |
 | **🔔 Smart Notifications** | Beautiful toast notification system with success, error, warning, and info states for better UX. |
 | **🔒 Privacy First** | HIPAA-compliant design: Images are processed in RAM and wiped immediately after analysis. |
-| **🏃 Preventative Care Hub** | Daily habit tracker with toggle switches for smoking, sweets, brushing, flossing, and Sensodyne usage. 7-day history grid with color-coded scores and streak tracking. |
-| **🎯 Action Plan Banner** | Dynamic alert when Model B detects Gingivitis/Caries. One-click access to AI-generated personalized oral care improvement plans. |
-| **🎗️ Oral Cancer Prevention** | Evidence-based prevention guide covering tobacco, alcohol, diet, and regular dental visits with severity-tagged cards. |
+| **🏃 Preventative Care Hub** | Full-featured daily habit tracker with toggle switches, 7-day history grid, streak counter, achievement level badges, score celebration popups with confetti, rotating daily tips, and motivational messages. |
+| **🎯 Action Plan Banner** | Dynamic alert when Model B detects Gingivitis/Caries. One-click access to AI-generated personalized oral care improvement plans via the RAG chatbot. |
+| **🎗️ Oral Cancer Prevention** | Evidence-based prevention guide covering tobacco, alcohol, diet, and regular dental visits with severity-tagged cards (Critical / Important / Recommended). |
+| **🎉 Gamification & Engagement** | Score celebration popup with animated confetti, star ratings, emoji feedback, and level-based achievements (Starter → Legendary) to encourage consistent oral hygiene. |
 | **☁️ Cloud Native** | Fully containerized with Docker, ready for serverless deployment. |
+
+---
+
+## 🏃 Preventative Care Hub
+
+The platform includes a comprehensive **Preventative Care Hub** — a gamified daily habit tracking system designed to encourage consistent oral hygiene practices.
+
+### 🦷 Daily Habit Tracker
+Users log five key habits each day using intuitive toggle switches:
+
+| Habit | Type | Score Impact |
+| :--- | :---: | :---: |
+| **Brushed After Meals** | ✅ Good | +1 if ON |
+| **Used Dental Floss** | ✅ Good | +1 if ON |
+| **Used Sensodyne/Fluoride** | ✅ Good | +1 if ON |
+| **Smoked Cigarettes** | ❌ Bad | +1 if OFF |
+| **Ate Sugary Snacks** | ❌ Bad | +1 if OFF |
+
+*   **Lock on Save**: Once saved, toggles are locked for the day to prevent tampering — ensuring data integrity.
+*   **JWT-Protected**: All habit data is saved securely via authenticated API endpoints (`POST /habits/log`, `GET /habits/history`).
+
+### 📊 7-Day History Grid
+*   **Always-Visible Grid**: Shows 7 day columns (today + 6 previous days), even if no data exists yet.
+*   **Color-Coded Scores**: Each day displays a score out of 5:
+    *   🟢 **Excellent** (5/5) — Green
+    *   🔵 **Good** (4/5) — Blue
+    *   🟡 **Average** (3/5) — Amber
+    *   🔴 **Poor** (0–2/5) — Red
+*   **Today Highlight**: Current day is visually emphasized with a distinct border.
+
+### 🔥 Streak Tracking & Achievement Levels
+The system tracks consecutive days where the user scores ≥ 3/5, unlocking progressive achievement badges:
+
+| Streak | Level | Icon |
+| :--- | :--- | :---: |
+| 0 days | Starter | 🌱 |
+| 3+ days | Committed | 🍃 |
+| 7+ days | Consistent | ⭐ |
+| 14+ days | Dedicated | 🏅 |
+| 21+ days | Oral Care Pro | 👑 |
+| 30+ days | Legendary | 💎 |
+
+### 🎉 Score Celebration Popup
+After saving daily habits, a dramatic **full-screen celebration popup** appears:
+*   **Centered Overlay**: Fixed-position overlay with backdrop blur and inline style fallbacks for guaranteed rendering.
+*   **Dynamic Theming**: Background gradient and accent color change based on score tier (excellent/good/average/poor).
+*   **Animated Elements**: Bounce-in card, pulsing emoji ring, sequentially-revealed star ratings, and confetti particles for scores ≥ 3.
+*   **Motivational Messages**: Randomized encouraging messages per score level (e.g., *"Perfect score! You're a dental superstar!"*).
+*   **Dismissible**: Close via button, backdrop click, Escape key, or auto-dismiss after 8 seconds.
+
+### 💡 Daily Oral Health Tips
+A rotating card displays a new tip each day, drawn from a curated library of 14 evidence-based oral health insights:
+*   *"Wait 30 minutes after eating acidic foods before brushing — acid softens enamel temporarily."*
+*   *"Your nighttime brush is the most important — saliva production drops during sleep."*
+*   *"Chewing xylitol gum after meals stimulates saliva and fights cavity-causing bacteria."*
+
+### 🎯 Action Plan Banner
+*   **Trigger**: Automatically appears when Model B detects **Gingivitis** or **Caries** in the user's latest scan.
+*   **One-Click Action**: Opens the RAG chatbot with a pre-filled prompt requesting a personalized oral care improvement plan based on the detection results.
+
+### 🎗️ Oral Cancer Prevention Section
+An evidence-based educational guide with severity-tagged cards:
+*   🔴 **Critical**: Avoid tobacco products, limit alcohol consumption
+*   🟡 **Important**: Maintain a balanced antioxidant-rich diet
+*   🟢 **Recommended**: Schedule regular dental check-ups
 
 ---
 
@@ -345,7 +413,7 @@ The platform is fully internationalized to serve Malaysia's diverse population.
 
 ## 🚀 Latest Enhancements (v2.0)
 
-We have recently upgraded the platform with professional-grade UI and reporting capabilities:
+We have recently upgraded the platform with professional-grade UI, reporting capabilities, and a gamified wellness experience:
 
 ### 1. High-Fidelity Visual Reporting
 The system now ensures that what you see is what you get.
@@ -361,6 +429,23 @@ The frontend has been redesigned to mimic professional medical imaging software:
 ### 3. Robust Backend Compatibility
 *   **Format Agnostic**: Added intelligent image conversion to handle WebP, PNG, and JPEG uploads seamlessly for PDF generation.
 *   **Cross-Platform Support**: Fixed file permission and pathing issues to ensure smooth operation on both Windows (Localhost) and Linux (Docker/Cloud) environments.
+
+### 4. Preventative Care Hub & Gamification
+A brand-new wellness module designed to drive daily engagement:
+*   **Habit Tracker**: Five toggle-switch habits (brushing, flossing, Sensodyne, no smoking, no sweets) with a daily score out of 5.
+*   **7-Day History Grid**: Always-visible, color-coded overview of the past week's performance.
+*   **Streak Counter & Achievement Levels**: Tracks consecutive good days and unlocks 6 progressive badges from "Starter" (🌱) to "Legendary" (💎).
+*   **Score Celebration Popup**: Full-screen animated overlay with confetti, star ratings, emoji feedback, dynamic gradients, and motivational messages — displayed on every save.
+*   **Rotating Daily Tips**: 14 curated oral health tips, one shown per day, covering timing, nutrition, and technique.
+*   **Action Plan Banner**: Contextual alert triggered by Model B detections (Gingivitis/Caries), linking directly to the AI chatbot for a personalized care plan.
+*   **Oral Cancer Prevention Guide**: Severity-tagged educational cards (Critical / Important / Recommended) covering tobacco, alcohol, diet, and dental visits.
+*   **Lock-After-Save**: Toggle switches lock after submission to preserve data integrity.
+*   **JWT-Secured API**: `POST /habits/log` and `GET /habits/history` endpoints protected by Bearer token authentication.
+
+### 5. Redesigned Navbar
+*   **Glassmorphism Navbar**: Modern semi-transparent navigation bar with backdrop blur and smooth hover effects.
+*   **Care Hub Quick Access**: Dedicated navbar link for instant access to the Preventative Care Hub from any page.
+*   **Active State Indicators**: Visual highlights for the currently active section.
 
 ---
 
