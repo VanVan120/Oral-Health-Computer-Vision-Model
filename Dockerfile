@@ -19,7 +19,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the application code
 COPY ["main.py", "chat_service.py", "report_service.py", "database.py", "models.py", "./"]
-COPY ["auth_service.py", "auth_core.py", "appointment_service.py", "inference_utils.py", "./"]
+COPY ["auth_service.py", "auth_core.py", "appointment_service.py", "habits_service.py", "inference_utils.py", "./"]
 COPY ["final.txt", "./"]
 COPY ["Model A", "Model A/"]
 COPY ["Model B", "Model B/"]
