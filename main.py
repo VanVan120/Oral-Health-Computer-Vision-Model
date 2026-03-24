@@ -183,6 +183,10 @@ def register_page(request: Request):
 def settings_page(request: Request):
     return templates.TemplateResponse("views/settings.html", {"request": request})
 
+@app.get("/game")
+def game_page(request: Request):
+    return templates.TemplateResponse("views/game.html", {"request": request})
+
 @app.post("/analyze")
 async def analyze_image(file: UploadFile = File(...)):
     print(f"--- Starting Analysis for {file.filename} ---")

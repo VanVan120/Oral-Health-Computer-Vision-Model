@@ -86,8 +86,11 @@ def book_appointment(
     session.refresh(db_appt)
 
     # 3. Notification
-    msg = f"<html><body><p>Dear {current_user.name},</p><p>Dr. {doctor.name} has scheduled a checkup for {appt.date_time}.</p></body></html>"
-    background_tasks.add_task(send_appointment_email, current_user.email, "Appointment Confirmed", msg)
+    patient_msg = f"<html><body><p>Dear {current_user.name},</p><p>Your appointment with Dr. {doctor.name} has been successfully scheduled for {appt.date_time}.</p></body></html>"
+    background_tasks.add_task(send_appointment_email, current_user.email, "Appointment Confirmed", patient_msg)
+
+    doctor_msg = f"<html><body><p>Dear Dr. {doctor.name},</p><p>A new appointment has been scheduled by {current_user.name} for {appt.date_time}.</p></body></html>"
+    background_tasks.add_task(send_appointment_email, doctor.email, "New Appointment Scheduled", doctor_msg)
 
     return db_appt
 
