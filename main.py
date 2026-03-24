@@ -132,60 +132,60 @@ os.makedirs(TEMP_DIR, exist_ok=True)
 
 @app.get("/")
 def read_root(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse(request=request, name="index.html")
 
 @app.get("/about")
 def read_about(request: Request):
-    return templates.TemplateResponse("views/about.html", {"request": request})
+    return templates.TemplateResponse(request=request, name="views/about.html")
 
 @app.get("/department")
 def read_department(request: Request):
-    return templates.TemplateResponse("views/department.html", {"request": request})
+    return templates.TemplateResponse(request=request, name="views/department.html")
 
 @app.get("/pages")
 def read_pages(request: Request):
-    return templates.TemplateResponse("views/pages.html", {"request": request})
+    return templates.TemplateResponse(request=request, name="views/pages.html")
 
 @app.get("/blog")
 def read_blog(request: Request):
-    return templates.TemplateResponse("views/blog.html", {"request": request})
+    return templates.TemplateResponse(request=request, name="views/blog.html")
 
 @app.get("/contact")
 def read_contact(request: Request):
-    return templates.TemplateResponse("views/contact.html", {"request": request})
+    return templates.TemplateResponse(request=request, name="views/contact.html")
 
 # --- Legal Pages ---
 @app.get("/privacy-policy")
 def privacy_policy(request: Request):
-    return templates.TemplateResponse("views/legal/privacy_policy.html", {"request": request})
+    return templates.TemplateResponse(request=request, name="views/legal/privacy_policy.html")
 
 @app.get("/terms-of-service")
 def terms_of_service(request: Request):
-    return templates.TemplateResponse("views/legal/terms_of_service.html", {"request": request})
+    return templates.TemplateResponse(request=request, name="views/legal/terms_of_service.html")
 
 @app.get("/cookie-policy")
 def cookie_policy(request: Request):
-    return templates.TemplateResponse("views/legal/cookie_policy.html", {"request": request})
+    return templates.TemplateResponse(request=request, name="views/legal/cookie_policy.html")
 
 @app.get("/hipaa-compliance")
 def hipaa_compliance(request: Request):
-    return templates.TemplateResponse("views/legal/hipaa_compliance.html", {"request": request})
+    return templates.TemplateResponse(request=request, name="views/legal/hipaa_compliance.html")
 
 @app.get("/login")
 def login_page(request: Request):
-    return templates.TemplateResponse("views/login.html", {"request": request})
+    return templates.TemplateResponse(request=request, name="views/login.html")
 
 @app.get("/register")
 def register_page(request: Request):
-    return templates.TemplateResponse("views/register.html", {"request": request})
+    return templates.TemplateResponse(request=request, name="views/register.html")
 
 @app.get("/settings")
 def settings_page(request: Request):
-    return templates.TemplateResponse("views/settings.html", {"request": request})
+    return templates.TemplateResponse(request=request, name="views/settings.html")
 
 @app.get("/game")
 def game_page(request: Request):
-    return templates.TemplateResponse("views/game.html", {"request": request})
+    return templates.TemplateResponse(request=request, name="views/game.html")
 
 @app.post("/analyze")
 async def analyze_image(file: UploadFile = File(...)):
