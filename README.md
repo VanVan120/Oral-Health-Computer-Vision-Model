@@ -29,6 +29,7 @@ app_port: 7860
     - [The Hygiene Specialist](#3%EF%B8%8F%E2%83%A3-the-hygiene-specialist-model-b)
 - [✨ Key Features](#-key-features)
 - [🏃 Preventative Care Hub](#-preventative-care-hub)
+- [🎮 Plaque Attack Minigame](#-plaque-attack-minigame)
 - [📅 Appointment Management System](#-appointment-management-system)
 - [🔐 User Authentication & Roles](#-user-authentication--roles)
 - [🌍 Multi-Language Support](#-multi-language-support)
@@ -260,6 +261,7 @@ The chatbot doesn't just "guess"; it uses **Retrieval-Augmented Generation (RAG)
 | **🎯 Action Plan Banner** | Dynamic alert when Model B detects Gingivitis/Caries. One-click access to AI-generated personalized oral care improvement plans via the RAG chatbot. |
 | **🎗️ Oral Cancer Prevention** | Evidence-based prevention guide covering tobacco, alcohol, diet, and regular dental visits with severity-tagged cards (Critical / Important / Recommended). |
 | **🎉 Gamification & Engagement** | Score celebration popup with animated confetti, star ratings, emoji feedback, and level-based achievements (Starter → Legendary) to encourage consistent oral hygiene. |
+| **🎮 Plaque Attack Game** | Built-in interactive 2D HTML5 Canvas game where users destroy plaque, featuring combo multipliers, procedurally generated Web Audio sounds, particle physics, and ambient visual effects. |
 | **☁️ Cloud Native** | Fully containerized with Docker, ready for serverless deployment. |
 
 ---
@@ -328,6 +330,20 @@ An evidence-based educational guide with severity-tagged cards:
 *   🟢 **Recommended**: Schedule regular dental check-ups
 
 ---
+
+
+---
+
+## 🎮 Plaque Attack Minigame
+
+To make oral healthcare more engaging, we have built a **Plaque Attack Minigame** directly into the platform. It is a highly optimized, dependency-free vanilla HTML5 Canvas implementation designed to reward good habits.
+
+### 🌟 Game Mechanics & Features
+*   **Physics-based Particles & 3D Shading**: Features a procedural 2D rendering engine with 3D gradients and glowing ambient dust effects using globalCompositeOperation.
+*   **Dynamic Combo Multipliers**: Build your score by accurately destroying plaque targets in succession. Misses reset the combo chain.
+*   **Procedural Web Audio API**: No external sound assets required. All sound effects (hits, misses, power-ups) are synthesized dynamically in the browser for an instant, latency-free experience.
+*   **Glassmorphic UI**: Uses modern CSS3 backdrop filters for HUD overlays and popups, matching the main application's dark mode visual language.
+*   **Responsive Mouse & Touch**: Fully playable on desktop and mobile devices.
 
 ## 📅 Appointment Management System
 
