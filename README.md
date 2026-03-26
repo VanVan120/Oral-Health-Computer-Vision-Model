@@ -146,28 +146,28 @@ Our multi-model system has been rigorously evaluated on held-out validation data
 <summary><b>📊 Click to see Detailed Evaluation Results</b></summary>
 
 #### Abnormality Detection (TVNT) — Derived from 3 Cellular Anomaly Classes
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
-│  🎯 Tile-level AUC-ROC:   1.0000                            │
-│  🎯 F1 Score:             0.9952                            │
-│  📈 Accuracy:             99.08% (108/109 correct)          │
-│  📈 Precision:            100.00%                           │
-│  📈 Recall/Sensitivity:   99.05%                            │
+│  🎯 Tile-level AUC-ROC:   0.6476                            │
+│  🎯 F1 Score:             0.9813                            │
+│  📈 Accuracy:             96.33% (105/109 correct)          │
+│  📈 Precision:            96.33%                            │
+│  📈 Recall/Sensitivity:   100.00%                           │
 ├─────────────────────────────────────────────────────────────┤
 │  Confusion Matrix:                                          │
 │                        Predicted                            │
 │                      Normal  Abnormal                       │
-│    Actual Normal        4        0                          │
-│    Actual Abnormal      1      104                          │
+│    Actual Normal        0        4                          │
+│    Actual Abnormal      0      105                          │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 #### 3 Cellular Anomaly Counts (Regression Tasks — Roboflow Dataset)
 | Feature | MAE | Exact Match | Within ±1 |
 |:--------|----:|------------:|----------:|
-| Mitotic Figures | 0.125 cells | 92.66% | 100% |
-| Multiple Nucleoli | 0.009 cells | 100.00% | 100% |
-| Nuclear Hyperchromatism | 0.009 cells | 100.00% | 100% |
+| Mitotic Figures | 0.1436 cells | 93.58% | 99.08% |
+| Multiple Nucleoli | 2.0272 cells | 12.84% | 44.04% |
+| Nuclear Hyperchromatism | 2.1767 cells | 25.69% | 55.96% |
 
 </details>
 
@@ -177,11 +177,44 @@ Our multi-model system has been rigorously evaluated on held-out validation data
 *   **Classes Detected**: Caries, Calculus, Gingivitis, Ulcers, Tooth Discoloration, Hypodontia
 *   **Optimized for**: High-resolution smartphone images with small lesion detection
 
+<details>
+<summary><b>📊 Click to see Detailed Evaluation Results</b></summary>
+
+#### Overall Performance (Test Set: 1,500 images)
+*   **Precision (P):** 0.746 (74.6%)
+*   **Recall (R):** 0.728 (72.8%)
+*   **mAP@50:** 0.771 (77.1%)
+*   **mAP@50-95:** 0.401 (40.1%)
+
+#### Class-Specific Breakdown
+| Class | Instances | Precision | Recall | mAP@50 | mAP@50-95 |
+|:---|---:|---:|---:|---:|---:|
+| **All Classes** | `9688` | **`0.746`** | **`0.728`** | **`0.771`** | **`0.401`** |
+| Calculus | 1465 | 0.667 | 0.597 | 0.641 | 0.281 |
+| Caries | 1694 | 0.776 | 0.792 | 0.828 | 0.436 |
+| Gingivitis | 1544 | 0.631 | 0.501 | 0.555 | 0.238 |
+| Hypodontia | 334 | 0.706 | 0.740 | 0.767 | 0.351 |
+| Tooth Discoloration | 4153 | 0.775 | 0.828 | 0.878 | 0.571 |
+| Ulcer | 498 | 0.919 | 0.912 | 0.958 | 0.529 |
+
+</details>
+
 ### Model C: Triage Router
 
 *   **Architecture**: ResNet18 (Transfer Learning)
 *   **Task**: Binary classification (Clinical vs Histopathological)
 *   **Purpose**: Ensures each image is processed by the correct specialist model
+
+<details>
+<summary><b>📊 Click to see Detailed Evaluation Results</b></summary>
+
+#### Routing Performance (Validation Set)
+*   **Accuracy:** 100.0% (1.0000)
+*   **Validation Loss:** 0.0014
+
+*Note: The model achieved near-perfect accuracy on the held-out validation set. It successfully distinguishes between clinical smartphone photos and microscopic histopathology slides, ensuring a highly reliable routing mechanism within the pipeline.*
+
+</details>
 
 ---
 
