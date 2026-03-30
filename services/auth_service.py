@@ -3,9 +3,9 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlmodel import Session, select
 from datetime import timedelta
 from pydantic import BaseModel
-from database import get_session
-from models import User
-from auth_core import verify_password, get_password_hash, create_access_token, ACCESS_TOKEN_EXPIRE_MINUTES, SECRET_KEY, ALGORITHM, jwt, JWTError
+from core.database import get_session
+from core.models import User
+from core.auth_core import verify_password, get_password_hash, create_access_token, ACCESS_TOKEN_EXPIRE_MINUTES, SECRET_KEY, ALGORITHM, jwt, JWTError
 
 # Auth Router
 router = APIRouter(prefix="/auth", tags=["authentication"])

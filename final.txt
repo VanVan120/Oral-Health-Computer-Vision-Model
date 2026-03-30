@@ -1,3 +1,0 @@
-- push to hugging face spaces so that its free for everyone to use it
-- auto report generation for pathologist and public user
-- AI chat bot

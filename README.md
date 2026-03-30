@@ -36,6 +36,7 @@ app_port: 7860
 - [🚀 Latest Enhancements](#-latest-enhancements-v20)
 - [Installation Guide](#-manual-installation--usage)
 - [Docker Deployment](#-docker-deployment)
+- [Python Unit Testing](#-testing)
 - [Project Structure](#-project-structure)
 - [Contact & Support](#-contact--support)
 
@@ -570,7 +571,30 @@ docker run -p 7860:7860 -e BREVO_API_KEY="your_key" oral-ai-backend
 *Access the app at `http://localhost:7860`*
 
 ---
+## 🧪 Python Unit Testing
 
+The repository includes a comprehensive, 100% passing test suite powered by `pytest`. The testing suite covers FastAPI endpoint routing, database CRUD operations with an in-memory SQLite pool, safe mock implementations for heavy Deep Learning Model inferences (PyTorch), and secure JWT Role checks.
+
+To execute the test suite locally:
+
+1. Ensure you have the required testing dependencies installed (`pytest`, `pytest-cov`, `httpx`).
+```bash
+pip install -r requirements.txt
+```
+
+2. Run tests directly via the `pytest` module. We use mocked inferences so no actual AI usage limits or huge GPU memory loads are required!
+```bash
+python -m pytest tests/ -v
+```
+
+3. (Optional) To view a test coverage report:
+```bash
+# First ensure pytest-cov is installed
+pip install pytest-cov
+python -m pytest tests/ --cov=services --cov=core --cov=app_routers --cov=utils
+```
+
+---
 ## 📂 Project Structure
 
 A quick look at the codebase organization:

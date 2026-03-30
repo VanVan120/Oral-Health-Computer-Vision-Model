@@ -4,9 +4,9 @@ from pydantic import BaseModel
 from typing import List, Optional
 from datetime import date, timedelta
 
-from database import get_session
-from models import DailyHabitLog, User
-from auth_service import get_current_user
+from core.database import get_session
+from core.models import DailyHabitLog, User
+from services.auth_service import get_current_user
 
 router = APIRouter(prefix="/habits", tags=["habits"])
 
