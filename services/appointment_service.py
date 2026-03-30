@@ -3,10 +3,10 @@ from sqlmodel import Session, select
 from typing import List, Optional
 from datetime import datetime
 from pydantic import BaseModel
-from database import get_session
-from models import User, Appointment
-from auth_service import get_current_user
-from auth_core import get_password_hash
+from core.database import get_session
+from core.models import User, Appointment
+from services.auth_service import get_current_user
+from core.auth_core import get_password_hash
 import os
 import requests
 

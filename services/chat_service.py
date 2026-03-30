@@ -6,10 +6,10 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel
 from sqlmodel import Session
 from typing import Optional
-from database import get_session
-from models import GenAIFeedback
-from auth_service import get_current_user
-from models import User
+from core.database import get_session
+from core.models import GenAIFeedback
+from services.auth_service import get_current_user
+from core.models import User
 
 # Load environment variables
 load_dotenv()

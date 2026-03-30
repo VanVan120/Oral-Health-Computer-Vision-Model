@@ -1,6 +1,12 @@
 from sqlmodel import SQLModel, create_engine, Session
 
-sqlite_file_name = "oral_health.db"
+import os
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA_DIR = os.path.join(BASE_DIR, "database")
+os.makedirs(DATA_DIR, exist_ok=True)
+
+sqlite_file_name = os.path.join(DATA_DIR, "oral_health.db")
 sqlite_url = f"sqlite:///{sqlite_file_name}"
 
 connect_args = {"check_same_thread": False}

@@ -19,12 +19,12 @@ from fastapi.templating import Jinja2Templates
 from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
 
 # Import new services
-from report_service import generate_expert_report, generate_public_report
-from chat_service import get_chat_response, router as chat_router
-from database import create_db_and_tables
-from appointment_service import router as appointment_router
-from auth_service import router as auth_router
-from habits_service import router as habits_router
+from services.report_service import generate_expert_report, generate_public_report
+from services.chat_service import get_chat_response, router as chat_router
+from core.database import create_db_and_tables
+from services.appointment_service import router as appointment_router
+from services.auth_service import router as auth_router
+from services.habits_service import router as habits_router
 
 # --- Security & Configuration Check ---
 # Explicitly load .env file from the current directory
@@ -46,9 +46,9 @@ if not GEMINI_API_KEY or GEMINI_API_KEY == "replace_with_your_key_here":
 
 # --- Setup Paths ---
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_A_DIR = os.path.join(BASE_DIR, "Model A")
-MODEL_B_DIR = os.path.join(BASE_DIR, "Model B")
-MODEL_TRIAGE_DIR = os.path.join(BASE_DIR, "Model Triage")
+MODEL_A_DIR = os.path.join(BASE_DIR, "ml_models", "model_a")
+MODEL_B_DIR = os.path.join(BASE_DIR, "ml_models", "model_b")
+MODEL_TRIAGE_DIR = os.path.join(BASE_DIR, "ml_models", "model_triage")
 
 # Add directories to sys.path to allow internal imports (like stain_utils in Model A)
 sys.path.append(MODEL_A_DIR)
@@ -78,12 +78,17 @@ print("Loading Model B...")
 model_b_module = load_module("model_b_inference_pkg", os.path.join(MODEL_B_DIR, "inference_model.py"))
 OralHygieneModel = model_b_module.OralHygieneModel
 
-# --- Initialize App ---
-app = FastAPI(title="Unified Oral Disease Detection System")
+from contextlib import asynccontextmanager
 
-@app.on_event("startup")
-def on_startup():
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup
     create_db_and_tables()
+    yield
+    # Shutdown
+
+# --- Initialize App ---
+app = FastAPI(title="Unified Oral Disease Detection System", lifespan=lifespan)
 
 app.include_router(auth_router)
 app.include_router(appointment_router)
