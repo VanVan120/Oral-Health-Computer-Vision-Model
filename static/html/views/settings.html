@@ -159,31 +159,38 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 shadow-lg rounded-4">
             <div class="modal-header border-0">
-                <h5 class="modal-title fw-bold">Edit Patient</h5>
+                <h5 class="modal-title fw-bold" data-translate="editPatient">Edit Patient</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
                 <form id="editUserForm">
                     <input type="hidden" id="editUserId">
                     <div class="mb-3">
-                        <label class="form-label">Full Name</label>
+                        <label class="form-label" data-translate="fullName">Full Name</label>
                         <input type="text" class="form-control" id="editUserName" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Email</label>
+                        <label class="form-label" data-translate="email">Email</label>
                         <input type="email" class="form-control" id="editUserEmail" required>
                     </div>
                 </form>
             </div>
             <div class="modal-footer border-0">
-                <button type="button" class="btn btn-light rounded-pill" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary rounded-pill" onclick="saveUserChanges()">Save Changes</button>
+                <button type="button" class="btn btn-light rounded-pill" data-bs-dismiss="modal" data-translate="cancel">Cancel</button>
+                <button type="button" class="btn btn-primary rounded-pill" onclick="saveUserChanges()" data-translate="saveChanges">Save Changes</button>
             </div>
         </div>
     </div>
 </div>
 
 <script>
+    function t(key) {
+        if (window.AppLanguage && typeof window.AppLanguage.t === 'function') {
+            return window.AppLanguage.t(key);
+        }
+        return key;
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
         const userInfoStr = localStorage.getItem('user_info');
         if(userInfoStr) {
@@ -196,7 +203,9 @@
         // Load saved preferences
         const savedLanguage = localStorage.getItem('preferred_language') || 'en';
         document.getElementById('languageSelect').value = savedLanguage;
-        applyLanguage(savedLanguage); // Apply language immediately
+        if (window.AppLanguage && typeof window.AppLanguage.setLanguage === 'function') {
+            window.AppLanguage.setLanguage(savedLanguage);
+        }
         
         const autoSave = localStorage.getItem('auto_save_reports') !== 'false';
         document.getElementById('autoSaveSwitch').checked = autoSave;
@@ -213,175 +222,6 @@
             }
         }
     });
-    
-    // Translation Dictionary
-    const translations = {
-        en: {
-            general: 'General',
-            security: 'Security',
-            patientManagement: 'Patient Management',
-            generalPreferences: 'General Preferences',
-            languageRegion: 'Language & Region',
-            preferredLanguage: 'Preferred Language',
-            selectLanguage: 'Select your preferred language for the interface',
-            reportSettings: 'Report Settings',
-            autoSaveReports: 'Auto-save Reports',
-            autoSaveDesc: 'Automatically save analysis reports to your account',
-            notifications: 'Notifications',
-            emailNotifications: 'Email Notifications',
-            emailNotifDesc: 'Receive updates about appointments',
-            securitySettings: 'Security Settings',
-            passwordChangeInfo: 'Password changes require re-authentication.',
-            currentPassword: 'Current Password',
-            newPassword: 'New Password',
-            confirmPassword: 'Confirm New Password',
-            updatePassword: 'Update Password',
-            enterCurrentPassword: 'Enter current password',
-            enterNewPassword: 'Enter new password',
-            confirmNewPassword: 'Confirm new password'
-        },
-        ms: {
-            general: 'Umum',
-            security: 'Keselamatan',
-            patientManagement: 'Pengurusan Pesakit',
-            generalPreferences: 'Tetapan Umum',
-            languageRegion: 'Bahasa & Wilayah',
-            preferredLanguage: 'Bahasa Pilihan',
-            selectLanguage: 'Pilih bahasa pilihan anda untuk antara muka',
-            reportSettings: 'Tetapan Laporan',
-            autoSaveReports: 'Auto-simpan Laporan',
-            autoSaveDesc: 'Simpan laporan analisis secara automatik ke akaun anda',
-            notifications: 'Pemberitahuan',
-            emailNotifications: 'Pemberitahuan E-mel',
-            emailNotifDesc: 'Terima kemas kini tentang temujanji',
-            securitySettings: 'Tetapan Keselamatan',
-            passwordChangeInfo: 'Perubahan kata laluan memerlukan pengesahan semula.',
-            currentPassword: 'Kata Laluan Semasa',
-            newPassword: 'Kata Laluan Baharu',
-            confirmPassword: 'Sahkan Kata Laluan Baharu',
-            updatePassword: 'Kemas Kini Kata Laluan',
-            enterCurrentPassword: 'Masukkan kata laluan semasa',
-            enterNewPassword: 'Masukkan kata laluan baharu',
-            confirmNewPassword: 'Sahkan kata laluan baharu'
-        },
-        zh: {
-            general: '常规',
-            security: '安全',
-            patientManagement: '患者管理',
-            generalPreferences: '常规设置',
-            languageRegion: '语言和地区',
-            preferredLanguage: '首选语言',
-            selectLanguage: '选择您的界面首选语言',
-            reportSettings: '报告设置',
-            autoSaveReports: '自动保存报告',
-            autoSaveDesc: '自动将分析报告保存到您的帐户',
-            notifications: '通知',
-            emailNotifications: '电子邮件通知',
-            emailNotifDesc: '接收有关预约的更新',
-            securitySettings: '安全设置',
-            passwordChangeInfo: '密码更改需要重新验证。',
-            currentPassword: '当前密码',
-            newPassword: '新密码',
-            confirmPassword: '确认新密码',
-            updatePassword: '更新密码',
-            enterCurrentPassword: '输入当前密码',
-            enterNewPassword: '输入新密码',
-            confirmNewPassword: '确认新密码'
-        },
-        ta: {
-            general: 'பொதுவான',
-            security: 'பாதுகாப்பு',
-            patientManagement: 'நோயாளி மேலாண்மை',
-            generalPreferences: 'பொதுவான விருப்பத்தேர்வுகள்',
-            languageRegion: 'மொழி மற்றும் பிராந்தியம்',
-            preferredLanguage: 'விருப்பமான மொழி',
-            selectLanguage: 'இடைமுகத்திற்கான உங்கள் விருப்பமான மொழியைத் தேர்ந்தெடுக்கவும்',
-            reportSettings: 'அறிக்கை அமைப்புகள்',
-            autoSaveReports: 'தானாக சேமிப்பு அறிக்கைகள்',
-            autoSaveDesc: 'பகுப்பாய்வு அறிக்கைகளை உங்கள் கணக்கில் தானாகச் சேமிக்கவும்',
-            notifications: 'அறிவிப்புகள்',
-            emailNotifications: 'மின்னஞ்சல் அறிவிப்புகள்',
-            emailNotifDesc: 'சந்திப்புகள் பற்றிய புதுப்பிப்புகளைப் பெறுங்கள்',
-            securitySettings: 'பாதுகாப்பு அமைப்புகள்',
-            passwordChangeInfo: 'கடவுச்சொல் மாற்றங்களுக்கு மீண்டும் அங்கீகாரம் தேவை.',
-            currentPassword: 'தற்போதைய கடவுச்சொல்',
-            newPassword: 'புதிய கடவுச்சொல்',
-            confirmPassword: 'புதிய கடவுச்சொல்லை உறுதிப்படுத்தவும்',
-            updatePassword: 'கடவுச்சொல்லை புதுப்பிக்கவும்',
-            enterCurrentPassword: 'தற்போதைய கடவுச்சொல்லை உள்ளிடவும்',
-            enterNewPassword: 'புதிய கடவுச்சொல்லை உள்ளிடவும்',
-            confirmNewPassword: 'புதிய கடவுச்சொல்லை உறுதிப்படுத்தவும்'
-        }
-    };
-    
-    // Apply Language Function
-    function applyLanguage(lang) {
-        const t = translations[lang] || translations.en;
-        
-        // Update all translatable elements
-        document.querySelector('#v-pills-general-tab').innerHTML = `
-            <div class="bg-primary bg-opacity-10 text-primary rounded-circle p-2 d-flex justify-content-center align-items-center" style="width: 32px; height: 32px;"><i class="fas fa-cog"></i></div>
-            ${t.general}
-        `;
-        
-        document.querySelector('#v-pills-security-tab').innerHTML = `
-            <div class="bg-warning bg-opacity-10 text-warning rounded-circle p-2 d-flex justify-content-center align-items-center" style="width: 32px; height: 32px;"><i class="fas fa-shield-alt"></i></div>
-            ${t.security}
-        `;
-        
-        const patientTab = document.querySelector('#v-pills-patients-tab');
-        if (patientTab) {
-            patientTab.innerHTML = `
-                <div class="bg-success bg-opacity-10 text-success rounded-circle p-2 d-flex justify-content-center align-items-center" style="width: 32px; height: 32px;"><i class="fas fa-users-cog"></i></div>
-                ${t.patientManagement}
-            `;
-        }
-        
-        // Update page titles and labels
-        const elements = {
-            '.card h4': [t.generalPreferences, t.securitySettings],
-            'label:contains("Language")': t.languageRegion,
-            'label:contains("Report")': t.reportSettings,
-            'label:contains("Notifications")': t.notifications
-        };
-        
-        // Update specific text content
-        document.querySelectorAll('h6').forEach(h6 => {
-            if (h6.textContent.includes('Auto-save')) {
-                h6.innerHTML = `<i class="fas fa-save me-2 text-success"></i>${t.autoSaveReports}`;
-            } else if (h6.textContent.includes('Email')) {
-                h6.textContent = t.emailNotifications;
-            } else if (h6.textContent.includes('Preferred')) {
-                h6.textContent = t.preferredLanguage;
-            }
-        });
-        
-        // Update form labels
-        const labels = document.querySelectorAll('.form-label');
-        labels.forEach((label, idx) => {
-            const text = label.textContent.trim();
-            if (text.includes('Current Password')) label.textContent = t.currentPassword;
-            else if (text.includes('New Password') && !text.includes('Confirm')) label.textContent = t.newPassword;
-            else if (text.includes('Confirm')) label.textContent = t.confirmPassword;
-        });
-        
-        // Update placeholders
-        const currentPwdInput = document.getElementById('currentPassword');
-        if (currentPwdInput) currentPwdInput.placeholder = t.enterCurrentPassword;
-        
-        const newPwdInput = document.getElementById('newPassword');
-        if (newPwdInput) newPwdInput.placeholder = t.enterNewPassword;
-        
-        const confirmPwdInput = document.getElementById('confirmPassword');
-        if (confirmPwdInput) confirmPwdInput.placeholder = t.confirmNewPassword;
-        
-        // Update button
-        const updateBtn = document.getElementById('updatePasswordBtn');
-        if (updateBtn && !updateBtn.disabled) updateBtn.textContent = t.updatePassword;
-        
-        // Store current language in global variable for other functions
-        window.currentLanguage = lang;
-    }
     
     // Beautiful Toast Notification System
     function showToast(message, type = 'success', duration = 4000) {
@@ -406,6 +246,7 @@
         
         const toast = document.createElement('div');
         toast.id = toastId;
+        const typeLabel = t(type);
         toast.style.cssText = `
             background: white;
             border-left: 4px solid ${config.border};
@@ -427,7 +268,7 @@
                 <i class="fas ${config.icon}" style="color: ${config.color}; font-size: 18px;"></i>
             </div>
             <div style="flex: 1; padding-top: 2px;">
-                <div style="font-weight: 600; color: #1f2937; margin-bottom: 4px; font-size: 15px;">${type.charAt(0).toUpperCase() + type.slice(1)}</div>
+                <div style="font-weight: 600; color: #1f2937; margin-bottom: 4px; font-size: 15px;">${typeLabel}</div>
                 <div style="color: #6b7280; font-size: 14px; line-height: 1.4;">${message}</div>
             </div>
             <button onclick="closeToast('${toastId}')" style="flex-shrink: 0; background: none; border: none; color: #9ca3af; cursor: pointer; padding: 0; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 4px; transition: all 0.2s;" onmouseover="this.style.background='#f3f4f6'; this.style.color='#1f2937';" onmouseout="this.style.background='none'; this.style.color='#9ca3af';">
@@ -456,23 +297,13 @@
     function saveLanguagePreference() {
         const language = document.getElementById('languageSelect').value;
         localStorage.setItem('preferred_language', language);
-        
-        // Apply language immediately on settings page
-        applyLanguage(language);
-        
+
         // Update global language system if available
         if (window.AppLanguage) {
             window.AppLanguage.setLanguage(language);
         }
-        
-        const languageNames = {
-            'en': 'English',
-            'ms': 'Bahasa Melayu',
-            'zh': 'Chinese (中文)',
-            'ta': 'Tamil (தமிழ்)'
-        };
-        
-        showToast(`Language changed to ${languageNames[language]}. Interface updated!`, 'success', 3000);
+
+        showToast(t('languageChanged'), 'success', 3000);
     }
     
     // Save Email Notification Preference
@@ -481,9 +312,9 @@
         localStorage.setItem('email_notifications', emailEnabled);
         
         if (emailEnabled) {
-            showToast('Email notifications enabled. You will receive appointment updates.', 'success', 3000);
+            showToast(t('emailNotifEnabled'), 'success', 3000);
         } else {
-            showToast('Email notifications disabled. You will not receive appointment emails.', 'info', 3000);
+            showToast(t('emailNotifDisabled'), 'info', 3000);
         }
     }
     
@@ -493,9 +324,9 @@
         localStorage.setItem('auto_save_reports', autoSave);
         
         if (autoSave) {
-            showToast('Auto-save enabled. Your reports will be saved automatically.', 'success', 3000);
+            showToast(t('autoSaveEnabled'), 'success', 3000);
         } else {
-            showToast('Auto-save disabled. You will need to manually save reports.', 'info', 3000);
+            showToast(t('autoSaveDisabled'), 'info', 3000);
         }
     }
     
@@ -510,18 +341,18 @@
         
         // Validate passwords match
         if (newPassword !== confirmPassword) {
-            showToast('New passwords do not match! Please try again.', 'error');
+            showToast(t('passwordMismatch'), 'error');
             return;
         }
         
         if (newPassword.length < 6) {
-            showToast('New password must be at least 6 characters long.', 'warning');
+            showToast(t('passwordTooShort'), 'warning');
             return;
         }
         
         const btn = document.getElementById('updatePasswordBtn');
         btn.disabled = true;
-        btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Updating...';
+        btn.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span>${t('updating')}`;
         
         try {
             const res = await fetch('/auth/change-password', {
@@ -537,18 +368,18 @@
             });
             
             if (res.ok) {
-                showToast('Password updated successfully! Your account is now more secure.', 'success', 5000);
+                showToast(t('passwordUpdated'), 'success', 5000);
                 document.getElementById('changePasswordForm').reset();
             } else {
                 const data = await res.json();
-                showToast(data.detail || 'Failed to update password. Please check your current password.', 'error');
+                showToast(data.detail || t('failedToUpdatePassword'), 'error');
             }
         } catch (e) {
             console.error(e);
-            showToast('Network error. Please check your connection and try again.', 'error');
+            showToast(t('networkError'), 'error');
         } finally {
             btn.disabled = false;
-            btn.innerHTML = 'Update Password';
+            btn.innerHTML = t('updatePassword');
         }
     }
 
@@ -567,12 +398,12 @@
                 currentPatients = await res.json();
                 renderPatients(currentPatients);
             } else {
-                showToast('Failed to load patients. You might not have permission.', 'error');
+                showToast(t('failedToLoadPatients'), 'error');
             }
         } catch(e) {
             console.error(e);
-            showToast('Error loading patient data. Please try again.', 'error');
-            document.getElementById('patientTableBody').innerHTML = '<tr><td colspan="5" class="text-center text-danger">Error loading data</td></tr>';
+            showToast(t('errorLoadingPatientData'), 'error');
+            document.getElementById('patientTableBody').innerHTML = `<tr><td colspan="5" class="text-center text-danger">${t('errorLoadingData')}</td></tr>`;
         }
     }
 
@@ -581,7 +412,7 @@
         tbody.innerHTML = '';
         
         if(patients.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="5" class="text-center py-4">No patients found.</td></tr>';
+            tbody.innerHTML = `<tr><td colspan="5" class="text-center py-4">${t('noPatientsFound')}</td></tr>`;
             return;
         }
 
@@ -598,7 +429,7 @@
                     </div>
                 </td>
                 <td><span class="text-muted">${p.email}</span></td>
-                <td><span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3">Active</span></td>
+                <td><span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3">${t('active')}</span></td>
                 <td class="text-end">
                     <button class="btn btn-sm btn-light text-primary hover-scale" onclick="openEditUser(${p.id})">
                         <i class="fas fa-edit"></i>
@@ -648,13 +479,13 @@
             if(res.ok) {
                 bootstrap.Modal.getInstance(document.getElementById('editUserModal')).hide();
                 loadPatientList(); // Refresh
-                showToast('Patient information updated successfully!', 'success');
+                showToast(t('patientInfoUpdated'), 'success');
             } else {
-                showToast('Update failed. Please try again.', 'error');
+                showToast(t('updateFailedTryAgain'), 'error');
             }
         } catch(e) {
             console.error(e);
-            showToast('Error updating patient information.', 'error');
+            showToast(t('errorUpdatingPatientInfo'), 'error');
         }
     }
 </script>

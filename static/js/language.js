@@ -101,6 +101,12 @@ const AppLanguage = {
             email: 'Email',
             status: 'Status',
             actions: 'Actions',
+            active: 'Active',
+            editPatient: 'Edit Patient',
+            noPatientsFound: 'No patients found.',
+            failedToLoadPatients: 'Failed to load patients. You might not have permission.',
+            errorLoadingPatientData: 'Error loading patient data. Please try again.',
+            errorLoadingData: 'Error loading data',
             
             // Home Page Hero - New Design
             trustedBy: 'Trusted by 10,000+ Healthcare Professionals',
@@ -379,6 +385,10 @@ const AppLanguage = {
             pleaseSelectTime: 'Please select a time',
             failedToBook: 'Failed to book',
             sessionExpired: 'Session Expired',
+            failedToUpdatePassword: 'Failed to update password. Please check your current password.',
+            patientInfoUpdated: 'Patient information updated successfully!',
+            updateFailedTryAgain: 'Update failed. Please try again.',
+            errorUpdatingPatientInfo: 'Error updating patient information.',
             
             // Additional Login/Register
             loginBrandingDesc: 'Access your personalized dashboard to manage appointments, view analysis reports, and connect with medical professionals seamlessly.',
@@ -699,6 +709,12 @@ const AppLanguage = {
             emailNotifications: 'Pemberitahuan E-mel',
             emailNotifDesc: 'Terima kemas kini tentang temujanji',
             passwordChangeInfo: 'Perubahan kata laluan memerlukan pengesahan semula.',
+            active: 'Aktif',
+            editPatient: 'Sunting Pesakit',
+            noPatientsFound: 'Tiada pesakit ditemui.',
+            failedToLoadPatients: 'Gagal memuatkan pesakit. Anda mungkin tidak mempunyai kebenaran.',
+            errorLoadingPatientData: 'Ralat memuatkan data pesakit. Sila cuba lagi.',
+            errorLoadingData: 'Ralat memuatkan data',
             
             // Home Page Hero
             welcomeTitle: 'Temujanji & Pengesanan Penyakit Berkuasa AI',
@@ -985,6 +1001,10 @@ const AppLanguage = {
             pleaseSelectTime: 'Sila pilih masa',
             failedToBook: 'Gagal menempah',
             sessionExpired: 'Sesi Tamat Tempoh',
+            failedToUpdatePassword: 'Gagal mengemas kini kata laluan. Sila semak kata laluan semasa anda.',
+            patientInfoUpdated: 'Maklumat pesakit berjaya dikemas kini!',
+            updateFailedTryAgain: 'Kemas kini gagal. Sila cuba lagi.',
+            errorUpdatingPatientInfo: 'Ralat mengemas kini maklumat pesakit.',
             
             // Additional Login/Register
             loginBrandingDesc: 'Akses papan pemuka peribadi anda untuk mengurus temujanji, melihat laporan analisis, dan berhubung dengan profesional perubatan dengan lancar.',
@@ -1238,6 +1258,7 @@ const AppLanguage = {
             discoverMore: '了解更多',
             startScreening: '开始筛查',
             tryNow: '立即尝试',
+            refresh: '刷新',
             
             // Status & Feedback
             error: '错误',
@@ -1277,6 +1298,12 @@ const AppLanguage = {
             emailNotifications: '电子邮件通知',
             emailNotifDesc: '接收有关预约的更新',
             passwordChangeInfo: '密码更改需要重新验证。',
+            active: '活跃',
+            editPatient: '编辑患者',
+            noPatientsFound: '未找到患者。',
+            failedToLoadPatients: '加载患者失败。您可能没有权限。',
+            errorLoadingPatientData: '加载患者数据时出错。请重试。',
+            errorLoadingData: '加载数据时出错',
             
             // Home Page Hero
             welcomeTitle: 'AI驱动的预约和疾病检测',
@@ -1562,6 +1589,10 @@ const AppLanguage = {
             pleaseSelectTime: '请选择时间',
             failedToBook: '预约失败',
             sessionExpired: '会话已过期',
+            failedToUpdatePassword: '更新密码失败。请检查当前密码。',
+            patientInfoUpdated: '患者信息更新成功！',
+            updateFailedTryAgain: '更新失败。请重试。',
+            errorUpdatingPatientInfo: '更新患者信息时出错。',
             
             // Additional Login/Register
             loginBrandingDesc: '访问您的个性化仪表板，管理预约、查看分析报告，并与医疗专业人员无缝连接。',
@@ -1908,6 +1939,12 @@ const AppLanguage = {
             emailNotifications: 'மின்னஞ்சல் அறிவிப்புகள்',
             emailNotifDesc: 'சந்திப்புகள் பற்றிய புதுப்பிப்புகளைப் பெறுங்கள்',
             passwordChangeInfo: 'கடவுச்சொல் மாற்றங்களுக்கு மீண்டும் அங்கீகாரம் தேவை.',
+            active: 'செயலில்',
+            editPatient: 'நோயாளியைத் திருத்து',
+            noPatientsFound: 'நோயாளிகள் எதுவும் கிடைக்கவில்லை.',
+            failedToLoadPatients: 'நோயாளிகளை ஏற்ற முடியவில்லை. உங்களுக்கு அனுமதி இல்லாமல் இருக்கலாம்.',
+            errorLoadingPatientData: 'நோயாளி தரவை ஏற்றுவதில் பிழை. மீண்டும் முயற்சிக்கவும்.',
+            errorLoadingData: 'தரவை ஏற்றுவதில் பிழை',
             
             // Home Page
             welcomeTitle: 'AI-இயங்கும் வாய் சுகாதார பகுப்பாய்வு',
@@ -1933,6 +1970,10 @@ const AppLanguage = {
             pleaseSelectTime: 'நேரத்தை தேர்ந்தெடுக்கவும்',
             failedToBook: 'பதிவு தோல்வியடைந்தது',
             sessionExpired: 'அமர்வு காலாவதியானது',
+            failedToUpdatePassword: 'கடவுச்சொல்லை புதுப்பிக்க முடியவில்லை. உங்கள் தற்போதைய கடவுச்சொல்லை சரிபார்க்கவும்.',
+            patientInfoUpdated: 'நோயாளி தகவல் வெற்றிகரமாக புதுப்பிக்கப்பட்டது!',
+            updateFailedTryAgain: 'புதுப்பிப்பு தோல்வியடைந்தது. மீண்டும் முயற்சிக்கவும்.',
+            errorUpdatingPatientInfo: 'நோயாளி தகவலை புதுப்பிப்பதில் பிழை.',
             
             // Footer
             quickLinks: 'விரைவு இணைப்புகள்',
