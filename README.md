@@ -601,21 +601,28 @@ A quick look at the codebase organization:
 
 ```text
 📦 Oral-Health-Computer-Vision-Model
- ┣ 📂 Model A             # 🧬 Pathology Model (DenseNet/ResNet)
- ┣ 📂 Model B             # 🦷 Hygiene Model (YOLOv8)
- ┣ 📂 Model Triage        # 🛡️ Router Model (ResNet18)
+ ┣ 📂 core                # ⚙️ Core configs (Database, Auth logic, Models)
+ ┃  ┣ 📜 auth_core.py     # 🔐 JWT and Password Hashing
+ ┃  ┣ 📜 database.py      # 💾 SQLite Engine & Connectors
+ ┃  ┗ 📜 models.py        # 📋 SQLModel Schemas (User, Appointment, HabitLog)
+ ┣ 📂 database            # 📁 Local SQLite Database Storage
+ ┣ 📂 ml_models           # 🧠 Deep Learning Models Directory
+ ┃  ┣ 📂 model_a          # 🧬 Pathology Model (DenseNet/ResNet)
+ ┃  ┣ 📂 model_b          # 🦷 Hygiene Model (YOLOv8)
+ ┃  ┗ 📂 model_triage     # 🛡️ Router Model (ResNet18)
+ ┣ 📂 services            # 🛣️ FastAPI Routers and Business Logic
+ ┃  ┣ 📜 appointment_service.py # 📅 Appointment CRUD APIs
+ ┃  ┣ 📜 auth_service.py        # 🚪 Authentication Endpoints
+ ┃  ┣ 📜 chat_service.py        # 🤖 AI Chatbot Logic (RAG + Guidelines)
+ ┃  ┣ 📜 habits_service.py      # 🏃 Daily Habit Tracking API
+ ┃  ┗ 📜 report_service.py      # 📄 PDF Generation & Email Delivery
  ┣ 📂 static              # 🎨 Frontend (HTML, CSS, JS)
  ┃  ┣ 📂 css              #    Stylesheets & animations
  ┃  ┣ 📂 html/views       #    Page templates (home, login, settings...)
  ┃  ┗ 📂 js               #    UI handlers & language translations
+ ┣ 📂 tests               # 🧪 PyTest Suite (Mocks, Services, DB testing)
+ ┣ 📂 utils               # 🛠️ Helper Utilities (Inference processing)
  ┣ 📜 main.py             # ⚡ FastAPI Application Entry Point
- ┣ 📜 auth_service.py     # 🔐 Authentication & User Management
- ┣ 📜 appointment_service.py # 📅 Appointment CRUD APIs
- ┣ 📜 chat_service.py     # 🤖 AI Chatbot Logic (RAG + Lifestyle Guidelines)
- ┣ 📜 habits_service.py   # 🏃 Daily Habit Tracking API (POST/GET)
- ┣ 📜 report_service.py   # 📄 PDF Generation & Email Delivery
- ┣ 📜 database.py         # 💾 SQLite Database Setup
- ┣ 📜 models.py           # 📋 SQLModel Schemas (User, Appointment, DailyHabitLog)
  ┣ 📜 Dockerfile          # 🐳 Container Configuration
  ┗ 📜 requirements.txt    # 📦 Python Dependencies
 ```
