@@ -114,11 +114,73 @@ export class ChatUI {
         }
     }
 
+    sanitizeBotText(text) {
+        if (!text || typeof text !== 'string') return text;
+
+        const leakMode = /user question:|analysis context:|role:|constraints:|guideline\s*\d|professional and calm:|empathetic\/supportive:|no diagnosis:|consultation:|explain the process:|clarify that it's a tool|add the mandatory consultation advice/i.test(text);
+
+        const metaPrefixes = [
+            'user question:',
+            'analysis context:',
+            'role:',
+            'constraints:',
+            'professional and calm:',
+            'empathetic/supportive:',
+            'no diagnosis:',
+            'consultation:',
+            'explain the process:',
+            'clarify that it\'s a tool',
+            'add the mandatory consultation advice',
+            'guideline ',
+            'draft ',
+            'final answer:'
+        ];
+
+        const filtered = text
+            .replace(/\r\n/g, '\n')
+            .split('\n')
+            .map(line => line.trim())
+            .filter(line => {
+                if (!line) return false;
+
+                const lower = line.toLowerCase();
+                if (metaPrefixes.some(prefix => lower.startsWith(prefix))) return false;
+                if (/^guideline\s*\d+\b/.test(lower)) return false;
+                if (/^\d+\.\s*guideline\b/.test(lower)) return false;
+                if (lower.endsWith('• just now')) return false;
+                if ((line.startsWith('*') || line.startsWith('-')) && (lower.includes('guideline') || lower.includes('analysis context'))) return false;
+                if (leakMode && (lower.startsWith('the ai likely uses') || lower.startsWith('it compares user-uploaded images') || lower.startsWith('it identifies patterns') || lower.startsWith('it provides a probability'))) return false;
+                return true;
+            });
+
+        const uniqueLongLines = new Set();
+        const deduped = filtered.filter(line => {
+            const key = line.toLowerCase();
+            if (line.length > 40 && uniqueLongLines.has(key)) return false;
+            uniqueLongLines.add(key);
+            return true;
+        });
+
+        let cleaned = deduped.join('\n').trim();
+
+        if (leakMode && cleaned) {
+            const paragraphs = cleaned.split(/\n\s*\n/).map(p => p.trim()).filter(Boolean);
+            if (paragraphs.length > 1) {
+                const tail = paragraphs[paragraphs.length - 1];
+                cleaned = tail.length >= 120 ? tail : paragraphs.slice(-2).join('\n\n');
+            }
+        }
+
+        return cleaned || text;
+    }
+
     addMessage(sender, text, save = true, originalPrompt = "") {
+        const safeText = sender === 'bot' ? this.sanitizeBotText(text) : text;
+
         // Save to session storage
         if (save) {
             const history = JSON.parse(sessionStorage.getItem('chat_history') || '[]');
-            history.push({ sender, text, timestamp: Date.now() });
+            history.push({ sender, text: safeText, timestamp: Date.now() });
             sessionStorage.setItem('chat_history', JSON.stringify(history));
 
             // Show notification if bot sends message and window is closed
@@ -136,12 +198,12 @@ export class ChatUI {
             msgDiv.className = 'd-flex justify-content-end chat-message-enter';
             msgDiv.innerHTML = `
                 <div class="user-message-bubble bg-primary text-white p-3 rounded-4 shadow-sm small" style="max-width: 80%; border-top-right-radius: 4px !important; background: linear-gradient(135deg, #3b82f6, #2563eb);">
-                    ${text}
+                    ${safeText}
                 </div>
             `;
         } else {
             // Parse Markdown for bot messages
-            const parsedText = typeof marked !== 'undefined' ? marked.parse(text) : text;
+            const parsedText = typeof marked !== 'undefined' ? marked.parse(safeText) : safeText;
             
             // Build the core message bubble
             let botHTML = `
@@ -180,7 +242,7 @@ export class ChatUI {
                     <div class="correction-form d-none mt-2 p-2 rounded-3 border" id="correction-form-${msgId}" style="background: rgba(248, 250, 252, 0.8); border-color: rgba(0,0,0,0.05) !important;">
                         <textarea class="form-control form-control-sm mb-2 shadow-none bg-white" rows="2" placeholder="Tell us how we can improve (optional)..." id="correction-input-${msgId}" style="font-size: 0.85rem; border-radius: 8px; resize: none; border-color: rgba(0,0,0,0.1); color: #334155;"></textarea>
                         <div class="d-flex justify-content-end">
-                            <button class="btn btn-primary px-3 py-1 d-flex align-items-center gap-1 submit-feedback-btn shadow-sm" data-msgid="${msgId}" data-prompt="${encodeURIComponent(originalPrompt)}" data-response="${encodeURIComponent(text)}" style="border-radius: 12px; font-size: 0.8rem; font-weight: 500; background: linear-gradient(135deg, #3b82f6, #2563eb); border: none;">
+                            <button class="btn btn-primary px-3 py-1 d-flex align-items-center gap-1 submit-feedback-btn shadow-sm" data-msgid="${msgId}" data-prompt="${encodeURIComponent(originalPrompt)}" data-response="${encodeURIComponent(safeText)}" style="border-radius: 12px; font-size: 0.8rem; font-weight: 500; background: linear-gradient(135deg, #3b82f6, #2563eb); border: none;">
                                 <i class="fas fa-paper-plane" style="font-size: 10px;"></i> Send
                             </button>
                         </div>
