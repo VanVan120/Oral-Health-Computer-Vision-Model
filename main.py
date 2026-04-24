@@ -282,13 +282,19 @@ class SuggestionRequest(BaseModel):
 async def get_suggestion(request: SuggestionRequest):
     try:
         if request.model_type == "Model A":
-             suggestion_prompt = "Based on these histopathology results, provide a brief, professional suggestion for the medical professional reviewing this case (max 2 sentences)."
+             suggestion_prompt = (
+                 "Based on these histopathology results, provide one concise professional suggestion for the "
+                 "medical professional reviewing this case. Mention key abnormal markers and confidence when relevant."
+             )
         elif request.model_type == "Model B":
-             suggestion_prompt = "Based on these clinical screening results, provide a brief, empathetic suggestion for the patient (max 2 sentences). Focus on hygiene or next steps."
+             suggestion_prompt = (
+                 "Based on these clinical screening results, provide one concise empathetic suggestion for the "
+                 "patient. Focus on hygiene habits or practical next steps."
+             )
         else:
             raise HTTPException(status_code=400, detail="Invalid model type")
             
-        ai_suggestion = get_chat_response(suggestion_prompt, request.analysis_data)
+        ai_suggestion = get_chat_response(suggestion_prompt, request.analysis_data, mode="suggestion")
         return {"ai_suggestion": ai_suggestion}
     except Exception as e:
         print(f"AI Suggestion Error: {e}")

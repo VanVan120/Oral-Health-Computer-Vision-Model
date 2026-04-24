@@ -26,6 +26,31 @@ def test_chat_endpoint(client: TestClient):
         assert response.json() == {"reply": "Mocked AI Response"}
         mock_chat.assert_called_once_with("What is OSCC?", {"model_used": "Model A"})
 
+
+def test_get_suggestion_uses_suggestion_mode(client: TestClient):
+    payload = {
+        "model_type": "Model A",
+        "analysis_data": {
+            "predictions": {
+                "abnormality_detected": True,
+                "confidence": 0.99,
+                "heatmap_overlay": "AAA"
+            }
+        }
+    }
+
+    with patch("main.get_chat_response", return_value="Clean suggestion.") as mock_chat:
+        response = client.post("/api/get-suggestion", json=payload)
+
+    assert response.status_code == 200
+    assert response.json() == {"ai_suggestion": "Clean suggestion."}
+    assert mock_chat.call_count == 1
+
+    args, kwargs = mock_chat.call_args
+    assert "histopathology" in args[0].lower()
+    assert args[1] == payload["analysis_data"]
+    assert kwargs["mode"] == "suggestion"
+
 @patch("main.TriageRouter")
 @patch("main.ModelAInference")
 @patch("main.OralHygieneModel")
