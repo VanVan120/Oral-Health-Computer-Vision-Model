@@ -134,7 +134,7 @@ export class HabitsUI {
             ate_sweets: document.getElementById('habit-sweets')?.checked || false,
             brushed_after_meal: document.getElementById('habit-brushed')?.checked || false,
             used_floss: document.getElementById('habit-floss')?.checked || false,
-            used_sensodyne: document.getElementById('habit-sensodyne')?.checked || false,
+            used_fluoride_toothpaste: document.getElementById('habit-toothpaste')?.checked || false,
         };
 
         try {
@@ -178,7 +178,7 @@ export class HabitsUI {
         let score = 0;
         if (log.brushed_after_meal) score++;
         if (log.used_floss) score++;
-        if (log.used_sensodyne) score++;
+        if (log.used_fluoride_toothpaste) score++;
         if (!log.smoked_cigarettes) score++;
         if (!log.ate_sweets) score++;
         return score;
@@ -191,7 +191,7 @@ export class HabitsUI {
         this.todaySaved = true;
 
         // Disable all habit checkboxes
-        const checkboxes = ['habit-smoked', 'habit-sweets', 'habit-brushed', 'habit-floss', 'habit-sensodyne'];
+        const checkboxes = ['habit-smoked', 'habit-sweets', 'habit-brushed', 'habit-floss', 'habit-toothpaste'];
         checkboxes.forEach(id => {
             const el = document.getElementById(id);
             if (el) {
@@ -401,7 +401,7 @@ export class HabitsUI {
                 document.getElementById('habit-sweets').checked = todayLog.ate_sweets;
                 document.getElementById('habit-brushed').checked = todayLog.brushed_after_meal;
                 document.getElementById('habit-floss').checked = todayLog.used_floss;
-                document.getElementById('habit-sensodyne').checked = todayLog.used_sensodyne;
+                document.getElementById('habit-toothpaste').checked = todayLog.used_fluoride_toothpaste;
 
                 // Lock form since today is already saved (no popup — only on fresh save)
                 this.lockForm();
@@ -470,7 +470,7 @@ export class HabitsUI {
             let score = 0;
             if (day.log.brushed_after_meal) score++;
             if (day.log.used_floss) score++;
-            if (day.log.used_sensodyne) score++;
+            if (day.log.used_fluoride_toothpaste) score++;
             if (!day.log.smoked_cigarettes) score++;
             if (!day.log.ate_sweets) score++;
 
@@ -508,7 +508,7 @@ export class HabitsUI {
                 let goodCount = 0;
                 if (log.brushed_after_meal) goodCount++;
                 if (log.used_floss) goodCount++;
-                if (log.used_sensodyne) goodCount++;
+                if (log.used_fluoride_toothpaste) goodCount++;
                 if (!log.smoked_cigarettes) goodCount++;
                 if (!log.ate_sweets) goodCount++;
 

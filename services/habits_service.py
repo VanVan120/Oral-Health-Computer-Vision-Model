@@ -16,7 +16,7 @@ class HabitLogRequest(BaseModel):
     ate_sweets: bool = False
     brushed_after_meal: bool = False
     used_floss: bool = False
-    used_sensodyne: bool = False
+    used_fluoride_toothpaste: bool = False
 
 
 class HabitLogResponse(BaseModel):
@@ -27,7 +27,7 @@ class HabitLogResponse(BaseModel):
     ate_sweets: bool
     brushed_after_meal: bool
     used_floss: bool
-    used_sensodyne: bool
+    used_fluoride_toothpaste: bool
 
 
 @router.post("/log", response_model=HabitLogResponse)
@@ -49,7 +49,7 @@ async def save_daily_habits(request: HabitLogRequest, current_user: User = Depen
         existing_log.ate_sweets = request.ate_sweets
         existing_log.brushed_after_meal = request.brushed_after_meal
         existing_log.used_floss = request.used_floss
-        existing_log.used_sensodyne = request.used_sensodyne
+        existing_log.used_fluoride_toothpaste = request.used_fluoride_toothpaste
         session.add(existing_log)
         session.commit()
         session.refresh(existing_log)
@@ -63,7 +63,7 @@ async def save_daily_habits(request: HabitLogRequest, current_user: User = Depen
             ate_sweets=request.ate_sweets,
             brushed_after_meal=request.brushed_after_meal,
             used_floss=request.used_floss,
-            used_sensodyne=request.used_sensodyne,
+            used_fluoride_toothpaste=request.used_fluoride_toothpaste,
         )
         session.add(new_log)
         session.commit()
