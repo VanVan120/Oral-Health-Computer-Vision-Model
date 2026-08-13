@@ -6,3 +6,7 @@ __pycache__/
 temp_uploads/
 .env
 
+# Runtime databases. Built on startup by create_db_and_tables(); they hold real
+# user records and must never be committed.
+database/*.db
+

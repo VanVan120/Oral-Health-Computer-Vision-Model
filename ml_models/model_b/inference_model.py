@@ -1,6 +1,7 @@
 import os
 import cv2
 import numpy as np
+import torch
 from ultralytics import YOLO  # Import Standard YOLO
 try:
     from sahi import AutoDetectionModel
@@ -41,7 +42,7 @@ class OralHygieneModel:
             raise FileNotFoundError(f"Model file not found at {model_path}")
         
         self.model_path = model_path
-        self.device = "cuda:0" 
+        self.device = "cuda:0" if torch.cuda.is_available() else "cpu"
         
         # 1. LOAD STANDARD YOLO (For Low Res)
         self.standard_model = YOLO(model_path)
