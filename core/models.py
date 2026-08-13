@@ -26,7 +26,7 @@ class DailyHabitLog(SQLModel, table=True):
     ate_sweets: bool = Field(default=False)
     brushed_after_meal: bool = Field(default=False)
     used_floss: bool = Field(default=False)
-    used_sensodyne: bool = Field(default=False)
+    used_fluoride_toothpaste: bool = Field(default=False)
 
 class GenAIFeedback(SQLModel, table=True):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()), primary_key=True)

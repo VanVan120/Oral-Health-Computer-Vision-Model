@@ -12,7 +12,7 @@ def test_save_and_get_habits(client: TestClient, patient_token: str):
             "ate_sweets": True,
             "brushed_after_meal": True,
             "used_floss": False,
-            "used_sensodyne": False
+            "used_fluoride_toothpaste": False
         }
     )
     assert response.status_code == 200

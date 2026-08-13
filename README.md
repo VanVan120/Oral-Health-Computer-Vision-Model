@@ -311,7 +311,7 @@ Users log five key habits each day using intuitive toggle switches:
 | :--- | :---: | :---: |
 | **Brushed After Meals** | ✅ Good | +1 if ON |
 | **Used Dental Floss** | ✅ Good | +1 if ON |
-| **Used Sensodyne/Fluoride** | ✅ Good | +1 if ON |
+| **Used Fluoride Toothpaste** | ✅ Good | +1 if ON |
 | **Smoked Cigarettes** | ❌ Bad | +1 if OFF |
 | **Ate Sugary Snacks** | ❌ Bad | +1 if OFF |
 
@@ -482,7 +482,7 @@ The frontend has been redesigned to mimic professional medical imaging software:
 
 ### 4. Preventative Care Hub & Gamification
 A brand-new wellness module designed to drive daily engagement:
-*   **Habit Tracker**: Five toggle-switch habits (brushing, flossing, Sensodyne, no smoking, no sweets) with a daily score out of 5.
+*   **Habit Tracker**: Five toggle-switch habits (brushing, flossing, fluoride toothpaste, no smoking, no sweets) with a daily score out of 5.
 *   **7-Day History Grid**: Always-visible, color-coded overview of the past week's performance.
 *   **Streak Counter & Achievement Levels**: Tracks consecutive good days and unlocks 6 progressive badges from "Starter" (🌱) to "Legendary" (💎).
 *   **Score Celebration Popup**: Full-screen animated overlay with confetti, star ratings, emoji feedback, dynamic gradients, and motivational messages — displayed on every save.
