@@ -1,11 +1,23 @@
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
 from typing import Optional, Union
+import os
 import jwt
 from jwt import PyJWTError as JWTError
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Config
-SECRET_KEY = "SECRET_KEY_GOES_HERE" # In prod, use env var
+# Deliberately no default. An unset signing key must stop the app rather than
+# fall back to a shared constant that would let anyone forge a doctor token.
+SECRET_KEY = os.environ.get("JWT_SECRET_KEY")
+if not SECRET_KEY:
+    raise RuntimeError(
+        "JWT_SECRET_KEY is not set. Generate one with:\n"
+        '    python -c "import secrets; print(secrets.token_urlsafe(48))"\n'
+        "then set it in your environment or .env file (see .env.example)."
+    )
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 300 # 5 hours for ease of demo
 
