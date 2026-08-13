@@ -8,6 +8,10 @@ import sys
 # Add the project root to the python path so tests can run easily
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
+# core.auth_core refuses to import without a signing key, so supply a throwaway
+# one before anything pulls it in. setdefault so a real CI secret still wins.
+os.environ.setdefault("JWT_SECRET_KEY", "test-only-key-not-used-outside-pytest")
+
 from main import app
 from core.database import get_session
 import core.models
