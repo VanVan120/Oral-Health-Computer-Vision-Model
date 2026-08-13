@@ -586,8 +586,8 @@ const AppLanguage = {
             detectedCount: '{count} detected',
             conditionCaries: 'Caries',
             conditionGingivitis: 'Gingivitis',
-            conditionUlcer: 'Ulcer',
-            conditionTooth: 'Tooth',
+            conditionUlcers: 'Ulcers',
+            conditionToothDiscoloration: 'Tooth Discoloration',
             conditionCalculus: 'Calculus',
             conditionHypodontia: 'Hypodontia',
             
@@ -1202,8 +1202,8 @@ const AppLanguage = {
             detectedCount: '{count} dikesan',
             conditionCaries: 'Karies',
             conditionGingivitis: 'Gingivitis',
-            conditionUlcer: 'Ulser',
-            conditionTooth: 'Gigi',
+            conditionUlcers: 'Ulser',
+            conditionToothDiscoloration: 'Perubahan Warna Gigi',
             conditionCalculus: 'Kalkulus',
             conditionHypodontia: 'Hipodontia',
             
@@ -1790,8 +1790,8 @@ const AppLanguage = {
             detectedCount: '检测到{count}个',
             conditionCaries: '龋齿',
             conditionGingivitis: '牙龈炎',
-            conditionUlcer: '溃疡',
-            conditionTooth: '牙齿',
+            conditionUlcers: '溃疡',
+            conditionToothDiscoloration: '牙齿变色',
             conditionCalculus: '牙结石',
             conditionHypodontia: '先天缺牙',
             
@@ -2392,8 +2392,8 @@ const AppLanguage = {
             detectedCount: '{count} கண்டறியப்பட்டது',
             conditionCaries: 'பல் சொத்தை',
             conditionGingivitis: 'ஈறு அழற்சி',
-            conditionUlcer: 'புண்',
-            conditionTooth: 'பல்',
+            conditionUlcers: 'புண்கள்',
+            conditionToothDiscoloration: 'பல் நிற மாற்றம்',
             conditionCalculus: 'கால்குலஸ்',
             conditionHypodontia: 'ஹைபோடோன்டியா',
             
