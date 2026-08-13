@@ -8,6 +8,33 @@ try:
 except ImportError:
     raise ImportError("Please run: pip install sahi ultralytics")
 
+# Presentation layer only. Keyed by the class names baked into the weights, never
+# by class index, so the index -> condition mapping can only ever come from the
+# model itself. The training dataset ships the class as "tooth_discolation"; the
+# corrected spelling here is a display choice and is declared as such in
+# verify_classes.py.
+DISPLAY_NAMES = {
+    "calculus": "Calculus",
+    "caries": "Caries",
+    "gingivitis": "Gingivitis",
+    "hypodontia": "Hypodontia",
+    "tooth_discolation": "Tooth Discoloration",
+    "ulcer": "Ulcers",
+}
+
+
+def display_name(model_class_name):
+    """Map a class name reported by the weights to its display label."""
+    try:
+        return DISPLAY_NAMES[model_class_name]
+    except KeyError:
+        raise KeyError(
+            f"No display label for model class {model_class_name!r}. "
+            f"Known classes: {sorted(DISPLAY_NAMES)}. "
+            "The weights have changed - update DISPLAY_NAMES to match."
+        ) from None
+
+
 class OralHygieneModel:
     def __init__(self, model_path):
         if not os.path.exists(model_path):
@@ -27,9 +54,11 @@ class OralHygieneModel:
             device=self.device
         )
         
+        # Read the class registry off the weights and label it for display. There
+        # is no second index -> condition table anywhere, so the two cannot drift.
         self.class_names = {
-            0: 'Caries', 1: 'Calculus', 2: 'Gingivitis',
-            3: 'Tooth Discoloration', 4: 'Ulcers', 5: 'Hypodontia'
+            index: display_name(name)
+            for index, name in self.standard_model.names.items()
         }
 
     def predict(self, image_path):
@@ -146,7 +175,7 @@ class OralHygieneModel:
             'Gingivitis': 0.30           
         }
         
-        class_name = self.class_names.get(cls_id, "Unknown")
+        class_name = self.class_names[cls_id]
         min_conf = confidence_thresholds.get(class_name, 0.25)
         
         if conf >= min_conf:
