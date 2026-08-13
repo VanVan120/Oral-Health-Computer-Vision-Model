@@ -10,3 +10,8 @@ temp_uploads/
 # user records and must never be committed.
 database/*.db
 
+# Working documents for the pre-submission remediation and the leakage audit.
+# Task specs, not deliverables.
+remediation-spec.md
+leakage-audit-spec.md
+
