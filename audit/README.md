@@ -69,6 +69,37 @@ reason.
 | `expert_packet.py` | 6.3 | Builds the expert-review packet in the scratchpad. Never writes into the repository. |
 | `run_remaining.sh` | 2–4 | Runs the analysis steps in order; each is skipped if its output exists. |
 
+## Results index
+
+Prose findings are in the `.md` files; every number behind them is in the
+`.json`/`.csv` of the same phase.
+
+| file | phase | contents |
+|---|---|---|
+| `S2_regenerated_test_train_pairs.csv` | 0.4 | D, 259 pairs, S2 column format |
+| `S7_valid_train_pairs.csv` | 2.7 | validation duplicates, 256 dihedral / 120 identity |
+| `S8`, `S26` | 5.4 | dataset lineage (S8 partial, superseded by S26) |
+| `S9`, `S10`, `S12`, `S14`, `S15` | 5.1–5.3 | stored run artifacts, both checkpoints' metadata, provenance, weight history, warm start |
+| `S11`, `S13`, `S18` | 3.1, 3.2 | verify_classes output, request path **(S13 carries a correction)**, pytest 45/0 |
+| `S16`, `S17` | 5.5, 5.6 | unit of independence, full commit chronology |
+| `S19`, `S35` | 3.5 | router: code reading, then measured on three sets |
+| `S20`, `S21` | 4.1(3) | Model A from the notebook's stored outputs only |
+| `S22`, `S23` | 0.3, 0.4 | dataset download/identity, duplicate regeneration |
+| `S24`, `S41` | 1.1–1.3 | exactness gate (0.0 on all four sets) and the evaluator write-up |
+| `S25` | 2.1 | 1,445 clusters |
+| `S28`, `S33`, `S44` | 1.3, 2.9 | batch-16 run, 8.4.118 run, **the version effect and its cause** |
+| `S29`, `S30`, `S43` | 2.2–2.8 | removal effect, 30,000 control deltas, **the Phase 2 write-up** |
+| `S31`, `S32` | 2.5–2.7 | memorisation diagnostics, per-class contrasts, validation contamination |
+| `S34`, `S45`, `S46` | 3.3–3.5 | end-to-end over 1,500 images, image-level Wilson CIs, **the Phase 3 write-up** |
+| `S36`, `S37`, `S42` | 4.1, 4.2 | Model A reproduction, per-image scores for all 544, **the write-up and the `model_a_best.pth` correction** |
+| `S38`, `S39`, `S40` | 2.8 | photometric tier — measured, and dropped with reasons |
+| `reference/` | 0.3 | the published S0–S5 verbatim, with PROVENANCE.md |
+
+Three files record **corrections to earlier conclusions in this same audit**:
+`S13` (SAHI is never exercised — the opposite of what was first written),
+`S42` (`model_a.pth` carries `model_a_best.pth`'s weights), and the CORRECTION
+lines in `results/SUMMARY_R1.md`.
+
 ## The duplicate rule, and the three traps in it
 
 `near_duplicates.py` implements the published rule: 32x32 greyscale thumbnails,

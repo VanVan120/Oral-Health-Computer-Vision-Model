@@ -194,3 +194,39 @@ weights are not. The deployed model IS measurable, and is measured in `S42`.
 (seed 20260921), 715 box rows; B = all **18** TVNT negatives + 18 random
 positives, renamed and shuffled, with the unblinding key kept separate. The 18
 is an independent confirmation of the CSV's `Normal=18`. Never committed.
+
+## Phases 2.9, 3.3, 3.4, 3.5 (DONE) — and a second correction
+
+**2.9.** Version effect mAP@0.5 −0.004167, mAP@0.5:0.95 −0.011828 at batch 16,
+reproducing the spec's expected 0.7710→0.7668 and 0.4010→0.3892 exactly. P and R
+identical to 16 significant figures. The optional decomposition is settled: the
+cached tp/conf/pred_cls/target_cls/target_img arrays are **bit-identical** across
+61,159 predictions, so the whole effect is in `compute_ap` — 8.3.231 credits a
+linear precision ramp over recall never achieved, 8.4.118 does not. `S33`, `S44`.
+
+**3.3/3.4/3.5.** Pre-fix full path: 1,464 of 1,994 displayed findings (73.4%)
+under a wrong name, 71.6% of images showing only wrong names. Router refuses
+22.9% of the detector's own benchmark and 24.6% of the histopathology set, while
+accepting 8.6% of COCO128; it more than triples the "No Issues Detected" rate
+(7.4% → 26.9%). Gates are nearly inert — 6 rejections across 2,172 images, all
+from the dark check. `S34`, `S35`, `S45`, `S46`.
+
+**Correction 2.** `S13` said the Roboflow export is 640×640 so every benchmark
+image takes the SAHI branch. The opposite is true: height ranges 33–612 and
+never reaches 640, so `sahi 0, standard 1500`. SAHI is never exercised by any
+reported number. `S13` now carries the correction inline.
+
+**pytest is now 45 passed, 0 skipped** (was 39/6). All six assertion-(iii) tests
+run on real images; two needed `MODEL_B_TEST_SCAN=1500` because the first 400
+images hold no hypodontia detection ≥0.60 nor an ulcer detection ≥0.75.
+
+## Phase 6 — packaging (DONE)
+
+`run_all.sh` ran end to end and is idempotent. Two scripts that produce committed
+results were unreachable from it and are now wired in, so its claim to regenerate
+every number is true. `SUMMARY_R1.md` rewritten in full: all 28 report-format
+sections, both checkpoints' complete 105-key `train_args` (`save_dir` is absent
+from both — ultralytics does not store it), and a 27-item UNEXPECTED list.
+
+Tag `v1.1-r1` applied at the final commit, branch and tag pushed. No force-push,
+no history rewritten, no dataset image committed.

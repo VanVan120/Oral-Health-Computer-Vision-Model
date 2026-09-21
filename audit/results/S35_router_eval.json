@@ -1,0 +1,187 @@
+{
+  "deployed_threshold": 0.95,
+  "model_b_test": {
+    "n": 1500,
+    "expected_route": "Clinical",
+    "labels": {
+      "Clinical": 1156,
+      "Unknown": 344
+    },
+    "exits": {
+      "classified": 1156,
+      "softmax_below_threshold": 341,
+      "gate_brightness_low": 3
+    },
+    "correct": {
+      "k": 1156,
+      "n": 1500,
+      "proportion": 0.7706666666666667,
+      "wilson95": [
+        0.7487162226820377,
+        0.7912343121547708
+      ]
+    },
+    "wrong_route": {
+      "k": 0,
+      "n": 1500,
+      "proportion": 0.0,
+      "wilson95": [
+        0.0,
+        0.002554430720181488
+      ]
+    },
+    "unknown": {
+      "k": 344,
+      "n": 1500,
+      "proportion": 0.22933333333333333,
+      "wilson95": [
+        0.20876568784522928,
+        0.25128377731796225
+      ]
+    },
+    "gate_rejections": {
+      "gate_brightness_low": 3
+    },
+    "gate_rejections_total": {
+      "k": 3,
+      "n": 1500,
+      "proportion": 0.002,
+      "wilson95": [
+        0.0006804084719908739,
+        0.005863804525309888
+      ]
+    },
+    "softmax_rejections": {
+      "k": 341,
+      "n": 1500,
+      "proportion": 0.22733333333333333,
+      "wilson95": [
+        0.20683601547854155,
+        0.24922366740753074
+      ]
+    }
+  },
+  "model_a_all": {
+    "n": 544,
+    "expected_route": "Histopathological",
+    "labels": {
+      "Histopathological": 410,
+      "Unknown": 134
+    },
+    "exits": {
+      "classified": 410,
+      "softmax_below_threshold": 134
+    },
+    "correct": {
+      "k": 410,
+      "n": 544,
+      "proportion": 0.7536764705882353,
+      "wilson95": [
+        0.7157739106366494,
+        0.7880214767992135
+      ]
+    },
+    "wrong_route": {
+      "k": 0,
+      "n": 544,
+      "proportion": 0.0,
+      "wilson95": [
+        0.0,
+        0.007011989981487356
+      ]
+    },
+    "unknown": {
+      "k": 134,
+      "n": 544,
+      "proportion": 0.24632352941176472,
+      "wilson95": [
+        0.21197852320078647,
+        0.28422608936335053
+      ]
+    },
+    "gate_rejections": {},
+    "gate_rejections_total": {
+      "k": 0,
+      "n": 544,
+      "proportion": 0.0,
+      "wilson95": [
+        0.0,
+        0.007011989981487356
+      ]
+    },
+    "softmax_rejections": {
+      "k": 134,
+      "n": 544,
+      "proportion": 0.24632352941176472,
+      "wilson95": [
+        0.21197852320078647,
+        0.28422608936335053
+      ]
+    },
+    "distinct_sources": 228,
+    "note": "image-level proportions; the 544 images are 3 Roboflow-augmented versions of a smaller set of source fields, so images are not independent"
+  },
+  "coco128_ood": {
+    "n": 128,
+    "expected_route": "Unknown",
+    "labels": {
+      "Clinical": 10,
+      "Unknown": 117,
+      "Histopathological": 1
+    },
+    "exits": {
+      "classified": 11,
+      "softmax_below_threshold": 114,
+      "gate_brightness_low": 3
+    },
+    "correct": {
+      "k": 117,
+      "n": 128,
+      "proportion": 0.9140625,
+      "wilson95": [
+        0.852659089457387,
+        0.9513368686286138
+      ]
+    },
+    "wrong_route": {
+      "k": 11,
+      "n": 128,
+      "proportion": 0.0859375,
+      "wilson95": [
+        0.04866313137138619,
+        0.14734091054261295
+      ]
+    },
+    "unknown": {
+      "k": 117,
+      "n": 128,
+      "proportion": 0.9140625,
+      "wilson95": [
+        0.852659089457387,
+        0.9513368686286138
+      ]
+    },
+    "gate_rejections": {
+      "gate_brightness_low": 3
+    },
+    "gate_rejections_total": {
+      "k": 3,
+      "n": 128,
+      "proportion": 0.0234375,
+      "wilson95": [
+        0.008002416396755477,
+        0.06664374505143224
+      ]
+    },
+    "softmax_rejections": {
+      "k": 114,
+      "n": 128,
+      "proportion": 0.890625,
+      "wilson95": [
+        0.8247655486183226,
+        0.9337212042929989
+      ]
+    }
+  },
+  "overlap_with_training_data": "UNKNOWN. The router's training data is ./dataset, assembled by hand and never committed at any point in the repository's history. Overlap with any of these three sets cannot be determined from the records that exist."
+}

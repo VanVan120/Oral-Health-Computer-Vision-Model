@@ -93,13 +93,24 @@ Selected on a single resolution test (inference_model.py:88):
   slice_width=512, overlap_height_ratio=0.2, overlap_width_ratio=0.2)`, with the
   SAHI model built at `confidence_threshold=0.15`.
 
-**The Roboflow export is 640x640, so every benchmark image takes the SAHI
-branch.** A 640x640 image is sliced into 512x512 tiles at 0.2 overlap. Any
-end-to-end number computed on this benchmark therefore describes the SAHI path,
-not the plain path, and the plain path is exercised only by smaller uploads.
-This is why the Phase 3.2(iii) test captures the class index *inside* the chain
-rather than calling the raw model separately: a raw standard-model call would
-compare the two inference branches instead of isolating the name mapping.
+> **CORRECTED 2026-09-21, after Phase 3.3 ran.** An earlier version of this
+> section said the Roboflow export is 640x640 and that every benchmark image
+> therefore takes the SAHI branch. **That is wrong, and the opposite is true.**
+> The export preserves the original image dimensions: the test split has 338
+> distinct sizes, width 123-644 and height **33-612**. Height never reaches 640,
+> so **no image satisfies `width >= 640 and height >= 640`** and the measured
+> path counts are `standard 1500, sahi 0`.
+>
+> The consequence is the reverse of what was written here: every end-to-end
+> number on this benchmark describes the **plain** path, and the SAHI branch --
+> a headline feature of the deployed system, and the one a full-size phone
+> photograph would take -- is **never exercised by any reported result**. See
+> `S46_phase3_end_to_end.md`.
+
+The Phase 3.2(iii) test captures the class index *inside* the chain rather than
+calling the raw model separately, so that it isolates the name mapping instead
+of comparing the two inference branches. That reasoning is unaffected by the
+correction above.
 
 ### Per-class thresholds and the "No Issues Detected" branch
 
