@@ -1,0 +1,34 @@
+WARNING ⚠️ Ultralytics settings reset to default values. This may be due to a possible problem with your settings or a recent ultralytics package update. 
+View Ultralytics Settings with 'yolo settings' or at '/Users/dev1/Library/Application Support/Ultralytics/settings.json'
+Update Settings with 'yolo settings key=value', i.e. 'yolo settings runs_dir=path/to/dir'. For help see https://docs.ultralytics.com/quickstart/#ultralytics-settings.
+
+MODEL'S OWN CLASS REGISTRY
+  0: calculus
+  1: caries
+  2: gingivitis
+  3: hypodontia
+  4: tooth_discolation
+  5: ulcer
+
+DISPLAY LABEL THE DEPLOYMENT LAYER DERIVES
+  0: Calculus
+  1: Caries
+  2: Gingivitis
+  3: Hypodontia
+  4: Tooth Discoloration
+  5: Ulcers
+
+WHAT THE USER ACTUALLY SEES
+  detected                 displayed                ok?
+  --------------------------------------------------------------
+  calculus                 Calculus                 OK
+  caries                   Caries                   OK
+  gingivitis               Gingivitis               OK
+  hypodontia               Hypodontia               OK
+  tooth_discolation        Tooth Discoloration      OK (declared spelling fix)
+  ulcer                    Ulcers                   OK
+
+  0 of 6 classes are reported under the wrong name.
+
+Mapping is correct: every class index resolves to the condition the
+weights say it is, and the display map covers the registry exactly.

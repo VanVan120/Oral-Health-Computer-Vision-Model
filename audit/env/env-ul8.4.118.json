@@ -1,0 +1,30 @@
+{
+  "PIL": "12.3.0",
+  "cpu_count": 10,
+  "cpu_model": "Apple M5",
+  "cuda_available": false,
+  "cv2": "5.0.0",
+  "default_dtype": "torch.float32",
+  "executable": "/Users/dev1/Desktop/Oral/r1-scratch/venvs/ul8.4.118/bin/python",
+  "machine": "arm64",
+  "macos": "26.6.2",
+  "matplotlib": "3.11.2",
+  "mps_available": true,
+  "numpy": "2.5.3",
+  "pandas": "3.0.6",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "python_version": "3.12.13 (main, Jul 23 2026, 14:33:47) [Clang 22.1.3 ]",
+  "python_version_tuple": [
+    3,
+    12,
+    13
+  ],
+  "sahi": "0.11.15",
+  "scipy": "1.18.1",
+  "sklearn": "1.9.1",
+  "torch": "2.7.1",
+  "torch_num_interop_threads": 10,
+  "torch_num_threads": 4,
+  "torchvision": "0.22.1",
+  "ultralytics": "8.4.118"
+}

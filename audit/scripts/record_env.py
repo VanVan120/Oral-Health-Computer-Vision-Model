@@ -1,10 +1,16 @@
 """Record the exact evaluation environment (spec Phase 0.1).
 
-Run once per venv with that venv's python. Writes a JSON block to stdout; the
-caller tees it into audit/env/. Everything here is descriptive: nothing is
-imported that the evaluation itself does not already import.
+Run once per venv with that venv's python:
+
+    <venv>/bin/python record_env.py --out audit/env/env-<tag>.json
+
+The JSON is written to the file rather than to stdout, because importing
+ultralytics prints a settings warning to stdout the first time it runs in a
+fresh venv, which would corrupt a redirected stream.
 """
+import argparse
 import json
+import pathlib
 import platform
 import subprocess
 import sys
@@ -18,6 +24,10 @@ def _safe(fn, default="unavailable"):
 
 
 def main() -> None:
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--out", required=True, type=pathlib.Path)
+    args = ap.parse_args()
+
     info = {
         "python_version": sys.version,
         "python_version_tuple": list(sys.version_info[:3]),
@@ -52,7 +62,9 @@ def main() -> None:
         except Exception as exc:  # noqa: BLE001
             info[mod] = f"unavailable: {exc}"
 
-    print(json.dumps(info, indent=2, sort_keys=True))
+    args.out.parent.mkdir(parents=True, exist_ok=True)
+    args.out.write_text(json.dumps(info, indent=2, sort_keys=True) + "\n")
+    print(f"wrote {args.out}")
 
 
 if __name__ == "__main__":
