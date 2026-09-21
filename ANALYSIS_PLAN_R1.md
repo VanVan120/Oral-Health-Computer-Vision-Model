@@ -155,3 +155,61 @@ rejections, for the detector test split, the histopathology set and COCO128.
 
 This adds reporting detail to a pre-specified analysis; it does not change the
 estimand.
+
+**D4 — 2026-09-21. PIL draft mode disabled when regenerating the duplicate
+sets.**
+
+Section 1's duplicate rule is defined on 32x32 greyscale thumbnails. The obvious
+fast implementation asks PIL for a DCT-scaled decode (`Image.draft`), which
+decodes a JPEG directly at a reduced size and is several times quicker.
+
+Using it does not reproduce the published sets: the first regeneration returned
+**228** pairs instead of 259. The cause is that `draft()` scales by whole DCT
+blocks, and for a JPEG whose dimensions are not multiples of 8 the padding it
+leaves is **not symmetric**. A reflected copy of an image therefore lands on a
+slightly different pixel grid from the original, and the reflected matches — the
+majority of D, since hflip and vflip account for 159 of the 259 pairs — score
+far above threshold and are lost. One pair was traced end to end: RMS 6.9408
+with draft mode against **0.3903** without, the latter being exactly the
+published value for that pair.
+
+`audit/scripts/near_duplicates.py` therefore sets `USE_DRAFT = False` and
+decodes at full resolution before resizing. With that change D reproduces the
+published S2 exactly (259, symmetric difference 0) and the identity-only pass
+reproduces S1 exactly (124, symmetric difference 0).
+
+This is an implementation correction, not a change of estimand. It is recorded
+because the fast path is the natural thing to write and silently loses 12% of
+the duplicate set.
+
+**D5 — 2026-09-21. Stratum widening in the stratified randomization.**
+
+Section 2.4(b) pre-specifies that where ND has too few images in a stratum, the
+stratum is merged with the adjacent bin of the same dominant class and the merge
+reported. Two cases in the data are not covered by that wording, and both occur:
+
+1. **The adjacent bin can also be exhausted.** `caries | >=16 instances` needs 4
+   controls and ND contains **zero** such images.
+2. **Two strata can compete for the same donors.** A naive merge that moves a
+   neighbour's images into one stratum can empty a bin that a second stratum
+   still needs, and can hand the same image to two strata in one draw.
+
+The implementation therefore allocates each control set greedily, scarcest
+stratum first, against a **used-set**: a stratum draws from its own bin, then
+from the adjacent bins of the same dominant class in order of distance, then
+from ND at large, and every image drawn is removed from the pool for the rest of
+that draw. Each control set is asserted to contain exactly 259 distinct images.
+
+Both strata that required widening are reported rather than merged silently:
+
+| stratum | controls needed | ND images available | widened to |
+|---|---|---|---|
+| `caries \| >=16` | 4 | **0** | `caries \| 8-15` |
+| `caries \| 1` | 26 | 25 | `caries \| 2-3` |
+
+That ND contains no caries-dominant image with 16 or more instances while D
+contains four is itself a composition difference, and is reported as such: the
+duplicated images are not a random sample of the split.
+
+This is an implementation detail of a pre-specified analysis; the estimand, the
+p-value formula and the MDE definition are unchanged.

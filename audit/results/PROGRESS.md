@@ -138,3 +138,59 @@ cannot be confirmed or refuted. `S26_lineage.md`.
 
 Phase 1.2 gate, then caches (valid, train), then Phases 2.2-2.9, 3.3-3.5, 4.1
 via `audit/scripts/run_remaining.sh`.
+
+## Phase 1 — cached evaluator (DONE, PASS)
+
+Exactness gate **0.0 on all four sets** (full, ND, ctrl1, ctrl2), not merely
+below 1e-9. The first attempt gave 6.158e-08 on ctrl2; cause found and fixed —
+`rect=True` sorts the dataloader by aspect ratio (338 distinct image sizes) and
+float32 cumsum in `ap_per_class` is order-sensitive, so the replay must use the
+validator's own order, not filename order. Both numbers reported.
+Batch-16 reproduces the spec's expected P/R/mAP figures exactly at the quoted
+precision. The batch effect on mAP@0.5 is 0.00006 — about 44x too small to
+explain the August 0.0025 discrepancy. Caches built for test, valid and all
+7,000 training images (~11 min, so no sampling needed). `S24`, `S28`, `S41`.
+
+## Phase 2 — contamination (DONE)
+
+Removal effect **Δ mAP@0.5 = +0.000997 [-0.01249, +0.01418]**, Δ mAP@0.5:0.95 =
++0.001111 [-0.00738, +0.00957], 10,000 cluster bootstrap resamples over 1,445
+clusters. Randomization p = 0.39-0.75; **MDE ~0.011 mAP@0.5**. Removing these
+259 images is indistinguishable from removing any 259.
+
+The substantive finding is elsewhere: only **57 of 259 (22.0%)** duplicate pairs
+have identical label sets, and the same 224 photographs score mAP@0.5 0.882 with
+their training labels against 0.660 with their test labels. The contamination is
+an annotation-consistency problem, not a leaderboard-inflation problem.
+`S29`, `S30`, `S31`, `S32`, `S43`.
+
+Fixed en route: `plan_strata()` could emit a stratum with no donor pool
+(`KeyError: '1|8-15'`). Rewritten to allocate greedily against a used-set, so
+two strata can never draw the same image and a stratum is never emptied by an
+earlier one; the 2 strata that genuinely lack donors are widened and **reported**
+(`caries|>=16` needs 4, ND has 0; `caries|1` needs 26, ND has 25).
+
+## Phase 4.1 — Model A (DONE) — and an earlier conclusion CORRECTED
+
+`model_a.pth` reproduces the notebook's stored confusion matrix **exactly on
+both splits**. It does not reproduce the AUC (0.8310 vs 0.6476) or the MAE/R²,
+and the cause is the evaluation pipeline, not the weights: cell 6 builds the
+dataset with `train_transform` and never reassigns it, so the validation loader
+applies random flips, rotation and colour jitter at evaluation time
+(`val_transform` is defined and never used — the author's own comment says so).
+Five re-runs of the augmented path give AUC 0.6048-0.7881; the published 0.6476
+is one draw from that spread.
+
+**Correction.** The earlier note that the published metrics describe "a
+checkpoint that no longer exists" is wrong. Notebook execution counts are
+consecutive (cell 8 = 22 saves best, cell 9 = 23 loads best and evaluates,
+cell 10 = 24 saves `model.state_dict()` as `model_a.pth`), so `model_a.pth` is a
+re-serialisation of `model_a_best.pth`'s weights. The file is missing; the
+weights are not. The deployed model IS measurable, and is measured in `S42`.
+
+## Phase 6.3 — expert packet (DONE, prepared not sent)
+
+`r1-scratch/work/expert_packet/`: A = 100 test images stratified by class
+(seed 20260921), 715 box rows; B = all **18** TVNT negatives + 18 random
+positives, renamed and shuffled, with the unblinding key kept separate. The 18
+is an independent confirmation of the CSV's `Normal=18`. Never committed.

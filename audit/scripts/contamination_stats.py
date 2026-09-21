@@ -177,44 +177,68 @@ def build_strata(meta: dict[str, dict], images: Sequence[str]) -> dict[str, list
 def plan_strata(
     meta: dict[str, dict], d_images: Sequence[str], nd_images: Sequence[str]
 ) -> tuple[dict[str, int], dict[str, list[str]], list[str]]:
-    """Stratum counts to match, with merges where ND is too thin.
+    """Stratum counts to match, and the ND donor pool for each.
 
-    A stratum short of donors is merged with the adjacent instance-count bin of
-    the same dominant class, and every merge is reported rather than silently
-    applied.
+    Returns the raw need and pool. Widening is decided per draw inside
+    `draw_control`, against a used-set, so that two strata can never be handed
+    the same image and a stratum is never emptied by an earlier one.
     """
-    need = Counter(meta[im]["stratum"] for im in d_images)
+    need = dict(Counter(meta[im]["stratum"] for im in d_images))
     pool = build_strata(meta, nd_images)
-    merges: list[str] = []
+    shortfalls = [
+        f"{k}: needs {v}, ND has {len(pool.get(k, []))}"
+        for k, v in sorted(need.items()) if len(pool.get(k, [])) < v
+    ]
+    return need, pool, shortfalls
 
-    final_need: dict[str, int] = {}
-    final_pool: dict[str, list[str]] = {k: list(v) for k, v in pool.items()}
 
-    for stratum, k in sorted(need.items()):
-        dom, lab = stratum.split("|")
-        have = len(final_pool.get(stratum, []))
-        if have >= k:
-            final_need[stratum] = final_need.get(stratum, 0) + k
-            continue
-        # Merge outward through adjacent bins of the same dominant class.
-        order = BIN_LABELS.index(lab)
-        merged_key = stratum
-        for step in range(1, len(BIN_LABELS)):
-            for nb in (order - step, order + step):
-                if not (0 <= nb < len(BIN_LABELS)):
-                    continue
-                cand = f"{dom}|{BIN_LABELS[nb]}"
-                if cand in final_pool and final_pool[cand]:
-                    final_pool.setdefault(merged_key, [])
-                    final_pool[merged_key].extend(final_pool.pop(cand))
-                    merges.append(f"{cand} -> {merged_key}")
-                    if len(final_pool[merged_key]) >= k:
-                        break
-            if len(final_pool.get(merged_key, [])) >= k:
-                break
-        final_need[merged_key] = final_need.get(merged_key, 0) + k
+def _widen_order(stratum: str) -> list[str]:
+    """Donor strata to fall back on, nearest instance-count bin first."""
+    dom, lab = stratum.split("|")
+    if lab not in BIN_LABELS:
+        return []
+    i = BIN_LABELS.index(lab)
+    out = []
+    for step in range(1, len(BIN_LABELS)):
+        for nb in (i - step, i + step):
+            if 0 <= nb < len(BIN_LABELS):
+                out.append(f"{dom}|{BIN_LABELS[nb]}")
+    return out
 
-    return final_need, final_pool, merges
+
+def draw_control(
+    rng, need: dict[str, int], pool: dict[str, list[str]], nd_images: Sequence[str],
+    record: list[str] | None = None,
+) -> set[str]:
+    """One stratified control set of 259 images drawn from ND.
+
+    Strata are filled scarcest-first so the tight ones get their own donors
+    before a looser stratum can take them. A stratum short of donors widens to
+    the adjacent instance-count bins of the same dominant class, then to any bin
+    of that class, and only then to ND at large -- and every widening is
+    recorded rather than applied silently.
+    """
+    used: set[str] = set()
+    order = sorted(need, key=lambda k: (len(pool.get(k, [])) - need[k], k))
+    for stratum in order:
+        k = need[stratum]
+        donors = [im for im in pool.get(stratum, []) if im not in used]
+        if len(donors) < k:
+            for cand in _widen_order(stratum):
+                donors += [im for im in pool.get(cand, []) if im not in used and im not in donors]
+                if record is not None and pool.get(cand):
+                    record.append(f"{stratum} <- {cand}")
+                if len(donors) >= k:
+                    break
+        if len(donors) < k:
+            extra = [im for im in nd_images if im not in used and im not in donors]
+            if record is not None:
+                record.append(f"{stratum} <- GLOBAL ND ({k - len(donors)} short)")
+            donors += extra
+        idx = rng.choice(len(donors), k, replace=False)
+        picked = {donors[i] for i in idx}
+        used |= picked
+    return used
 
 
 def randomization(
@@ -232,22 +256,20 @@ def randomization(
     all_set = list(all_images)
     jobs = []
     removed_sets = []
-    for _ in range(n_resamples):
+    widenings: list[str] = []
+    for r in range(n_resamples):
         if need is None:
             idx = rng.choice(len(nd_images), 259, replace=False)
             ctrl = {nd_images[i] for i in idx}
         else:
-            ctrl = set()
-            for stratum, k in need.items():
-                donors = pool[stratum]
-                idx = rng.choice(len(donors), k, replace=False)
-                ctrl.update(donors[i] for i in idx)
+            ctrl = draw_control(rng, need, pool, nd_images, widenings if r == 0 else None)
+        assert len(ctrl) == 259, f"control set has {len(ctrl)} images, expected 259"
         removed_sets.append(ctrl)
         jobs.append([im for im in all_set if im not in ctrl])
 
     with mp.Pool(workers, initializer=_init_worker, initargs=(str(cache_path),)) as pool_:
         out = pool_.map(_eval_one, jobs, chunksize=16)
-    return {"draws": out, "removed": removed_sets}
+    return {"draws": out, "removed": removed_sets, "widenings": widenings}
 
 
 def summarise_controls(draws: list[tuple[float, float]], base: dict[str, float], delta: dict[str, float]) -> dict[str, Any]:
@@ -345,8 +367,8 @@ def main() -> None:
     boot_draws50, boot_draws5095 = boot.pop("_draws50"), boot.pop("_draws5095")
 
     # --- 2.4 randomization
-    need, pool, merges = plan_strata(meta, d_images, nd_images)
-    print(f"stratified randomization ({len(need)} strata, {len(merges)} merges) ...")
+    need, pool, shortfalls = plan_strata(meta, d_images, nd_images)
+    print(f"stratified randomization ({len(need)} strata, {len(shortfalls)} short of donors) ...")
     strat = randomization(args.cache, all_images, nd_images, need, pool, args.resamples, args.workers, 1)
     print("unstratified randomization ...")
     unstrat = randomization(args.cache, all_images, nd_images, None, None, args.resamples, args.workers, 2)
@@ -380,9 +402,12 @@ def main() -> None:
         "randomization_stratified": strat_sum,
         "randomization_unstratified": unstrat_sum,
         "strata": {
-            "n_strata_used": len(need),
-            "merges": merges,
-            "need": {k: int(v) for k, v in need.items()},
+            "n_strata": len(need),
+            "definition": "dominant class (ties to the lower index) x instance-count bin (1, 2-3, 4-7, 8-15, >=16)",
+            "need": {k: int(v) for k, v in sorted(need.items())},
+            "nd_donors_available": {k: len(pool.get(k, [])) for k in sorted(need)},
+            "strata_short_of_donors": shortfalls,
+            "widenings_applied_first_replicate": strat.get("widenings", []),
         },
         "balance": balance_table(meta, d_images, strat["removed"]),
     }

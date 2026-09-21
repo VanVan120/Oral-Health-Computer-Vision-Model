@@ -1,0 +1,595 @@
+{
+  "a_train_valid_test": {
+    "train": {
+      "n_images": 7000,
+      "n_instances": 44786,
+      "P": 0.872381186973787,
+      "R": 0.8862026414095988,
+      "mAP50": 0.9341557298351368,
+      "mAP50_95": 0.6131291422112911
+    },
+    "valid": {
+      "n_images": 1500,
+      "n_instances": 9396,
+      "P": 0.7317801974229647,
+      "R": 0.7312142823519522,
+      "mAP50": 0.7576857920549598,
+      "mAP50_95": 0.38737019126123257
+    },
+    "test": {
+      "n_images": 1500,
+      "n_instances": 9688,
+      "P": 0.745417452742701,
+      "R": 0.7312260347248408,
+      "mAP50": 0.7709449520439561,
+      "mAP50_95": 0.4009384630259208
+    }
+  },
+  "a_full": {
+    "train": {
+      "n_images": 7000,
+      "n_instances": 44786,
+      "P": 0.872381186973787,
+      "R": 0.8862026414095988,
+      "mAP50": 0.9341557298351368,
+      "mAP50_95": 0.6131291422112911,
+      "fitness": 0.6131291422112911,
+      "per_class": {
+        "calculus": {
+          "class_index": 0,
+          "instances": 6413,
+          "images": 1584,
+          "P": 0.835306737920482,
+          "R": 0.8074853621871806,
+          "AP50": 0.8924145513362118,
+          "AP50_95": 0.5407419246883158
+        },
+        "caries": {
+          "class_index": 1,
+          "instances": 8486,
+          "images": 2566,
+          "P": 0.8975437583069436,
+          "R": 0.928941786471836,
+          "AP50": 0.9641661974681525,
+          "AP50_95": 0.6518731501075019
+        },
+        "gingivitis": {
+          "class_index": 2,
+          "instances": 7200,
+          "images": 1389,
+          "P": 0.8001422399094912,
+          "R": 0.7128558433318535,
+          "AP50": 0.8244803233943294,
+          "AP50_95": 0.4762832380274619
+        },
+        "hypodontia": {
+          "class_index": 3,
+          "instances": 1655,
+          "images": 918,
+          "P": 0.8899001986296885,
+          "R": 0.9486404833836858,
+          "AP50": 0.9715141877048138,
+          "AP50_95": 0.6343003302945889
+        },
+        "tooth_discolation": {
+          "class_index": 4,
+          "instances": 18596,
+          "images": 2957,
+          "P": 0.8586239111224511,
+          "R": 0.9503869570821151,
+          "AP50": 0.9634110611223966,
+          "AP50_95": 0.7251414303980673
+        },
+        "ulcer": {
+          "class_index": 5,
+          "instances": 2436,
+          "images": 1278,
+          "P": 0.9527702759536655,
+          "R": 0.968905416000922,
+          "AP50": 0.9889480579849168,
+          "AP50_95": 0.650434779751812
+        }
+      }
+    },
+    "valid": {
+      "n_images": 1500,
+      "n_instances": 9396,
+      "P": 0.7317801974229647,
+      "R": 0.7312142823519522,
+      "mAP50": 0.7576857920549598,
+      "mAP50_95": 0.38737019126123257,
+      "fitness": 0.38737019126123257,
+      "per_class": {
+        "calculus": {
+          "class_index": 0,
+          "instances": 1294,
+          "images": 315,
+          "P": 0.6249817454019448,
+          "R": 0.598145285935085,
+          "AP50": 0.6148559656798862,
+          "AP50_95": 0.29280686392093547
+        },
+        "caries": {
+          "class_index": 1,
+          "instances": 1688,
+          "images": 541,
+          "P": 0.7881316054150623,
+          "R": 0.8045023696682464,
+          "AP50": 0.8393897729149439,
+          "AP50_95": 0.4449050174229878
+        },
+        "gingivitis": {
+          "class_index": 2,
+          "instances": 1510,
+          "images": 295,
+          "P": 0.594583157488561,
+          "R": 0.5357615894039736,
+          "AP50": 0.5435223837444356,
+          "AP50_95": 0.22955884023356282
+        },
+        "hypodontia": {
+          "class_index": 3,
+          "instances": 393,
+          "images": 199,
+          "P": 0.7444277918275398,
+          "R": 0.7888040712468194,
+          "AP50": 0.791865156691361,
+          "AP50_95": 0.3294220712106614
+        },
+        "tooth_discolation": {
+          "class_index": 4,
+          "instances": 3887,
+          "images": 615,
+          "P": 0.7586946801758424,
+          "R": 0.8331493009345127,
+          "AP50": 0.8663848516646748,
+          "AP50_95": 0.5605692344376438
+        },
+        "ulcer": {
+          "class_index": 5,
+          "instances": 624,
+          "images": 279,
+          "P": 0.8798622042288375,
+          "R": 0.8269230769230769,
+          "AP50": 0.8900966216344577,
+          "AP50_95": 0.46695912034160403
+        }
+      }
+    },
+    "test": {
+      "n_images": 1500,
+      "n_instances": 9688,
+      "P": 0.745417452742701,
+      "R": 0.7312260347248408,
+      "mAP50": 0.7709449520439561,
+      "mAP50_95": 0.4009384630259208,
+      "fitness": 0.4009384630259208,
+      "per_class": {
+        "calculus": {
+          "class_index": 0,
+          "instances": 1465,
+          "images": 342,
+          "P": 0.6675273455113439,
+          "R": 0.6006825938566553,
+          "AP50": 0.6402376271666306,
+          "AP50_95": 0.28108720131229314
+        },
+        "caries": {
+          "class_index": 1,
+          "instances": 1694,
+          "images": 536,
+          "P": 0.7740618412123662,
+          "R": 0.7922077922077922,
+          "AP50": 0.8282260871709528,
+          "AP50_95": 0.4361275865684376
+        },
+        "gingivitis": {
+          "class_index": 2,
+          "instances": 1544,
+          "images": 297,
+          "P": 0.6288139572233624,
+          "R": 0.5038860103626943,
+          "AP50": 0.553721300226553,
+          "AP50_95": 0.23807236176027632
+        },
+        "hypodontia": {
+          "class_index": 3,
+          "instances": 334,
+          "images": 184,
+          "P": 0.7067407621860003,
+          "R": 0.7485029940119761,
+          "AP50": 0.7683719844282701,
+          "AP50_95": 0.3506610928469906
+        },
+        "tooth_discolation": {
+          "class_index": 4,
+          "instances": 4153,
+          "images": 610,
+          "P": 0.774522715875762,
+          "R": 0.830430231564546,
+          "AP50": 0.8776310057715304,
+          "AP50_95": 0.5717515238054907
+        },
+        "ulcer": {
+          "class_index": 5,
+          "instances": 498,
+          "images": 274,
+          "P": 0.9208380944473707,
+          "R": 0.9116465863453815,
+          "AP50": 0.9574817074997997,
+          "AP50_95": 0.5279310118620361
+        }
+      }
+    }
+  },
+  "b_concordance": {
+    "n_pairs": 259,
+    "class_agnostic": {
+      "precision": 0.6856502242152467,
+      "recall": 0.6720879120879121,
+      "f1": 0.6788013318534961
+    },
+    "class_aware": {
+      "precision": 0.668609865470852,
+      "recall": 0.6553846153846153,
+      "f1": 0.6619311875693674
+    },
+    "n_boxes_test": 2275,
+    "n_boxes_twin": 2230,
+    "pairs_with_identical_label_sets": 57,
+    "proportion_identical_label_sets": 0.22007722007722008,
+    "per_class": {
+      "calculus": {
+        "test_boxes": 455,
+        "twin_boxes": 509,
+        "matched_same_class": 291
+      },
+      "caries": {
+        "test_boxes": 251,
+        "twin_boxes": 269,
+        "matched_same_class": 180
+      },
+      "gingivitis": {
+        "test_boxes": 597,
+        "twin_boxes": 551,
+        "matched_same_class": 367
+      },
+      "hypodontia": {
+        "test_boxes": 144,
+        "twin_boxes": 139,
+        "matched_same_class": 97
+      },
+      "tooth_discolation": {
+        "test_boxes": 825,
+        "twin_boxes": 762,
+        "matched_same_class": 556
+      },
+      "ulcer": {
+        "test_boxes": 3,
+        "twin_boxes": 0,
+        "matched_same_class": 0
+      }
+    },
+    "n_class_disagreements": 38,
+    "class_disagreements": [
+      {
+        "test_image": "calculus-101-_jpg.rf.feb0ba2b80bef770be404833be6bce83.jpg",
+        "train_image": "calculus-821-_jpg.rf.94c303faa41fda99e5266dada489e8ed.jpg",
+        "transform": "vflip",
+        "twin_class": "caries",
+        "test_class": "calculus"
+      },
+      {
+        "test_image": "calculus-106-_jpg.rf.642e519b7e7aff2de02f2ae9b6c9a165.jpg",
+        "train_image": "calculus-1214-_jpg.rf.0f86e03c59cf892792815ab573dfd845.jpg",
+        "transform": "identity",
+        "twin_class": "calculus",
+        "test_class": "tooth_discolation"
+      },
+      {
+        "test_image": "calculus-1160-_jpg.rf.e4bf320a31bb09ba6e1dac644f42ad40.jpg",
+        "train_image": "calculus-584-_jpg.rf.08d5d60cd1e0eed8d706f6b07a86e57c.jpg",
+        "transform": "hflip",
+        "twin_class": "tooth_discolation",
+        "test_class": "calculus"
+      },
+      {
+        "test_image": "calculus-1160-_jpg.rf.e4bf320a31bb09ba6e1dac644f42ad40.jpg",
+        "train_image": "calculus-584-_jpg.rf.08d5d60cd1e0eed8d706f6b07a86e57c.jpg",
+        "transform": "hflip",
+        "twin_class": "tooth_discolation",
+        "test_class": "calculus"
+      },
+      {
+        "test_image": "calculus-1160-_jpg.rf.e4bf320a31bb09ba6e1dac644f42ad40.jpg",
+        "train_image": "calculus-584-_jpg.rf.08d5d60cd1e0eed8d706f6b07a86e57c.jpg",
+        "transform": "hflip",
+        "twin_class": "tooth_discolation",
+        "test_class": "calculus"
+      },
+      {
+        "test_image": "calculus-1264-_jpg.rf.543cc4dc80aaf23c236321f993b00071.jpg",
+        "train_image": "calculus-688-_jpg.rf.d7bc17f7fcc4c7826d0bcde3190a1e88.jpg",
+        "transform": "hflip",
+        "twin_class": "caries",
+        "test_class": "calculus"
+      },
+      {
+        "test_image": "calculus-1264-_jpg.rf.543cc4dc80aaf23c236321f993b00071.jpg",
+        "train_image": "calculus-688-_jpg.rf.d7bc17f7fcc4c7826d0bcde3190a1e88.jpg",
+        "transform": "hflip",
+        "twin_class": "caries",
+        "test_class": "calculus"
+      },
+      {
+        "test_image": "calculus-36-_jpg.rf.b37f19215913f040aab538064df7de82.jpg",
+        "train_image": "calculus-612-_jpg.rf.e8ad4398e904eb75e632efc57bc4006c.jpg",
+        "transform": "hflip",
+        "twin_class": "tooth_discolation",
+        "test_class": "calculus"
+      },
+      {
+        "test_image": "calculus-579-_jpg.rf.e6c6311ec6a8a0cd230ef77f7dbc4847.jpg",
+        "train_image": "calculus-1214-_jpg.rf.0f86e03c59cf892792815ab573dfd845.jpg",
+        "transform": "hflip",
+        "twin_class": "calculus",
+        "test_class": "tooth_discolation"
+      },
+      {
+        "test_image": "calculus-600-_jpg.rf.52b9a3e08f453ae6fc920b282197c649.jpg",
+        "train_image": "gingivitis-1516-_jpg.rf.9ce65a634c115a1cc9b5208e6b83c4d8.jpg",
+        "transform": "rot180",
+        "twin_class": "calculus",
+        "test_class": "caries"
+      },
+      {
+        "test_image": "calculus-67-_jpg.rf.32b585f4a71e64286423fc5085177045.jpg",
+        "train_image": "calculus-787-_jpg.rf.b47b1627e2ac174ad6679b79c6c28c11.jpg",
+        "transform": "vflip",
+        "twin_class": "calculus",
+        "test_class": "caries"
+      },
+      {
+        "test_image": "calculus-67-_jpg.rf.32b585f4a71e64286423fc5085177045.jpg",
+        "train_image": "calculus-787-_jpg.rf.b47b1627e2ac174ad6679b79c6c28c11.jpg",
+        "transform": "vflip",
+        "twin_class": "calculus",
+        "test_class": "caries"
+      },
+      {
+        "test_image": "calculus-684-_jpg.rf.b0bc4192a28181f264b0606c7b4090c2.jpg",
+        "train_image": "calculus-732-_jpg.rf.3d53d11d4967c401640a6f4079738900.jpg",
+        "transform": "rot180",
+        "twin_class": "calculus",
+        "test_class": "tooth_discolation"
+      },
+      {
+        "test_image": "calculus-704-_jpg.rf.a7b1e7e9f8bdb1163613625f3db6ec95.jpg",
+        "train_image": "calculus-128-_jpg.rf.d47b9dfc29e5c399c4016022b7e6e9f6.jpg",
+        "transform": "hflip",
+        "twin_class": "calculus",
+        "test_class": "tooth_discolation"
+      },
+      {
+        "test_image": "calculus-773-_jpg.rf.23cfd780c5c507db14f13d9758432adb.jpg",
+        "train_image": "calculus-629-_jpg.rf.3d168fa6f411ae49c3372ec6c6df24ad.jpg",
+        "transform": "rot180",
+        "twin_class": "caries",
+        "test_class": "tooth_discolation"
+      },
+      {
+        "test_image": "calculus-793-_jpg.rf.e6877b99793a32e03741132f86d1790b.jpg",
+        "train_image": "calculus-649-_jpg.rf.53e66a84f3f5dd5b36bb138783da740b.jpg",
+        "transform": "rot180",
+        "twin_class": "calculus",
+        "test_class": "caries"
+      },
+      {
+        "test_image": "calculus-793-_jpg.rf.e6877b99793a32e03741132f86d1790b.jpg",
+        "train_image": "calculus-649-_jpg.rf.53e66a84f3f5dd5b36bb138783da740b.jpg",
+        "transform": "rot180",
+        "twin_class": "calculus",
+        "test_class": "caries"
+      },
+      {
+        "test_image": "gingilagi-166-_jpg.rf.72d25acd7a07548d065bdb4231ab0d21.jpg",
+        "train_image": "gingilagi-102-_jpg.rf.4ca57d247019d0ba47ac45a000ba266b.jpg",
+        "transform": "hflip",
+        "twin_class": "tooth_discolation",
+        "test_class": "calculus"
+      },
+      {
+        "test_image": "gingilagi-166-_jpg.rf.72d25acd7a07548d065bdb4231ab0d21.jpg",
+        "train_image": "gingilagi-102-_jpg.rf.4ca57d247019d0ba47ac45a000ba266b.jpg",
+        "transform": "hflip",
+        "twin_class": "tooth_discolation",
+        "test_class": "calculus"
+      },
+      {
+        "test_image": "gingilagi-166-_jpg.rf.72d25acd7a07548d065bdb4231ab0d21.jpg",
+        "train_image": "gingilagi-102-_jpg.rf.4ca57d247019d0ba47ac45a000ba266b.jpg",
+        "transform": "hflip",
+        "twin_class": "tooth_discolation",
+        "test_class": "calculus"
+      },
+      {
+        "test_image": "gingilagi-166-_jpg.rf.72d25acd7a07548d065bdb4231ab0d21.jpg",
+        "train_image": "gingilagi-102-_jpg.rf.4ca57d247019d0ba47ac45a000ba266b.jpg",
+        "transform": "hflip",
+        "twin_class": "tooth_discolation",
+        "test_class": "calculus"
+      },
+      {
+        "test_image": "gingilagi-166-_jpg.rf.72d25acd7a07548d065bdb4231ab0d21.jpg",
+        "train_image": "gingilagi-102-_jpg.rf.4ca57d247019d0ba47ac45a000ba266b.jpg",
+        "transform": "hflip",
+        "twin_class": "tooth_discolation",
+        "test_class": "calculus"
+      },
+      {
+        "test_image": "gingilagi-84-_jpg.rf.4f8a40780e7f4b62909630d73b08edf6.jpg",
+        "train_image": "gingilagi-52-_jpg.rf.ddd5e0383a878ee2bdff5b9fd6fd5a98.jpg",
+        "transform": "identity",
+        "twin_class": "caries",
+        "test_class": "gingivitis"
+      },
+      {
+        "test_image": "gingivitis-1231-_jpg.rf.d27163bed968cca2265d9051028b4163.jpg",
+        "train_image": "gingivitis-178-_jpg.rf.aedf9f68b948cbc14df9b2e4caf6817a.jpg",
+        "transform": "hflip",
+        "twin_class": "calculus",
+        "test_class": "caries"
+      },
+      {
+        "test_image": "gingivitis-1519-_jpg.rf.d0c3f24585459eeee6eca34d62ef30b7.jpg",
+        "train_image": "gingivitis-1259-_jpg.rf.fba4c9fe80b2c526b8b690f431c1a7b7.jpg",
+        "transform": "rot180",
+        "twin_class": "calculus",
+        "test_class": "tooth_discolation"
+      },
+      {
+        "test_image": "gingivitis-194-_jpg.rf.b70a2d53df24096479b369428a1927c4.jpg",
+        "train_image": "gingivitis-1081-_jpg.rf.2d033d22e35c288b7970cb387802f410.jpg",
+        "transform": "hflip",
+        "twin_class": "caries",
+        "test_class": "calculus"
+      },
+      {
+        "test_image": "gingivitis-194-_jpg.rf.b70a2d53df24096479b369428a1927c4.jpg",
+        "train_image": "gingivitis-1081-_jpg.rf.2d033d22e35c288b7970cb387802f410.jpg",
+        "transform": "hflip",
+        "twin_class": "caries",
+        "test_class": "calculus"
+      },
+      {
+        "test_image": "gingivitis-194-_jpg.rf.b70a2d53df24096479b369428a1927c4.jpg",
+        "train_image": "gingivitis-1081-_jpg.rf.2d033d22e35c288b7970cb387802f410.jpg",
+        "transform": "hflip",
+        "twin_class": "caries",
+        "test_class": "calculus"
+      },
+      {
+        "test_image": "gingivitis-210-_jpg.rf.62308790ba09ae512f5d13afede9a53d.jpg",
+        "train_image": "gingivitis-1263-_jpg.rf.1e2a35846e593d4694f43dd8514dfef3.jpg",
+        "transform": "hflip",
+        "twin_class": "caries",
+        "test_class": "calculus"
+      },
+      {
+        "test_image": "gingivitis-210-_jpg.rf.62308790ba09ae512f5d13afede9a53d.jpg",
+        "train_image": "gingivitis-1263-_jpg.rf.1e2a35846e593d4694f43dd8514dfef3.jpg",
+        "transform": "hflip",
+        "twin_class": "caries",
+        "test_class": "calculus"
+      },
+      {
+        "test_image": "gingivitis-210-_jpg.rf.62308790ba09ae512f5d13afede9a53d.jpg",
+        "train_image": "gingivitis-1263-_jpg.rf.1e2a35846e593d4694f43dd8514dfef3.jpg",
+        "transform": "hflip",
+        "twin_class": "caries",
+        "test_class": "calculus"
+      },
+      {
+        "test_image": "gingivitis-2106-_jpg.rf.021b8e23bd98ed1d4f7bcf04091f8ae5.jpg",
+        "train_image": "gingivitis-1328-_jpg.rf.f7a45cd90ab42d7bfd3012a295f72d8b.jpg",
+        "transform": "vflip",
+        "twin_class": "tooth_discolation",
+        "test_class": "calculus"
+      },
+      {
+        "test_image": "gingivitis-2134-_jpg.rf.c751e39ee306a0b626537f6636f46798.jpg",
+        "train_image": "gingivitis-1356-_jpg.rf.f1813d1d7a0a1d1090b1e77e8bd7ade0.jpg",
+        "transform": "vflip",
+        "twin_class": "calculus",
+        "test_class": "caries"
+      },
+      {
+        "test_image": "gingivitis-2216-_jpg.rf.d8bf0f8cb910da0231ef62e149c7823a.jpg",
+        "train_image": "gingivitis-1181-_jpg.rf.a23734a97e25db4eb8a875deba121782.jpg",
+        "transform": "hflip",
+        "twin_class": "calculus",
+        "test_class": "caries"
+      },
+      {
+        "test_image": "gingivitis-2348-_jpg.rf.0f068a7a1707bb61b48e26009af0bdbf.jpg",
+        "train_image": "gingivitis-1573-_jpg.rf.cf007e22155de57a2393cf54c1de0a0e.jpg",
+        "transform": "vflip",
+        "twin_class": "calculus",
+        "test_class": "tooth_discolation"
+      },
+      {
+        "test_image": "gingivitis-2348-_jpg.rf.0f068a7a1707bb61b48e26009af0bdbf.jpg",
+        "train_image": "gingivitis-1573-_jpg.rf.cf007e22155de57a2393cf54c1de0a0e.jpg",
+        "transform": "vflip",
+        "twin_class": "calculus",
+        "test_class": "tooth_discolation"
+      },
+      {
+        "test_image": "gingivitis-2348-_jpg.rf.0f068a7a1707bb61b48e26009af0bdbf.jpg",
+        "train_image": "gingivitis-1573-_jpg.rf.cf007e22155de57a2393cf54c1de0a0e.jpg",
+        "transform": "vflip",
+        "twin_class": "calculus",
+        "test_class": "tooth_discolation"
+      },
+      {
+        "test_image": "hypodontia-626-_jpg.rf.0bea86ac56238e6f655689328cd743ff.jpg",
+        "train_image": "hypodontia-765-_jpg.rf.6c4d2ca9faac74cc7483fd42a6786904.jpg",
+        "transform": "rot180",
+        "twin_class": "caries",
+        "test_class": "gingivitis"
+      }
+    ]
+  },
+  "c_recall_own_vs_twin": {
+    "t_global": 0.2822822822822823,
+    "all_D": {
+      "recall_vs_own_labels": 0.6843956043956044,
+      "recall_vs_twin_labels": 0.6955156950672646,
+      "n_own": 2275,
+      "n_twin": 2230
+    },
+    "differing_label_subset": {
+      "n_pairs": 202,
+      "recall_vs_own_labels": 0.6717411988582302,
+      "recall_vs_twin_labels": 0.6835196888672824,
+      "n_own": 2102,
+      "n_twin": 2057
+    }
+  },
+  "d_twins_vs_D": {
+    "twins_own_labels": {
+      "n_images": 224,
+      "n_instances": 1974,
+      "P": 0.7892103988982047,
+      "R": 0.8358536998711467,
+      "mAP50": 0.8820208752675764,
+      "mAP50_95": 0.5496797163314228,
+      "fitness": 0.5496797163314228
+    },
+    "D": {
+      "n_images": 259,
+      "n_instances": 2275,
+      "P": 0.56268073430001,
+      "R": 0.7533758072315041,
+      "mAP50": 0.660227289818202,
+      "mAP50_95": 0.31508087005643465,
+      "fitness": 0.31508087005643465
+    },
+    "n_unique_twins": 224
+  },
+  "drawn_pairs": [
+    "/Users/dev1/Desktop/Oral/r1-scratch/work/concordance_pairs/vflip__gingivitis-1390-_jpg.rf.994791a31298890961becda9bfe4d14b.jpg",
+    "/Users/dev1/Desktop/Oral/r1-scratch/work/concordance_pairs/hflip__calculus-30-_jpg.rf.cc66d1cd34e1b5e8b423937cafd7327c.jpg",
+    "/Users/dev1/Desktop/Oral/r1-scratch/work/concordance_pairs/identity__gingilagi-84-_jpg.rf.4f8a40780e7f4b62909630d73b08edf6.jpg",
+    "/Users/dev1/Desktop/Oral/r1-scratch/work/concordance_pairs/vflip__calculus-743-_jpg.rf.44c73e112e130a3cb5b090c79f5d759b.jpg",
+    "/Users/dev1/Desktop/Oral/r1-scratch/work/concordance_pairs/rot180__calculus-592-_jpg.rf.e1421f2becca84d60c3301a4d883d330.jpg",
+    "/Users/dev1/Desktop/Oral/r1-scratch/work/concordance_pairs/identity__gingilagi-234-_jpg.rf.6cbc6e8d6fc668ad41dcbf68116a659c.jpg",
+    "/Users/dev1/Desktop/Oral/r1-scratch/work/concordance_pairs/vflip__hypodontia-119-_jpg.rf.7d1750cd201de86de6e6ece121db24bc.jpg",
+    "/Users/dev1/Desktop/Oral/r1-scratch/work/concordance_pairs/vflip__gingivitis-31-_jpg.rf.865f542266a21b73e7036ab4fca2d2f9.jpg",
+    "/Users/dev1/Desktop/Oral/r1-scratch/work/concordance_pairs/identity__gingilagi-64-_jpg.rf.0c1d3c97e7990cf462ec96c510e8f6b4.jpg",
+    "/Users/dev1/Desktop/Oral/r1-scratch/work/concordance_pairs/hflip__gingivitis-2298-_jpg.rf.de675d5f1bbf5a4a0eac8b1ebd5b77d8.jpg",
+    "/Users/dev1/Desktop/Oral/r1-scratch/work/concordance_pairs/vflip__gingivitis-2295-_jpg.rf.8d6d0d04e02696811d1249f694779b4c.jpg",
+    "/Users/dev1/Desktop/Oral/r1-scratch/work/concordance_pairs/rot180__calculus-728-_jpg.rf.2ad04dd63bf8a90b65f35c9be931cc58.jpg"
+  ],
+  "t_global": 0.2822822822822823
+}
