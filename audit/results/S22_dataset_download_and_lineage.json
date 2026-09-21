@@ -1,0 +1,210 @@
+{
+  "datasets": {
+    "model_a": {
+      "counts": {
+        "test": 26,
+        "train": 474,
+        "valid": 44
+      },
+      "path": "/Users/dev1/Desktop/Oral/r1-scratch/datasets/model_a",
+      "project": "oral-cancer-1mnve-n5yij",
+      "total": 544,
+      "version": 2
+    },
+    "model_b": {
+      "counts": {
+        "test": 1500,
+        "train": 7000,
+        "valid": 1500
+      },
+      "path": "/Users/dev1/Desktop/Oral/r1-scratch/datasets/model_b",
+      "project": "oral-diseases-5ctay-h9oye",
+      "total": 10000,
+      "version": 1
+    }
+  },
+  "lineage": {
+    "model_a": {
+      "all_project_keys": [
+        "annotation",
+        "augmentation",
+        "classes",
+        "colors",
+        "created",
+        "icon",
+        "id",
+        "images",
+        "license",
+        "multilabel",
+        "name",
+        "preprocessing",
+        "public",
+        "splits",
+        "type",
+        "unannotated",
+        "updated",
+        "versions"
+      ],
+      "classes": {
+        "Mitotic Figures": 26,
+        "Multiple Nucleol": 1091,
+        "Nuclear Hyperchromatism": 831
+      },
+      "created": 1679071576.721,
+      "forkedFrom": null,
+      "id": "segp-fcn6m/oral-cancer-1mnve-n5yij",
+      "images": 228,
+      "license": "CC BY 4.0",
+      "name": "Oral Cancer",
+      "parent": null,
+      "public": true,
+      "source": null,
+      "type": "object-detection",
+      "unannotated": 0,
+      "universe": null,
+      "updated": 1770125702.578,
+      "versions": [
+        {
+          "augmentation": {
+            "crop": {
+              "min": 0,
+              "percent": 20
+            },
+            "flip": {
+              "horizontal": true,
+              "vertical": true
+            },
+            "image": {
+              "versions": 3
+            },
+            "ninety": {
+              "clockwise": true,
+              "counter-clockwise": true,
+              "upside-down": true
+            }
+          },
+          "created": 1770125702.577,
+          "id": "segp-fcn6m/oral-cancer-1mnve-n5yij/2",
+          "images": 544,
+          "name": "2026-02-03 9:34pm",
+          "preprocessing": {
+            "auto-orient": true,
+            "contrast": {
+              "type": "Adaptive Equalization"
+            },
+            "resize": {
+              "format": "Stretch to",
+              "height": "512",
+              "width": "512"
+            }
+          },
+          "splits": {
+            "test": 26,
+            "train": 474,
+            "valid": 44
+          }
+        },
+        {
+          "augmentation": {
+            "crop": {
+              "min": 0,
+              "percent": 20
+            },
+            "flip": {
+              "horizontal": true,
+              "vertical": true
+            },
+            "image": {
+              "versions": 3
+            },
+            "ninety": {
+              "clockwise": true,
+              "counter-clockwise": true,
+              "upside-down": true
+            }
+          },
+          "created": 1770124604.656,
+          "id": "segp-fcn6m/oral-cancer-1mnve-n5yij/1",
+          "images": 544,
+          "name": "2026-02-03 9:16pm",
+          "preprocessing": {
+            "auto-orient": true,
+            "contrast": {
+              "type": "Adaptive Equalization"
+            },
+            "resize": {
+              "format": "Stretch to",
+              "height": "512",
+              "width": "512"
+            }
+          },
+          "splits": {
+            "test": 26,
+            "train": 474,
+            "valid": 44
+          }
+        }
+      ]
+    },
+    "model_b": {
+      "all_project_keys": [
+        "annotation",
+        "augmentation",
+        "classes",
+        "colors",
+        "created",
+        "icon",
+        "id",
+        "images",
+        "license",
+        "multilabel",
+        "name",
+        "preprocessing",
+        "public",
+        "splits",
+        "type",
+        "unannotated",
+        "updated",
+        "versions"
+      ],
+      "classes": {
+        "calculus": 9172,
+        "caries": 11868,
+        "gingivitis": 10254,
+        "hypodontia": 2382,
+        "tooth_discolation": 26636,
+        "ulcer": 3558
+      },
+      "created": 1722707388.66,
+      "forkedFrom": null,
+      "id": "segp-fcn6m/oral-diseases-5ctay-h9oye",
+      "images": 10000,
+      "license": "CC BY 4.0",
+      "name": "oral-diseases",
+      "parent": null,
+      "public": true,
+      "source": null,
+      "type": "object-detection",
+      "unannotated": 0,
+      "universe": null,
+      "updated": 1765005486.752,
+      "versions": [
+        {
+          "augmentation": {},
+          "created": 1765000618.971,
+          "id": "segp-fcn6m/oral-diseases-5ctay-h9oye/1",
+          "images": 10000,
+          "name": "2025-12-06 1:56pm",
+          "preprocessing": {
+            "auto-orient": true
+          },
+          "splits": {
+            "test": 1500,
+            "train": 7000,
+            "valid": 1500
+          }
+        }
+      ]
+    }
+  }
+}

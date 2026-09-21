@@ -1,0 +1,707 @@
+{
+  "tolerance": 1e-09,
+  "seed": 20260921,
+  "all_pass": false,
+  "sets": {
+    "full": {
+      "n_images": 1500,
+      "max_abs_diff": 0.0,
+      "worst_key": "",
+      "pass": true,
+      "cached": {
+        "n_images": 1500,
+        "n_instances": 9688,
+        "P": 0.745417452742701,
+        "R": 0.7312260347248408,
+        "mAP50": 0.7709449520439561,
+        "mAP50_95": 0.4009384630259208,
+        "fitness": 0.4009384630259208,
+        "per_class": {
+          "calculus": {
+            "class_index": 0,
+            "instances": 1465,
+            "images": 342,
+            "P": 0.6675273455113439,
+            "R": 0.6006825938566553,
+            "AP50": 0.6402376271666306,
+            "AP50_95": 0.28108720131229314
+          },
+          "caries": {
+            "class_index": 1,
+            "instances": 1694,
+            "images": 536,
+            "P": 0.7740618412123662,
+            "R": 0.7922077922077922,
+            "AP50": 0.8282260871709528,
+            "AP50_95": 0.4361275865684376
+          },
+          "gingivitis": {
+            "class_index": 2,
+            "instances": 1544,
+            "images": 297,
+            "P": 0.6288139572233624,
+            "R": 0.5038860103626943,
+            "AP50": 0.553721300226553,
+            "AP50_95": 0.23807236176027632
+          },
+          "hypodontia": {
+            "class_index": 3,
+            "instances": 334,
+            "images": 184,
+            "P": 0.7067407621860003,
+            "R": 0.7485029940119761,
+            "AP50": 0.7683719844282701,
+            "AP50_95": 0.3506610928469906
+          },
+          "tooth_discolation": {
+            "class_index": 4,
+            "instances": 4153,
+            "images": 610,
+            "P": 0.774522715875762,
+            "R": 0.830430231564546,
+            "AP50": 0.8776310057715304,
+            "AP50_95": 0.5717515238054907
+          },
+          "ulcer": {
+            "class_index": 5,
+            "instances": 498,
+            "images": 274,
+            "P": 0.9208380944473707,
+            "R": 0.9116465863453815,
+            "AP50": 0.9574817074997997,
+            "AP50_95": 0.5279310118620361
+          }
+        }
+      },
+      "val": {
+        "n_images": 1500,
+        "n_instances": 9688,
+        "P": 0.745417452742701,
+        "R": 0.7312260347248408,
+        "mAP50": 0.7709449520439561,
+        "mAP50_95": 0.4009384630259208,
+        "fitness": 0.4009384630259208,
+        "per_class": {
+          "calculus": {
+            "class_index": 0,
+            "instances": 1465,
+            "images": 342,
+            "P": 0.6675273455113439,
+            "R": 0.6006825938566553,
+            "AP50": 0.6402376271666306,
+            "AP50_95": 0.28108720131229314
+          },
+          "caries": {
+            "class_index": 1,
+            "instances": 1694,
+            "images": 536,
+            "P": 0.7740618412123662,
+            "R": 0.7922077922077922,
+            "AP50": 0.8282260871709528,
+            "AP50_95": 0.4361275865684376
+          },
+          "gingivitis": {
+            "class_index": 2,
+            "instances": 1544,
+            "images": 297,
+            "P": 0.6288139572233624,
+            "R": 0.5038860103626943,
+            "AP50": 0.553721300226553,
+            "AP50_95": 0.23807236176027632
+          },
+          "hypodontia": {
+            "class_index": 3,
+            "instances": 334,
+            "images": 184,
+            "P": 0.7067407621860003,
+            "R": 0.7485029940119761,
+            "AP50": 0.7683719844282701,
+            "AP50_95": 0.3506610928469906
+          },
+          "tooth_discolation": {
+            "class_index": 4,
+            "instances": 4153,
+            "images": 610,
+            "P": 0.774522715875762,
+            "R": 0.830430231564546,
+            "AP50": 0.8776310057715304,
+            "AP50_95": 0.5717515238054907
+          },
+          "ulcer": {
+            "class_index": 5,
+            "instances": 498,
+            "images": 274,
+            "P": 0.9208380944473707,
+            "R": 0.9116465863453815,
+            "AP50": 0.9574817074997997,
+            "AP50_95": 0.5279310118620361
+          }
+        }
+      },
+      "per_key_diffs": {
+        "P": 0.0,
+        "R": 0.0,
+        "calculus/AP50": 0.0,
+        "calculus/AP50_95": 0.0,
+        "calculus/P": 0.0,
+        "calculus/R": 0.0,
+        "calculus/instances": 0.0,
+        "caries/AP50": 0.0,
+        "caries/AP50_95": 0.0,
+        "caries/P": 0.0,
+        "caries/R": 0.0,
+        "caries/instances": 0.0,
+        "fitness": 0.0,
+        "gingivitis/AP50": 0.0,
+        "gingivitis/AP50_95": 0.0,
+        "gingivitis/P": 0.0,
+        "gingivitis/R": 0.0,
+        "gingivitis/instances": 0.0,
+        "hypodontia/AP50": 0.0,
+        "hypodontia/AP50_95": 0.0,
+        "hypodontia/P": 0.0,
+        "hypodontia/R": 0.0,
+        "hypodontia/instances": 0.0,
+        "mAP50": 0.0,
+        "mAP50_95": 0.0,
+        "n_images": 0.0,
+        "n_instances": 0.0,
+        "tooth_discolation/AP50": 0.0,
+        "tooth_discolation/AP50_95": 0.0,
+        "tooth_discolation/P": 0.0,
+        "tooth_discolation/R": 0.0,
+        "tooth_discolation/instances": 0.0,
+        "ulcer/AP50": 0.0,
+        "ulcer/AP50_95": 0.0,
+        "ulcer/P": 0.0,
+        "ulcer/R": 0.0,
+        "ulcer/instances": 0.0
+      }
+    },
+    "ND": {
+      "n_images": 1241,
+      "max_abs_diff": 0.0,
+      "worst_key": "",
+      "pass": true,
+      "cached": {
+        "n_images": 1241,
+        "n_instances": 7413,
+        "P": 0.7539653978273296,
+        "R": 0.726751826089301,
+        "mAP50": 0.7719422148126003,
+        "mAP50_95": 0.4020498009450574,
+        "fitness": 0.4020498009450574,
+        "per_class": {
+          "calculus": {
+            "class_index": 0,
+            "instances": 1010,
+            "images": 249,
+            "P": 0.6867391005103142,
+            "R": 0.593069306930693,
+            "AP50": 0.6481113366066712,
+            "AP50_95": 0.2834760349100064
+          },
+          "caries": {
+            "class_index": 1,
+            "instances": 1443,
+            "images": 455,
+            "P": 0.7827456540052508,
+            "R": 0.7976437976437977,
+            "AP50": 0.8384891136531897,
+            "AP50_95": 0.443927395246266
+          },
+          "gingivitis": {
+            "class_index": 2,
+            "instances": 947,
+            "images": 191,
+            "P": 0.6439877490750081,
+            "R": 0.47624076029567053,
+            "AP50": 0.5494894030573207,
+            "AP50_95": 0.23494931307896544
+          },
+          "hypodontia": {
+            "class_index": 3,
+            "instances": 190,
+            "images": 106,
+            "P": 0.7005428793465128,
+            "R": 0.7368421052631579,
+            "AP50": 0.7462067500751767,
+            "AP50_95": 0.3320864565717069
+          },
+          "tooth_discolation": {
+            "class_index": 4,
+            "instances": 3328,
+            "images": 504,
+            "P": 0.7887872216190267,
+            "R": 0.8395432692307693,
+            "AP50": 0.8908987720215502,
+            "AP50_95": 0.5878982432842204
+          },
+          "ulcer": {
+            "class_index": 5,
+            "instances": 495,
+            "images": 272,
+            "P": 0.9209897824078648,
+            "R": 0.9171717171717172,
+            "AP50": 0.958457913461693,
+            "AP50_95": 0.5299613625791793
+          }
+        }
+      },
+      "val": {
+        "n_images": 1241,
+        "n_instances": 7413,
+        "P": 0.7539653978273296,
+        "R": 0.726751826089301,
+        "mAP50": 0.7719422148126003,
+        "mAP50_95": 0.4020498009450574,
+        "fitness": 0.4020498009450574,
+        "per_class": {
+          "calculus": {
+            "class_index": 0,
+            "instances": 1010,
+            "images": 249,
+            "P": 0.6867391005103142,
+            "R": 0.593069306930693,
+            "AP50": 0.6481113366066712,
+            "AP50_95": 0.2834760349100064
+          },
+          "caries": {
+            "class_index": 1,
+            "instances": 1443,
+            "images": 455,
+            "P": 0.7827456540052508,
+            "R": 0.7976437976437977,
+            "AP50": 0.8384891136531897,
+            "AP50_95": 0.443927395246266
+          },
+          "gingivitis": {
+            "class_index": 2,
+            "instances": 947,
+            "images": 191,
+            "P": 0.6439877490750081,
+            "R": 0.47624076029567053,
+            "AP50": 0.5494894030573207,
+            "AP50_95": 0.23494931307896544
+          },
+          "hypodontia": {
+            "class_index": 3,
+            "instances": 190,
+            "images": 106,
+            "P": 0.7005428793465128,
+            "R": 0.7368421052631579,
+            "AP50": 0.7462067500751767,
+            "AP50_95": 0.3320864565717069
+          },
+          "tooth_discolation": {
+            "class_index": 4,
+            "instances": 3328,
+            "images": 504,
+            "P": 0.7887872216190267,
+            "R": 0.8395432692307693,
+            "AP50": 0.8908987720215502,
+            "AP50_95": 0.5878982432842204
+          },
+          "ulcer": {
+            "class_index": 5,
+            "instances": 495,
+            "images": 272,
+            "P": 0.9209897824078648,
+            "R": 0.9171717171717172,
+            "AP50": 0.958457913461693,
+            "AP50_95": 0.5299613625791793
+          }
+        }
+      },
+      "per_key_diffs": {
+        "P": 0.0,
+        "R": 0.0,
+        "calculus/AP50": 0.0,
+        "calculus/AP50_95": 0.0,
+        "calculus/P": 0.0,
+        "calculus/R": 0.0,
+        "calculus/instances": 0.0,
+        "caries/AP50": 0.0,
+        "caries/AP50_95": 0.0,
+        "caries/P": 0.0,
+        "caries/R": 0.0,
+        "caries/instances": 0.0,
+        "fitness": 0.0,
+        "gingivitis/AP50": 0.0,
+        "gingivitis/AP50_95": 0.0,
+        "gingivitis/P": 0.0,
+        "gingivitis/R": 0.0,
+        "gingivitis/instances": 0.0,
+        "hypodontia/AP50": 0.0,
+        "hypodontia/AP50_95": 0.0,
+        "hypodontia/P": 0.0,
+        "hypodontia/R": 0.0,
+        "hypodontia/instances": 0.0,
+        "mAP50": 0.0,
+        "mAP50_95": 0.0,
+        "n_images": 0.0,
+        "n_instances": 0.0,
+        "tooth_discolation/AP50": 0.0,
+        "tooth_discolation/AP50_95": 0.0,
+        "tooth_discolation/P": 0.0,
+        "tooth_discolation/R": 0.0,
+        "tooth_discolation/instances": 0.0,
+        "ulcer/AP50": 0.0,
+        "ulcer/AP50_95": 0.0,
+        "ulcer/P": 0.0,
+        "ulcer/R": 0.0,
+        "ulcer/instances": 0.0
+      }
+    },
+    "ctrl1": {
+      "n_images": 1241,
+      "max_abs_diff": 0.0,
+      "worst_key": "",
+      "pass": true,
+      "cached": {
+        "n_images": 1241,
+        "n_instances": 7887,
+        "P": 0.7483677655798981,
+        "R": 0.7311706360192322,
+        "mAP50": 0.772538690936501,
+        "mAP50_95": 0.40313448619811343,
+        "fitness": 0.40313448619811343,
+        "per_class": {
+          "calculus": {
+            "class_index": 0,
+            "instances": 1165,
+            "images": 279,
+            "P": 0.6695696311657651,
+            "R": 0.5991416309012876,
+            "AP50": 0.6429786018655608,
+            "AP50_95": 0.2873225166993399
+          },
+          "caries": {
+            "class_index": 1,
+            "instances": 1402,
+            "images": 445,
+            "P": 0.7829611662186141,
+            "R": 0.796718972895863,
+            "AP50": 0.8364170244833053,
+            "AP50_95": 0.4396156067664262
+          },
+          "gingivitis": {
+            "class_index": 2,
+            "instances": 1221,
+            "images": 242,
+            "P": 0.6406908216878072,
+            "R": 0.511131481960515,
+            "AP50": 0.5599627763131347,
+            "AP50_95": 0.24268747277666375
+          },
+          "hypodontia": {
+            "class_index": 3,
+            "instances": 261,
+            "images": 149,
+            "P": 0.7075713456024766,
+            "R": 0.7394636015325671,
+            "AP50": 0.7614050407045452,
+            "AP50_95": 0.3500152099170136
+          },
+          "tooth_discolation": {
+            "class_index": 4,
+            "instances": 3411,
+            "images": 507,
+            "P": 0.77390628418806,
+            "R": 0.8319030234387434,
+            "AP50": 0.8801832191142843,
+            "AP50_95": 0.5728262264872894
+          },
+          "ulcer": {
+            "class_index": 5,
+            "instances": 427,
+            "images": 233,
+            "P": 0.9155073446166659,
+            "R": 0.9086651053864169,
+            "AP50": 0.9542854831381761,
+            "AP50_95": 0.5263398845419478
+          }
+        }
+      },
+      "val": {
+        "n_images": 1241,
+        "n_instances": 7887,
+        "P": 0.7483677655798981,
+        "R": 0.7311706360192322,
+        "mAP50": 0.772538690936501,
+        "mAP50_95": 0.40313448619811343,
+        "fitness": 0.40313448619811343,
+        "per_class": {
+          "calculus": {
+            "class_index": 0,
+            "instances": 1165,
+            "images": 279,
+            "P": 0.6695696311657651,
+            "R": 0.5991416309012876,
+            "AP50": 0.6429786018655608,
+            "AP50_95": 0.2873225166993399
+          },
+          "caries": {
+            "class_index": 1,
+            "instances": 1402,
+            "images": 445,
+            "P": 0.7829611662186141,
+            "R": 0.796718972895863,
+            "AP50": 0.8364170244833053,
+            "AP50_95": 0.4396156067664262
+          },
+          "gingivitis": {
+            "class_index": 2,
+            "instances": 1221,
+            "images": 242,
+            "P": 0.6406908216878072,
+            "R": 0.511131481960515,
+            "AP50": 0.5599627763131347,
+            "AP50_95": 0.24268747277666375
+          },
+          "hypodontia": {
+            "class_index": 3,
+            "instances": 261,
+            "images": 149,
+            "P": 0.7075713456024766,
+            "R": 0.7394636015325671,
+            "AP50": 0.7614050407045452,
+            "AP50_95": 0.3500152099170136
+          },
+          "tooth_discolation": {
+            "class_index": 4,
+            "instances": 3411,
+            "images": 507,
+            "P": 0.77390628418806,
+            "R": 0.8319030234387434,
+            "AP50": 0.8801832191142843,
+            "AP50_95": 0.5728262264872894
+          },
+          "ulcer": {
+            "class_index": 5,
+            "instances": 427,
+            "images": 233,
+            "P": 0.9155073446166659,
+            "R": 0.9086651053864169,
+            "AP50": 0.9542854831381761,
+            "AP50_95": 0.5263398845419478
+          }
+        }
+      },
+      "per_key_diffs": {
+        "P": 0.0,
+        "R": 0.0,
+        "calculus/AP50": 0.0,
+        "calculus/AP50_95": 0.0,
+        "calculus/P": 0.0,
+        "calculus/R": 0.0,
+        "calculus/instances": 0.0,
+        "caries/AP50": 0.0,
+        "caries/AP50_95": 0.0,
+        "caries/P": 0.0,
+        "caries/R": 0.0,
+        "caries/instances": 0.0,
+        "fitness": 0.0,
+        "gingivitis/AP50": 0.0,
+        "gingivitis/AP50_95": 0.0,
+        "gingivitis/P": 0.0,
+        "gingivitis/R": 0.0,
+        "gingivitis/instances": 0.0,
+        "hypodontia/AP50": 0.0,
+        "hypodontia/AP50_95": 0.0,
+        "hypodontia/P": 0.0,
+        "hypodontia/R": 0.0,
+        "hypodontia/instances": 0.0,
+        "mAP50": 0.0,
+        "mAP50_95": 0.0,
+        "n_images": 0.0,
+        "n_instances": 0.0,
+        "tooth_discolation/AP50": 0.0,
+        "tooth_discolation/AP50_95": 0.0,
+        "tooth_discolation/P": 0.0,
+        "tooth_discolation/R": 0.0,
+        "tooth_discolation/instances": 0.0,
+        "ulcer/AP50": 0.0,
+        "ulcer/AP50_95": 0.0,
+        "ulcer/P": 0.0,
+        "ulcer/R": 0.0,
+        "ulcer/instances": 0.0
+      }
+    },
+    "ctrl2": {
+      "n_images": 1241,
+      "max_abs_diff": 6.158038867720705e-08,
+      "worst_key": "tooth_discolation/AP50_95",
+      "pass": false,
+      "cached": {
+        "n_images": 1241,
+        "n_instances": 7966,
+        "P": 0.7438056964088341,
+        "R": 0.7290249528808742,
+        "mAP50": 0.7688157801872307,
+        "mAP50_95": 0.4015618925970559,
+        "fitness": 0.4015618925970559,
+        "per_class": {
+          "calculus": {
+            "class_index": 0,
+            "instances": 1154,
+            "images": 273,
+            "P": 0.6587475234819069,
+            "R": 0.5909878682842288,
+            "AP50": 0.6222152523568854,
+            "AP50_95": 0.2723554137201652
+          },
+          "caries": {
+            "class_index": 1,
+            "instances": 1427,
+            "images": 445,
+            "P": 0.7753312866521174,
+            "R": 0.795374912403644,
+            "AP50": 0.8346976849589854,
+            "AP50_95": 0.4432645527782689
+          },
+          "gingivitis": {
+            "class_index": 2,
+            "instances": 1303,
+            "images": 244,
+            "P": 0.6326773399348075,
+            "R": 0.5118956254796623,
+            "AP50": 0.5675248443183605,
+            "AP50_95": 0.24733936637665166
+          },
+          "hypodontia": {
+            "class_index": 3,
+            "instances": 281,
+            "images": 155,
+            "P": 0.6968727281011055,
+            "R": 0.7259786476868327,
+            "AP50": 0.7505887333955709,
+            "AP50_95": 0.3448782351454884
+          },
+          "tooth_discolation": {
+            "class_index": 4,
+            "instances": 3406,
+            "images": 498,
+            "P": 0.7761972712847824,
+            "R": 0.8385202583675866,
+            "AP50": 0.8821160026897418,
+            "AP50_95": 0.5770945146316218
+          },
+          "ulcer": {
+            "class_index": 5,
+            "instances": 395,
+            "images": 229,
+            "P": 0.9230080289982844,
+            "R": 0.9113924050632911,
+            "AP50": 0.9557521634038404,
+            "AP50_95": 0.5244392729301387
+          }
+        }
+      },
+      "val": {
+        "n_images": 1241,
+        "n_instances": 7966,
+        "P": 0.7438056964088341,
+        "R": 0.7290249528808742,
+        "mAP50": 0.7688157801872307,
+        "mAP50_95": 0.40156188233365775,
+        "fitness": 0.40156188233365775,
+        "per_class": {
+          "calculus": {
+            "class_index": 0,
+            "instances": 1154,
+            "images": 273,
+            "P": 0.6587475234819069,
+            "R": 0.5909878682842288,
+            "AP50": 0.6222152523568854,
+            "AP50_95": 0.2723554137201652
+          },
+          "caries": {
+            "class_index": 1,
+            "instances": 1427,
+            "images": 445,
+            "P": 0.7753312866521174,
+            "R": 0.795374912403644,
+            "AP50": 0.8346976849589854,
+            "AP50_95": 0.4432645527782689
+          },
+          "gingivitis": {
+            "class_index": 2,
+            "instances": 1303,
+            "images": 244,
+            "P": 0.6326773399348075,
+            "R": 0.5118956254796623,
+            "AP50": 0.5675248443183605,
+            "AP50_95": 0.24733936637665166
+          },
+          "hypodontia": {
+            "class_index": 3,
+            "instances": 281,
+            "images": 155,
+            "P": 0.6968727281011055,
+            "R": 0.7259786476868327,
+            "AP50": 0.7505887333955709,
+            "AP50_95": 0.3448782351454884
+          },
+          "tooth_discolation": {
+            "class_index": 4,
+            "instances": 3406,
+            "images": 498,
+            "P": 0.7761972712847824,
+            "R": 0.8385202583675866,
+            "AP50": 0.8821160026897418,
+            "AP50_95": 0.5770944530512331
+          },
+          "ulcer": {
+            "class_index": 5,
+            "instances": 395,
+            "images": 229,
+            "P": 0.9230080289982844,
+            "R": 0.9113924050632911,
+            "AP50": 0.9557521634038404,
+            "AP50_95": 0.5244392729301387
+          }
+        }
+      },
+      "per_key_diffs": {
+        "P": 0.0,
+        "R": 0.0,
+        "calculus/AP50": 0.0,
+        "calculus/AP50_95": 0.0,
+        "calculus/P": 0.0,
+        "calculus/R": 0.0,
+        "calculus/instances": 0.0,
+        "caries/AP50": 0.0,
+        "caries/AP50_95": 0.0,
+        "caries/P": 0.0,
+        "caries/R": 0.0,
+        "caries/instances": 0.0,
+        "fitness": 1.026339813137156e-08,
+        "gingivitis/AP50": 0.0,
+        "gingivitis/AP50_95": 0.0,
+        "gingivitis/P": 0.0,
+        "gingivitis/R": 0.0,
+        "gingivitis/instances": 0.0,
+        "hypodontia/AP50": 0.0,
+        "hypodontia/AP50_95": 0.0,
+        "hypodontia/P": 0.0,
+        "hypodontia/R": 0.0,
+        "hypodontia/instances": 0.0,
+        "mAP50": 0.0,
+        "mAP50_95": 1.026339813137156e-08,
+        "n_images": 0.0,
+        "n_instances": 0.0,
+        "tooth_discolation/AP50": 0.0,
+        "tooth_discolation/AP50_95": 6.158038867720705e-08,
+        "tooth_discolation/P": 0.0,
+        "tooth_discolation/R": 0.0,
+        "tooth_discolation/instances": 0.0,
+        "ulcer/AP50": 0.0,
+        "ulcer/AP50_95": 0.0,
+        "ulcer/P": 0.0,
+        "ulcer/R": 0.0,
+        "ulcer/instances": 0.0
+      }
+    }
+  }
+}

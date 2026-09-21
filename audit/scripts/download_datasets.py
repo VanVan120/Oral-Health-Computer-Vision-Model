@@ -71,6 +71,47 @@ def fetch_export_link(ds: dict, key: str) -> str:
     return link
 
 
+def fetch_project_metadata(ds: dict, key: str) -> dict:
+    """Project-level metadata for the lineage question (spec Phase 5.4).
+
+    Returns the class list, image counts, licence and any fork/source field.
+    The key is only ever a query parameter; neither the URL nor the raw payload
+    is printed, because Roboflow echoes the key back in some responses.
+    """
+    url = (
+        f"https://api.roboflow.com/{ds['workspace']}/{ds['project']}"
+        f"?api_key={urllib.parse.quote(key)}"
+    )
+    with urllib.request.urlopen(url, timeout=120) as resp:
+        payload = json.load(resp)
+
+    proj = payload.get("project", payload) or {}
+    versions = payload.get("versions", []) or []
+    return {
+        "id": proj.get("id"),
+        "name": proj.get("name"),
+        "type": proj.get("type"),
+        "classes": proj.get("classes"),
+        "images": proj.get("images"),
+        "unannotated": proj.get("unannotated"),
+        "license": proj.get("license"),
+        "public": proj.get("public"),
+        "created": proj.get("created"),
+        "updated": proj.get("updated"),
+        # Fork/source fields, whichever the API supplies for this project.
+        "forkedFrom": proj.get("forkedFrom"),
+        "source": proj.get("source"),
+        "parent": proj.get("parent"),
+        "universe": proj.get("universe"),
+        # Every key present, so a field we did not anticipate is still visible.
+        "all_project_keys": sorted(proj),
+        "versions": [
+            {k: v.get(k) for k in ("id", "name", "created", "images", "splits", "preprocessing", "augmentation")}
+            for v in versions
+        ],
+    }
+
+
 def download(link: str, dest: Path) -> Path:
     dest.parent.mkdir(parents=True, exist_ok=True)
     zip_path = dest.with_suffix(".zip")
@@ -102,6 +143,7 @@ def main() -> None:
 
     key = get_key()
     report = {}
+    lineage = {}
 
     for ds in DATASETS:
         if args.only and ds["key"] != args.only:
@@ -116,6 +158,13 @@ def main() -> None:
             sha = hashlib.sha256(zip_path.read_bytes()).hexdigest()
             print(f"   zip sha256 {sha}")
             extract(zip_path, dest)
+        try:
+            lineage[ds["key"]] = fetch_project_metadata(ds, key)
+            print("   project metadata fetched")
+        except Exception as exc:  # noqa: BLE001
+            lineage[ds["key"]] = {"error": f"{type(exc).__name__}: {exc}"}
+            print(f"   project metadata unavailable: {type(exc).__name__}")
+
         counts = count_images(dest)
         total = sum(counts.values())
         print(f"   counts {counts}  total {total}")
@@ -127,6 +176,10 @@ def main() -> None:
             "path": str(dest),
         }
 
+    out = Path("audit/results/S22_dataset_download_and_lineage.json")
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps({"datasets": report, "lineage": lineage}, indent=2, sort_keys=True) + "\n")
+    print(f"wrote {out}")
     print(json.dumps(report, indent=2))
 
 

@@ -78,5 +78,80 @@ These are labelled as exploratory wherever they are reported:
 No retraining. The reproducibility of model development (the training environment, the AutoBatch size and the warm-start data) is documented as far as the records allow, but it is not reproduced.
 
 ## DEVIATIONS
+**D1 — 2026-09-21. Definition of the identity-only duplicate set (S1).**
 
-(none)
+Section 1 defines D by the dihedral rule and refers to Supplementary S1 as the
+identity-only subset. The phrase is ambiguous, and the two readings differ by
+almost a factor of two. Filtering the dihedral result on "the best-scoring
+transform is identity" yields **63** test images. Filtering on "the RMS under
+the identity transform is below 6.0" yields **124**, which is the published S1
+and the set the original analysis used.
+
+The second reading is the operative one. It is what the published
+`S0_README.txt` states — *"To recover the fixed-alignment set, filter on
+also_found_by_aligned_only = yes (exactly 124 rows), not on matching_transform =
+identity"* — and it was verified here: S1 equals the 124 S2 rows flagged
+`also_found_by_aligned_only = yes` as a set, and does not equal the 63
+best-transform-identity rows.
+
+The cause is that 124 images fall below threshold under identity, but for 61 of
+them some reflection scores lower still, so identity is the single best
+transform for only 63. `audit/scripts/near_duplicates.py` therefore runs two
+passes, full-dihedral and identity-only, and reports both.
+
+No analysis changes: D is still the 259-image dihedral set, exactly as
+pre-specified. This entry records the disambiguation so the 124/63 distinction
+cannot be mistaken for a discrepancy later.
+
+**D2 — 2026-09-21. Pre-correction end-to-end simulation: full path, not mapping
+alone.**
+
+Section 3.5 pre-specifies the end-to-end label-mapping analysis as the agreement
+between the class index inside the deployed path and the displayed label, under
+the pre-correction dictionary of commit 7210dea. Reading the code at that commit
+showed the plan understates what the defect did.
+
+The per-class confidence thresholds are keyed by **display name**, and that
+table is byte-identical before and after the correction. Because the pre-fix
+dictionary mapped each index to the wrong display name, the threshold lookup
+resolved to the wrong class's threshold as well:
+
+| true class | correct threshold | applied pre-fix | direction |
+|---|---|---|---|
+| calculus | 0.25 | 0.35 (Caries) | stricter |
+| caries | 0.35 | 0.25 (Calculus) | looser |
+| gingivitis | 0.30 | 0.30 | unchanged |
+| hypodontia | 0.60 | 0.40 (Tooth Discoloration) | looser |
+| tooth_discolation | 0.40 | 0.75 (Ulcers) | stricter |
+| ulcer | 0.75 | 0.60 (Hypodontia) | looser |
+
+So the historical application did not merely display a wrong label on a correct
+finding: the set of findings that survived thresholding also differed, in both
+directions. Applying the old dictionary to indices captured under the *current*
+thresholds isolates the mapping, but is therefore a lower bound on the
+historical discrepancy.
+
+**Change.** The primary pre-correction result is now a simulation of the full
+7210dea path — the old dictionary together with thresholds looked up by the
+wrong display name. The mapping-only count pre-specified in 3.5 is retained and
+reported as a secondary result. Both are labelled wherever they appear.
+
+This is a change of estimand, made after reading the code and before the
+analysis was run, and it is recorded here for that reason.
+
+**D3 — 2026-09-21. Image-quality gates included in the replicated path.**
+
+Section 3.4 and 3.6 describe the deployed inference path and the router's
+softmax threshold. Reading `triage_inference.py` showed that three checks run
+*before* the network: mean brightness below 40, mean brightness above 250, and
+standard deviation below 15, each returning "Unknown" directly from the
+full-resolution array.
+
+A router rejection is therefore not necessarily a low-confidence
+classification, and a proportion that mixes the two is uninterpretable. The
+replicated path now records which of the four exit paths each image takes, and
+the per-gate rejection counts are reported separately from the softmax
+rejections, for the detector test split, the histopathology set and COCO128.
+
+This adds reporting detail to a pre-specified analysis; it does not change the
+estimand.
