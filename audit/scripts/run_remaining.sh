@@ -9,6 +9,7 @@ V1="$SCRATCH/venvs/ul8.3.231"
 V2="$SCRATCH/venvs/ul8.4.118"
 D="$SCRATCH/datasets"
 C="$SCRATCH/work/caches"
+CACHES_DIR="$C"
 R="$REPO/audit/results"
 cd "$REPO"
 export PYTHONPATH="$REPO/audit/scripts"
@@ -16,6 +17,22 @@ export PYTHONPATH="$REPO/audit/scripts"
 
 step() { printf '\n======== %s ========\n' "$*"; }
 have() { [ -s "$1" ]; }
+
+# The train and valid caches may still be building when this starts. Wait for
+# them rather than failing three steps in. The bracket keeps the pattern from
+# matching this script's own command line.
+wait_for() {
+  local f="$1" waited=0
+  while [ ! -s "$f" ]; do
+    if ! ps -eo command | grep -q '[c]ached_evaluator.py'; then
+      echo "MISSING $f and no cache build running -- aborting"; exit 1
+    fi
+    sleep 15; waited=$((waited+15))
+    [ $((waited % 120)) -eq 0 ] && echo "  still waiting for $(basename "$f") (${waited}s)"
+  done
+}
+for f in test_b1 valid_b1 train_b1; do wait_for "$CACHES_DIR/$f.pkl"; done
+echo "all caches present"
 
 # ---------------------------------------------------------------- 2.7 pairs
 step "valid-vs-train near duplicates (S7)"
