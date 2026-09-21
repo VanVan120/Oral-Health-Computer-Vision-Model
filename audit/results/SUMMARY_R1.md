@@ -941,7 +941,10 @@ PACKAGING   audit/ tree:
               0cc2120  Photometric tier: verifies against the null, but does not reproduce at 322
               2c5731a  Run Phases 1, 2 and 4.1: exactness gate, contamination statistics, Model A
               d52b1b2  Phase 2.9: the ultralytics version effect is entirely in the metric code
-              <FINAL>  Phase 3 end to end, and the R1 summary
+              abb3e29  Phase 3 end to end, and the R1 summary
+              <tip>    Record the final commit list and apply the tag
+            (the last entry is this file's own commit, so it cannot name its own
+            hash; the tag v1.1-r1 points at it and the hash is in the hand-off)
             tag: v1.1-r1 at the final commit. Branch and tag pushed normally;
             never force-pushed, no history rewritten. The merge into main is left
             for the human.
