@@ -144,7 +144,10 @@ def main() -> None:
     records = []
     for n, p in enumerate(paths, 1):
         rv = router_verdict(router, str(p))
-        det = detect_indices(model, str(p)) if rv["label"] == "Clinical" or True else {"raw": [], "path_used": None}
+        # Detection runs on EVERY image, whatever the router decided. The router
+        # outcome is reported separately: mixing the two would make the mapping
+        # counts depend on the router's behaviour as well as the dictionary's.
+        det = detect_indices(model, str(p))
         records.append({"image": p.name, "router": rv, "detect": det})
         if n % 250 == 0:
             print(f"  {n}/{len(paths)}")
@@ -241,7 +244,13 @@ def main() -> None:
                                                  "router_label": r["router"]["label"],
                                                  "router_conf": r["router"]["conf"],
                                                  "path_used": r["detect"].get("path_used"),
-                                                 "raw": r["detect"].get("raw", [])} for r in records]},
+                                                 # Every per-class threshold, and the fallback, is at
+                                                 # or above 0.25, so a detection below it can never be
+                                                 # reported under either dictionary. Dropping those
+                                                 # keeps this file small without losing anything the
+                                                 # analysis can use.
+                                                 "raw": [[c, round(v, 4)] for c, v in r["detect"].get("raw", [])
+                                                         if v >= DEFAULT_THRESHOLD]} for r in records]},
                                    indent=2, default=float) + "\n")
     print(json.dumps(out, indent=2, default=float)[:3000])
 

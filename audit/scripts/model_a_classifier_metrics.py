@@ -74,11 +74,11 @@ def main() -> None:
             analyse("training (n=435)", tn=0, fp=14, fn=0, tp=421),
         ],
         "stored_auc": {"validation": 0.6476, "training": 0.9333},
-        "not_computed_here": [
-            "ROC-AUC bootstrap CI stratified by class - needs per-image scores, which are not stored",
-            "average precision (positive as target, and negative as target) - same reason",
-            "source-level counts - needs the 544 images to recover the .rf. stems",
-        ],
+        "scope": "This script analyses ONLY the numbers the notebook stored. It does "
+                 "not run any model. Quantities needing per-image scores -- the ROC-AUC "
+                 "bootstrap CI, average precision for either target, and source-level "
+                 "counts -- are computed by model_a_reproduce.py from the deployed "
+                 "checkpoint; see S36, S37 and S42.",
     }
     print(json.dumps(out, indent=2))
 

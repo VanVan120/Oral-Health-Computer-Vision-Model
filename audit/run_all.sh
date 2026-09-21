@@ -154,6 +154,24 @@ r = real_val("ml_models/model_b/models/best.pt", Path(os.environ["DATA"]+"/model
 Path("audit/results/S28_batch16_full_split.json").write_text(json.dumps(r, indent=2)+"\n")'
 
 # --------------------------------------------------------------------------
+step "5.1 - 5.2  checkpoint metadata, both detector checkpoints"
+# --------------------------------------------------------------------------
+# Reads the released best.pt and the superseded warm-start object fetched from
+# LFS history. Needs no dataset, only the weights.
+[ -s "$RESULTS/S10_best_pt_metadata.json" ] || "$VENV_MAIN/bin/python" audit/scripts/checkpoint_metadata.py \
+  --weights ml_models/model_b/models/best.pt > "$RESULTS/S10_best_pt_metadata.json"
+# The superseded warm start is not a working-tree file; fetch it from LFS history
+# first (see S15) and point --weights at the extracted object to regenerate S14.
+
+# --------------------------------------------------------------------------
+step "4.1(3)  Model A metrics from the notebook's stored outputs"
+# --------------------------------------------------------------------------
+# Transcribes and recomputes from the confusion matrices the notebook stored.
+# Distinct from 4.1(1)-(2), which RUN model_a.pth (in run_remaining.sh).
+[ -s "$RESULTS/S20_model_a_classifier_metrics.json" ] || "$VENV_MAIN/bin/python" \
+  audit/scripts/model_a_classifier_metrics.py > "$RESULTS/S20_model_a_classifier_metrics.json"
+
+# --------------------------------------------------------------------------
 step "2.1  duplicate-graph clusters"
 # --------------------------------------------------------------------------
 [ -s "$RESULTS/S25_clusters.json" ] || caffeinate -i "$VENV_MAIN/bin/python" audit/scripts/clusters.py \
