@@ -65,13 +65,29 @@ def full_res(path: Path) -> np.ndarray:
         return np.asarray(im.convert("L").resize(FULL, Image.BILINEAR), dtype=np.float64)
 
 
+# Numpy equivalents of the dihedral transforms, applied in float space so the
+# standardised values are not round-tripped through uint8.
+NP_TF = {
+    "identity": lambda a: a,
+    "hflip": lambda a: a[:, ::-1],
+    "vflip": lambda a: a[::-1, :],
+    "rot180": lambda a: a[::-1, ::-1],
+    "rot90": lambda a: np.rot90(a, 1),
+    "rot270": lambda a: np.rot90(a, 3),
+    "transpose": lambda a: a.T,
+    "transverse": lambda a: np.rot90(a, 2).T,
+}
+
+
 def verify(tp: Path, rp: Path, tname: str) -> dict[str, float]:
-    a, b = zscore(full_res(tp)), zscore(full_res(rp))
-    op = dict(TRANSFORMS)[tname]
-    a = a if op is None else np.asarray(
-        Image.fromarray(((a - a.min()) / max(a.ptp(), 1e-9) * 255).astype(np.uint8)).transpose(op), dtype=np.float64)
-    if op is not None:
-        a = zscore(a)
+    """Full-resolution check after standardisation.
+
+    For two standardised images, RMS^2 = 2(1 - r), so the RMS and the Pearson
+    correlation carry the same information; both are reported because the RMS is
+    what the thumbnail screen uses and r is what the decision uses.
+    """
+    a = zscore(NP_TF[tname](full_res(tp)))
+    b = zscore(full_res(rp))
     return {"full_res_z_rms": float(np.sqrt(((a - b) ** 2).mean())),
             "pearson_r": float(np.corrcoef(a.ravel(), b.ravel())[0, 1])}
 
@@ -102,11 +118,19 @@ def main() -> None:
         a, b = zscore(tb[i]), zscore(rb[j])
         null.append(float(np.sqrt(((a - b) ** 2).mean())))
     null = np.array(null)
-    # A conservative cut: well below anything the null produces.
-    cut = float(np.percentile(null, 0.5))
+    # For standardised vectors RMS^2 = 2(1 - r), so the null median of ~1.41
+    # is simply r = 0. The 0.5th percentile of the null sits near r = 0.80,
+    # which is far too loose to call a photometric duplicate -- it admits
+    # hundreds of merely similar clinical photographs. The screen is therefore
+    # set at r >= 0.90 (RMS <= 0.447), and the decision is made by the
+    # full-resolution check at r >= 0.95. The null is reported for calibration:
+    # nothing random comes anywhere near either cut.
+    null_cut = float(np.percentile(null, 0.5))
+    cut = float(np.sqrt(2 * (1 - 0.90)))
 
     cand = [i for i in order if tps[i].name not in d_names and best[i] < cut]
-    print(f"null: median {np.median(null):.3f}, 0.5th pct {cut:.3f}, min {null.min():.3f}")
+    print(f"null: median {np.median(null):.3f} (r=0), 0.5th pct {null_cut:.3f}, min {null.min():.3f}")
+    print(f"screen cut {cut:.3f} (r>=0.90)")
     print(f"{len(cand)} photometric-only candidates beyond D")
 
     rows, verified = [], 0
@@ -131,7 +155,9 @@ def main() -> None:
                   "brightness and contrast change; minimum over the dihedral group as before",
         "null_pairs": args.null_pairs,
         "null_median": float(np.median(null)), "null_min": float(null.min()),
-        "cut_used_0.5th_percentile_of_null": cut,
+        "null_0.5th_percentile": null_cut,
+        "screen_cut_used": cut,
+        "screen_cut_meaning": "thumbnail standardised RMS <= sqrt(2(1-0.90)), i.e. r >= 0.90",
         "n_candidates_beyond_D": len(cand),
         "n_verified_full_resolution": verified,
         "verification_rule": "Pearson r >= 0.95 between standardised 256x256 greyscale images",

@@ -1,0 +1,18 @@
+{
+  "method": "per-thumbnail standardisation (mean 0, sd 1) removes exactly a global brightness and contrast change; minimum over the dihedral group as before",
+  "null_pairs": 600,
+  "null_median": 1.4037769436836243,
+  "null_min": 0.5560083985328674,
+  "null_0.5th_percentile": 0.6386890432238579,
+  "screen_cut_used": 0.44721359549995787,
+  "screen_cut_meaning": "thumbnail standardised RMS <= sqrt(2(1-0.90)), i.e. r >= 0.90",
+  "n_candidates_beyond_D": 280,
+  "n_verified_full_resolution": 163,
+  "verification_rule": "Pearson r >= 0.95 between standardised 256x256 greyscale images",
+  "expected_by_spec": {
+    "extra_pairs": 63,
+    "tier_total": 322
+  },
+  "tier_total_if_used": 422,
+  "csv": "audit/results/S39_photometric_pairs.csv"
+}
