@@ -1,0 +1,70 @@
+{
+  "source": "Model_A_Training_Master.ipynb cell 9 stored outputs",
+  "results": [
+    {
+      "set": "validation (n=109)",
+      "n": 109,
+      "confusion": {
+        "TN": 0,
+        "FP": 4,
+        "FN": 0,
+        "TP": 105
+      },
+      "n_positive": 105,
+      "n_negative": 4,
+      "base_rate_positive": 0.963302752293578,
+      "accuracy": 0.963302752293578,
+      "sensitivity": 1.0,
+      "sensitivity_CP95": [
+        0.9654777858734943,
+        1.0
+      ],
+      "specificity": 0.0,
+      "specificity_CP95": [
+        0.0,
+        0.6023646356164746
+      ],
+      "balanced_accuracy": 0.5,
+      "mcc": null,
+      "mcc_note": "undefined: MCC denominator has a zero factor ([109, 105, 4, 0]); sklearn.matthews_corrcoef returns 0.0 by convention",
+      "predicted_positive_for_every_image": true
+    },
+    {
+      "set": "training (n=435)",
+      "n": 435,
+      "confusion": {
+        "TN": 0,
+        "FP": 14,
+        "FN": 0,
+        "TP": 421
+      },
+      "n_positive": 421,
+      "n_negative": 14,
+      "base_rate_positive": 0.967816091954023,
+      "accuracy": 0.967816091954023,
+      "sensitivity": 1.0,
+      "sensitivity_CP95": [
+        0.9912760920819639,
+        1.0
+      ],
+      "specificity": 0.0,
+      "specificity_CP95": [
+        0.0,
+        0.23163576165011646
+      ],
+      "balanced_accuracy": 0.5,
+      "mcc": null,
+      "mcc_note": "undefined: MCC denominator has a zero factor ([435, 421, 14, 0]); sklearn.matthews_corrcoef returns 0.0 by convention",
+      "predicted_positive_for_every_image": true
+    }
+  ],
+  "stored_auc": {
+    "validation": 0.6476,
+    "training": 0.9333
+  },
+  "not_computed_here": [
+    "ROC-AUC bootstrap CI stratified by class - needs per-image scores, which are not stored",
+    "average precision (positive as target, and negative as target) - same reason",
+    "source-level counts - needs the 544 images to recover the .rf. stems"
+  ]
+}

@@ -65,3 +65,32 @@ api.roboflow.com needs the key, so the fork/source question is unresolved. See
 `audit/results/S8_lineage_partial.md`. Search-index evidence is consistent with
 reference 8 (tesisdientes/oral-diseases-5ctay-rqpxs) having 4 classes and ~4.2k
 images, versus 6 classes and 10,000 in the project actually used.
+
+## Phases 0.1, 0.2, 3.1, 3.2, 4.1(3), 4.3, 5.1, 5.2, 5.5, 5.6 — DONE
+
+See SUMMARY_R1.md for every number. Files S8-S21 in this directory.
+
+- 0.1 both venvs built and recorded; three environment hazards found, two fixed
+  (thread-count pinning, per-venv YOLO_CONFIG_DIR).
+- 0.2 weights fetched and verified; best.pt MATCHES. `git lfs fetch --all`
+  succeeded, so both superseded checkpoints were read too.
+- 3.1 request path traced in full. 3.2 test added; 39 passed, 6 skipped.
+- 3.3 pre-fix permutation recovered verbatim; five of six classes wrong.
+- 4.1(3) stored outputs verified: confusion matrix and AUC both MATCH.
+  4.1(4) computed analytically from the 2x2 table.
+- 4.3 R2 convention answered. 5.1/5.2/5.3 provenance; warm start identified.
+- 5.5 all four independence questions answered. 5.6 chronology built.
+
+## BLOCKED — waiting on the human
+
+Two things are needed, in a terminal, never in a chat window:
+
+    export ROBOFLOW_API_KEY=...
+
+then re-run `bash audit/run_all.sh`. That unblocks Phases 0.3, 0.4, 1, 2,
+3.2(iii), 3.3, 3.4, 3.5, 4.1(1)-(2), 4.2, 5.3's overlap measurement and 5.4.
+
+The tag `v1.1-r1` has deliberately NOT been applied. It should mark the
+completed revision, and this one is not complete; applying it now would label an
+incomplete audit as the deliverable, and a pushed tag cannot be moved without
+the history rewrite ground rule 1 forbids. Apply it after the blocked phases run.
