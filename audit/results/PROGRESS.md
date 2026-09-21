@@ -94,3 +94,47 @@ The tag `v1.1-r1` has deliberately NOT been applied. It should mark the
 completed revision, and this one is not complete; applying it now would label an
 incomplete audit as the deliverable, and a pushed tag cannot be moved without
 the history rewrite ground rule 1 forbids. Apply it after the blocked phases run.
+
+---
+
+# RESUMED 2026-09-21 ~22:20 with ROBOFLOW_API_KEY supplied
+
+## Phase 0.3 — datasets (DONE, PASS)
+
+Both pinned versions downloaded via the REST API with the version in the URL.
+Model B 7000/1500/1500, **9,688** test instances, **0** background images;
+per-class counts match published S4 exactly. Model A 474/44/26 = 544.
+All six required files (data.yaml, README.roboflow.txt, README.dataset.txt)
+present for both. No STOP. Details in `S23_dataset_identity_and_duplicates.md`.
+
+Counting note: `cat labels/*.txt | grep -c .` undercounts by one line per file
+(no trailing newlines), giving a spurious 8,189. Count per file.
+
+## Phase 0.4 — duplicate regeneration (DONE, EXACT)
+
+D == S2 as a set (259, symmetric difference 0); identity-only subset == S1
+(124, symmetric difference 0). ND = 1241. No STOP.
+
+Required disabling PIL draft mode, which breaks reflected matching through
+asymmetric JPEG block padding on non-multiple-of-8 dimensions. See
+`S23_dataset_identity_and_duplicates.md` and DEVIATIONS D4.
+
+## Phase 2.1 — clusters (DONE)
+
+1,445 components over 1,500 images: 1,394 singletons, 47 of size 2, 4 of size 3.
+214 contain a D image, 1,231 do not. 104 edges from a shared training twin,
+59 from test-test duplicates. `S25_clusters.json`.
+
+## Phase 5.4 — lineage (DONE)
+
+Resolved from the Roboflow API. Model B: 10,000 images, 6 classes, CC BY 4.0,
+one version, **no augmentation** — so its near-duplicates were in the source
+upload, not created by the platform. Model A: 228 source images expanded to 544
+by declared augmentation (3 versions per image: flips, 90-degree rotations, crop
+0-20%). Neither project exposes a fork/source field, so references 8 and 9
+cannot be confirmed or refuted. `S26_lineage.md`.
+
+## Still running at the time of writing
+
+Phase 1.2 gate, then caches (valid, train), then Phases 2.2-2.9, 3.3-3.5, 4.1
+via `audit/scripts/run_remaining.sh`.

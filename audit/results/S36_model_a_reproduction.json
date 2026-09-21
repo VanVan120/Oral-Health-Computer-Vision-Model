@@ -1,0 +1,206 @@
+{
+  "weights": "/Users/dev1/Desktop/Oral/Oral-Health-Computer-Vision-Model/ml_models/model_a/model_a.pth",
+  "n_s5_validation_images": 96,
+  "split_sorted": {
+    "n_train": 435,
+    "n_val": 109,
+    "val_names_matching_S5": 96,
+    "S5_total": 96
+  },
+  "split_listdir": {
+    "n_train": 435,
+    "n_val": 109,
+    "val_names_matching_S5": 22,
+    "S5_total": 96
+  },
+  "chosen_order": "sorted",
+  "tvnt_distribution_all_544": {
+    "normal": 18,
+    "abnormal": 526
+  },
+  "validation_deterministic": {
+    "confusion": {
+      "TN": 0,
+      "FP": 4,
+      "FN": 0,
+      "TP": 105
+    },
+    "n": 109,
+    "n_positive": 105,
+    "n_negative": 4,
+    "base_rate_positive": 0.963302752293578,
+    "accuracy": 0.963302752293578,
+    "sensitivity": 1.0,
+    "sensitivity_CP95": [
+      0.9654777858734943,
+      1.0
+    ],
+    "specificity": 0.0,
+    "specificity_CP95": [
+      0.0,
+      0.6023646356164746
+    ],
+    "balanced_accuracy": 0.5,
+    "roc_auc": 0.830952380952381,
+    "roc_auc_boot95": [
+      0.6571428571428571,
+      0.9714285714285714
+    ],
+    "roc_auc_boot_n": 10000,
+    "average_precision_positive_target": 0.9924398515350865,
+    "average_precision_negative_target": 0.18721862473018808,
+    "mcc": null,
+    "mcc_note": "undefined: zero factor in denominator [109, 105, 4, 0]; sklearn returns 0.0 by convention",
+    "predicted_positive_for_every_image": true
+  },
+  "validation_regression": {
+    "mitotic": {
+      "mae": 0.13519690930843353,
+      "rmse": 0.2831106232157117,
+      "r2": 0.07185029983520508,
+      "exact_match_rate": 0.9357798165137615,
+      "within_1": 0.9908256880733946,
+      "within_2": 1.0
+    },
+    "nucleol": {
+      "mae": 1.7528159618377686,
+      "rmse": 2.51914210899902,
+      "r2": 0.7444767951965332,
+      "exact_match_rate": 0.1834862385321101,
+      "within_1": 0.5412844036697247,
+      "within_2": 0.7889908256880734
+    },
+    "hyperchrom": {
+      "mae": 2.071868419647217,
+      "rmse": 4.433007773776545,
+      "r2": 0.43795788288116455,
+      "exact_match_rate": 0.26605504587155965,
+      "within_1": 0.6697247706422018,
+      "within_2": 0.8256880733944955
+    }
+  },
+  "training_deterministic": {
+    "confusion": {
+      "TN": 0,
+      "FP": 14,
+      "FN": 0,
+      "TP": 421
+    },
+    "n": 435,
+    "n_positive": 421,
+    "n_negative": 14,
+    "base_rate_positive": 0.967816091954023,
+    "accuracy": 0.967816091954023,
+    "sensitivity": 1.0,
+    "sensitivity_CP95": [
+      0.9912760920819639,
+      1.0
+    ],
+    "specificity": 0.0,
+    "specificity_CP95": [
+      0.0,
+      0.23163576165011646
+    ],
+    "balanced_accuracy": 0.5,
+    "roc_auc": 0.9553783508652868,
+    "roc_auc_boot95": [
+      0.9046487953851374,
+      0.991856124872752
+    ],
+    "roc_auc_boot_n": 10000,
+    "average_precision_positive_target": 0.9983559982530641,
+    "average_precision_negative_target": 0.6816598729663531,
+    "mcc": null,
+    "mcc_note": "undefined: zero factor in denominator [435, 421, 14, 0]; sklearn returns 0.0 by convention",
+    "predicted_positive_for_every_image": true
+  },
+  "validation_augmented_repeats": [
+    {
+      "confusion": {
+        "TN": 0,
+        "FP": 4,
+        "FN": 0,
+        "TP": 105
+      },
+      "accuracy": 0.963302752293578,
+      "roc_auc": 0.7666666666666666
+    },
+    {
+      "confusion": {
+        "TN": 0,
+        "FP": 4,
+        "FN": 0,
+        "TP": 105
+      },
+      "accuracy": 0.963302752293578,
+      "roc_auc": 0.7880952380952381
+    },
+    {
+      "confusion": {
+        "TN": 0,
+        "FP": 4,
+        "FN": 0,
+        "TP": 105
+      },
+      "accuracy": 0.963302752293578,
+      "roc_auc": 0.6523809523809524
+    },
+    {
+      "confusion": {
+        "TN": 0,
+        "FP": 4,
+        "FN": 0,
+        "TP": 105
+      },
+      "accuracy": 0.963302752293578,
+      "roc_auc": 0.7690476190476191
+    },
+    {
+      "confusion": {
+        "TN": 0,
+        "FP": 4,
+        "FN": 0,
+        "TP": 105
+      },
+      "accuracy": 0.963302752293578,
+      "roc_auc": 0.6047619047619048
+    }
+  ],
+  "unleaked_subset": {
+    "n": 13,
+    "confusion": {
+      "TN": 0,
+      "FP": 0,
+      "FN": 0,
+      "TP": 13
+    },
+    "n_positive": 13,
+    "n_negative": 0,
+    "base_rate_positive": 1.0,
+    "accuracy": 1.0,
+    "sensitivity": 1.0,
+    "sensitivity_CP95": [
+      0.752947361999529,
+      1.0
+    ],
+    "specificity": NaN,
+    "specificity_CP95": [
+      NaN,
+      NaN
+    ],
+    "balanced_accuracy": NaN,
+    "roc_auc": NaN,
+    "roc_auc_boot95": null,
+    "roc_auc_boot_n": 0,
+    "average_precision_positive_target": null,
+    "average_precision_negative_target": null,
+    "mcc": null,
+    "mcc_note": "undefined: zero factor in denominator [13, 13, 0, 0]; sklearn returns 0.0 by convention",
+    "predicted_positive_for_every_image": true
+  },
+  "source_level": {
+    "validation_images": 109,
+    "validation_distinct_sources": 94,
+    "all_544_distinct_sources": 228
+  }
+}

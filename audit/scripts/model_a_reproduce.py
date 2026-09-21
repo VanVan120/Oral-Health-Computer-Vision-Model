@@ -42,7 +42,14 @@ IMAGE_EXTS = {".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff"}
 
 
 class OSCCMultiTaskModel(nn.Module):
-    """Architecture copied from ml_models/model_a/inference_model.py."""
+    """Architecture copied from ml_models/model_a/inference_model.py.
+
+    Note the Dropout in every head. It carries no parameters but it occupies an
+    index in the Sequential, so omitting it shifts the final Linear from .3 to
+    .2 and the state dict no longer matches. The deployed loader uses
+    strict=False, which would swallow exactly that mismatch and leave the final
+    layers randomly initialised; we load strictly so any such error is loud.
+    """
 
     def __init__(self):
         super().__init__()
@@ -50,9 +57,9 @@ class OSCCMultiTaskModel(nn.Module):
         num_ftrs = self.backbone.classifier.in_features
         self.backbone.classifier = nn.Identity()
         self.head_tvnt = nn.Sequential(nn.Linear(num_ftrs, 256), nn.ReLU(), nn.Dropout(0.3), nn.Linear(256, 2))
-        self.head_mitotic = nn.Sequential(nn.Linear(num_ftrs, 128), nn.ReLU(), nn.Linear(128, 1))
-        self.head_nucleol = nn.Sequential(nn.Linear(num_ftrs, 128), nn.ReLU(), nn.Linear(128, 1))
-        self.head_hyperchrom = nn.Sequential(nn.Linear(num_ftrs, 128), nn.ReLU(), nn.Linear(128, 1))
+        self.head_mitotic = nn.Sequential(nn.Linear(num_ftrs, 128), nn.ReLU(), nn.Dropout(0.2), nn.Linear(128, 1))
+        self.head_nucleol = nn.Sequential(nn.Linear(num_ftrs, 128), nn.ReLU(), nn.Dropout(0.2), nn.Linear(128, 1))
+        self.head_hyperchrom = nn.Sequential(nn.Linear(num_ftrs, 128), nn.ReLU(), nn.Dropout(0.2), nn.Linear(128, 1))
 
     def forward(self, x):
         f = self.backbone.features(x)

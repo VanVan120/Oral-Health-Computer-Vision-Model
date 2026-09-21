@@ -1,11 +1,13 @@
 {
   "tolerance": 1e-09,
   "seed": 20260921,
-  "all_pass": false,
+  "all_pass": true,
   "sets": {
     "full": {
       "n_images": 1500,
       "max_abs_diff": 0.0,
+      "max_abs_diff_filename_order_replay": 0.0,
+      "worst_key_filename_order_replay": "",
       "worst_key": "",
       "pass": true,
       "cached": {
@@ -181,6 +183,8 @@
     "ND": {
       "n_images": 1241,
       "max_abs_diff": 0.0,
+      "max_abs_diff_filename_order_replay": 0.0,
+      "worst_key_filename_order_replay": "",
       "worst_key": "",
       "pass": true,
       "cached": {
@@ -356,6 +360,8 @@
     "ctrl1": {
       "n_images": 1241,
       "max_abs_diff": 0.0,
+      "max_abs_diff_filename_order_replay": 0.0,
+      "worst_key_filename_order_replay": "",
       "worst_key": "",
       "pass": true,
       "cached": {
@@ -530,17 +536,19 @@
     },
     "ctrl2": {
       "n_images": 1241,
-      "max_abs_diff": 6.158038867720705e-08,
-      "worst_key": "tooth_discolation/AP50_95",
-      "pass": false,
+      "max_abs_diff": 0.0,
+      "max_abs_diff_filename_order_replay": 6.158038867720705e-08,
+      "worst_key_filename_order_replay": "tooth_discolation/AP50_95",
+      "worst_key": "",
+      "pass": true,
       "cached": {
         "n_images": 1241,
         "n_instances": 7966,
         "P": 0.7438056964088341,
         "R": 0.7290249528808742,
         "mAP50": 0.7688157801872307,
-        "mAP50_95": 0.4015618925970559,
-        "fitness": 0.4015618925970559,
+        "mAP50_95": 0.40156188233365775,
+        "fitness": 0.40156188233365775,
         "per_class": {
           "calculus": {
             "class_index": 0,
@@ -585,7 +593,7 @@
             "P": 0.7761972712847824,
             "R": 0.8385202583675866,
             "AP50": 0.8821160026897418,
-            "AP50_95": 0.5770945146316218
+            "AP50_95": 0.5770944530512331
           },
           "ulcer": {
             "class_index": 5,
@@ -676,7 +684,7 @@
         "caries/P": 0.0,
         "caries/R": 0.0,
         "caries/instances": 0.0,
-        "fitness": 1.026339813137156e-08,
+        "fitness": 0.0,
         "gingivitis/AP50": 0.0,
         "gingivitis/AP50_95": 0.0,
         "gingivitis/P": 0.0,
@@ -688,11 +696,11 @@
         "hypodontia/R": 0.0,
         "hypodontia/instances": 0.0,
         "mAP50": 0.0,
-        "mAP50_95": 1.026339813137156e-08,
+        "mAP50_95": 0.0,
         "n_images": 0.0,
         "n_instances": 0.0,
         "tooth_discolation/AP50": 0.0,
-        "tooth_discolation/AP50_95": 6.158038867720705e-08,
+        "tooth_discolation/AP50_95": 0.0,
         "tooth_discolation/P": 0.0,
         "tooth_discolation/R": 0.0,
         "tooth_discolation/instances": 0.0,

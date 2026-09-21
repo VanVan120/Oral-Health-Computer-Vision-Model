@@ -1,9 +1,10 @@
 # Model A, the histopathology classifier (spec Phase 4)
 
-Phase 4.1(2) — re-running inference on the validation split — and Phase 4.2 —
-the source audit — need the 544 images and are blocked. But Phase 4.1(3),
-verifying against the notebook's stored outputs, and most of Phase 4.1(4), the
-classifier statistics, need only the stored 2x2 table. Both are done here.
+This file has two parts. The first was written before the data arrived and
+verifies the notebook's stored outputs from the stored 2×2 table alone. The
+second, after the heading "Reproduction with the deployed checkpoint", is the
+full reproduction against the real images and supersedes the "Blocked" list
+below.
 
 ## 4.1(3) Verification against the stored outputs — all MATCH
 
@@ -69,8 +70,8 @@ Three things to state plainly in the revision:
 The one number not fixed by the degenerate predictions is the ROC-AUC, 0.6476,
 since it ranks continuous scores rather than thresholded labels. It is computed
 against **four** negative images. Its confidence interval will be very wide, and
-it cannot be computed here because the per-image scores are not stored — see
-Blocked below.
+it could not be computed from the stored outputs, because the per-image scores
+are not stored. It is computed from a rerun below.
 
 Note also the training/validation AUC gap, 0.9333 against 0.6476, on a split
 where 88.1% of validation images have an augmented sibling in training. The gap
@@ -84,8 +85,8 @@ validation figure the more generous of the two, not the more conservative.
 do not. Recomputing the classifier metrics on those 13 is descriptive only —
 and, given that the model predicts "Abnormal" for everything, it can only return
 sensitivity 1.0 and specificity 0.0 or NaN on whatever subset is chosen. The
-identity of the 13 needs the pooled file list, so it is blocked, but the
-conclusion does not depend on running it.
+reproduction below identifies the 13 and confirms something stronger: all 13 are
+TVNT positive, so the subset contains no negative class at all.
 
 ## 4.3 The R² convention — answered
 
@@ -115,17 +116,11 @@ notebook's `CLASS_NAMES` names them `{0: 'Mitotic Figures', 1: 'Multiple
 Nucleol', 2: 'Nuclear Hyperchromatism'}`. These are what Table 3's MAE,
 exact-match and R² columns describe; TVNT is the only classification target.
 
-## Blocked, and why
+## What was blocked at the time of writing — now all done except one
 
-| item | needs |
-|---|---|
-| 4.1(1) reproduce the pooling and `random_split` | the 544 images |
-| 4.1(2) re-run `model_a.pth` inference | the 544 images |
-| ROC-AUC bootstrap CI, stratified by class | per-image scores — not stored |
-| average precision, positive- and negative-as-target | per-image scores — not stored |
-| source-level counts | the 544 images, to recover the `.rf.` stems |
-| 4.2 source audit; the 18 negatives' source names | the 544 images |
-| 4.2(4) Rahman et al. thumbnail match | not attempted |
+4.1(1) the split, 4.1(2) the inference, the ROC-AUC bootstrap CI, both average
+precisions, the source-level counts and 4.1(6) are all completed below. Only
+4.2(4), the Rahman et al. thumbnail match, was **not attempted**.
 
 ## The stored metrics describe a checkpoint that no longer exists
 
@@ -178,3 +173,140 @@ Spec 4.1(2) asks to re-run `model_a.pth` inference on the validation split and
 verify it against the stored outputs. When the images become available, that
 comparison should be expected to **fail**, and the failure is the finding, not a
 bug in the reproduction.
+
+---
+
+# Reproduction with the deployed checkpoint (added after the data arrived)
+
+Run by `audit/scripts/model_a_reproduce.py`; full output in
+`S36_model_a_reproduction.json`, per-image scores in
+`S37_model_a_per_image_scores.csv`.
+
+## The split reproduces exactly
+
+`int(0.8 * 544) = 435` train, 109 validation, via
+`random_split(..., generator=torch.Generator().manual_seed(42))`.
+
+The pooled row order matters, because `random_split` permutes indices: cell 2
+builds the record list with `os.listdir`, which is filesystem-ordered. Both
+orderings were tried and scored against the 96 validation filenames the
+published S5 records:
+
+| pooling order | train / val | validation names matching S5 |
+|---|---|---|
+| **sorted** | 435 / 109 | **96 / 96** |
+| raw `os.listdir` | 435 / 109 | 22 / 96 |
+
+So the original run enumerated in sorted order, and the reproduced validation
+split is **the same 109 images**. That also quantifies the hazard: had the
+filesystem returned a different order, three-quarters of the validation set
+would have differed, with the same code and the same seed.
+
+Corpus check: TVNT Normal = 18, Abnormal = 526, exactly as stored.
+
+## What reproduces, and what does not
+
+Running **`model_a.pth`** — the deployed checkpoint — on that split, with
+`val_transform` (deterministic):
+
+| quantity | published (`model_a_best.pth`) | reproduced (`model_a.pth`) | verdict |
+|---|---|---|---|
+| confusion matrix | TN 0, FP 4, FN 0, TP 105 | **TN 0, FP 4, FN 0, TP 105** | **MATCH** |
+| accuracy | 0.9633 | 0.9633 | MATCH |
+| sensitivity | 1.0000 | 1.0000 | MATCH |
+| **ROC-AUC** | **0.6476** | **0.8310** | **DOES NOT MATCH** |
+
+The confusion matrix matching is not evidence that the checkpoints agree. Both
+models predict "Abnormal" for every image, so the 2×2 table is fixed by the
+class balance alone and cannot distinguish one checkpoint from another. The AUC
+ranks continuous scores and does discriminate — and it differs by 0.18.
+
+## Why the AUC differs: the evaluation itself was stochastic
+
+`full_dataset` is constructed with `train_transform`, and `val_transform` is
+defined but never used (it appears exactly twice in the notebook: at its
+definition, and in the comment *"For proper validation, we should use
+val_transform"*). The validation loader therefore wraps a Subset whose transform
+applies `RandomHorizontalFlip`, `RandomVerticalFlip`, `RandomRotation(15)` and
+`ColorJitter`, with no seed fixed at evaluation time.
+
+Re-running the notebook's own pipeline five times on `model_a.pth`:
+
+| run | confusion | accuracy | ROC-AUC |
+|---|---|---|---|
+| 1 | TN 0, FP 4, FN 0, TP 105 | 0.9633 | 0.7667 |
+| 2 | TN 0, FP 4, FN 0, TP 105 | 0.9633 | 0.7881 |
+| 3 | TN 0, FP 4, FN 0, TP 105 | 0.9633 | **0.6524** |
+| 4 | TN 0, FP 4, FN 0, TP 105 | 0.9633 | 0.7690 |
+| 5 | TN 0, FP 4, FN 0, TP 105 | 0.9633 | 0.6048 |
+
+The AUC spans **0.605 to 0.788** across five draws of the same model on the same
+images. The published 0.6476 sits inside that range, and run 3's 0.6524 is
+within 0.005 of it.
+
+**So the published AUC of 0.6476 is one draw from a random augmentation process,
+not a property of the model.** It is not reproducible in principle, and the
+difference from 0.8310 is attributable to the evaluation transform rather than
+necessarily to the missing checkpoint. Two defects compound here: the metric was
+computed on a checkpoint that no longer exists, *and* through a stochastic
+pipeline. Neither can be recovered.
+
+## Full classifier statistics for the deployed model (n = 109)
+
+| statistic | value |
+|---|---|
+| sensitivity | 1.0000, CP 95% [0.9655, 1.0000] |
+| **specificity** | **0.0000**, CP 95% [0.0000, 0.6024] |
+| balanced accuracy | **0.5000** |
+| accuracy | 0.9633 = the base rate exactly |
+| base rate (positive) | 0.9633 |
+| ROC-AUC | 0.8310, stratified bootstrap 95% **[0.6571, 0.9714]** |
+| average precision, positive as target | 0.9924 |
+| average precision, negative as target | **0.1872** |
+| MCC | **undefined** (zero factor in the denominator; sklearn returns 0.0 by convention) |
+
+The ROC-AUC interval spans 0.31 and reaches down towards chance, which is what
+four negative images buys. Training-set figures for contrast: confusion
+TN 0, FP 14, FN 0, TP 421, ROC-AUC 0.9554 [0.9046, 0.9919].
+
+## The 13 validation images with no training sibling
+
+All **13 are TVNT positive**. There is not a single negative among them, so
+specificity and ROC-AUC are undefined on that subset (accuracy 1.0000 is
+vacuous). Spec 4.1(6) asks for the classifier metrics there as a descriptive
+check; the honest report is that the uncontaminated subset contains no negative
+class at all and can support no discrimination estimate.
+
+## Source-level counts
+
+| | images | distinct sources |
+|---|---|---|
+| validation split | 109 | **94** |
+| all pooled | 544 | **228** |
+
+The 228 matches the Roboflow project's own `images: 228` exactly, independently
+confirming that the 544 are three augmented versions of 228 source fields. At
+source level the validation split is 94 units, not 109, and 96 of its 109 images
+share a source with training.
+
+## Regression heads, deployed checkpoint, deterministic (validation)
+
+| target | MAE | RMSE | R² | exact match | within ±1 |
+|---|---|---|---|---|---|
+| mitotic | 0.1352 | 0.2831 | 0.0719 | 0.9358 | 0.9908 |
+| nucleol | 1.7528 | 2.5191 | 0.7445 | 0.1835 | 0.5413 |
+| hyperchrom | 2.0719 | 4.4330 | 0.4380 | 0.2661 | 0.6697 |
+
+These do not match the stored values either — the notebook stores mitotic
+MAE 0.1436 and R² −0.0154 on validation — for the same two reasons as the AUC.
+Note R² here is referenced to this evaluation set's own mean.
+
+## One further hazard found while loading the weights
+
+`ml_models/model_a/inference_model.py:56` loads with **`strict=False`**. Each
+head is `Linear → ReLU → Dropout → Linear`, so the final Linear sits at index 3.
+An architecture that omits the Dropout puts it at index 2, and with
+`strict=False` the mismatch loads silently, leaving the output layers randomly
+initialised and every prediction meaningless — with no error. The shipped
+architecture does match the checkpoint, so nothing is currently broken; the
+reproduction script loads with `strict=True` so that any future drift is loud.

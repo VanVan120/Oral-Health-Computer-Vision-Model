@@ -8,9 +8,8 @@
 # Long steps are wrapped in `caffeinate -i` so the Mac does not sleep partway
 # through. Every step is idempotent: re-running skips work already on disk.
 #
-# NOTE: this revision is incomplete. The steps below are the ones that exist.
-# The phases that are still blocked are listed at the bottom, and the script
-# says so rather than pretending to have run them.
+# Needs ROBOFLOW_API_KEY in the environment (never in a chat window) and the
+# git-lfs objects fetched. Stops with an explicit message if either is missing.
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -122,23 +121,70 @@ sys.exit(0 if ok else 1)
 PY
 
 # --------------------------------------------------------------------------
-cat <<'EOF'
+step "1.1  cached evaluator, test / valid / train at batch 1"
+# --------------------------------------------------------------------------
+CACHES="$SCRATCH/work/caches"; mkdir -p "$CACHES"
+export PYTHONPATH="$REPO_ROOT/audit/scripts"
+. "$VENV_MAIN/pinned-env.sh"
+# Roboflow names the validation split "val" in data.yaml, not "valid".
+for split in test val train; do
+  [ -s "$CACHES/${split/val/valid}_b1.pkl" ] || caffeinate -i "$VENV_MAIN/bin/python" audit/scripts/cached_evaluator.py \
+     --weights "$BEST" --data "$DATA/model_b/data.yaml" --split "$split" --batch 1 \
+     --out "$CACHES/${split/val/valid}_b1.pkl" --boxes-out "$CACHES/${split/val/valid}_b1_boxes.pkl"
+done
 
-=== NOT YET IMPLEMENTED ===
+# --------------------------------------------------------------------------
+step "1.2  exactness gate (1e-9)"
+# --------------------------------------------------------------------------
+caffeinate -i "$VENV_MAIN/bin/python" audit/scripts/exactness_gate.py \
+  --cache "$CACHES/test_b1.pkl" --weights "$BEST" --data "$DATA/model_b/data.yaml" \
+  --d-csv "$RESULTS/S2_regenerated_test_train_pairs.csv" \
+  --work "$SCRATCH/work/subsets" --out "$RESULTS/S24_exactness_gate.json"
+"$VENV_MAIN/bin/python" -c 'import json,sys; d=json.load(open("audit/results/S24_exactness_gate.json")); print("exactness gate: PASS") if d["all_pass"] else sys.exit("EXACTNESS GATE FAILED -- do not proceed to any statistics")'
 
-The following phases have no script in this directory yet, because they were
-blocked before they could be written and tested against real data:
+# --------------------------------------------------------------------------
+step "1.3  batch sensitivity: val(batch=16) on the full split"
+# --------------------------------------------------------------------------
+[ -s "$RESULTS/S28_batch16_full_split.json" ] || caffeinate -i "$VENV_MAIN/bin/python" -c '
+import json, sys; sys.path.insert(0,"audit/scripts")
+from pathlib import Path
+from cached_evaluator import real_val
+import os
+r = real_val("ml_models/model_b/models/best.pt", Path(os.environ["DATA"]+"/model_b/data.yaml"), split="test", batch=16)
+Path("audit/results/S28_batch16_full_split.json").write_text(json.dumps(r, indent=2)+"\n")'
 
-  Phase 1    cached exact evaluator and its 1e-9 exactness gate
-  Phase 2    contamination statistics (clusters, bootstrap, randomization,
-             per-class contrasts, memorisation diagnostics, validation
-             contamination, photometric tier, library-version comparison)
-  Phase 3.3  full end-to-end run over the 1,500 test images
-  Phase 3.4  user-facing image-level metrics
-  Phase 3.5  router evaluation on the three sets
-  Phase 4    histopathology reproduction and source audit
-  Phase 5.3  warm-start overlap measurement
-  Phase 5.4  dataset lineage from the Roboflow API
+# --------------------------------------------------------------------------
+step "2.1  duplicate-graph clusters"
+# --------------------------------------------------------------------------
+[ -s "$RESULTS/S25_clusters.json" ] || caffeinate -i "$VENV_MAIN/bin/python" audit/scripts/clusters.py \
+  --test-dir "$DATA/model_b/test/images" --train-dir "$DATA/model_b/train/images" \
+  --d-csv "$RESULTS/S2_regenerated_test_train_pairs.csv" --out "$RESULTS/S25_clusters.json"
 
-See audit/results/PROGRESS.md and audit/results/SUMMARY_R1.md.
-EOF
+# --------------------------------------------------------------------------
+step "2.2 - 4.1  everything downstream"
+# --------------------------------------------------------------------------
+bash audit/scripts/run_remaining.sh
+
+# --------------------------------------------------------------------------
+step "2.8  photometric tier (sensitivity analysis)"
+# --------------------------------------------------------------------------
+[ -s "$RESULTS/S38_photometric_tier.json" ] || caffeinate -i "$VENV_MAIN/bin/python" audit/scripts/photometric_tier.py \
+  --test-dir "$DATA/model_b/test/images" --train-dir "$DATA/model_b/train/images" \
+  --d-csv "$RESULTS/S2_regenerated_test_train_pairs.csv" \
+  --out "$RESULTS/S38_photometric_tier.json" --tier-csv "$RESULTS/S39_photometric_pairs.csv"
+
+# --------------------------------------------------------------------------
+step "3.2  regression tests"
+# --------------------------------------------------------------------------
+echo "run the pytest suite in an environment carrying the app requirements:"
+echo "  GEMINI_API_KEY=test JWT_SECRET_KEY=test <venv>/bin/python -m pytest tests/ -v"
+
+# --------------------------------------------------------------------------
+step "6.3  expert-review packet (scratchpad only, never committed)"
+# --------------------------------------------------------------------------
+"$VENV_MAIN/bin/python" audit/scripts/expert_packet.py \
+  --test-images "$DATA/model_b/test/images" --test-labels "$DATA/model_b/test/labels" \
+  --model-a-root "$DATA/model_a" --dest "$SCRATCH/work/expert_packet"
+
+step "ALL DONE"
+echo "summary: $RESULTS/SUMMARY_R1.md"
