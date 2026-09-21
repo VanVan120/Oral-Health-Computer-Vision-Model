@@ -1,0 +1,62 @@
+723980862fea1ba70a10ff916f8d4abdd868aba1|2026-09-21 21:54:46 +0800|VanVan120|Pin both evaluation environments and read the checkpoints' provenance
+aa758e6b13e7fb805404fec72f2668be8be4c662|2026-09-21 21:39:10 +0800|VanVan120|Add the R1 audit scaffold, scripts and the as-published reference sets
+12f3199e0669565b35fe663e3b9bc6fe993cc3a7|2026-09-21 21:25:17 +0800|VanVan120|Pre-register the revision R1 analysis plan
+5b815bb8e7f873f6e11771c55af12c3e7598d506|2026-08-13 16:02:51 +0800|VanVan120|Ignore the remediation and leakage-audit specs
+2eccc76099b6ac672415bf3c92d3cf2215806042|2026-08-13 15:56:06 +0800|VanVan120|Fall back to CPU when no GPU is present, and stop committing databases
+9ad5b13b24f698da7569789d97bd28e3fbd080a2|2026-08-13 15:55:56 +0800|VanVan120|Move the JWT signing key and Roboflow key to environment variables
+46fddfbbf71dc03026c8597928858eb2d3ff315f|2026-08-13 15:55:45 +0800|VanVan120|Remove the branded toothpaste recommendation from the assistant
+0b21474f1fcec2d1957c2a4bf8e9f0a627e65fb9|2026-08-13 15:55:35 +0800|VanVan120|Key display names on the model's class registry, not on index
+7210dea81144dee4ec214776165790d308e43e17|2026-04-24 13:04:02 +0800|Your Name|latest changes
+0a9faf894ff14585737856ec3f4a48c8389ac51a|2026-04-16 22:18:01 +0800|Your Name|translator bug issue has been fixed
+065dbd44ea4b740121e7dcbd989038f76669a02f|2026-03-30 22:52:43 +0800|Your Name|restructure the folder structure and added pytest
+f5c69a6a4edfcb70d1efa9cba5190611352df724|2026-03-26 21:42:53 +0800|Your Name|updated readme
+09e37adf948a7d56878f67a2c316f8ab658bf75f|2026-03-24 16:48:50 +0800|Your Name|delete unsued file
+275e4489eff2779c50f9c660dcb21d8f47b2f181|2026-03-24 15:45:51 +0800|Your Name|update the new function for game
+3920c0820cdb61452156d838d8ab5f0a4fd99593|2026-03-04 15:21:15 +0800|Your Name|update docker
+015d8cd67efeff2e7ea9f80e719404f077e7c367|2026-03-04 15:19:01 +0800|Your Name|update readme
+57df00d16b9c2de73004167a974f014360236f47|2026-03-01 17:38:55 +0800|Your Name|modify the design for the advisory system
+5c2dc3588c0374ddee4011a2bc708c42dd5668f8|2026-03-01 16:12:17 +0800|Your Name|evaluation for all model
+86930015d2b699071f95ee13d2fac5fffa2e6c23|2026-02-25 10:56:43 +0800|Your Name|added oral health care advisory system
+376437e22879ca6bcd0f43ce3b2834d3871295a3|2026-02-06 12:08:38 +0800|Your Name|updated setting up requirement
+0c9afcf010c752beca660ff7998e2547835b2245|2026-02-05 22:40:48 +0800|Your Name|fix fpdf version issue
+a2ffd090e23232542ba2aee2d1c3d7c1d9f125d9|2026-02-05 22:38:30 +0800|Your Name|enable sending email in localhost
+5b5a3e3fe1f885bef4ffa48c3d26c13b5b3e17a6|2026-02-05 22:24:52 +0800|Your Name|upgrade the structure of the pdf report so that become more professional
+6998cf71f2596afd542a4dbfb23b9faa2b3a70bc|2026-02-05 22:00:42 +0800|Your Name|modify the image view in analysis page
+2c67474c5aeba4d419647b616d86f046d2dbcd43|2026-02-05 21:17:12 +0800|Your Name|removed the bounding box segmentation in histopathological analysis
+48e1c4eced191b3d183720b549abe4d807202d37|2026-02-05 20:55:51 +0800|Your Name|update the design for the analysis view for users
+d0f4ecf5a43fd5abbd522a07592a59d5f9b1e6e8|2026-02-03 21:19:47 +0800|Your Name|update the design for all the other pages
+211ba28312686f2129eb836858798c06d2aed9fa|2026-02-03 20:27:26 +0800|Your Name|updated Docker file copied file
+2588cff7603da24a3f94e9db5800cef81868c60a|2026-02-03 20:22:01 +0800|Your Name|added missing import module
+5c9f92fda6fa168dbef7a8060a75780359a63886|2026-02-03 20:15:11 +0800|Your Name|updated requirement
+dc96dd9737c1baab26676b3f318b380dd40878b4|2026-01-30 18:30:38 +0800|Your Name|fix the requirement error
+9038f35426b51c20ae808fbbe0d1f2b2ddaebaf1|2026-01-30 18:25:35 +0800|Your Name|modify the entire UI design and added a database to collect the record for patient and doctor
+8877066df63d15d725806884102b8024f52efd29|2026-01-28 21:25:10 +0800|Your Name|update the profile image for dataset team
+122e02688bb99adfb31832169f30140fcb7c48b3|2025-12-12 17:05:14 +0800|Your Name|Model B has been enhanced via evolution training
+9ca7b6c33ce701d9332f4cb5f71df8477166c703|2025-12-10 21:47:43 +0800|Your Name|Added some design to the about page for section technology stack
+0a89bb7bee0cb87145af87926c07278af07d7411|2025-12-10 21:37:13 +0800|Your Name|Added explanation for technology stack in about page
+570553314dd9dc750fed7de4f3d3633b066d2789|2025-12-10 17:20:29 +0800|Your Name|Added an email functionality to contact page
+595e696485f4e6e259e9ac5676c42d5f3b6c4d3b|2025-12-10 14:55:52 +0800|Your Name|reduce api call after screening
+2103d29d31add46c8c4aef674cc3f72415185fd0|2025-12-10 14:48:25 +0800|Your Name|Updated the thereshold for triage model
+1295ee6dea93aae0c42da5cfee9d737e397a6b53|2025-12-09 23:26:19 +0800|Your Name|fixing the image recognition issue for rubbish data
+c7c4ff01bf2966a25263187fa3efb9087a6769cd|2025-12-09 22:59:02 +0800|Your Name|fixing the image recognition issue for rubbish data
+5686e9b05927b1dbd3cbaa43160ba8a038b90122|2025-12-09 22:43:12 +0800|Your Name|Updated the triage model analysis for non-oral image
+0dc7cdd652bec502d786bc98aa49d76ba3839189|2025-12-09 17:14:02 +0800|Your Name|Modify README reponame
+b6d1718b4fb8cac176bd8628fd1ec39e8169baa7|2025-12-09 16:51:42 +0800|Your Name|Added error handling message for email sending
+e845ccec01bb9b01896d77f5a2230fdc3b6561e3|2025-12-09 16:36:39 +0800|Your Name|Solving email handling issue
+1c283fe58a11350a9ec9983db3c92f7f9801f61c|2025-12-09 15:14:03 +0800|Your Name|Fix the email sending problem for report
+492fd05bd5939a8970b052a488a6d40199bf25a1|2025-12-09 14:53:45 +0800|Your Name|Add Email Report button and frontend logic
+e56c539515e6d3b0a7af2dcc29c50a358627cc53|2025-12-09 14:42:44 +0800|Your Name|Add email report functionality
+337cdd36a466ebc0244c78416d9cd3317a601767|2025-12-09 00:04:48 +0800|Your Name|Restore Hugging Face YAML configuration metadata
+48a5282062744c973b4ab5fec71282d650955e53|2025-12-09 00:01:03 +0800|Your Name|Fix Mermaid diagram text visibility by forcing black font color
+7930619bf1fd2f589bffe2764bad16e651ff5d33|2025-12-08 23:58:54 +0800|Your Name|Enhance README with detailed tech stack and improved diagrams
+a0352b2fcc6accf2635e124e2f352a1fe8c2a55d|2025-12-08 23:09:30 +0800|Your Name|Update README with interactive documentation and manual run instructions
+8e93e5b9ad0f7b8cf5134e41465583d3b7f82429|2025-12-08 22:28:35 +0800|Your Name|Remove debug prints
+3bf90328a443d122261b9f8322ae8be2dfacdd9d|2025-12-08 22:11:25 +0800|Your Name|Add environment variable debug
+7c8a2d123414b365df5f0dc3e805b12d05672810|2025-12-08 21:37:39 +0800|Your Name|Switch to Brevo API for emails
+32a00ce9fd3b78d3d78b97003f1f47310be4bf9f|2025-12-08 21:18:19 +0800|Your Name|Add debug logging for email
+c78787b8bca6046e28b6230276a73aafe191ecdf|2025-12-08 21:04:58 +0800|Your Name|updated email sending problem
+89cc020480291011f2e8bd04da6e6ca644f88449|2025-12-07 17:44:02 +0800|Your Name|Update email link to use Hugging Face URL
+17b99c8e8daadfa5bc3a6fc0b2d45db3554af4c2|2025-12-07 17:11:16 +0800|Your Name|Fix missing apt package libgl1-mesa-glx
+b2f2ba469eb21e6e2fe7e4ea0f3ef7bd616f37ba|2025-12-07 17:09:39 +0800|Your Name|Fix Dockerfile and ignore notebooks
+3f9583ab4438a3748f3d22f19ef5b747a1b70f9f|2025-12-07 17:04:18 +0800|Your Name|Add README.md with Hugging Face configuration
+f7e56f79b619693979e7fb33cabc2cb2538ceb05|2025-12-07 16:48:02 +0800|Your Name|Oral AI first commit
