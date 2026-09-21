@@ -1,0 +1,8 @@
+class_id,class_name,test_instances,test_images,contam_instances_aligned124,pct_instances_aligned124,contam_images_aligned124,contam_instances_orient259,pct_instances_orient259,contam_images_orient259
+0,calculus,1465,342,268,18.29,52,455,31.06,93
+1,caries,1694,536,129,7.62,40,251,14.82,81
+2,gingivitis,1544,297,345,22.34,59,597,38.67,106
+3,hypodontia,334,184,55,16.47,29,144,43.11,78
+4,tooth_discolation,4153,610,370,8.91,49,825,19.87,106
+5,ulcer,498,274,3,0.60,2,3,0.60,2
+,ALL,9688,1500,1170,12.08,124,2275,23.48,259
