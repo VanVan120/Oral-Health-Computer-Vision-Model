@@ -213,3 +213,68 @@ duplicated images are not a random sample of the split.
 
 This is an implementation detail of a pre-specified analysis; the estimand, the
 p-value formula and the MDE definition are unchanged.
+
+**D6 — 2026-09-22. Per-class contrasts: resample count, and the point estimate.**
+
+Section 2.5 inherits the 10,000-resample cluster bootstrap specified in 2.3(a).
+The table published in the R1 summary was computed with **2,000**. Two
+corrections, both applied by re-running:
+
+1. The bootstrap is now run at the pre-registered **10,000** resamples.
+2. The point estimate reported for each contrast is now the **observed** D-minus-ND
+   difference. The earlier table reported the bootstrap **mean** in that column,
+   which is a resampling artefact rather than an estimate of the quantity. The
+   two differ by at most 0.0021 here, so no conclusion changes; the bias is
+   reported per class alongside the corrected figures.
+
+Percentile intervals are unchanged in definition (2.5th and 97.5th). No
+estimand changes.
+
+**D7 — 2026-09-22. The fitness formula in this plan is wrong for the pinned
+ultralytics.**
+
+Section 2.7 of this plan defines fitness as `0.1 * mAP@0.5 + 0.9 * mAP@0.5:0.95`.
+That is an older ultralytics convention. The pinned version, **8.3.231**, defines
+it in `DetMetrics.fitness` as
+
+    w = [0.0, 0.0, 0.0, 1.0]   # weights for [P, R, mAP@0.5, mAP@0.5:0.95]
+
+so **fitness is mAP@0.5:0.95 alone**. Confirmed two ways: against the installed
+source, and against `best.pt`, whose stored `train_metrics.fitness` (0.38766) is
+equal to its stored `metrics/mAP50-95(B)` (0.38766) to every digit.
+
+Validation fitness is therefore reported as mAP@0.5:0.95. This changes the
+reported delta from −0.00520 (under the plan's formula) to **−0.00473**. The
+direction and the order of magnitude are unchanged.
+
+This is an error in the pre-registered plan, corrected against the software the
+plan itself pins, and recorded rather than silently fixed.
+
+**D8 — 2026-09-22. Exploratory analyses in addendum R1b.**
+
+The following were requested after the pre-registered analysis was complete and
+are **not in this plan**. They are exploratory, and every number they produce is
+labelled as such wherever it appears. None of them alters a pre-registered
+estimand; they test whether pre-registered conclusions survive.
+
+- **R1b item 1** — re-determining the duplicate transform at 256x256, the
+  cross-tab against the thumbnail transform and against the published S2, the
+  pixel-dimension and aspect-ratio checks, the recomputation of 2.6(b) under the
+  full-resolution transform, and the within-rule oracle upper bound on box F1.
+- **R1b item 2** — the five model-versus-label consistency contrasts, their
+  stratification by whether the training augmentation could reach the twin's
+  frame, and the interaction test. **Note that the stratification variable was
+  chosen after seeing the per-transform breakdown**, which is why the interaction
+  is reported with its full sensitivity analysis (threshold sweep, weighting,
+  matching rule, balance controls) rather than as a single p-value.
+- **R1b item 3** — visual inspection of 24 pairs.
+- **R1b item 4** — decomposing the image-level "No Issues Detected" rate into
+  router rejection versus accepted-with-no-finding. This is a *refinement* of the
+  pre-registered 3.4 reporting, not a new estimand: the earlier figure was a sum
+  of two events that mean opposite things to a user.
+- **R1b item 8** — full-resolution verification of the validation pairs against
+  a random-pair null.
+
+Items 1, 2 and 3 were prompted by a question the plan does not ask: whether the
+2.6(b) annotation-disagreement finding could be an artefact of a misregistered
+frame. It is not, and the checks are reported whichever way they came out.

@@ -1,0 +1,183 @@
+{
+  "seed": 20260921,
+  "t_global": 0.2822822822822823,
+  "transform_argmin_decisiveness": {
+    "note": "if the argmin were a near-tie, thumbnail-vs-full-resolution agreement would be weak evidence. It is not a near-tie.",
+    "gap_runner_up_minus_winner_rms": {
+      "min": 22.12069070492086,
+      "p1": 24.2065312579588,
+      "median": 43.024575096252505,
+      "max": 92.39753265558355
+    },
+    "ratio_runner_up_over_winner": {
+      "min": 3.6353419839285914,
+      "median": 25.287594188023235,
+      "max": 1722.0951535698364
+    },
+    "n_pairs_ratio_below_2": 0,
+    "n_pairs_gap_below_2_rms": 0,
+    "interpretation": "the winner beats the runner-up by at least 22.1 RMS units on a 0-255 scale, so thumbnail and full resolution could scarcely have disagreed; the 259/259 agreement is a consistency check, not independent corroboration of the transform column"
+  },
+  "where_the_instability_lives": {
+    "same_transform_as_published": 225,
+    "same_train_image_as_published": 222,
+    "pairs_same_twin_but_different_transform": 0,
+    "published_transform_recovered_on_published_pairing": "37/37",
+    "relative_rms_difference_between_competing_twins": {
+      "min": 7.661461933962944e-05,
+      "median": 0.038024370938506066,
+      "p90": 2.461460284242694,
+      "n_within_10pct": 22
+    },
+    "conclusion": "the transform RULE is fully reproducible -- given the same twin it returns the same transform every time, and it recovers the published transform on the published pairing. The irreproducible step is WHICH training image is nearest, where competing candidates are often within a few percent of each other."
+  },
+  "reproduces_S47": {
+    "i_predD_vs_predTwin": 0.7875402792696026,
+    "ii_labelD_vs_labelTwin": 0.6619311875693674,
+    "iii_predD_vs_labelD": 0.6797642436149313,
+    "iv_predD_vs_labelTwin": 0.6838624338624338,
+    "v_predTwin_vs_labelTwin": 0.8006114872242848
+  },
+  "matching_rule_sensitivity": {
+    "note": "the first implementation matched class-agnostically then filtered for class agreement, so a wrong-class pairing could block a correct-class one. Re-matched within each class separately.",
+    "agnostic_then_filter": {
+      "i_predD_vs_predTwin": 0.7875402792696026,
+      "ii_labelD_vs_labelTwin": 0.6619311875693674,
+      "iii_predD_vs_labelD": 0.6797642436149313,
+      "iv_predD_vs_labelTwin": 0.6838624338624338,
+      "v_predTwin_vs_labelTwin": 0.8006114872242848
+    },
+    "within_class": {
+      "i_predD_vs_predTwin": 0.792266380236305,
+      "ii_labelD_vs_labelTwin": 0.6619311875693674,
+      "iii_predD_vs_labelD": 0.6819471731063087,
+      "iv_predD_vs_labelTwin": 0.6860670194003528,
+      "v_predTwin_vs_labelTwin": 0.8006114872242848
+    },
+    "iv_minus_iii_agnostic": 0.0040981902475025755,
+    "iv_minus_iii_within_class": 0.0041198462940440495
+  },
+  "stratified_interaction": {
+    "rationale": "best.pt train_args: fliplr 0.27883, flipud 0.0, degrees 0. The model can only reproduce a twin's labels in a frame training could present. identity and hflip are reachable; vflip and rot180 are not. The hypothesis is therefore only testable on the reachable stratum.",
+    "reachable": {
+      "n_pairs": 139,
+      "transforms": [
+        "identity",
+        "hflip"
+      ],
+      "iv_minus_iii": 0.07361056040179748,
+      "ci_lo": 0.03328020026637845,
+      "ci_hi": 0.11254417707942994
+    },
+    "unreachable": {
+      "n_pairs": 120,
+      "transforms": [
+        "vflip",
+        "rot180"
+      ],
+      "iv_minus_iii": -0.08094925196887881,
+      "ci_lo": -0.13468307809145624,
+      "ci_hi": -0.03229112273454739
+    },
+    "interaction_reachable_minus_unreachable": {
+      "point": 0.15455981237067629,
+      "ci_lo": 0.09467336353548969,
+      "ci_hi": 0.21819821259808875,
+      "p_interaction_le_0": 0.0,
+      "n_resamples_used": 10000
+    },
+    "identity_only": {
+      "n_pairs": 59,
+      "iv_minus_iii": 0.06822179318029697
+    },
+    "balance_controls": {
+      "note": "if the unreachable pairs were simply harder, the within-frame contrasts would differ too. They do not: only the cross-frame quantities move.",
+      "iii_predD_vs_labelD": {
+        "reachable": 0.6819984139571769,
+        "unreachable": 0.6770276833414278
+      },
+      "v_predTwin_vs_labelTwin": {
+        "reachable": 0.8003220611916263,
+        "unreachable": 0.8009546539379475
+      },
+      "i_predD_vs_predTwin": {
+        "reachable": 0.8701809598741149,
+        "unreachable": 0.6881211547562707
+      }
+    }
+  },
+  "t_global_sweep_iv_minus_iii": {
+    "0.05": {
+      "pooled": -0.006646713873145194,
+      "reachable": 0.025754705830653757,
+      "unreachable": -0.04508608026323524
+    },
+    "0.1": {
+      "pooled": -0.0037775095909499123,
+      "reachable": 0.04378078431787524,
+      "unreachable": -0.06082662912131964
+    },
+    "0.2": {
+      "pooled": -0.0015450314816894961,
+      "reachable": 0.061432494395712633,
+      "unreachable": -0.07767040191244567
+    },
+    "t_global": {
+      "pooled": 0.0040981902475025755,
+      "reachable": 0.07361056040179748,
+      "unreachable": -0.08094925196887881
+    },
+    "0.35": {
+      "pooled": 0.004789203257009045,
+      "reachable": 0.07235689960152825,
+      "unreachable": -0.07842099398261648
+    },
+    "0.45": {
+      "pooled": 0.01201929486339759,
+      "reachable": 0.08349172008006944,
+      "unreachable": -0.07634027675719168
+    },
+    "0.6": {
+      "pooled": 0.016193015244796216,
+      "reachable": 0.0792647231003395,
+      "unreachable": -0.06053978668441651
+    }
+  },
+  "weighting_sensitivity": {
+    "note": "259 pairs cover fewer distinct training twins, so micro-averaging pools some twins two or three times into the (ii)/(iv)/(v) denominators while every test image enters once. Reported so the pooled figure is not read as weighting-independent.",
+    "n_pairs": 259,
+    "n_distinct_train_twins": 224,
+    "twins_used_twice": 29,
+    "twins_used_three_times": 3,
+    "iv_minus_iii": {
+      "micro_pooled": 0.0040981902475025755,
+      "macro_per_pair": 0.00026320155891446095,
+      "micro_dedup_one_pair_per_twin": 0.013380772961160692
+    },
+    "ordering_under_macro": {
+      "i_predD_vs_predTwin": 0.7744232866949069,
+      "ii_labelD_vs_labelTwin": 0.6689590101840031,
+      "iii_predD_vs_labelD": 0.6778998594904172,
+      "iv_predD_vs_labelTwin": 0.6781630610493317,
+      "v_predTwin_vs_labelTwin": 0.8168020624112451
+    }
+  },
+  "what_i_vs_ii_measures": {
+    "note": "F1 here is the Dice coefficient 2tp/(np+nt), which factorises as [2 min(np,nt)/(np+nt)] x [tp/min(np,nt)]: a cardinality ceiling times a spatial-agreement term. If the gap lives in the ceiling, '(i) > (ii)' is mostly a statement about how reproducible the BOX COUNT is, not about annotation quality.",
+    "pooled_gap_i_minus_ii": 0.12560909170023515,
+    "cardinality_ceiling": {
+      "i": 0.9907626208378089,
+      "ii": 0.9900110987791343
+    },
+    "restricted_to_pairs_with_equal_counts_on_BOTH_contrasts": {
+      "n_pairs": 53,
+      "i": 0.8769230769230769,
+      "ii": 0.8689320388349513,
+      "gap": 0.007991038088125624
+    },
+    "box_count_reproducibility": {
+      "P_equal_counts_model": 0.3745173745173745,
+      "P_equal_counts_annotators": 0.3281853281853282
+    }
+  }
+}

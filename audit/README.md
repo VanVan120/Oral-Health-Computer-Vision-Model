@@ -94,6 +94,16 @@ Prose findings are in the `.md` files; every number behind them is in the
 | `S36`, `S37`, `S42` | 4.1, 4.2 | Model A reproduction, per-image scores for all 544, **the write-up and the `model_a_best.pth` correction** |
 | `S38`, `S39`, `S40` | 2.8 | photometric tier — measured, and dropped with reasons |
 | `reference/` | 0.3 | the published S0–S5 verbatim, with PROVENANCE.md |
+| `S47`, `S48`, `S52` | R1b 1-2 | full-resolution transforms, per-pair table, and the robustness re-analysis **(exploratory)** |
+| `S49` | R1b 4 | router outcomes decomposed into four mutually exclusive events |
+| `S50`, `S51` | R1b 8 | validation pairs verified at full resolution against a null |
+| `S53` | R1b 6 | best.pt's full 48-epoch validation curve, and the epoch-selection margin |
+
+Addendum R1b scripts: `addendum_concordance.py` (items 1-2),
+`addendum_sheets.py` (item 3, writes outside the repo), `addendum_router_outcomes.py`
+(item 4), `addendum_valid_verify.py` (item 8), `addendum_robustness.py` (the
+re-analysis after adversarial review). Items 1, 2, 3, 8 and the item-4
+decomposition are **exploratory** — not in the pre-registered plan; see D8.
 
 Three files record **corrections to earlier conclusions in this same audit**:
 `S13` (SAHI is never exercised — the opposite of what was first written),

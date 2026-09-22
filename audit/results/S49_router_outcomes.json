@@ -1,0 +1,387 @@
+{
+  "n_images": 1500,
+  "outcome_definitions": {
+    "rejected_router_or_gate": "router_label != Clinical: softmax below 0.95, or one of the three image-quality gates fired",
+    "accepted_no_finding": "routed Clinical and the detector reported nothing after per-class thresholding -- the only outcome that is a detector miss",
+    "accepted_condition_reported": "routed Clinical and this condition was shown",
+    "accepted_other_findings_only": "routed Clinical, something was shown, but not this condition"
+  },
+  "bootstrap": {
+    "design": "Phase 2.1 cluster bootstrap, stratified by whether a cluster contains a D image, as pre-specified in 2.3",
+    "n_resamples": 10000
+  },
+  "all_images": {
+    "n": 1500,
+    "note": "with cond=None, outcomes 3 and 4 collapse: 'accepted_condition_reported' means 'accepted and at least one finding shown', and 'accepted_other_findings_only' is empty by construction",
+    "outcomes": {
+      "rejected_router_or_gate": {
+        "k": 344,
+        "proportion": 0.22933333333333333,
+        "wilson95": [
+          0.20876568784522928,
+          0.25128377731796225
+        ],
+        "cluster_boot95": [
+          0.20902380601285708,
+          0.24983889623265032
+        ]
+      },
+      "accepted_no_finding": {
+        "k": 59,
+        "proportion": 0.03933333333333333,
+        "wilson95": [
+          0.030615277481382798,
+          0.05040487135547774
+        ],
+        "cluster_boot95": [
+          0.0294314381270903,
+          0.04946606781964837
+        ]
+      },
+      "accepted_condition_reported": {
+        "k": 1097,
+        "proportion": 0.7313333333333333,
+        "wilson95": [
+          0.7083313345671101,
+          0.7531534821530192
+        ],
+        "cluster_boot95": [
+          0.7093091490975546,
+          0.7531976039684356
+        ]
+      },
+      "accepted_other_findings_only": {
+        "k": 0,
+        "proportion": 0.0,
+        "wilson95": [
+          0.0,
+          0.002554430720181488
+        ],
+        "cluster_boot95": [
+          0.0,
+          0.0
+        ]
+      }
+    }
+  },
+  "by_condition_present": {
+    "Calculus": {
+      "n_present": 342,
+      "outcomes": {
+        "rejected_router_or_gate": {
+          "k": 21,
+          "proportion": 0.06140350877192982,
+          "wilson95": [
+            0.040509035243411415,
+            0.09204146629857175
+          ],
+          "cluster_boot95": [
+            0.03746195696086617,
+            0.08823529411764706
+          ]
+        },
+        "accepted_no_finding": {
+          "k": 2,
+          "proportion": 0.005847953216374269,
+          "wilson95": [
+            0.0016051873754230964,
+            0.021068377695211273
+          ],
+          "cluster_boot95": [
+            0.0,
+            0.015151515151515152
+          ]
+        },
+        "accepted_condition_reported": {
+          "k": 280,
+          "proportion": 0.8187134502923976,
+          "wilson95": [
+            0.7744162615987762,
+            0.8559303739473827
+          ],
+          "cluster_boot95": [
+            0.775811209439528,
+            0.8592386341686129
+          ]
+        },
+        "accepted_other_findings_only": {
+          "k": 39,
+          "proportion": 0.11403508771929824,
+          "wilson95": [
+            0.08454960526374036,
+            0.15209483609320482
+          ],
+          "cluster_boot95": [
+            0.08,
+            0.15
+          ]
+        }
+      }
+    },
+    "Caries": {
+      "n_present": 536,
+      "outcomes": {
+        "rejected_router_or_gate": {
+          "k": 100,
+          "proportion": 0.1865671641791045,
+          "wilson95": [
+            0.15585996327406834,
+            0.22173507965945174
+          ],
+          "cluster_boot95": [
+            0.15469516161920205,
+            0.22043081868350684
+          ]
+        },
+        "accepted_no_finding": {
+          "k": 6,
+          "proportion": 0.011194029850746268,
+          "wilson95": [
+            0.005140143431660497,
+            0.024204506857519667
+          ],
+          "cluster_boot95": [
+            0.003596960851426579,
+            0.020726121810538654
+          ]
+        },
+        "accepted_condition_reported": {
+          "k": 391,
+          "proportion": 0.7294776119402985,
+          "wilson95": [
+            0.6903357562896251,
+            0.7653535872769048
+          ],
+          "cluster_boot95": [
+            0.6915699156470152,
+            0.7662572638695299
+          ]
+        },
+        "accepted_other_findings_only": {
+          "k": 39,
+          "proportion": 0.07276119402985075,
+          "wilson95": [
+            0.05368054893057547,
+            0.09792221792523467
+          ],
+          "cluster_boot95": [
+            0.05197074430945398,
+            0.09515260323159784
+          ]
+        }
+      }
+    },
+    "Gingivitis": {
+      "n_present": 297,
+      "outcomes": {
+        "rejected_router_or_gate": {
+          "k": 24,
+          "proportion": 0.08080808080808081,
+          "wilson95": [
+            0.05490196801914126,
+            0.11741955649384944
+          ],
+          "cluster_boot95": [
+            0.051194539249146756,
+            0.11278341768818932
+          ]
+        },
+        "accepted_no_finding": {
+          "k": 0,
+          "proportion": 0.0,
+          "wilson95": [
+            0.0,
+            0.012769047310675656
+          ],
+          "cluster_boot95": [
+            0.0,
+            0.0
+          ]
+        },
+        "accepted_condition_reported": {
+          "k": 213,
+          "proportion": 0.7171717171717171,
+          "wilson95": [
+            0.6634308267300525,
+            0.7653664557511691
+          ],
+          "cluster_boot95": [
+            0.6655515569917744,
+            0.7682129717229055
+          ]
+        },
+        "accepted_other_findings_only": {
+          "k": 60,
+          "proportion": 0.20202020202020202,
+          "wilson95": [
+            0.16029545409745005,
+            0.2513547862190132
+          ],
+          "cluster_boot95": [
+            0.15718944099378881,
+            0.24913524333644319
+          ]
+        }
+      }
+    },
+    "Hypodontia": {
+      "n_present": 184,
+      "outcomes": {
+        "rejected_router_or_gate": {
+          "k": 41,
+          "proportion": 0.22282608695652173,
+          "wilson95": [
+            0.16871447615407004,
+            0.2882744088323637
+          ],
+          "cluster_boot95": [
+            0.1649987113402062,
+            0.2849169520033639
+          ]
+        },
+        "accepted_no_finding": {
+          "k": 22,
+          "proportion": 0.11956521739130435,
+          "wilson95": [
+            0.08029911009223206,
+            0.17439151635973588
+          ],
+          "cluster_boot95": [
+            0.07142857142857142,
+            0.17058823529411765
+          ]
+        },
+        "accepted_condition_reported": {
+          "k": 95,
+          "proportion": 0.5163043478260869,
+          "wilson95": [
+            0.44450547468405033,
+            0.5874363556108652
+          ],
+          "cluster_boot95": [
+            0.44148936170212766,
+            0.5894736842105263
+          ]
+        },
+        "accepted_other_findings_only": {
+          "k": 26,
+          "proportion": 0.14130434782608695,
+          "wilson95": [
+            0.09828884395555816,
+            0.1989908895562973
+          ],
+          "cluster_boot95": [
+            0.09316770186335403,
+            0.1937180955497382
+          ]
+        }
+      }
+    },
+    "Tooth Discoloration": {
+      "n_present": 610,
+      "outcomes": {
+        "rejected_router_or_gate": {
+          "k": 75,
+          "proportion": 0.12295081967213115,
+          "wilson95": [
+            0.09922595473734495,
+            0.15139488002388596
+          ],
+          "cluster_boot95": [
+            0.09787928221859707,
+            0.14948496420865157
+          ]
+        },
+        "accepted_no_finding": {
+          "k": 1,
+          "proportion": 0.001639344262295082,
+          "wilson95": [
+            0.00028944315427416583,
+            0.009226790617091939
+          ],
+          "cluster_boot95": [
+            0.0,
+            0.0051284246575342435
+          ]
+        },
+        "accepted_condition_reported": {
+          "k": 481,
+          "proportion": 0.7885245901639344,
+          "wilson95": [
+            0.754364470888206,
+            0.8190734990336346
+          ],
+          "cluster_boot95": [
+            0.7554806070826307,
+            0.8210862619808307
+          ]
+        },
+        "accepted_other_findings_only": {
+          "k": 53,
+          "proportion": 0.08688524590163935,
+          "wilson95": [
+            0.06703898738759569,
+            0.11190210113340517
+          ],
+          "cluster_boot95": [
+            0.0650667808219178,
+            0.11092985318107668
+          ]
+        }
+      }
+    },
+    "Ulcers": {
+      "n_present": 274,
+      "outcomes": {
+        "rejected_router_or_gate": {
+          "k": 141,
+          "proportion": 0.5145985401459854,
+          "wilson95": [
+            0.45562923670926375,
+            0.5731641623534832
+          ],
+          "cluster_boot95": [
+            0.45582807159821587,
+            0.5730337078651685
+          ]
+        },
+        "accepted_no_finding": {
+          "k": 30,
+          "proportion": 0.10948905109489052,
+          "wilson95": [
+            0.0777774894644837,
+            0.15199908560703732
+          ],
+          "cluster_boot95": [
+            0.07443155159346014,
+            0.14814814814814814
+          ]
+        },
+        "accepted_condition_reported": {
+          "k": 100,
+          "proportion": 0.36496350364963503,
+          "wilson95": [
+            0.3101922939895922,
+            0.4234687646799992
+          ],
+          "cluster_boot95": [
+            0.3082700029644002,
+            0.42248062015503873
+          ]
+        },
+        "accepted_other_findings_only": {
+          "k": 3,
+          "proportion": 0.010948905109489052,
+          "wilson95": [
+            0.003730470399453789,
+            0.031690660998525744
+          ],
+          "cluster_boot95": [
+            0.0,
+            0.02491103202846975
+          ]
+        }
+      }
+    }
+  }
+}

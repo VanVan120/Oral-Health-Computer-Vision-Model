@@ -159,6 +159,16 @@ present" is the image-level sensitivity a user actually experiences.
 **Overall "No Issues Detected" rate: 0.2687 [0.2468, 0.2917] with the router,
 0.0740 [0.0618, 0.0884] without it.**
 
+> **CORRECTED 2026-09-22 (addendum R1b item 4).** The with-router figure of
+> 0.2687 adds together two events that mean opposite things to a user:
+> **0.2293 [0.2088, 0.2513]** of images the router or a gate REFUSED ("not a
+> valid oral health image"), and **0.0393 [0.0307, 0.0503]** the router ACCEPTED
+> and on which the detector then reported nothing. Only the latter is a detector
+> miss, so quoting 26.9% as a "no finding" rate overstates the detector's misses
+> roughly six-fold. The four mutually exclusive outcomes, per condition, with
+> Wilson and cluster-bootstrap intervals, are in `S49_router_outcomes.json` and
+> the ADDENDUM R1b section of `SUMMARY_R1.md`.
+
 ### What the router costs
 
 | condition | Δ reported-when-present (with − without) |

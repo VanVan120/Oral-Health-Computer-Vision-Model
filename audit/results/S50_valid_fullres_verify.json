@@ -1,0 +1,48 @@
+{
+  "method": "full resolution 256x256 greyscale, each image standardised to mean 0 sd 1, minimum over the dihedral group; null = 600 random query-train pairs scored identically. Decision rule r >= 0.95, the same rule S40 used to verify photometric candidates.",
+  "seed": 20260921,
+  "verify_rule_r": 0.95,
+  "validation": {
+    "n_pairs": 256,
+    "null": {
+      "n": 600,
+      "median_z_rms": 1.2614951615803007,
+      "min_z_rms": 0.5341760783974241,
+      "pct0.5_z_rms": 0.8508788958557378,
+      "median_as_r": 0.20431497865474546,
+      "min_as_r": 0.8573279586339745
+    },
+    "verified_full_resolution_r>=0.95": 256,
+    "verified_proportion": 1.0,
+    "below_null_minimum": 256,
+    "pearson_r": {
+      "min": 0.9817253230127507,
+      "p05": 0.9909409866844046,
+      "median": 0.9989506742232205,
+      "max": 0.9999999964527131
+    },
+    "transform_agreement_thumb_vs_fullres": 256
+  },
+  "test_reference": {
+    "n_pairs": 259,
+    "null": {
+      "n": 600,
+      "median_z_rms": 1.261277532509129,
+      "min_z_rms": 0.2773684873139309,
+      "pct0.5_z_rms": 0.858627972472553,
+      "median_as_r": 0.20458949299384155,
+      "min_as_r": 0.9615333611225909
+    },
+    "verified_full_resolution_r>=0.95": 259,
+    "verified_proportion": 1.0,
+    "below_null_minimum": 258,
+    "pearson_r": {
+      "min": 0.9599068761056652,
+      "p05": 0.9922489577095102,
+      "median": 0.9991947526469971,
+      "max": 0.9999998223927812
+    },
+    "transform_agreement_thumb_vs_fullres": 259
+  },
+  "csv": "audit/results/S51_valid_fullres_pairs.csv"
+}

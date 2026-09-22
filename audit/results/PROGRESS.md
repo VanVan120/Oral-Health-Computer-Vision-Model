@@ -230,3 +230,38 @@ from both — ultralytics does not store it), and a 27-item UNEXPECTED list.
 
 Tag `v1.1-r1` applied at the final commit, branch and tag pushed. No force-push,
 no history rewritten, no dataset image committed.
+
+# ADDENDUM R1b — 2026-09-22
+
+Ten follow-ups, all from existing caches; no new inference. Deviations D6, D7, D8
+appended to `ANALYSIS_PLAN_R1.md`. Items 1, 2, 3, 8 and the item-4 decomposition
+are exploratory.
+
+**The one that changes a conclusion.** Item 2's pooled (iv)−(iii) = +0.0041 is a
+cancellation artefact. Stratified by whether the training augmentation could
+reach the twin's frame (fliplr 0.27883, flipud 0, degrees 0): reachable
++0.0736 [+0.0333, +0.1125], unreachable −0.0809 [−0.1347, −0.0323], interaction
++0.1546 [+0.0947, +0.2182], P(≤0) = 0.0000. Balance controls clean — the
+within-frame contrasts (iii) and (v) are indistinguishable across strata, only
+the cross-frame ones move. An adversarial reviewer raised this as fatal against
+the first cut; it was correct and the numbers were re-derived independently in
+`S52`. Stratification chosen post hoc, so it is reported with its full
+sensitivity analysis and a replication caveat.
+
+Item 1: thumbnail and full-resolution transforms agree 259/259, but the argmin is
+decisive (min ratio 3.64) so that is a consistency check, not corroboration. The
+real instability is twin SELECTION — 222/259 against published S2, with competing
+twins often within a few percent. 2.6(b) reproduces exactly; oracle gain +0.0013,
+so registration is not the limiting factor. Item 3: 24/24 same photograph, 20/24
+labels differ, matching the computed flags on all 24. Item 4: 26.9% = 22.9%
+refused + 3.9% analysed-and-clean; the router refuses 51.5% of ulcer images
+against 6.1% of calculus ones. Item 5: contrasts rerun at 10,000 with observed
+point estimates. Item 6: fitness is mAP@0.5:0.95 for 8.3.231, not the plan's
+0.1/0.9 blend; selection margin 0.00111 against a 0.00473 level shift. Item 7:
+stratum `3|1` is hypodontia, not caries. Item 8: 256/256 validation pairs verify.
+Item 9: the HF Space is live (HTTP 200, RUNNING) and its lastModified is
+2026-04-24 — the pre-fix commit date, flagged as an unverified inference worth
+settling. Item 10: Claude Opus 5 (1M context), claude-opus-5[1m].
+
+Contact sheets in `~/Desktop/concordance_sheets/`, never committed.
+Tag `v1.1-r1b` at the final commit; `v1.1-r1` left where it is.

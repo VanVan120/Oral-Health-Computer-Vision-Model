@@ -133,8 +133,10 @@ RANDOM      design        metric        ctrl mean     SD      2.5-97.5%         
 
             merged (widened) strata: 22 strata, 2 could not be filled from their
             own bin and were widened, both reported rather than merged silently:
-              caries | >=16 instances : D needs 4,  ND has 0  -> caries | 8-15
-              caries | 1 instance     : D needs 26, ND has 25 -> caries | 2-3
+              caries     | >=16 instances : D needs 4,  ND has 0  -> caries | 8-15
+              hypodontia | 1 instance     : D needs 26, ND has 25 -> hypodontia | 2-3
+            (CORRECTED in addendum R1b item 7: the second stratum is `3|1`, whose
+            dominant class index 3 is HYPODONTIA. It was mislabelled caries here.)
             That ND holds NO caries-dominant image with >=16 instances while D
             holds four is itself a composition difference: D is not a random
             sample of the split. Ulcer cannot be balanced at all (D has 3
@@ -220,9 +222,18 @@ VALID       S7 exported: **256** validation images match a training image under
             full               1500       9396  0.75769    0.38737     0.42440
             de-duplicated      1244       7179  0.74827    0.38264     0.41920
             delta                                -0.00942   -0.00473   -0.00520
-            De-duplicating validation makes it HARDER. Model selection used
-            fitness; 0.0052 is far smaller than the gap between adjacent epochs in
-            the stored train_results, so no checkpoint choice turns on it. [S32]
+            De-duplicating validation makes it HARDER. [S32]
+            CORRECTED (addendum R1b item 6): the fitness figures above used this
+            plan's formula 0.1*mAP50 + 0.9*mAP50-95, which is WRONG for the pinned
+            ultralytics 8.3.231 -- its DetMetrics.fitness weights are [0,0,0,1],
+            so fitness IS mAP@0.5:0.95. Corrected: fitness full 0.38737,
+            de-duplicated 0.38264, delta **-0.00473** (deviation D7).
+            The sentence "no checkpoint choice turns on it" is WITHDRAWN: it was
+            unsupported. The relevant comparison is the SELECTION MARGIN between
+            the best and runner-up epoch, which is 0.00111 -- about a quarter of
+            the 0.00473 level shift. See the ADDENDUM for why a level shift
+            measured on one checkpoint still cannot show how the ranking of epochs
+            would change.
 
 PHOTOMETRIC verified: **NO** -- and the tier is therefore DROPPED, exactly as the
             spec instructs ("If they do not, report the result and drop the tier").
@@ -371,6 +382,13 @@ IMAGE-LEVEL per condition, over all 1,500 test images, Wilson 95% CIs. [S45, S34
 
             OVERALL "No Issues Detected": **0.2687 [0.2468, 0.2917] with the
             router, 0.0740 [0.0618, 0.0884] without it.**
+            CORRECTED (addendum R1b item 4): the with-router 0.2687 is NOT one
+            event. It is 0.2293 [0.2088, 0.2513] of images REFUSED by the router
+            or a gate -- the user is told the photograph is not a valid oral
+            health image -- plus 0.0393 [0.0307, 0.0503] ACCEPTED and then found
+            to contain nothing. Only the second is a detector miss. Calling the
+            sum a "No Issues Detected" rate overstates the detector's misses by
+            about six-fold. Full four-outcome decomposition in the ADDENDUM.
 
             what the router costs (d reported-when-present):
               Ulcers -0.350 | Caries -0.183 | Hypodontia -0.169
@@ -1124,3 +1142,557 @@ matters to the manuscript.
 27. **The router checkpoint stores no class names**, so a class-order mismatch
     there would be undetectable — structurally the same defect as Model B's,
     still unguarded, in the component that gates every request.
+
+---
+
+# ADDENDUM R1b
+
+Ten follow-ups, run 2026-09-22 on the existing caches. **No new inference was
+performed**: every number below comes from the Phase 1 caches, the box caches,
+the published CSVs, the checkpoint, or the image files.
+
+**Scope.** Earlier sections are unchanged except for the three corrections
+explicitly requested — item 4 (IMAGE-LEVEL), item 6 (VALID) and item 7 (RANDOM),
+each marked CORRECTED in place. Everything else is appended here. Where a result
+here supersedes an earlier table, it says so.
+
+**Pre-registration.** Deviations **D6** (contrast resamples and point estimate),
+**D7** (the plan's fitness formula is wrong for the pinned ultralytics) and
+**D8** (which of these analyses are exploratory) are recorded in
+`ANALYSIS_PLAN_R1.md`. Items 1, 2, 3, 8 and the item-4 decomposition are
+**EXPLORATORY**: they are not in the pre-registered plan.
+
+**Adversarial review.** Items 1 and 2 were independently re-checked by three
+adversarial agents, one of which returned a **fatal** objection to the first cut
+of item 2. That objection was correct, is adopted below, and changes the
+headline. The checks and the numbers were then re-derived independently
+(`S52_addendum_robustness.json`); the agents' figures are not taken on trust.
+
+```
+ITEM 1  TWIN CONCORDANCE, TRANSFORM CHECK  [S47, S48, S52]  — EXPLORATORY
+
+  Method: both images greyscale, resized to 256x256, RMS over all 8 dihedral
+  transforms. The transform maps TEST -> TRAIN, so its inverse carries the
+  twin's boxes into the test frame. The algebra was verified pixel-exhaustively
+  against the array operations, including group closure and both-sided
+  inverses.
+
+  CROSS-TAB, thumbnail transform (row) vs full-resolution transform (col):
+
+                 identity   hflip   vflip  rot180
+      identity         59       0       0       0
+      hflip             0      80       0       0
+      vflip             0       0      77       0
+      rot180            0       0       0      43
+
+  Perfectly diagonal: 259/259 agree. No pair resolves to rot90, rot270,
+  transpose or transverse.
+
+  IDENTICAL PIXEL DIMENSIONS:  258 / 259
+  SAME ASPECT RATIO (+-1%):    259 / 259
+  The single dimension mismatch is 612x375 against 295x180 — the same picture at
+  two scales (aspect ratios 1.6320 and 1.6389, 0.42% apart).
+
+  HOW MUCH DOES THE 259/259 ACTUALLY PROVE? Less than it looks, and this is
+  reported because the first draft of this addendum overstated it.
+  The argmin is not close: the runner-up transform's RMS exceeds the winner's by
+  at least 22.12 units on a 0-255 scale (median gap 43.02), a ratio of at least
+  3.64 (median 25.29). ZERO pairs have a ratio below 2. Thumbnail and
+  full-resolution resolutions could scarcely have disagreed, so this is a
+  consistency check, not independent corroboration.
+
+  WHERE THE REAL INSTABILITY IS. Against the PUBLISHED S2:
+      same transform as published    225 / 259
+      same train image as published  222 / 259
+      same twin but different transform    0 / 259
+      published transform recovered when run on the published pairing  37 / 37
+  So the transform RULE is fully reproducible — given the same twin it returns
+  the same answer, and it reproduces the published transform on the published
+  pairing every time. The irreproducible step is WHICH training image is
+  nearest: on the 37 disagreeing pairs the competing twins differ in RMS by a
+  median of 3.8%, and 22 of 37 are within 10% of each other. D is stable as a
+  SET of test images (symmetric difference 0 against S2); the per-pair
+  assignment is not, and the transform column should not be leaned on.
+
+  2.6(b) RECOMPUTED with the full-resolution transform, greedy IoU >= 0.5:
+
+                        precision  recall     F1
+      class-agnostic      0.6857   0.6721   0.6788
+      class-aware         0.6686   0.6554   0.6619
+      identical label sets  57 / 259 = 22.0%
+      2,275 test-side boxes vs 2,230 twin-side boxes
+
+  IDENTICAL to the original 2.6(b), to four decimals. That is expected — the
+  transform is the same and all four axis-safe transforms are self-inverse — and
+  it settles the question the item was asked to settle: **the annotation
+  disagreement in 2.6(b) is not an artefact of a misregistered frame.**
+
+  BY TRANSFORM:
+      transform   n   agnostic F1  aware F1  identical  oracle F1
+      identity   59     0.7487      0.7452     28.8%     0.7901
+      hflip      80     0.6904      0.6586     23.7%     0.6506
+      vflip      77     0.6234      0.6101     18.2%     0.6068
+      rot180     43     0.6444      0.6277     16.3%     0.6558
+
+  ORACLE UPPER BOUND — the best class-aware box F1 each pair could reach under
+  ANY of the four transforms the published rule can produce:
+      per-pair F1 at the chosen transform  0.6690
+      per-pair F1 at the best transform    0.6702
+      mean gain                            +0.0013
+      pairs where a different transform would help      2 / 259
+  Registration is not the limiting factor. Even an oracle that picked the best
+  transform per pair would move concordance by about one part in a thousand.
+  (This bound is over the four transforms the published rule emits, not over all
+  eight; all 259 pairs resolve to those four, so it is valid as stated.)
+
+  UNDER THE PUBLISHED PAIRING instead of the regenerated one: class-agnostic F1
+  0.6983, class-aware 0.6846, identical label sets 22.8% — the same picture.
+
+ITEM 2  MODEL CONSISTENCY vs LABEL CONSISTENCY  [S47, S52]  — EXPLORATORY
+
+  Class-aware box F1, greedy matching at IoU >= 0.5, at t_global = 0.2823,
+  twin boxes and twin predictions mapped through the full-resolution transform.
+  Micro-averaged (pooled counts). 10,000-resample cluster bootstrap over the
+  Phase 2.1 components containing a D image.
+
+  contrast                              F1      95% CI
+  (i)   predictions D vs predictions twin   0.7875  [0.7590, 0.8157]
+  (ii)  labels D vs labels twin             0.6619  [0.6231, 0.7001]
+  (iii) predictions D vs D's own labels     0.6798  [0.6450, 0.7134]
+  (iv)  predictions D vs twin's labels      0.6839  [0.6461, 0.7205]
+  (v)   predictions twin vs twin's labels   0.8006  [0.7686, 0.8312]
+
+  (iv) - (iii) = +0.0041  [-0.0320, +0.0403]
+
+  **THE POOLED (iv)-(iii) IS A CANCELLATION ARTEFACT. DO NOT READ IT AS A NULL.**
+
+  This is the correction an adversarial reviewer forced, and it is the most
+  important result in this addendum. best.pt was trained with
+  **fliplr 0.27883, flipud 0.0, degrees 0**. The model can only have memorised a
+  twin's labels in a frame that training could actually present. So the
+  hypothesis is testable on identity and hflip pairs, and NOT testable on vflip
+  and rot180 pairs, where the model provably cannot express the preference.
+
+  stratum        transforms          n     (iv)-(iii)   95% CI
+  reachable      identity, hflip    139     +0.0736   [+0.0333, +0.1125]
+  unreachable    vflip, rot180      120     -0.0809   [-0.1347, -0.0323]
+  INTERACTION    reachable - unreachable   +0.1546   [+0.0947, +0.2182]
+                 P(interaction <= 0) = 0.0000 over 10,000 resamples
+  identity alone (no registration at all, n=59)  +0.0682
+
+  Both stratum CIs exclude zero, in OPPOSITE directions. Pooling them produces
+  +0.0041 and the appearance of a null.
+
+  BALANCE CONTROLS — is the unreachable stratum simply harder? No.
+      quantity                           reachable  unreachable
+      (iii) predictions D vs D's labels    0.6820     0.6770
+      (v)   predictions twin vs twin's     0.8003     0.8010
+      (i)   predictions D vs predictions   0.8702     0.6881
+  The two WITHIN-frame contrasts are indistinguishable across strata. Only the
+  CROSS-frame quantities move. That is the signature of a frame-transfer effect,
+  not of pair difficulty.
+
+  ROBUSTNESS of the stratified result — the sign holds at every operating point:
+      threshold   pooled    reachable  unreachable
+      0.05        -0.0066    +0.0258     -0.0451
+      0.10        -0.0038    +0.0438     -0.0608
+      0.20        -0.0015    +0.0614     -0.0777
+      t_global    +0.0041    +0.0736     -0.0809
+      0.35        +0.0048    +0.0724     -0.0784
+      0.45        +0.0120    +0.0835     -0.0763
+      0.60        +0.0162    +0.0793     -0.0605
+  The POOLED statistic crosses zero inside this range and its sign depends on
+  the threshold — another reason not to report it. The STRATIFIED result is
+  positive on reachable and negative on unreachable at all seven thresholds.
+
+  WEIGHTING. 259 pairs cover 224 distinct training twins (29 used twice, 3 three
+  times), so micro-averaging pools some twins repeatedly into the (ii)/(iv)/(v)
+  denominators while every test image enters once:
+      micro-averaged (pooled)              +0.0041
+      macro-averaged (per pair)            +0.0003
+      micro, one pair per distinct twin    +0.0134
+  The pooled figure is weighting-dependent; the stratified contrast is what
+  survives.
+
+  MATCHING RULE. The first implementation matched class-agnostically and then
+  filtered for class agreement, so a wrong-class pairing could block a
+  correct-class one. Re-matched within each class separately:
+      (i) 0.7875 -> 0.7923   (iii) 0.6798 -> 0.6819   (iv) 0.6839 -> 0.6861
+      (ii) and (v) unchanged;  (iv)-(iii) identical at +0.0041
+  Benign, and reported so it is not mistaken for an unexamined confound.
+
+  WHAT (i) > (ii) ACTUALLY SAYS — weaker than it first appears.
+  F1 here is the Dice coefficient 2tp/(np+nt), which mixes spatial agreement
+  with agreement about HOW MANY boxes there are. Restricting to the 53 pairs
+  where both contrasts have equal counts on the two sides:
+      all 259 pairs:        (i) 0.7875  (ii) 0.6619   gap +0.1256
+      53 equal-count pairs: (i) 0.8769  (ii) 0.8689   gap +0.0080
+      P(equal box counts):  model 0.375   annotators 0.328
+  Almost the entire gap lives on pairs where the two sides disagree about the
+  number of boxes. So "the model is more self-consistent than the annotators
+  are" is substantially "the model emits a more reproducible box COUNT" — a
+  near-mechanical consequence of thresholding one deterministic scorer at one
+  fixed cut on near-identical pixels. It is NOT strong evidence about annotation
+  quality, and the earlier draft of this addendum overstated it.
+
+  WHAT ITEM 2 SUPPORTS:
+   - On pairs whose frame the training augmentation could reach, the model
+     reproduces the TRAINING twin's annotation better than the test image's own,
+     by +0.0736 [+0.0333, +0.1125]. That is a memorisation signature, and it is
+     mechanistically predicted rather than fished: the stratifying variable is
+     fixed by best.pt's own train_args.
+   - On pairs it could not reach, the effect reverses.
+   - The interaction is +0.1546 [+0.0947, +0.2182] and survives every sensitivity
+     check applied.
+  CAVEAT, stated plainly: the stratification was chosen AFTER seeing the
+  per-transform breakdown. The augmentation rationale is pre-existing and the
+  balance controls are clean, but this is an exploratory finding on 259 pairs
+  and should be replicated before it carries weight in print.
+
+ITEM 3  VISUAL CHECK, 24 PAIRS  [~/Desktop/concordance_sheets/]  — EXPLORATORY
+
+  3 sheets of 8, seed 20260921, stratified by transform (8 hflip, 7 vflip,
+  5 identity, 4 rot180). Left panel: the test image with its own boxes. Right:
+  the training twin mapped into the test frame with its boxes. NOT COMMITTED —
+  they contain dataset images.
+
+  SAME PHOTOGRAPH: **24 / 24 = YES.** Every twin registers onto its test image
+  exactly — same subject, framing, lighting and specular highlights. No pair is
+  merely a similar clinical photograph, and no mapping is visibly wrong, which
+  is an end-to-end check of the transform algebra by eye.
+
+  LABELS DIFFER: **20 / 24 = YES**, 4 = no. The four that agree (#12, #21, #22,
+  #23) are exactly the four the IoU-based flag calls identical — my reading and
+  the computed statistic agree on all 24 panels.
+
+   #  tf        test/twin boxes  how the labels differ
+   1  rot180     6 / 12   extra boxes in twin; twin adds gingivitis, absent in test
+   2  rot180    22 / 21   twin adds calculus; only 8 of 22 boxes match
+   3  hflip      2 / 3    extra calculus box in twin
+   4  rot180    11 / 11   same classes and counts; one box differs in extent
+   5  hflip     13 / 11   missing boxes in twin
+   6  hflip     18 / 13   twin omits gingivitis entirely
+   7  vflip      9 / 5    twin omits tooth_discolation entirely
+   8  identity  12 / 3    twin omits tooth_discolation; 3 boxes against 12
+   9  hflip      7 / 7    same counts; 2 of 7 differ in extent
+  10  identity   4 / 2    twin omits hypodontia
+  11  vflip     19 / 19   same counts; 3 matched boxes carry DIFFERENT classes
+  12  vflip      2 / 2    -- identical --
+  13  vflip     14 / 8    twin omits gingivitis and tooth_discolation; 2 of 14 match
+  14  vflip      4 / 3    one hypodontia box missing in twin
+  15  rot180     1 / 8    twin adds calculus and tooth_discolation; 1 box vs 8
+  16  identity  11 / 9    missing boxes and differing extent
+  17  hflip      1 / 3    test under-annotated: 1 hypodontia box against 3
+  18  vflip     22 / 25   extra boxes in twin; 20 of 22 match
+  19  identity  14 / 12   twin omits gingivitis
+  20  vflip     23 / 29   twin omits caries but adds 6 boxes; 1 class disagreement
+  21  hflip      1 / 1    -- identical --
+  22  hflip      2 / 2    -- identical --
+  23  identity   2 / 2    -- identical --
+  24  hflip     13 / 15   twin omits calculus; 3 matched boxes carry different classes
+
+  The dominant failure is a WHOLE CLASS present on one side and absent on the
+  other (#6, #7, #8, #10, #13, #19, #20, #24 — 8 of 24), not small
+  disagreements about box extent. Two pairs (#11, #24) put a different class on
+  the same lesion. The four agreeing pairs are all small: one or two boxes.
+
+ITEM 4  ROUTER OUTCOMES, DECOMPOSED  [S49]  — refinement of 3.4, not a new estimand
+
+  The earlier IMAGE-LEVEL section reported a with-router "No Issues Detected"
+  rate of 0.2687. That number adds together two events that mean OPPOSITE things
+  to a user: an image the router refused as "not a valid oral health image", and
+  an image the router accepted on which the detector then found nothing. Only
+  the second is a detector miss. The wording is CORRECTED in place above and in
+  S46; the decomposition is here.
+
+  Four mutually exclusive, exhaustive outcomes. Wilson 95% and the pre-specified
+  10,000-resample cluster bootstrap (Phase 2.1 components, stratified by whether
+  a component contains a D image).
+
+  ALL 1,500 IMAGES
+    outcome                          k      prop    Wilson 95%        cluster boot 95%
+    rejected by router or gate     344    0.2293  [0.2088, 0.2513]  [0.2090, 0.2498]
+    accepted, no finding            59    0.0393  [0.0306, 0.0504]  [0.0294, 0.0495]
+    accepted, >=1 finding         1097    0.7313  [0.7083, 0.7532]  [0.7093, 0.7532]
+  (With no condition named, outcomes 3 and 4 collapse; "accepted, other findings
+  only" is empty by construction.)
+
+  So of the 26.87% shown "No Issues Detected", **85.4% were never analysed at
+  all** and 14.6% were analysed and came back clean. Quoting 26.9% as a
+  no-finding rate overstates the detector's misses roughly six-fold.
+
+  BY CONDITION PRESENT — proportion [Wilson 95%] (cluster bootstrap 95%):
+
+  Calculus (n=342)
+    rejected            0.0614 [0.0405,0.0920] (0.0375,0.0882)
+    accepted no finding 0.0058 [0.0016,0.0211] (0.0000,0.0152)
+    condition reported  0.8187 [0.7744,0.8559] (0.7758,0.8592)
+    other findings only 0.1140 [0.0845,0.1521] (0.0800,0.1500)
+  Caries (n=536)
+    rejected            0.1866 [0.1559,0.2217] (0.1547,0.2204)
+    accepted no finding 0.0112 [0.0051,0.0242] (0.0036,0.0207)
+    condition reported  0.7295 [0.6903,0.7654] (0.6916,0.7663)
+    other findings only 0.0728 [0.0537,0.0979] (0.0520,0.0952)
+  Gingivitis (n=297)
+    rejected            0.0808 [0.0549,0.1174] (0.0512,0.1128)
+    accepted no finding 0.0000 [0.0000,0.0128] (0.0000,0.0000)
+    condition reported  0.7172 [0.6634,0.7654] (0.6656,0.7682)
+    other findings only 0.2020 [0.1603,0.2514] (0.1572,0.2491)
+  Hypodontia (n=184)
+    rejected            0.2228 [0.1687,0.2883] (0.1650,0.2849)
+    accepted no finding 0.1196 [0.0803,0.1744] (0.0714,0.1706)
+    condition reported  0.5163 [0.4445,0.5874] (0.4415,0.5895)
+    other findings only 0.1413 [0.0983,0.1990] (0.0932,0.1937)
+  Tooth Discoloration (n=610)
+    rejected            0.1230 [0.0992,0.1514] (0.0979,0.1495)
+    accepted no finding 0.0016 [0.0003,0.0092] (0.0000,0.0051)
+    condition reported  0.7885 [0.7544,0.8191] (0.7555,0.8211)
+    other findings only 0.0869 [0.0670,0.1119] (0.0651,0.1109)
+  Ulcers (n=274)
+    rejected            0.5146 [0.4556,0.5732] (0.4558,0.5730)
+    accepted no finding 0.1095 [0.0778,0.1520] (0.0744,0.1481)
+    condition reported  0.3650 [0.3102,0.4235] (0.3083,0.4225)
+    other findings only 0.0109 [0.0037,0.0317] (0.0000,0.0249)
+
+  **THE ROUTER'S REJECTION IS STRONGLY CONDITION-DEPENDENT, AND WORST WHERE IT
+  MATTERS MOST.** It refuses 51.5% of ulcer-bearing images against 6.1% of
+  calculus-bearing ones — an eight-fold difference, with non-overlapping
+  intervals. Ulcers are the condition most likely to need urgent review, and
+  they are also the ones the gate in front of the detector discards most often.
+  The earlier reading, that ulcer sensitivity is low because the class threshold
+  is 0.75, is only part of it: most of the loss happens BEFORE the detector runs.
+  Of the 63.5% of ulcer images not reported, four fifths were never analysed.
+
+ITEM 5  PER-CLASS CONTRASTS AT 10,000 RESAMPLES  [S32]  — deviation D6
+
+  **This table REPLACES the CONTRASTS table above**, which used 2,000 resamples
+  and reported the bootstrap MEAN in the point-estimate column. The plan
+  specified 10,000, and the point estimate should be the observed difference.
+
+  Observed D minus ND, with percentile cluster-bootstrap 95% CIs, 10,000
+  resamples. t_global = 0.2823.
+
+  class (deployed thr)   dRecall @ t_global        dRecall @ deployed
+  calculus   (0.25)      +0.0245 [-0.0592,+0.1090]  +0.0221 [-0.0613,+0.1065]
+  caries     (0.35)      -0.0367 [-0.1221,+0.0374]  -0.0673 [-0.1576,+0.0108]
+  gingivitis (0.30)      +0.0715 [-0.0198,+0.1657]  +0.0680 [-0.0249,+0.1649]
+  hypodontia (0.60)      +0.0270 [-0.0924,+0.1463]  +0.0029 [-0.1399,+0.1471]
+  tooth_disc (0.40)      -0.0483 [-0.1050,+0.0013]  -0.0669 [-0.1290,-0.0116]
+
+  class (deployed thr)   dPrecision @ t_global     dPrecision @ deployed
+  calculus   (0.25)      -0.0547 [-0.1327,+0.0230]  -0.0538 [-0.1298,+0.0207]
+  caries     (0.35)      -0.0568 [-0.1555,+0.0345]  -0.0511 [-0.1493,+0.0401]
+  gingivitis (0.30)      -0.0333 [-0.1257,+0.0572]  -0.0327 [-0.1250,+0.0616]
+  hypodontia (0.60)      +0.0108 [-0.1098,+0.1282]  +0.0177 [-0.0905,+0.1245]
+  tooth_disc (0.40)      -0.0695 [-0.1322,-0.0150]  -0.0605 [-0.1220,-0.0073]
+
+  Bootstrap mean minus observed, deployed thresholds: calculus +0.00099,
+  caries -0.00212, gingivitis +0.00132, hypodontia +0.00061, tooth_disc -0.00102.
+  The bias is small, so no conclusion changes — nine of ten recall intervals
+  still span zero and tooth_discolation still clears zero in the WRONG direction
+  — but the point estimates above are the correct ones.
+
+ITEM 6  VALIDATION  [S32, S53]  — deviation D7
+
+  (a) The sentence "no checkpoint choice turns on it" is WITHDRAWN from the VALID
+      section. It was unsupported.
+
+  (b) The plan's fitness formula is wrong for the pinned library. ultralytics
+      8.3.231 defines DetMetrics.fitness with
+          w = [0.0, 0.0, 0.0, 1.0]   over [P, R, mAP@0.5, mAP@0.5:0.95]
+      so **fitness IS mAP@0.5:0.95**. Confirmed against the installed source and
+      against best.pt, whose stored fitness 0.38766 equals its stored
+      mAP50-95 0.38766 exactly.
+
+      validation set     mAP@0.5    mAP@0.5:0.95 = fitness
+      full (1500)        0.75769    0.38737
+      de-duplicated(1244) 0.74827   0.38264
+      delta              -0.00942   **-0.00473**
+      (The plan's formula gave -0.00520. Direction and magnitude unchanged.)
+
+  (c) From best.pt's full train_results — 48 epochs, read from the checkpoint,
+      since S10 stored only the first 7 — ranked by validation mAP@0.5:0.95:
+
+        rank  epoch   mAP@0.5:0.95   mAP@0.5
+          1     28      0.38766      0.75956   <- the released checkpoint
+          2      8      0.38655      0.75886
+          3     26      0.38469      0.75435
+          4     25      0.38459      0.75771
+          5     35      0.38377      0.75385
+
+      **SELECTION MARGIN (best - runner-up) = 0.00111.**
+
+      The relevant comparison is the selection margin, not the level shift. The
+      de-duplication level shift is 0.00473 — about **4.3x the margin** that
+      separated the chosen epoch from the next one. So the contamination is large
+      enough to matter to checkpoint selection in principle.
+
+      **But a level shift measured on one checkpoint cannot show how the ranking
+      of epochs would change.** The shift was computed for epoch 28's weights
+      only. Whether epoch 8 would overtake epoch 28 on a de-duplicated validation
+      set depends on epoch 8's OWN de-duplicated score, which would require that
+      checkpoint. Only `best.pt` and one superseded warm start survive; the
+      per-epoch checkpoints were never committed. The honest statement is that
+      the shift exceeds the margin and the ranking is therefore NOT demonstrably
+      safe — not that the ranking would change, and not that it would not.
+
+ITEM 7  STRATUM LABEL  — CORRECTED in place
+
+  The second widened stratum is **`3|1` = HYPODONTIA-dominant, one instance**,
+  not caries. Dominant class index 3 is hypodontia. Corrected in the RANDOM
+  section above and in S43. The counts (26 needed, 25 available) and every
+  downstream number are unaffected; only the class name was wrong. The first
+  stratum, `1|>=16`, IS caries-dominant and was labelled correctly.
+
+ITEM 8  VALIDATION PAIRS VERIFIED AT FULL RESOLUTION  [S50, S51]  — EXPLORATORY
+
+  The 256 validation-training pairs from S7 were found by the 32x32 screen. Each
+  was re-checked at 256x256 greyscale with per-image standardisation, minimum
+  over the dihedral group, against the same random-pair null construction used
+  for the test side in S40: 600 random query-train pairs scored identically.
+  Decision rule r >= 0.95, the rule S40 used.
+
+  set                     pairs   verified r>=0.95   below the null minimum
+  validation               256      **256 / 256**         256 / 256
+  test (reference)         259      **259 / 259**         258 / 259
+
+  Pearson r across the 256 validation pairs: min 0.9817, median 0.9990.
+  Thumbnail vs full-resolution transform agreement: 256 / 256.
+  Null: median z-RMS 1.2615 (r = 0.204), minimum 0.5342 (r = 0.857).
+
+  **All 256 validation pairs verify.** The validation contamination is as real as
+  the test contamination; neither is a screening artefact.
+
+  One observation worth recording: the TEST-side null minimum corresponds to
+  r = 0.9615, which is above the r >= 0.95 decision rule. A "random" test-train
+  pair drawn for the null was itself a genuine duplicate — unsurprising, since
+  259 such pairs exist among 1500 x 7000 candidates. The null is therefore
+  slightly contaminated by the very effect it calibrates, which biases it
+  CONSERVATIVE (it makes real duplicates look less exceptional). It does not
+  affect the pass counts, which are decided by the fixed r >= 0.95 rule.
+
+ITEM 9  DEPLOYMENT RECORD  [repository + one read-only HTTP check]
+
+  WHAT THE REPOSITORY RECORDS. All claims verified directly in the working tree
+  and in git history.
+
+  SPACE IDENTITY — two spellings of one Space:
+    canonical  IvanJun/Oral_AI_Cancer_Disease_Detection   (README.md:13 badge)
+    subdomain  ivanjun-oral-ai-cancer-disease-detection.hf.space
+               (README.md:20 live-demo link, and main.py:615 as the BASE_URL default)
+  URLs:
+    https://huggingface.co/spaces/IvanJun/Oral_AI_Cancer_Disease_Detection
+    https://ivanjun-oral-ai-cancer-disease-detection.hf.space
+
+  README.md YAML FRONT MATTER, verbatim, lines 1-9 at HEAD:
+      ---
+      title: Oral AI Cancer Disease Detection
+      emoji: 🦷
+      colorFrom: blue
+      colorTo: green
+      sdk: docker
+      pinned: false
+      app_port: 7860
+      ---
+  Note what is ABSENT: no sdk_version, no app_file, no python_version, no
+  hardware key. `sdk: docker` with `app_port: 7860` means a Docker Space, which
+  matches Dockerfile:33 `EXPOSE 7860` and Dockerfile:37
+  `CMD ["uvicorn","main:app","--host","0.0.0.0","--port","7860"]`. There is no
+  gradio or streamlit anywhere in the tree or in any commit (0 commits match
+  either string), so the Space serves the FastAPI app directly.
+
+  DATES (all +0800, from git log --date=iso):
+    2025-12-07 16:48:02  f7e56f7  first commit; final.txt line 1 is the intent
+                                  "push to hugging face spaces so that its free
+                                  for everyone to use it"; Dockerfile already
+                                  carries the 7860 comment
+    2025-12-07 17:04:18  3f9583a  "Add README.md with Hugging Face configuration"
+                                  — the YAML front matter first appears
+    2025-12-07 17:44:02  89cc020  "Update email link to use Hugging Face URL" —
+                                  main.py BASE_URL default switched from
+                                  http://127.0.0.1:8000 to the .hf.space URL
+    2025-12-08 23:09:30  a0352b2  badge and live-demo link added to README
+    2025-12-08 23:58:54  7930619  README rewritten; the YAML block is DELETED
+    2025-12-09 00:04:48  337cdd3  "Restore Hugging Face YAML configuration
+                                  metadata" — identical block restored ~6 min later
+    2026-03-30 22:52:43  065dbd4  restructure; deletes final.txt
+    2026-08-13 15:55:45  46fddfb  last commit on main touching README.md; the
+                                  front matter is still present and identical
+  No huggingface remote is configured in .git/config (origin is the GitHub repo
+  only), and there is no CI workflow, so the repository does not record HOW the
+  Space is updated.
+
+  DOES THE URL RESPOND? **YES.** Checked 2026-09-22T03:47Z, read-only, no login,
+  nothing modified:
+    GET https://ivanjun-oral-ai-cancer-disease-detection.hf.space/
+        -> HTTP 200, three consecutive attempts, ~2.9-3.2 s
+        response header `server: uvicorn` (consistent with the FastAPI app)
+        HEAD -> HTTP 405 with `allow: GET`
+    GET https://huggingface.co/spaces/IvanJun/Oral_AI_Cancer_Disease_Detection
+        -> HTTP 200
+    GET https://huggingface.co/api/spaces/IvanJun/Oral_AI_Cancer_Disease_Detection
+        -> HTTP 200; sdk "docker", private false, runtime.stage "RUNNING",
+           createdAt 2025-12-07T08:45:24Z, lastModified 2026-04-24T05:04:02Z
+
+  ONE THING THE DATES RAISE, flagged as an INFERENCE and not verified.
+  The Space's lastModified is **2026-04-24**. In this repository, 2026-04-24 is
+  the date of commit 7210dea — the commit that carries the PRE-FIX class
+  dictionary. The fix landed on 2026-08-13 (0b21474). If lastModified reflects
+  the last code push to the Space, then **the live public demo may still be
+  running the pre-fix mapping and showing five of six conditions under the wrong
+  name** — the defect quantified in the E2E section at 73.4% of displayed
+  findings. This was NOT confirmed: doing so means reading the Space's files,
+  which is beyond the read-only status check requested. It is cheap to settle and
+  should be settled before publication, because a live medical-screening demo
+  displaying wrong condition names is a patient-facing problem, not a manuscript
+  one.
+
+ITEM 10  GENERATIVE AI STATEMENT
+
+  The model that performed this audit and wrote these analyses:
+      Model name:  Claude Opus 5 (1M context)
+      Model ID:    claude-opus-5[1m]
+      Provider:    Anthropic
+      Interface:   Claude Code (CLI agent), invoked in this repository
+      Dates:       2026-09-21 and 2026-09-22
+  Subagents used for the adversarial verification in items 1 and 2 ran under the
+  same model ID. Suggested wording for the paper's statement: "Analysis code,
+  statistical analysis and the audit report were produced with the assistance of
+  Anthropic's Claude Opus 5 (model claude-opus-5) operating as an agent in the
+  project repository; all numerical results were regenerated from the committed
+  scripts and verified by the authors."
+  The authors should verify every figure before publication; this statement
+  describes the tool, not a transfer of responsibility.
+```
+
+## What changed in the conclusions
+
+1. **Item 2 overturns a null.** The pooled (iv)-(iii) = +0.0041 is a cancellation
+   artefact. Split by whether the training augmentation could reach the twin's
+   frame, the model reproduces the training twin's labels better than the test
+   image's own on reachable pairs (+0.0736 [+0.0333, +0.1125]) and worse on
+   unreachable ones (-0.0809 [-0.1347, -0.0323]); interaction +0.1546
+   [+0.0947, +0.2182]. This is the clearest memorisation signal in the audit —
+   exploratory, post hoc in its stratification, and in need of replication.
+
+2. **Item 4 corrects a misleading headline.** The 26.9% "No Issues Detected"
+   rate is 22.9% refused plus 3.9% analysed-and-clean. And the router's refusal
+   is condition-dependent in the worst possible way: 51.5% of ulcer images
+   against 6.1% of calculus images.
+
+3. **Item 1 closes off the obvious objection to 2.6(b)**, and weakens its own
+   evidence honestly: the transform is right, registration is not the limiting
+   factor (oracle gain +0.0013), but the 259/259 agreement is a consistency
+   check rather than corroboration, and the per-pair PAIRING is only 222/259
+   reproducible against the published S2.
+
+4. **Item 6 removes an unsupported claim** and replaces it with the comparison
+   that matters: the de-duplication shift (0.00473) is 4.3x the epoch-selection
+   margin (0.00111), so the ranking is not demonstrably safe — while noting that
+   a shift measured on one checkpoint cannot settle how the ranking would move.
+
+5. **Items 3 and 8 confirm what was already reported**: every sampled pair is
+   genuinely the same photograph, 20 of 24 disagree on labels, and all 256
+   validation pairs verify at full resolution.
+
+6. **Item 9 surfaces a live-deployment risk** that no earlier phase looked at.

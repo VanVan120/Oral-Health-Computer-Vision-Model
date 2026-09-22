@@ -78,7 +78,13 @@ Ulcer contrasts are therefore not interpretable and are excluded from 2.5.
 is reported rather than silently merged:
 
 - `caries | ≥16 instances`: D needs 4, ND has **0** → widened to `caries | 8-15`
-- `caries | 1 instance`: D needs 26, ND has 25 → widened to `caries | 2-3`
+- `hypodontia | 1 instance`: D needs 26, ND has 25 → widened to `hypodontia | 2-3`
+
+> **CORRECTED 2026-09-22 (addendum R1b item 7).** The second stratum was
+> mislabelled "caries" here and in `SUMMARY_R1.md`. The stratum key is `3|1`, and
+> dominant class index **3 is hypodontia**, not caries. The counts (26 needed, 25
+> available) and every downstream number are unaffected — only the class name was
+> wrong.
 
 That ND contains *no* caries-dominant image with ≥16 instances while D contains
 four is itself a composition difference worth noting: the duplicated images are

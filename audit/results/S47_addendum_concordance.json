@@ -1,0 +1,311 @@
+{
+  "seed": 20260921,
+  "item1_transform_check": {
+    "method": "both images greyscale, resized to 256x256, RMS over all 8 dihedral transforms; the transform maps TEST -> TRAIN, so its inverse brings the twin's boxes into the test frame",
+    "crosstab_thumbnail_vs_fullres": {
+      "hflip": {
+        "hflip": 80
+      },
+      "identity": {
+        "identity": 59
+      },
+      "rot180": {
+        "rot180": 43
+      },
+      "vflip": {
+        "vflip": 77
+      }
+    },
+    "n_agree": 259,
+    "n_pairs": 259,
+    "identical_pixel_dimensions": 258,
+    "same_aspect_ratio_1pct": 259,
+    "concordance_fullres_overall": {
+      "n_pairs": 259,
+      "n_boxes_test": 2275,
+      "n_boxes_twin": 2230,
+      "class_agnostic": {
+        "precision": 0.6856502242152467,
+        "recall": 0.6720879120879121,
+        "f1": 0.6788013318534961
+      },
+      "class_aware": {
+        "precision": 0.668609865470852,
+        "recall": 0.6553846153846153,
+        "f1": 0.6619311875693674
+      },
+      "pairs_with_identical_label_sets": 57,
+      "proportion_identical_label_sets": 0.22007722007722008,
+      "n_pairs_with_defined_f1": 259,
+      "per_pair_f1_aware_at_chosen_transform_mean": 0.6689590101840031,
+      "per_pair_f1_aware_at_chosen_transform_median": 0.7368421052631577,
+      "oracle_best_f1_aware_mean": 0.670223432501057,
+      "oracle_best_f1_aware_median": 0.7368421052631577,
+      "oracle_gain_mean": 0.0012644223170538962,
+      "n_pairs_where_oracle_beats_chosen": 2
+    },
+    "concordance_fullres_by_transform": {
+      "identity": {
+        "n_pairs": 59,
+        "n_boxes_test": 595,
+        "n_boxes_twin": 551,
+        "class_agnostic": {
+          "precision": 0.778584392014519,
+          "recall": 0.7210084033613445,
+          "f1": 0.7486910994764397
+        },
+        "class_aware": {
+          "precision": 0.7749546279491834,
+          "recall": 0.7176470588235294,
+          "f1": 0.7452006980802792
+        },
+        "pairs_with_identical_label_sets": 17,
+        "proportion_identical_label_sets": 0.288135593220339,
+        "n_pairs_with_defined_f1": 59,
+        "per_pair_f1_aware_at_chosen_transform_mean": 0.7863728206746212,
+        "per_pair_f1_aware_at_chosen_transform_median": 0.8333333333333334,
+        "oracle_best_f1_aware_mean": 0.7901392990173707,
+        "oracle_best_f1_aware_median": 0.8333333333333334,
+        "oracle_gain_mean": 0.0037664783427495295,
+        "n_pairs_where_oracle_beats_chosen": 1
+      },
+      "hflip": {
+        "n_pairs": 80,
+        "n_boxes_test": 650,
+        "n_boxes_twin": 668,
+        "class_agnostic": {
+          "precision": 0.6811377245508982,
+          "recall": 0.7,
+          "f1": 0.6904400606980272
+        },
+        "class_aware": {
+          "precision": 0.6497005988023952,
+          "recall": 0.6676923076923077,
+          "f1": 0.6585735963581184
+        },
+        "pairs_with_identical_label_sets": 19,
+        "proportion_identical_label_sets": 0.2375,
+        "n_pairs_with_defined_f1": 80,
+        "per_pair_f1_aware_at_chosen_transform_mean": 0.6506329073347928,
+        "per_pair_f1_aware_at_chosen_transform_median": 0.7058823529411765,
+        "oracle_best_f1_aware_mean": 0.6506329073347928,
+        "oracle_best_f1_aware_median": 0.7058823529411765,
+        "oracle_gain_mean": 0.0,
+        "n_pairs_where_oracle_beats_chosen": 0
+      },
+      "vflip": {
+        "n_pairs": 77,
+        "n_boxes_test": 611,
+        "n_boxes_twin": 592,
+        "class_agnostic": {
+          "precision": 0.6334459459459459,
+          "recall": 0.613747954173486,
+          "f1": 0.6234413965087281
+        },
+        "class_aware": {
+          "precision": 0.6199324324324325,
+          "recall": 0.6006546644844517,
+          "f1": 0.6101413133832086
+        },
+        "pairs_with_identical_label_sets": 14,
+        "proportion_identical_label_sets": 0.18181818181818182,
+        "n_pairs_with_defined_f1": 77,
+        "per_pair_f1_aware_at_chosen_transform_mean": 0.606756381944369,
+        "per_pair_f1_aware_at_chosen_transform_median": 0.6666666666666666,
+        "oracle_best_f1_aware_mean": 0.606756381944369,
+        "oracle_best_f1_aware_median": 0.6666666666666666,
+        "oracle_gain_mean": 0.0,
+        "n_pairs_where_oracle_beats_chosen": 0
+      },
+      "rot180": {
+        "n_pairs": 43,
+        "n_boxes_test": 419,
+        "n_boxes_twin": 419,
+        "class_agnostic": {
+          "precision": 0.6443914081145584,
+          "recall": 0.6443914081145584,
+          "f1": 0.6443914081145584
+        },
+        "class_aware": {
+          "precision": 0.6276849642004774,
+          "recall": 0.6276849642004774,
+          "f1": 0.6276849642004774
+        },
+        "pairs_with_identical_label_sets": 7,
+        "proportion_identical_label_sets": 0.16279069767441862,
+        "n_pairs_with_defined_f1": 43,
+        "per_pair_f1_aware_at_chosen_transform_mean": 0.6533375167756809,
+        "per_pair_f1_aware_at_chosen_transform_median": 0.7200000000000001,
+        "oracle_best_f1_aware_mean": 0.6557854971918377,
+        "oracle_best_f1_aware_median": 0.7200000000000001,
+        "oracle_gain_mean": 0.002447980416156671,
+        "n_pairs_where_oracle_beats_chosen": 1
+      }
+    },
+    "reproducibility_vs_published_S2": {
+      "note": "D matches published S2 exactly as a SET of test images, but the per-pair ASSIGNMENT -- which training image, under which transform -- is a near-tie argmin and is only partly reproducible across implementations. Reported because it bounds how much weight the transform column can carry.",
+      "n_with_published_row": 259,
+      "same_transform": 225,
+      "same_train_image": 222,
+      "same_both": 222,
+      "crosstab_published_vs_regenerated": {
+        "hflip": {
+          "hflip": 71,
+          "identity": 3,
+          "vflip": 5,
+          "rot180": 6
+        },
+        "identity": {
+          "vflip": 4,
+          "identity": 56,
+          "hflip": 3
+        },
+        "rot180": {
+          "rot180": 33,
+          "hflip": 1,
+          "vflip": 3
+        },
+        "vflip": {
+          "vflip": 65,
+          "rot180": 4,
+          "hflip": 5
+        }
+      },
+      "concordance_under_published_pairing": {
+        "n_pairs": 259,
+        "class_agnostic_f1": 0.698321554770318,
+        "class_aware_f1": 0.6846289752650176,
+        "proportion_identical_label_sets": 0.2277992277992278
+      }
+    },
+    "oracle_note": "oracle_best_f1_aware is the best class-aware box F1 achievable over identity/hflip/vflip/rot180 for that pair -- an upper bound on what any registration could deliver, not an estimate"
+  },
+  "item2_consistency": {
+    "t_global": 0.2822822822822823,
+    "matching": "greedy, IoU >= 0.5, class-aware; micro-averaged (pooled counts)",
+    "bootstrap": {
+      "design": "cluster bootstrap over the Phase 2.1 connected components that contain at least one D image. Clusters with no D image contribute no pairs, so drawing them is a no-op and they are omitted; this is exactly equivalent to the pre-specified stratified design for a pair-level statistic.",
+      "n_clusters_resampled": 214,
+      "n_resamples": 10000
+    },
+    "overall": {
+      "i_predD_vs_predTwin": {
+        "point": 0.7875402792696026,
+        "ci_lo": 0.7589893947628039,
+        "ci_hi": 0.8156673196816513,
+        "boot_mean": 0.7875282314018668,
+        "boot_sd": 0.014502147783157027
+      },
+      "ii_labelD_vs_labelTwin": {
+        "point": 0.6619311875693674,
+        "ci_lo": 0.6231295283448941,
+        "ci_hi": 0.70011307309199,
+        "boot_mean": 0.6621205009733594,
+        "boot_sd": 0.019706465169126563
+      },
+      "iii_predD_vs_labelD": {
+        "point": 0.6797642436149313,
+        "ci_lo": 0.6449839157542769,
+        "ci_hi": 0.7133719739905472,
+        "boot_mean": 0.6796019485250904,
+        "boot_sd": 0.017502263114870586
+      },
+      "iv_predD_vs_labelTwin": {
+        "point": 0.6838624338624338,
+        "ci_lo": 0.6460940495865282,
+        "ci_hi": 0.7204651077070109,
+        "boot_mean": 0.6838740105187285,
+        "boot_sd": 0.018993141106142003
+      },
+      "v_predTwin_vs_labelTwin": {
+        "point": 0.8006114872242848,
+        "ci_lo": 0.7685946735224559,
+        "ci_hi": 0.8312088404868674,
+        "boot_mean": 0.8004568165167717,
+        "boot_sd": 0.016009634876987755
+      }
+    },
+    "iv_minus_iii": {
+      "point": 0.0040981902475025755,
+      "ci_lo": -0.03198299688945175,
+      "ci_hi": 0.04030775929825427,
+      "boot_mean": 0.004272061993638224,
+      "boot_sd": 0.01811860921318919
+    },
+    "by_transform": {
+      "identity": {
+        "n_pairs": 59,
+        "i_predD_vs_predTwin": 0.9053571428571429,
+        "ii_labelD_vs_labelTwin": 0.7452006980802792,
+        "iii_predD_vs_labelD": 0.6833477135461604,
+        "iv_predD_vs_labelTwin": 0.7515695067264574,
+        "v_predTwin_vs_labelTwin": 0.7931345980126469,
+        "iv_minus_iii": {
+          "point": 0.06822179318029697,
+          "ci_lo": 0.00918782004765448,
+          "ci_hi": 0.12467610643897609,
+          "boot_mean": 0.06687124780562956,
+          "boot_sd": 0.02948602927570759
+        },
+        "seen_in_training_augmentation": "yes (the image itself)"
+      },
+      "hflip": {
+        "n_pairs": 80,
+        "i_predD_vs_predTwin": 0.8424753867791843,
+        "ii_labelD_vs_labelTwin": 0.6585735963581184,
+        "iii_predD_vs_labelD": 0.6808510638297872,
+        "iv_predD_vs_labelTwin": 0.7588703837798697,
+        "v_predTwin_vs_labelTwin": 0.8061002178649239,
+        "iv_minus_iii": {
+          "point": 0.07801931995008249,
+          "ci_lo": 0.023624209425294133,
+          "ci_hi": 0.13156486492069638,
+          "boot_mean": 0.07804373560035452,
+          "boot_sd": 0.027705861493720875
+        },
+        "seen_in_training_augmentation": "yes (fliplr 0.27883)"
+      },
+      "vflip": {
+        "n_pairs": 77,
+        "i_predD_vs_predTwin": 0.6698564593301436,
+        "ii_labelD_vs_labelTwin": 0.6101413133832086,
+        "iii_predD_vs_labelD": 0.6677524429967426,
+        "iv_predD_vs_labelTwin": 0.5707196029776676,
+        "v_predTwin_vs_labelTwin": 0.772986167615948,
+        "iv_minus_iii": {
+          "point": -0.09703284001907508,
+          "ci_lo": -0.16291384829851482,
+          "ci_hi": -0.035794026485913864,
+          "boot_mean": -0.09687524543908428,
+          "boot_sd": 0.03212486933571711
+        },
+        "seen_in_training_augmentation": "no (flipud 0.0)"
+      },
+      "rot180": {
+        "n_pairs": 43,
+        "i_predD_vs_predTwin": 0.7147846332945287,
+        "ii_labelD_vs_labelTwin": 0.6276849642004774,
+        "iii_predD_vs_labelD": 0.690734055354994,
+        "iv_predD_vs_labelTwin": 0.6329723225030085,
+        "v_predTwin_vs_labelTwin": 0.8406466512702078,
+        "iv_minus_iii": {
+          "point": -0.05776173285198549,
+          "ci_lo": -0.13786175244769733,
+          "ci_hi": 0.011100145004509945,
+          "boot_mean": -0.05770671297554151,
+          "boot_sd": 0.03761506319503982
+        },
+        "seen_in_training_augmentation": "no (flipud 0.0, degrees 0)"
+      }
+    },
+    "training_augmentation_note": "best.pt train_args: fliplr 0.27883, flipud 0.0, degrees 0. Horizontal flips were seen in training; vertical flips and 180-degree rotations were not."
+  },
+  "class_names": {
+    "0": "calculus",
+    "1": "caries",
+    "2": "gingivitis",
+    "3": "hypodontia",
+    "4": "tooth_discolation",
+    "5": "ulcer"
+  }
+}

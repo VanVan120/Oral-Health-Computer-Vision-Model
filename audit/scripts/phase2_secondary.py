@@ -136,12 +136,18 @@ def main() -> None:
             "AP50_95_ND": nd_eval["per_class"].get(name, {}).get("AP50_95"),
         }
         for label, thr in (("t_global", tg), ("deployed", DEPLOYED_BY_INDEX[c])):
-            row[label] = {
-                "threshold": thr,
-                "D": rp(*counts_at(ev, d_images, c, thr)),
-                "ND": rp(*counts_at(ev, nd_images, c, thr)),
-                "bootstrap": boot_rp(ev, clusters, d_set, c, thr, args.boot, rng),
-            }
+            dd, nn = rp(*counts_at(ev, d_images, c, thr)), rp(*counts_at(ev, nd_images, c, thr))
+            bs = boot_rp(ev, clusters, d_set, c, thr, args.boot, rng)
+            # Report the OBSERVED D-minus-ND difference as the point estimate. The
+            # bootstrap supplies the interval only; its mean is a resampling
+            # artefact and is kept solely for the bias it reveals (deviation D6).
+            for q in ("recall", "precision"):
+                if bs[f"delta_{q}"] is not None:
+                    obs = dd[q] - nn[q]
+                    bs[f"delta_{q}"]["observed"] = float(obs)
+                    bs[f"delta_{q}"]["boot_mean_minus_observed"] = float(
+                        bs[f"delta_{q}"]["mean"] - obs)
+            row[label] = {"threshold": thr, "D": dd, "ND": nn, "bootstrap": bs}
         contrasts[name] = row
         print(f"  {name}: AP50 D {row['AP50_D']:.4f} vs ND {row['AP50_ND']:.4f}")
 
@@ -156,7 +162,12 @@ def main() -> None:
     v_clean = sorted(set(v_all) - {v_by[n] for n in v_dupe if n in v_by})
 
     def fit(m):
-        return 0.1 * m["mAP50"] + 0.9 * m["mAP50_95"]
+        # ultralytics 8.3.231 DetMetrics.fitness uses w = [0, 0, 0, 1] over
+        # [P, R, mAP50, mAP50-95], i.e. fitness IS mAP@0.5:0.95. Confirmed against
+        # the installed source and against best.pt, whose stored fitness (0.38766)
+        # equals its stored mAP50-95 exactly. The plan's 0.1/0.9 weighting is an
+        # older ultralytics convention and does not apply here (deviation D7).
+        return m["mAP50_95"]
 
     v_full_m, v_clean_m = vev.evaluate(v_all), vev.evaluate(v_clean)
     valid = {
@@ -166,6 +177,8 @@ def main() -> None:
         "expected_by_spec": {"aligned": 120, "dihedral": 256},
         "full": {k: v_full_m[k] for k in ("n_images", "n_instances", "P", "R", "mAP50", "mAP50_95")},
         "deduplicated": {k: v_clean_m[k] for k in ("n_images", "n_instances", "P", "R", "mAP50", "mAP50_95")},
+        "fitness_definition": "ultralytics 8.3.231: fitness = mAP@0.5:0.95 "
+                              "(DetMetrics.fitness weights [0,0,0,1])",
         "fitness_full": fit(v_full_m),
         "fitness_deduplicated": fit(v_clean_m),
         "delta_fitness": fit(v_clean_m) - fit(v_full_m),
