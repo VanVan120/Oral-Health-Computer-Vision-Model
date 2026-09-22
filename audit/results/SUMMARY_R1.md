@@ -960,9 +960,14 @@ PACKAGING   audit/ tree:
               2c5731a  Run Phases 1, 2 and 4.1: exactness gate, contamination statistics, Model A
               d52b1b2  Phase 2.9: the ultralytics version effect is entirely in the metric code
               abb3e29  Phase 3 end to end, and the R1 summary
-              <tip>    Record the final commit list and apply the tag
+              3cad249  Record the final commit list and apply the v1.1-r1 tag
+                       <- tag v1.1-r1 points here, and is NOT moved
+              81f8b8f  Addendum R1b: ten follow-ups, and a null that turns out
+                       to be a cancellation
+              <tip>    Record the R1b commit list and apply the v1.1-r1b tag
             (the last entry is this file's own commit, so it cannot name its own
-            hash; the tag v1.1-r1 points at it and the hash is in the hand-off)
+            hash; the tag v1.1-r1b points at it and the hash is in the hand-off)
+            zip, addendum: ~/Desktop/audit-results-R1b.zip
             tag: v1.1-r1 at the final commit. Branch and tag pushed normally;
             never force-pushed, no history rewritten. The merge into main is left
             for the human.
