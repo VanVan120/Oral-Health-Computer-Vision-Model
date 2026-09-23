@@ -10,6 +10,8 @@ app_port: 7860
 
 # 🦷 Oral AI: Advanced Disease Detection System
 
+> The history of this repository was rewritten on 23 September 2026 to remove personal data; see [HISTORY_REWRITE.md](HISTORY_REWRITE.md).
+
 [![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/IvanJun/Oral_AI_Cancer_Disease_Detection)
 [![Python](https://img.shields.io/badge/Python-3.10+-yellow.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.68+-green.svg)](https://fastapi.tiangolo.com/)
