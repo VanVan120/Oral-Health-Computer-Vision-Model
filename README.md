@@ -12,14 +12,18 @@ app_port: 7860
 
 > The history of this repository was rewritten on 23 September 2026 to remove personal data; see [HISTORY_REWRITE.md](HISTORY_REWRITE.md).
 
-[![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/IvanJun/Oral_AI_Cancer_Disease_Detection)
+[![Paper](https://img.shields.io/badge/Paper-Frontiers%20in%20Big%20Data%202026-orange.svg)](https://doi.org/10.3389/fdata.2026.1972023)
 [![Python](https://img.shields.io/badge/Python-3.10+-yellow.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.68+-green.svg)](https://fastapi.tiangolo.com/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-Deep%20Learning-red.svg)](https://pytorch.org/)
 [![Docker](https://img.shields.io/badge/Docker-Enabled-blue.svg)](https://www.docker.com/)
 [![License](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
 
-> **🚀 LIVE DEMO:** [**Click here to interact with the App on Hugging Face Spaces**](https://ivanjun-oral-ai-cancer-disease-detection.hf.space)
+> **⚠️ Research prototype, not a medical device.** Oral AI has not been clinically validated and must not be used for diagnosis.
+>
+> **📄 Published evaluation audit:** Char ICJ, Sayed ASA, Ichikawa K, Sayed YMG, Bin Milhan A, Sim DYY and Ramanathan A (2026). *From benchmark to user: an end-to-end evaluation audit of an AI-based oral health screening prototype.* Frontiers in Big Data 9:1972023. [doi:10.3389/fdata.2026.1972023](https://doi.org/10.3389/fdata.2026.1972023). The audit code and every output file are on the [`revision-r1`](https://github.com/VanVan120/Oral-Health-Computer-Vision-Model/tree/revision-r1) branch (tags `v1.1-r1` and `v1.1-r1b`).
+>
+> **Demo status:** the public Hugging Face demo was taken offline in September 2026, after the audit found that the deployed version showed 73% of findings under the wrong condition name. That class-mapping bug is fixed on `main`: display names now come from the checkpoint's own class registry.
 
 ---
 
@@ -46,9 +50,9 @@ app_port: 7860
 
 ## 📖 Overview
 
-**Oral AI** is a cutting-edge medical diagnostic ecosystem designed to bridge the gap between patients and early diagnosis. By leveraging a **Multi-Model Deep Learning Pipeline**, the system provides instant, privacy-focused analysis of oral cavity images.
+**Oral AI** is a research prototype for screening oral cavity images, built by a student team at the University of Nottingham Malaysia. A **multi-model deep learning pipeline** gives instant, privacy-focused analysis: images are processed in memory and never stored.
 
-It doesn't just "detect"; it **understands** the difference between a microscopic biopsy slide and a smartphone selfie, routing each to the correct specialist model for maximum accuracy.
+A router model first decides whether an upload is a clinical photo or a histopathology slide, then sends it to the matching specialist model. The published audit (above) measures how well each part, and the whole pipeline, actually performs; the key results are in [Model Performance Summary](#-model-performance-summary).
 
 ---
 
@@ -107,28 +111,13 @@ graph TD
     *   **Nuclear Hyperchromatism (Regression)**: Counts cells with abnormally dark nuclei — indicates chromatin abnormalities.
 *   **Derived Output — TVNT (Binary Classification)**: Uses the presence/absence of the 3 anomalies above to determine an overall **Abnormality Score** (Abnormal Tissue vs Normal Tissue). If any of the 3 cellular features are detected at significant levels, the tissue is classified as abnormal.
 
-#### 📊 Model A Performance Metrics (Validation Set)
-
-| Task | Metric | Score |
-|:-----|:-------|------:|
-| **Abnormality Detection (TVNT)** | AUC-ROC | **0.6476** |
-| **Abnormality Detection (TVNT)** | F1 Score | **0.9813** |
-| **Abnormality Detection (TVNT)** | Accuracy | **96.33%** |
-| **Abnormality Detection (TVNT)** | Precision | **96.33%** |
-| **Abnormality Detection (TVNT)** | Recall | **100.00%** |
-| **Mitotic Figures** | MAE | **0.1436 cells** |
-| **Mitotic Figures** | Exact Match Rate | **93.58%** |
-| **Multiple Nucleoli** | MAE | **2.0272 cells** |
-| **Multiple Nucleoli** | Exact Match Rate | **12.84%** |
-| **Nuclear Hyperchromatism** | MAE | **2.1767 cells** |
-| **Nuclear Hyperchromatism** | Exact Match Rate | **25.69%** |
-
-> **Note**: The model quantifies 3 cellular anomalies from a Roboflow-annotated dataset and uses their presence to derive the overall Abnormality (TVNT) score. It achieves classification (AUC-ROC = 0.6476) for abnormality detection and highly accurate cell counting with all count predictions within ±1 of ground truth.
+> **Audit finding:** the TVNT classifier labels **every** validation image abnormal (105 true positives, 4 false positives, 0 true negatives, 0 false negatives). Its 96.33% accuracy and 100% recall are therefore just the share of abnormal images in the split (105/109): it does not separate normal from abnormal tissue. Validation results, with the audit's corrections, are in the [Model Performance Summary](#-model-performance-summary).
 
 ### 3️⃣ The Hygiene Specialist (Model B)
 *   **Architecture**: **YOLOv8** (You Only Look Once) + **SAHI** (Slicing Aided Hyper Inference).
 *   **Input**: Smartphone Photos of the Mouth.
-*   **Advanced Inference (Why SAHI?)**: Standard object detection models resize images to low resolutions (e.g., 640x640). In a high-res mouth photo, a small cavity might become just 1-2 pixels after resizing, making it impossible to detect. **SAHI** chops the image into overlapping tiles, runs detection on each tile at full resolution, and then stitches the results back together to detect even the smallest lesions.
+*   **Advanced Inference (Why SAHI?)**: Standard object detection models resize images to low resolutions (e.g., 640x640). In a high-res mouth photo, a small cavity might become just 1-2 pixels after resizing, making it impossible to detect. **SAHI** chops the image into overlapping tiles, runs detection on each tile at full resolution, and then stitches the results back together.
+    *   SAHI runs only for images at least 640×640 pixels. None of the 1,500 benchmark test images is that large, so **the reported detector metrics do not exercise SAHI**, and its benefit on full-size phone photos is untested.
 *   **Detection Classes**:
     *   `Caries` (Cavities)
     *   `Calculus` (Tartar/Plaque)
@@ -141,7 +130,7 @@ graph TD
 
 ## � Model Performance Summary
 
-Our multi-model system has been rigorously evaluated on held-out validation data to ensure clinical reliability.
+The numbers below are corrected by the published audit ([doi:10.3389/fdata.2026.1972023](https://doi.org/10.3389/fdata.2026.1972023); outputs on the [`revision-r1`](https://github.com/VanVan120/Oral-Health-Computer-Vision-Model/tree/revision-r1) branch). The per-model metrics describe **components** on their own splits. [End-to-end results](#end-to-end-what-a-user-sees) describes **the product**, and the two differ a lot.
 
 ### Model A: Histopathology Analysis
 
@@ -151,19 +140,19 @@ Our multi-model system has been rigorously evaluated on held-out validation data
 #### Abnormality Detection (TVNT) — Derived from 3 Cellular Anomaly Classes
 ```text
 ┌─────────────────────────────────────────────────────────────┐
-│  🎯 Tile-level AUC-ROC:   0.6476                            │
-│  🎯 F1 Score:             0.9813                            │
-│  📈 Accuracy:             96.33% (105/109 correct)          │
-│  📈 Precision:            96.33%                            │
-│  📈 Recall/Sensitivity:   100.00%                           │
-├─────────────────────────────────────────────────────────────┤
-│  Confusion Matrix:                                          │
+│  Validation split: 109 images (105 abnormal, 4 normal)      │
 │                        Predicted                            │
 │                      Normal  Abnormal                       │
 │    Actual Normal        0        4                          │
 │    Actual Abnormal      0      105                          │
+├─────────────────────────────────────────────────────────────┤
+│  Every image is predicted abnormal.                         │
+│  Accuracy 96.33% = the base rate (105/109), not skill.      │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+*   The originally reported **AUC-ROC of 0.6476** was a single draw: the evaluation code applied training-time augmentation (random flips, rotation, colour jitter) to the validation set. Five re-runs of that path give 0.60–0.79. With a deterministic transform, the same weights give **AUC 0.831**, but with only 4 normal images that estimate is very uncertain, and the deployed threshold still calls everything abnormal.
+*   The count metrics below come from the same augmented evaluation. Deterministic re-evaluation differs slightly (for example, mitotic MAE 0.1352) and is in the audit.
 
 #### 3 Cellular Anomaly Counts (Regression Tasks — Roboflow Dataset)
 | Feature | MAE | Exact Match | Within ±1 |
@@ -176,9 +165,8 @@ Our multi-model system has been rigorously evaluated on held-out validation data
 
 ### Model B: Clinical Hygiene Detection
 
-*   **Architecture**: YOLOv8 + SAHI (Slicing Aided Hyper Inference)
+*   **Architecture**: YOLOv8m, with SAHI for images of 640×640 pixels or more (not exercised by this benchmark; see above)
 *   **Classes Detected**: Caries, Calculus, Gingivitis, Ulcers, Tooth Discoloration, Hypodontia
-*   **Optimized for**: High-resolution smartphone images with small lesion detection
 
 <details>
 <summary><b>📊 Click to see Detailed Evaluation Results</b></summary>
@@ -188,6 +176,10 @@ Our multi-model system has been rigorously evaluated on held-out validation data
 *   **Recall (R):** 0.728 (72.8%)
 *   **mAP@50:** 0.771 (77.1%)
 *   **mAP@50-95:** 0.401 (40.1%)
+
+> **Read these with two caveats from the audit:**
+> *   **Library version.** These figures come from ultralytics 8.3.231, whose AP interpolation overestimates. Ultralytics 8.4.118 gives **mAP@50 0.767 and mAP@50-95 0.389** from bit-identical predictions. The library change moves mAP@50-95 by −0.012, more than removing every duplicated test image does.
+> *   **Train–test near-duplicates.** 259 of the 1,500 test images (17.3%) are near-duplicates of training images. Removing them changes mAP@50 by +0.001 (95% CI −0.012 to +0.014), so they did not measurably inflate the score. Only 22% of the duplicate pairs carry identical labels, however.
 
 #### Class-Specific Breakdown
 | Class | Instances | Precision | Recall | mAP@50 | mAP@50-95 |
@@ -211,13 +203,28 @@ Our multi-model system has been rigorously evaluated on held-out validation data
 <details>
 <summary><b>📊 Click to see Detailed Evaluation Results</b></summary>
 
-#### Routing Performance (Validation Set)
-*   **Accuracy:** 100.0% (1.0000)
-*   **Validation Loss:** 0.0014
+#### Routing Performance
+*   The training log reports **100% validation accuracy** (loss 0.0014), but on the router's own split. Its training data is not in the repository, so overlap with the sets below cannot be ruled out.
+*   Audit results at the deployed confidence threshold (0.95):
 
-*Note: The model achieved near-perfect accuracy on the held-out validation set. It successfully distinguishes between clinical smartphone photos and microscopic histopathology slides, ensuring a highly reliable routing mechanism within the pipeline.*
+| Set | Images | Routed correctly | Refused as "not a valid image" | Sent to the wrong model |
+|:---|---:|---:|---:|---:|
+| Detector test set (clinical photos) | 1,500 | 77.1% | **22.9%** | 0% |
+| Histopathology set | 544 | 75.4% | **24.6%** | 0% |
+| COCO128 (unrelated photos, should be refused) | 128 | 91.4% refused | — | **8.6% accepted** |
+
+The router never confuses the two medical domains, but it refuses about a quarter of the system's own valid images.
 
 </details>
+
+### End-to-end: what a user sees
+
+The audit traced all 1,500 detector test images through the deployed request path (router, image-quality gates, detector and display thresholds).
+
+*   **Ulcers are hit hardest.** The router refuses 51% of photos that contain an ulcer, so the app reports an ulcer on only **36.5%** of ulcer images, against a benchmark recall of 0.91. With the detector alone it would be 71.5%.
+*   **Valid photos are refused.** 22.9% of all test images are refused as "not a valid oral health image" before any analysis.
+*   **Class-mapping bug (fixed).** Before the fix on `main`, five of six conditions were displayed under another condition's name: **73.4% of displayed findings** were wrong, and on 71.6% of images every displayed name was wrong. Names are now read from the checkpoint's own class registry.
+*   **Not estimable from this benchmark:** the test set has no healthy mouths and no patient identifiers, so patient-level sensitivity, specificity in healthy people and predictive values cannot be derived.
 
 ---
 
